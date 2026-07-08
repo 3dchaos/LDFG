@@ -1,0 +1,126 @@
+[@互换]
+{
+#IF
+#ACT
+OPENMERCHANTBIGDLG 0 16 1 0 0 0 1 383 25 
+#SAY
+\  \
+<Img:38:0:150:-4>\
+<Text:请注意背包里最多只能存放100000000000金币。溢出可能装不下！！:20:45{FCOLOR=7}>\
+<Text:灵符与金币的比例是 1：10000:20:47{FCOLOR=255}>\
+<Text:灵符换金币:20:49{FCOLOR=251}/@@InPutInteger1>   <Text:金币换灵符:20:49{FCOLOR=251}/@@InPutInteger2>\
+<Text:元宝与金币的比例是 1：1000:20:54{FCOLOR=255}>\
+<Text:元宝换金币:20:57{FCOLOR=251}/@@InPutInteger3>   <Text:金币换元宝:20:57{FCOLOR=251}/@@InPutInteger4>\
+<Text:声望与金币的比例是 1：10000:20:63{FCOLOR=255}>\
+<Text:声望换金币:20:66{FCOLOR=251}/@@InPutInteger5>   <Text:金币换声望:20:66{FCOLOR=251}/@@InPutInteger6>\
+<Text:返回:20:76{FCOLOR=251}/@辅助功能>\
+;灵符换金币
+[@InPutInteger1]
+#IF
+small <$GAMEGIRD> <$STR(N1)>
+#ACT
+#SAY
+你的灵符不够！！\
+<返回/@互换>
+#ELSEACT
+MUL N30 N1 10000
+GAMEGIRD - N1
+give 金币 N30
+SENDMSG 7 兑换<$STR(N30)>金币！
+
+;金币换灵符
+
+[@InPutInteger2]
+#IF
+LARGE <$STR(N2)> 9999
+#ELSESAY
+你的输入有误！！至少要10000金币\
+<返回/@互换>
+#ELSEACT
+BREAK
+
+#IF
+#ACT
+DIV N31 <$STR(N2)> 10000
+#IF
+checkgold <$STR(N2)>
+#ACT
+	take 金币 <$STR(N2)>
+	GAMEGIRD + <$STR(N31)>
+	SENDMSG 7 兑换<$STR(N31)>灵符！
+	BREAK
+#ELSEACT
+SENDMSG 7 金币不够<$STR(N2)>
+;元宝换金币
+[@InPutInteger3]
+#IF
+small <$GAMEGOLD> <$STR(N3)>
+#ACT
+#SAY
+你的元宝不够！！\
+<返回/@互换>
+#ELSEACT
+MUL N32 N3 1000
+GAMEGOLD - N3
+give 金币 N32
+SENDMSG 7 兑换<$STR(N32)>金币！
+
+
+[@InPutInteger4]
+#IF
+LARGE <$STR(N4)> 999
+#ELSESAY
+你的输入有误！！至少要1000金币\
+<返回/@互换>
+#ELSEACT
+BREAK
+#IF
+#ACT
+DIV N33 <$STR(N4)> 1000
+#IF
+checkgold <$STR(N4)>
+#ACT
+	take 金币 <$STR(N4)>
+	GAMEGOLD + <$STR(N33)>
+	SENDMSG 7 兑换<$STR(N33)>元宝！
+	BREAK
+#ELSEACT
+SENDMSG 7 金币不够<$STR(N4)>
+
+;声望换金币
+[@InPutInteger5]
+#IF
+CHECKCREDITPOINT < <$STR(N5)>
+#ACT
+#SAY
+你的声望不够！！\
+<返回/@互换>
+#ELSEACT
+MUL N34 N5 10000
+CREDITPOINT - N5
+give 金币 N34
+SENDMSG 7 兑换<$STR(N34)>金币！
+
+[@InPutInteger6]
+#IF
+LARGE <$STR(N6)> 9999
+#ELSESAY
+你的输入有误！！至少要10000金币\
+<返回/@互换>
+#ELSEACT
+BREAK
+
+#IF
+#ACT
+DIV N35 <$STR(N6)> 10000
+#IF
+checkgold <$STR(N6)>
+#ACT
+	take 金币 <$STR(N6)>
+	CREDITPOINT + <$STR(N35)>
+	SENDMSG 7 兑换<$STR(N35)>声望！
+	BREAK
+#ELSEACT
+SENDMSG 7 金币不够<$STR(N6)>
+
+}

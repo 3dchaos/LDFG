@@ -1,0 +1,5 @@
+;以下是月卡秘钥的示例，https://mima.r311.com/可以批量生产随机秘钥。请自行生成。
+;兑换一个就会删除一个，不会重复领取
+GIUcMuxB
+8ZyqiQrc
+8NDOGWzw

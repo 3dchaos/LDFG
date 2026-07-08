@@ -1,0 +1,34 @@
+
+[@极品存仓入包触发]
+{
+#IF
+check [99] 1
+#ELSEACT
+BREAK
+;开始绑定检测
+#if
+#act
+LINKPICKUPITEM 
+GetItemFieldValue -1 name S$入包名
+#OR
+EQUAL S$入包名 神秘戒指
+EQUAL S$入包名 神秘腰带
+EQUAL S$入包名 神秘头盔
+#ACT
+UpdateItem -1
+BREAK
+
+;判断极品
+#or
+CheckItemAddValueEx -1 > <$STR(U9)> 0
+CheckItemAddValueEx -1 = <$STR(U9)> 0
+#act
+GetItemFieldValue -1 makeindex S$存仓ID
+BagItemToStoragemakeIndex <$STR(S$存仓ID)> 1  N$存入数
+SENDMSG 5 <$STR(N$存入数)>个极品<$STR(S$入包名)>存入仓库
+
+#IF
+#ACT
+UpdateItem -1
+BREAK
+}

@@ -1,0 +1,117 @@
+[@main]
+#IF
+CHECK [36] 1
+CHECK [37] 0
+#SAY
+不可思议！你居然能寻到此处，那么你已经有资格\
+拥有此处的财宝。这些东西拿去在此处自保用！\
+<收下/@收下>\
+<退出/@exit>\
+#ELSESAY
+这里就是真正的沙巴克藏宝阁了！\
+如果这里的怪物还不够你胃口，\
+我可以为你创建镜像世界。\
+在镜像中，只有你或者你的队友可以进入。\
+每天你可以创建3次地图，每次时间为1个半小时\ \
+<创建藏宝阁副本/@创建藏宝阁副本>\
+<清除藏宝阁副本/@清除藏宝阁副本>\
+<退出/@exit>\
+
+
+[@收下]
+#IF
+CHECKBAGSIZE 2
+#ACT
+SET [37] 1
+GIVE 苹果 3
+GIVE 鹿血 3
+	CHANGEEXP + 50000
+	CREDITPOINT + 5
+	SENDMSG 5 提示：任务已完成，你获得了5点声望，当前声望：<$CREDITPOINT>点...
+	RefreshMissPage 180任务
+	ADDBUTTON 0 1 82 83 84 153 150 7 <PlayImg:0:82:2:200:0:0:0> 251#任务\250#打开任务窗口
+GOTO @main
+#ELSESAY
+请准备2个空格。\
+<返回/@main>\
+
+
+[@清除藏宝阁副本]
+#IF
+#ACT
+SET [30] 0
+SET [31] 0
+mov N$刷怪次数 0
+Delnpc <$USERNAME>藏宝阁管理员 <$USERNAME>藏宝阁 
+DelMirrorMap <$USERNAME>藏宝阁
+MESSAGEBOX 清除完毕
+[@创建藏宝阁副本]
+#IF
+;	原N8是否拥有镜像
+CHECK [30] 1
+#SAY
+你已经有一个镜像了，请清除了再试。\
+<退出/@exit>\
+#ACT
+BREAK
+
+#IF
+;	每日次数
+EQUAL J0 3
+#SAY
+今天创建的次数已经够多的了\
+<退出/@exit>\
+#ACT
+BREAK
+
+#IF
+#ACT
+AddMirrorMap H204 <$USERNAME>藏宝阁 镜像藏宝阁 5400 H204 38 N8 1 50,50
+CreateNPC <$USERNAME>藏宝阁管理员 <$USERNAME>藏宝阁 51 49 9 藏宝阁管理员 1
+;	镜像标识
+SET [30] 1
+INC J0 1
+;	镜像主人标识原U11
+SET [31] 1
+;	镜像刷新次数
+mov N$刷怪次数 0
+;DelayCall 5400000 @退出副本
+GOTO @创建藏宝阁副本2
+
+[@退出副本]
+#IF
+#ACT
+SET [31] 0
+DelMirrorMap <$USERNAME>藏宝阁
+
+
+[@创建藏宝阁副本2]
+#IF
+CHECK [30] 1
+#SAY
+镜像创建成功，请选择进入方式\
+<单人进入/@单人进入>\
+<组队进入/@组队进入>\
+<退出/@exit>\
+#ELSESAY
+创建失败了！
+
+[@单人进入]
+#IF
+#ACT
+;完成初入幻境任务标识
+SET [39] 1
+mapmove <$USERNAME>藏宝阁 50 50
+
+
+[@组队进入]
+#if
+NOT ISGROUPMASTER
+#ACT
+SendMsg 5 你不是组长,不能组队传送
+BREAK
+#IF
+#ACT
+;完成初入幻境任务标识
+SET [39] 1
+GROUPMAPMOVE <$USERNAME>藏宝阁 50 50

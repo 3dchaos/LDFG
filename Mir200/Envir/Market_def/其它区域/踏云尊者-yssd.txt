@@ -1,0 +1,209 @@
+[@main]
+
+
+#IF
+CHECK [256] 1
+#ACT
+mov N$资源编号 0 
+OpenBigDialogBox <$STR(N$资源编号)> 16 1 4 0 0 1 384 23
+mov N$元素上限 10
+mov N$次数上限 50
+SENDMSG 5 已经成功突破！目前元素上限：10%，次数上限50次
+
+#ELSEACT
+mov N$资源编号 0 
+OpenBigDialogBox <$STR(N$资源编号)> 16 1 4 0 0 1 384 23
+mov N$元素上限 5
+mov N$次数上限 10
+
+#IF
+#SAY
+<Img:~#L1:25:<$STR(N$资源编号)>:-20:44>\
+<Img:~#L1:34:<$STR(N$资源编号)>:144:-5>\
+<&Layout:~#L02:200:80:215:240>
+<MText:#L02~:0:0:255:老身看到了后生的元素之力正跃跃欲试，|
+释放你的熔炼值在装备上，|
+有几率获得元素附着！|
+熔炼值就是云隐宗师|
+帮你熔炼装备的收获。
+>
+<Text:#L02~:释放熔炼值:0:20{FCOLOR=251}/@释放熔炼>
+<NewLine:#L02~>
+<Text:#L02~:狐火突破:0:20{FCOLOR=251}/@狐火突破>
+<NewLine:#L02~>
+<Text:#L02~:离开这里:0:20{FCOLOR=251}/@带我离开这里>
+
+[@狐火突破]
+#IF
+CHECK [256] 1
+#ACT
+mov N$元素上限 10
+mov N$次数上限 50
+SENDMSG 5 已经成功突破！目前元素上限：10%，次数上限50次
+
+#ELSESAY
+老夫听说东海之滨有一片神秘大地，\
+可能跟白日门一位姑娘有关。\
+请你尝试进入那里给老夫一些狐火。\
+这些材料可以让元素值突破5%的限制。\
+<我去过那里了/@我去过那里了>\
+<我这就去/@exit>\
+
+[@我去过那里了]
+#IF
+check [255] 1
+#SAY
+真幸运，你居然真的到达了那块地域。\
+那你有带来狐火吗？\
+<带来了/@带来了>给5狐火\
+<没有/@exit>\
+#ELSESAY
+你并没有那块土地的味道，\
+去白日门问问那个神奇少女吧！\
+<我这就去/@exit>\
+
+
+[@带来了]
+#IF
+checkitem 狐火 5
+#ACT
+take 狐火 5
+SET [256] 1
+mov N$元素上限 10
+mov N$次数上限 50
+SENDMSG 5 狐火的力量突破了元素上限，目前元素上限：10%，次数上限50次
+#ELSESAY
+你好像没有准备齐全。\
+<返回/@main>\
+
+
+[@释放熔炼]
+#IF
+#ACT
+	CLOSEBIGDIALOGBOX
+#IF
+  checkrenewlevel > <$STR(N$次数上限)>
+#act
+  break
+#say
+你释放的次数已经到达极限了.\ \
+<离开/@exit>\
+
+#IF
+SMALL U19 1
+#SAY
+老身并没有在你身上看到熔炼痕迹，去旁边的熔炼炉火力看看吧。\
+把你的装备丢入火焰，火焰吞噬后会赐予你熔炼值。\
+<返回/@main>\
+#ELSESAY
+是宗师让你来的吗?\
+看来你身上有不少秘密.哈哈哈\
+请把需要释放熔炼的道具交给老身吧，\
+你拥有的熔炼值越高，几率就越高。\
+我算算，你身上的<熔炼值是<$STR(U19)>/AutoColor=245>\
+<ITEMBOX:6:1:730:300:100:45:45:5,6,15,16,10,11,30,19,20,26,24,22,23,64,54,62,28,12:254#请放入要被释放熔炼的道具^251#老登传奇>\
+<开始释放/@释放熔炼进行>\
+<返回/@main>\
+
+[@释放熔炼进行]
+#IF
+SMALL U19 1
+#ACT
+MESSAGEBOX 老身并没有在你身上看到熔炼痕迹，检查你的熔炼值。
+BREAK
+#IF
+CheckBoxItemCount 6
+#ELSEACT
+MESSAGEBOX 请放入要释放熔炼值的道具
+BREAK
+#IF
+#ACT
+SENDMSG 6 释放的道具是<$BOXITEM[6].NAME>
+#OR
+EQUAL <$BOXITEM[6].NAME> 麻痹戒指
+EQUAL <$BOXITEM[6].NAME> 复活戒指
+EQUAL <$BOXITEM[6].NAME> 传送戒指
+EQUAL <$BOXITEM[6].NAME> 护身戒指
+EQUAL <$BOXITEM[6].NAME> 防御戒指
+EQUAL <$BOXITEM[6].NAME> 活力戒指
+EQUAL <$BOXITEM[6].NAME> 火焰戒指
+EQUAL <$BOXITEM[6].NAME> 隐身戒指
+EQUAL <$BOXITEM[6].NAME> 强化麻痹戒指
+EQUAL <$BOXITEM[6].NAME> 强化复活戒指
+EQUAL <$BOXITEM[6].NAME> 强化护身戒指
+#ACT
+MESSAGEBOX 特殊戒指承载不了元素力量！无法熔炼
+BREAK
+
+#IF
+LARGE U19 9
+#ACT
+MOVR N$随机消费熔炼值 5 10
+#ELSEACT
+MOVR N$随机消费熔炼值 1 <$STR(U19)>
+#IF
+SMALL U19 2
+#ACT
+MOV N$随机消费熔炼值 1
+
+#IF
+#ACT
+DEC U19 <$STR(N$随机消费熔炼值)>
+DIV N$熔炼几率 10  <$STR(N$随机消费熔炼值)>
+MOV L$元素属性表 [0,1,2,3,4,5,6,7,8,9,10] 删除涉及英雄的元素
+;MOV L$元素属性表 [0,1,2,3,4,5,6,7,8]
+SENDMSG 5 结算熔炼值：<$STR(U19)>，消耗熔炼值：<$STR(N$随机消费熔炼值)>，成功几率：1/<$STR(N$熔炼几率)>
+#IF
+RANDOM <$STR(N$熔炼几率)>
+#ACT
+mov N1 0
+;循环读九次
+loopgoto @读取元素 9
+GetListVarCount L$元素属性表 N1
+#ELSEACT
+MESSAGEBOX 熔炼失败！拥有熔炼值越高，几率才会越高。
+GOTO @释放熔炼
+BREAK
+
+#IF
+SMALL N1 1
+#ACT
+MESSAGEBOX 这个道具已经无法承受新的熔炼值！
+ReturnBoxItem 6
+GOTO @释放熔炼
+BREAK
+#ELSEACT
+MOVR N$元素位置 <$STR(N1)>
+;DEC N$元素位置 1
+;SENDMSG 5 元素位置是：<$STR(N$元素位置)>
+SetUpgradeItem boxitem6
+SetNewItemValue boxitem6 <$STR(L$元素属性表[<$STR(N$元素位置)>])> + 1
+SETITEMSTATE boxitem6 0 1
+SETITEMSTATE boxitem6 1 1
+SETITEMSTATE boxitem6 4 1
+SETITEMSTATE boxitem6 5 1
+ADDTEXTLISTEX ..\QuestDiary\系统功能\绑定物品ID列表.txt <$BOXITEM[6].MAKEINDEX> 0
+UpdateItem boxitem6
+
+MESSAGEBOX 恭喜你！成功释放熔炼值，激活新元素属性！<装备已经绑定/AutoColor=254>
+GOTO @释放熔炼
+
+[@读取元素]
+#IF
+CHECKNEWITEMVALUE boxitem6 <$STR(N1)> < <$STR(N$元素上限)>
+#ELSEACT
+Dec L$元素属性表 <$STR(N1)>
+#IF
+#ACT
+Inc N1 1
+;sendmsg 7 输出结果：<$str(L$元素属性表)>
+
+
+[@带我离开这里]
+#IF
+random 2
+#ACT
+MAPMOVE  0 285 609
+
+#ELSEACT
+MAPMOVE  0 627 605

@@ -1,0 +1,12 @@
+[强化复活戒指]
+Attack13=20
+Attack51=20
+
+[强化护身戒指]
+Attack22=20
+Attack58=20
+
+[强化麻痹戒指]
+Attack26=20
+Attack56=20
+

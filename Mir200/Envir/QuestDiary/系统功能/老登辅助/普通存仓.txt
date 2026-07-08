@@ -1,0 +1,33 @@
+[@普通存仓入包触发]
+{
+#ACT
+MOV S$处理物品名称 <$CurItemName>
+MOV L$禁存目录 <$STR(A30)>
+MOV N$序号 0
+MOV N$存储数量 0
+#if
+CheckVarInList L$禁存目录 <$CurItemName>
+#act
+SendMsg 6 <$CurItemName>不允许存仓！
+BREAK
+
+#IF
+EQUAL S$处理物品名称
+#ACT
+BREAK
+#ELSEACT
+GetDBItemFieldValue <$STR(S$处理物品名称)> idx <$STR(N$序号)>
+GetListString ..\QuestDiary\数据文件\存仓列表\<$USERNAME>.txt 0 L$拾取数组
+
+#if
+CheckVarInList L$拾取数组 <$STR(N$序号)>
+#act
+BagItemToStorage <$CurItemName> 1 N$存储数量
+#ELSEACT
+BREAK
+
+#IF
+	CHECK [63] 1
+	#ELSEACT
+SendMsg 6 背包的物品保存到仓库中
+}

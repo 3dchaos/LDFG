@@ -1,0 +1,46 @@
+[@MAIN]
+#IF
+CHECK [44] 1
+#SAY
+魔龙殿还需要加强封印，你已经记住了它的位置\
+对吧？\
+<退出/@exit>\
+#ACT
+BREAK
+
+#IF
+CHECK [43] 1
+#SAY
+这个隘口非常重要，我实在脱不开身。\
+听说魔龙殿的方位已经探明，你能帮我击杀10只\
+里面的魔龙力士吗？\
+<已经击杀/@已经击杀>\
+<退出/@exit>\
+#ACT
+BREAK
+
+#IF
+#SAY
+我必须镇守此处，听说魔龙殿的位置有点眉目了。\
+<退出/@exit>\
+
+[@已经击杀]
+#IF
+LARGE U32 9
+#SAY
+辛苦你了，我一直在担心魔龙殿里的怪物跑出来。\
+后续部队会加强魔龙殿的封印。\
+<好的/@exit>\
+#ACT
+;清理变量
+mov U32 0
+SET [44] 1
+CHANGEEXP + 1000000
+CREDITPOINT + 100
+SENDMSG 5 提示：任务已完成，你获得了100点声望，当前声望：<$CREDITPOINT>点...
+RefreshMissPage 180任务
+ADDBUTTON 0 1 82 83 84 153 150 7 <PlayImg:0:82:2:200:0:0:0> 251#任务\250#打开任务窗口
+BREAK
+#ELSEACT
+MESSAGEBOX 你还未完成目标数量！
+BREAK

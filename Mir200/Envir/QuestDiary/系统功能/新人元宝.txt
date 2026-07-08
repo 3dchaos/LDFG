@@ -1,0 +1,74 @@
+[@每日元宝]
+{
+
+	
+#IF
+CHECKLEVEL 29
+#ACT
+MESSAGEBOX 你的等级<$LEVEL>已经太高了,需要自力更生哦！
+BREAK
+
+#IF
+CHECKLEVELEX < 20
+#ACT
+MOV N$发放元宝数 100
+#ELSEACT
+MOV N$发放元宝数 500
+
+
+#IF
+  checknamelist ..\QuestDiary\数据文件\新人元宝名单.txt
+#ACT
+MESSAGEBOX 今天我已经帮助过你了,明天再来吧！
+BREAK
+
+#IF
+GetStringPosEX ..\QuestDiary\数据文件\新人元宝IP检测.txt <$MACHINEID> N$行号 S$行文本 0
+
+#ELSEACT
+;IP没领取过，直接领取
+GOTO @成功领取元宝
+ADDTEXTLIST ..\QuestDiary\数据文件\新人元宝IP检测.txt <$MACHINEID>:1
+BREAK
+
+#IF
+#ACT
+GetListString ..\QuestDiary\数据文件\新人元宝IP检测.txt <$STR(N$行号)> S$临时无用 N$IP次数
+
+
+#IF
+LARGE N$IP次数 1
+#ACT
+MESSAGEBOX 别以为换一个人来就可以骗本小姐\当前机器已经领取过两次了，请不要重复领取
+BREAK
+
+	
+#IF
+EQUAL N$IP次数 1
+#ACT
+GOTO @成功领取元宝
+DelTextListLine ..\QuestDiary\数据文件\新人元宝IP检测.txt <$STR(N$行号)> 0
+ADDTEXTLIST ..\QuestDiary\数据文件\新人元宝IP检测.txt <$MACHINEID>:2
+BREAK
+
+[@次数判断]
+#IF
+#ACT
+GetListString ..\QuestDiary\数据文件\新人元宝IP检测.txt <$STR(N$行号)> S$临时无用 N$IP次数
+#IF
+LARGE N$IP次数 1
+#ACT
+MESSAGEBOX 别以为换一个人来就可以骗本小姐\当前IP已经领取过两次了，请不要重复领取
+BREAK
+
+
+[@成功领取元宝]
+#IF
+#ACT
+GAMEGOLD + <$STR(N$发放元宝数)>
+ADDTEXTLIST ..\QuestDiary\数据文件\新人元宝名单.txt <$USERNAME>
+MESSAGEBOX 增加<$STR(N$发放元宝数)>元宝,希望能帮助你解决目前的困境!\你的设备已经领取<$STR(N$IP)>次
+
+
+}
+

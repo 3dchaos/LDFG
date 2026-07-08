@@ -1,0 +1,301 @@
+[@main]
+#IF
+#ACT
+DELBUTTON 1
+ADDBUTTON 0 1 82 83 84 153 150 7 -1
+mov N$资源编号 0
+OpenBigDialogBox <$STR(N$资源编号)> 16 1 4 0 0 1 384 23
+#SAY
+<Img:~#L1:30:<$STR(N$资源编号)>:0:64>\
+<Img:~#L1:34:<$STR(N$资源编号)>:144:-5>\
+<&Layout:~#L02:205:120:195:240>
+<MText:#L02~:0:0:255:欢迎光临热血美容店，|
+你也是慕名而来的吧？|
+我这里做美容是要收费的|
+
+>
+#if
+not equal G3 1
+#say
+<Text:#L02~:换 发 型:0:50{FCOLOR=251}/@ChangHair>
+<NewLine:#L02~>
+<Text:#L02~:变性手术:0:50{FCOLOR=251}/@本人性别变更>
+<NewLine:#L02~>
+<Text:#L02~:对话|支线任务:0:50{FCOLOR=251}/@对话>
+<NewLine:#L02~>
+<Text:#L02~:退出:0:50{FCOLOR=251}/@exit>
+#elsesay
+
+<Text:#L02~:换 发 型:0:50{FCOLOR=251}/@ChangHair>
+<NewLine:#L02~>
+<Text:#L02~:变性手术:0:50{FCOLOR=251}/@本人性别变更>
+<NewLine:#L02~>
+<Text:#L02~:英雄变性:0:50{FCOLOR=251}/@英雄性别变更>
+<NewLine:#L02~>
+<Text:#L02~:对话|支线任务:0:50{FCOLOR=251}/@对话>
+<NewLine:#L02~>
+<Text:#L02~:退出:0:50{FCOLOR=251}/@exit>
+
+
+
+[@对话]
+#IF
+#ACT
+CLOSEBIGDIALOGBOX
+#IF
+CHECK [12] 1
+#SAY
+谢谢你的帮助，下次变性手术\
+我可不会打折哦！\ \
+<返回/@main>
+#ACT
+BREAK
+
+#IF
+CHECK [11] 1
+#SAY
+送来了吗？我需要的群体治疗术？\
+患者们已经等不及了。\ \
+<带来了/@带来了>\ \
+<返回/@main>
+#ACT
+BREAK
+
+#IF
+CHECK [11] 0
+#SAY
+我是医术还是不太高明，\
+很多患者做完变性手术后\
+有强烈的后遗症。\
+听说世间存在一本秘籍，上面记载着\
+治疗群体的法术，你能帮我找来一本吗？\
+<我这就去找/@我这就去找>\ \
+<我没兴趣/@main>
+
+[@我这就去找]
+#IF
+#SAY
+太感谢你了，完成任务后，\
+我会免费为你服务一次哦。\
+<好的/@main>
+#ACT
+SET [11] 1
+
+[@带来了]
+#IF
+CHECKITEM 群体治疗术 1
+#ACT
+TAKE 群体治疗术 1
+SET [12] 1
+CHANGEEXP + 100000
+CREDITPOINT + 5
+SENDMSG 5 提示：任务已完成，你获得了5点声望，当前声望：<$CREDITPOINT>点...
+RefreshMissPage 170任务
+ADDBUTTON 0 1 82 83 84 153 150 7 <PlayImg:0:82:2:200:0:0:0> 251#任务\250#打开任务窗口
+
+#SAY
+太感谢你了，我的患者们都有救了。\
+我可以帮你免费变性一次。\
+你想试试吗？\ \
+<帮我变性/@性别变更1>\ \
+<我没兴趣/@main>
+#ELSESAY
+你并没有传说中的那本秘籍哦！\
+快去寻找吧！\ \
+<好的/@main>
+
+[@本人性别变更]
+#IF
+#ACT
+CLOSEBIGDIALOGBOX
+#IF
+large <$GAMEGIRD> 499
+#ACT
+GAMEGIRD - 500
+GOTO @性别变更1
+#ELSESAY
+手术费不够哦！需要500灵符\
+<返回/@main>
+
+[@英雄性别变更]
+#IF
+CheckHeroOnline
+#ELSEACT
+MESSAGEBOX 你的英雄没在线呢
+BREAK
+#IF
+#ACT
+CLOSEBIGDIALOGBOX
+#IF
+large <$GAMEGIRD> 999
+#ACT
+GAMEGIRD - 1000
+GOTO @性别变更2
+#ELSESAY
+手术费不够哦！\
+<返回/@main>
+
+[@性别变更1]
+#IF
+gender man
+#SAY
+是不是做猛男没什么意思呀，想不想尝尝做淑女的滋味呀！！！\ \
+『<尝尝/@towoman>』\ \
+〖<返回/@main>〗
+#ELSESAY
+是不是做淑女挺累的，想不想尝尝做猛男的滋味呀！！！\ \
+『<尝尝/@toman>』\ \
+〖<返回/@main>〗
+
+[@性别变更2]
+
+#IF
+H.gender man
+#SAY
+不喜欢粗壮的男英雄？可以试试让他变成软萌妹的！！！\ \
+『<英雄变性/@英雄变性1>』\ \
+〖<返回/@main>〗
+#ELSESAY
+不喜欢娇弱的女英雄？可以试试让她变成纯爷们的！！！\ \
+『<英雄变性/@英雄变性2>』\ \
+〖<返回/@main>〗
+
+
+[@英雄变性2]
+#IF
+#ACT
+H.CHANGEGENDER 0
+H.HAIRSTYLE 2
+#SAY
+呵呵，你的英雄已经变成一位猛男了。\ \
+〖<返回/@main>〗
+
+
+[@英雄变性1]
+#IF
+#ACT
+H.CHANGEGENDER 1
+H.HAIRSTYLE 3
+#SAY
+呵呵，你的英雄已经变成一位淑女了。\ \
+〖<返回/@main>〗
+
+
+[@toman]
+#IF
+#ACT
+CHANGEGENDER 0
+HAIRSTYLE 2
+#SAY
+呵呵，你已经变成一位猛男了。\ \
+〖<返回/@main>〗
+
+[@towoman]
+#IF
+#ACT
+CHANGEGENDER 1
+HAIRSTYLE 3
+#SAY
+呵呵，你已经变成一位淑女了。\ \
+〖<返回/@main>〗
+
+[@ChangHair]
+#IF
+#ACT
+CLOSEBIGDIALOGBOX
+#IF
+gender man
+#ACT
+goto @ChangHairMan
+#ELSEACT
+goto @ChangHairWoman
+[@ChangHairMan]
+想不想来个光头呀，酷呆了！！！\ \
+『<大光头/@hairman0>』\
+『<长头发/@hairman1>』\
+『<短寸头/@hairman2>』\ \
+〖<返回/@main>〗 〖<关闭/@exit>〗
+[@hairman0]
+#IF
+checkgold 300000
+#ACT
+take 金币 300000
+HAIRSTYLE 0
+#SAY
+呵呵，大光头是不是很酷呀！！！ \ \
+〖<返回/@main>〗 〖<关闭/@Exit>〗
+#ELSEACT
+MESSAGEBOX 需要给我30万金币才能换发型哦!!
+[@hairman1]
+#IF
+checkgold 300000
+#ACT
+take 金币 300000
+HAIRSTYLE 1
+#SAY
+呵呵，你的发型已经改变成长头发了... \ \
+〖<返回/@main>〗 〖<关闭/@Exit>〗
+#ELSEACT
+MESSAGEBOX 需要给我30万金币才能换发型哦!!
+[@hairman2]
+#IF
+checkgold 300000
+#ACT
+take 金币 300000
+HAIRSTYLE 2
+#SAY
+呵呵，你的发型已经改变成短寸头了... \ \
+〖<返回/@main>〗 〖<关闭/@Exit>〗
+#ELSEACT
+MESSAGEBOX 需要给我30万金币才能换发型哦!!
+[@ChangHairWoman]
+『<红短发/@hairWoman0>』\
+『<蓝辫子/@hairWoman1>』\
+『<短寸头/@hairWoman2>』\
+『<大光头/@hairWoman3>』\ \
+〖<返回/@main>〗 〖<关闭/@exit>〗
+[@hairWoman0]
+#IF
+checkgold 300000
+#ACT
+take 金币 300000
+HAIRSTYLE 3
+#SAY
+呵呵，你的发型已经改变成红短发了... \ \
+〖<返回/@main>〗 〖<关闭/@Exit>〗
+#ELSEACT
+MESSAGEBOX 需要给我30万金币才能换发型哦!!
+[@hairWoman1]
+#IF
+checkgold 300000
+#ACT
+take 金币 300000
+HAIRSTYLE 1
+#SAY
+呵呵，你的发型已经改变成蓝辫子了... \ \
+〖<返回/@main>〗 〖<关闭/@Exit>〗
+#ELSEACT
+MESSAGEBOX 需要给我30万金币才能换发型哦!!
+[@hairWoman2]
+#IF
+checkgold 300000
+#ACT
+take 金币 300000
+HAIRSTYLE 2
+#SAY
+呵呵，你的发型已经改变成短寸头了... \ \
+〖<返回/@main>〗 〖<关闭/@Exit>〗
+#ELSEACT
+MESSAGEBOX 需要给我30万金币才能换发型哦!!
+[@hairWoman3]
+#IF
+checkgold 300000
+#ACT
+take 金币 300000
+HAIRSTYLE 4
+#SAY
+呵呵，你的发型已经改变成大光头了... \ \
+〖<返回/@main>〗 〖<关闭/@Exit>〗
+#ELSEACT
+MESSAGEBOX 需要给我30万金币才能换发型哦!!
+

@@ -1,0 +1,37 @@
+[@挂机跟踪]
+{
+#IF
+CHECK [64] 
+#ACT
+BREAK
+
+#IF
+#ACT
+GetListString ..\QuestDiary\数据文件\跟随目录\<$STR(T5)>.txt 0 S$数据
+#ELSEACT
+BREAK
+
+#IF
+EQUAL S$数据
+#ACT
+BREAK
+
+#ELSEACT
+ExtractStringEx | <$STR(S$数据)> S$分割
+;SENDMSG 5 <$STR(S$分割1)>,<$STR(S$分割2)>,<$STR(S$分割3)>,<$STR(S$分割4)>
+
+#IF
+EQUAL S$分割2 <$MAP>
+CHECKMAPMOVE <$STR(S$分割2)> <$STR(S$分割3)> <$STR(S$分割4)> 
+#ACT
+GOTO @发送消息
+AUTOGOTOXY <$STR(S$分割2)> <$STR(S$分割3)> <$STR(S$分割4)>
+#ELSEACT
+SENDMSG 5 无法找到跟踪目标<$STR(T5)>，请确保你们在同一个地图！
+[@发送消息]
+#IF
+CHECK [63] 1
+#ELSEACT
+SENDMSG 5 找到跟踪目标<$STR(T5)>，可以到达正在前往
+
+}

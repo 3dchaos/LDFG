@@ -1,0 +1,89 @@
+[@挂机功能]
+{
+;清理挂机目录
+#IF
+#ACT
+DelTextList ..\QuestDiary\数据文件\挂机名单.txt <$USERNAME>
+DelTextList ..\QuestDiary\数据文件\挂机名单.txt <$USERNAME>
+DelTextList ..\QuestDiary\数据文件\挂机名单.txt <$USERNAME>
+DelTextList ..\QuestDiary\数据文件\挂机名单.txt <$HERONAME>
+DelTextList ..\QuestDiary\数据文件\挂机名单.txt <$HERONAME>
+DelTextList ..\QuestDiary\数据文件\挂机名单.txt <$HERONAME>
+
+#IF
+CheckAttackMode 1
+#ELSEACT
+	SENDMSG 6 挂机失败，请切换为和平模式
+	BREAK
+
+;开启挂机自动召唤
+#IF
+CHECK [68] 1
+#ACT
+SENDMSG 6 已启动挂机自动召唤仆从
+SETONTIMER 6 5
+
+
+;开启挂机遇人随机
+#IF
+CHECK [116] 1
+#ACT
+SET [116] 0
+DelTextList ..\QuestDiary\数据文件\挂机名单.txt <$USERNAME>
+DelTextList ..\QuestDiary\数据文件\挂机名单.txt <$HERONAME> 
+SETOFFTIMER 8
+SETICON 0 -1
+SENDMSG 6 已经停止跟踪挂机。
+BREAK
+
+#IF
+CHECK [64] 1
+CHECK [116] 0
+#ACT
+SENDMSG 6 已启动挂机跟随功能，<$STR(T5)>在附近时可以自动跟随，开启跟随将无法攻击，无法随机
+;记录跟人状态
+SET [116] 1
+AddTextList ..\QuestDiary\数据文件\挂机名单.txt <$USERNAME>
+AddTextList ..\QuestDiary\数据文件\挂机名单.txt <$HERONAME>
+SETICON 0 0 200 44 -30 10 0 0 150 0
+H.SETICON 0 0 200 44 -30 10 0 0 150 0
+SETONTIMER 8 2
+BREAK
+
+
+
+#IF
+CHECK [60] 1
+#ACT
+SENDMSG 6 已启动挂机遇人随机功能，无需随机道具即可随机
+
+#IF
+CHECK [61] 1
+#ACT
+SENDMSG 6 已启动挂机卡死随机功能，无需随机道具即可随机
+
+#IF
+CHECK [62] 1
+#ACT
+SENDMSG 6 已启动挂机危险随机功能，无需随机道具即可随机
+
+#IF
+EQUAL G2 0
+#ACT
+SENDMSG 6 开始挂机，使用点击【辅助】停止挂机，挂机过程小心被人杀了！
+SENDMSG 6 当前挂机记录地图：<$STR(T17)>
+#ELSEACT
+SENDMSG 6 开始挂机，使用点击【辅助】停止挂机，挂机过程被人物攻击将反击敌人1/3生命值
+SENDMSG 6 当前挂机记录地图：<$STR(T17)>
+#IF
+#ACT
+StartAutoPlayGame
+AddTextList ..\QuestDiary\数据文件\挂机名单.txt <$USERNAME>
+AddTextList ..\QuestDiary\数据文件\挂机名单.txt <$HERONAME>
+SETICON 0 0 200 44 -30 10 0 0 150 0
+H.SETICON 0 0 200 44 -30 10 0 0 150 0
+SETONTIMER 7 2
+
+}
+
+

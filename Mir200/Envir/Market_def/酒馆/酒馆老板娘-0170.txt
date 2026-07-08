@@ -1,0 +1,749 @@
+[@main]
+#IF
+CHECK [46] 1
+#SAY
+幻境里的动静是你引起的吧？我舅舅告诉我了。\
+<神秘洞穴在哪？/@神秘洞穴在哪>\
+#ELSESAY
+这里是盟重最大的客栈。客官，打尖还是住店？\
+<打听消息/@打听消息>\
+#IF
+LARGE G0 2
+#SAY
+我还可以帮你们解除物品的封印，\
+不过有些封印力量过强的首饰在解封过程中可能会破碎，\
+解封需要耗费我大量魔法力，金钱就是动力，\
+给我2万金币，我可能会帮你一次。\
+<我要解除封印/@解除封印>\
+<回收毒囊/@回收毒囊>兑换经验宝珠\
+#ELSESAY
+最近都没有什么生意呢！\
+<返回/@exit>\
+
+[@神秘洞穴在哪]
+#IF
+#ACT
+SET [38] 1
+#SAY
+我家跑堂发现的，就在酒馆的后院里。\
+不过他的嘴很严，你去问问他吧。\
+就说我让带路。\
+<好的/@exit>\
+
+[@回收毒囊]
+#IF
+#SAY
+洞穴里的怪物太可恨了，不过它们身上的毒囊还是蛮值钱的\
+你有很多吗？十个毒囊兑换一个双倍经验神丹如何?\
+当然如果你有50个可以兑换一个三倍经验神丹！\
+100个兑换五倍经验神丹\
+<兑换双倍经验神丹/@兑换双倍经验神丹>\
+<兑换三倍经验神丹/@兑换三倍经验神丹>\
+<兑换五倍经验神丹/@兑换五倍经验神丹>\
+
+[@兑换双倍经验神丹]
+#IF
+CHECKITEM 雷蛛毒囊 10
+#ACT
+TAKE 雷蛛毒囊 10
+GIVESTATEITEM 双倍经验神丹 1 1 0 1 1 1 0
+SENDMSG 5 成功在老板娘这里兑换双倍经验神丹
+#ELSEACT
+MESSAGEBOX 我数了数好像数量不够呀！
+
+[@兑换三倍经验神丹]
+#IF
+CHECKITEM 雷蛛毒囊 50
+#ACT
+TAKE 雷蛛毒囊 50
+GIVESTATEITEM 三倍经验神丹 1 1 0 1 1 1 0
+SENDMSG 5 成功在老板娘这里兑换三倍经验神丹
+#ELSEACT
+MESSAGEBOX 我数了数好像数量不够呀！
+
+[@兑换五倍经验神丹]
+#IF
+CHECKITEM 雷蛛毒囊 100
+#ACT
+TAKE 雷蛛毒囊 100
+GIVESTATEITEM 五倍经验神丹 1 1 0 1 1 1 0
+SENDMSG 5 成功在老板娘这里兑换五倍经验神丹
+#ELSEACT
+MESSAGEBOX 我数了数好像数量不够呀！
+
+
+[@打听消息]
+#IF
+#SAY
+你说那个啊，听说是幻境的影响。出现了一个洞。\
+我的舅舅正好在幻境做秘使。你可以问问他。\
+<好的/@exit>\
+
+[@解除封印]
+#IF
+CHECKGOLD  20000
+#ACT
+take 金币 20000
+#SAY
+你还想解封哪个物品的封印呢？\ \
+<雷泽项链(封印)/@雷项>　    <唤魔项链(封印)/@唤项>　    <启源项链(封印)/@启项>\
+<雷泽手镯(封印)/@雷手>　    <唤魔手镯(封印)/@唤手>　    <启源手镯(封印)/@启手>\
+<雷泽戒指(封印)/@雷戒>　    <唤魔戒指(封印)/@唤戒>　    <启源戒指(封印)/@启戒>\
+<解封圣战、法神、天尊的封印/@解圣战封>
+#ELSESAY
+我是开门做生意呢，没有2万金币我是不会动手的。
+[@解圣战封]
+我也可以帮你解封封印的圣战、法神、天尊系列的物品\
+解封成功将有可能获得属性更高的系列物品\
+即使解封失败，封印的物品也会完好无损，不会消失\
+一旦到我这里进行解封，无论是否成功，我都将送您返回盟重\
+\ \
+<直接解封/@直接解封>
+[@直接解封]
+我也可以帮你解封封印的圣战、法神、天尊系列的物品\
+至于解封后,它会成为什么,我也无法预知,一切都和你本身有关\
+现在就让我看看你想解封什么吧\
+解封成功将有可能获得属性更高的系列物品\
+即使解封失败，封印的物品也会完好无损，不会消失\
+<圣战项链(封印)/@圣项>  <法神项链(封印)/@法项>  <天尊项链(封印)/@天项>\
+<圣战手镯(封印)/@圣镯>  <法神手镯(封印)/@法镯>  <天尊手镯(封印)/@天镯>\
+<圣战戒指(封印)/@圣戒>  <法神戒指(封印)/@法戒>  <天尊戒指(封印)/@天戒>\
+[@雷项]
+#IF
+checkitem 雷泽项链(封印) 1
+#ACT
+inc D0 1
+SENDMSG 5 祝贺你，封印已经成功解除
+goto @解除封印
+#IF
+checkitem 雷泽项链(封印) 1
+random 24
+#ACT
+take 雷泽项链(封印) 1
+give 雷泽项链(神威) 1
+break
+#IF
+checkitem 雷泽项链(封印) 1
+random 12
+#ACT
+take 雷泽项链(封印) 1
+give 雷泽项链(神力) 1
+break
+#IF
+checkitem 雷泽项链(封印) 1
+random 9
+#ACT
+take 雷泽项链(封印) 1
+give 雷泽项链(霸气) 1
+break
+#IF
+checkitem 雷泽项链(封印) 1
+random 6
+#ACT
+take 雷泽项链(封印) 1
+give 雷泽项链(精纯) 1
+break
+#IF
+checkitem 雷泽项链(封印) 1
+random 3
+#ACT
+take 雷泽项链(封印) 1
+give 雷泽项链(坚硬) 1
+break
+#IF
+checkitem 雷泽项链(封印) 1
+#ACT
+take 雷泽项链(封印) 1
+SENDMSG 5 封印力量过于强大，解封失败，封印装备已破碎！
+#ELSESAY
+你没有这个封印装备，我没办法帮你解除封印。\
+<返回/@解除封印>
+[@雷手]
+#IF
+checkitem 雷泽手镯(封印) 1
+#ACT
+inc D0 1
+SENDMSG 5 祝贺你，封印已经成功解除
+goto @解除封印
+#IF
+checkitem 雷泽手镯(封印) 1
+random 24
+#ACT
+take 雷泽手镯(封印) 1
+give 雷泽手镯(神威) 1
+break
+#IF
+checkitem 雷泽手镯(封印) 1
+random 12
+#ACT
+take 雷泽手镯(封印) 1
+give 雷泽手镯(神力) 1
+break
+#IF
+checkitem 雷泽手镯(封印) 1
+random 9
+#ACT
+take 雷泽手镯(封印) 1
+give 雷泽手镯(霸气) 1
+break
+#IF
+checkitem 雷泽手镯(封印) 1
+random 6
+#ACT
+take 雷泽手镯(封印) 1
+give 雷泽手镯(精纯) 1
+break
+#IF
+checkitem 雷泽手镯(封印) 1
+random 3
+#ACT
+take 雷泽手镯(封印) 1
+give 雷泽手镯(坚硬) 1
+break
+#IF
+checkitem 雷泽手镯(封印) 1
+#ACT
+take 雷泽手镯(封印) 1
+SENDMSG 5 封印力量过于强大，解封失败，封印装备已破碎！
+#ELSESAY
+你没有这个封印装备，我没办法帮你解除封印。\
+<返回/@解除封印>
+[@雷戒]
+#IF
+checkitem 雷泽戒指(封印) 1
+#ACT
+inc D0 1
+SENDMSG 5 祝贺你，封印已经成功解除
+goto @解除封印
+#IF
+checkitem 雷泽戒指(封印) 1
+random 24
+#ACT
+take 雷泽戒指(封印) 1
+give 雷泽戒指(神威) 1
+break
+#IF
+checkitem 雷泽戒指(封印) 1
+random 12
+#ACT
+take 雷泽戒指(封印) 1
+give 雷泽戒指(神力) 1
+break
+#IF
+checkitem 雷泽戒指(封印) 1
+random 9
+#ACT
+take 雷泽戒指(封印) 1
+give 雷泽戒指(霸气) 1
+break
+#IF
+checkitem 雷泽戒指(封印) 1
+random 6
+#ACT
+take 雷泽戒指(封印) 1
+give 雷泽戒指(精纯) 1
+break
+#IF
+checkitem 雷泽戒指(封印) 1
+random 3
+#ACT
+take 雷泽戒指(封印) 1
+give 雷泽戒指(坚硬) 1
+break
+#IF
+checkitem 雷泽戒指(封印) 1
+#ACT
+take 雷泽戒指(封印) 1
+SENDMSG 5 封印力量过于强大，解封失败，封印装备已破碎！
+#ELSESAY
+你没有这个封印装备，我没办法帮你解除封印。\
+<返回/@解除封印>
+[@唤项]
+#IF
+checkitem 唤魔项链(封印) 1
+#ACT
+inc D0 1
+SENDMSG 5 祝贺你，封印已经成功解除
+goto @解除封印
+#IF
+checkitem 唤魔项链(封印) 1
+random 24
+#ACT
+take 唤魔项链(封印) 1
+give 唤魔项链(神雀) 1
+break
+#IF
+checkitem 唤魔项链(封印) 1
+random 12
+#ACT
+take 唤魔项链(封印) 1
+give 唤魔项链(天作) 1
+break
+#IF
+checkitem 唤魔项链(封印) 1
+random 9
+#ACT
+take 唤魔项链(封印) 1
+give 唤魔项链(敏锐) 1
+break
+#IF
+checkitem 唤魔项链(封印) 1
+random 6
+#ACT
+take 唤魔项链(封印) 1
+give 唤魔项链(流光) 1
+break
+#IF
+checkitem 唤魔项链(封印) 1
+random 3
+#ACT
+take 唤魔项链(封印) 1
+give 唤魔项链(灰暗) 1
+break
+#IF
+checkitem 唤魔项链(封印) 1
+#ACT
+take 唤魔项链(封印) 1
+SENDMSG 5 封印力量过于强大，解封失败，封印装备已破碎！
+#ELSESAY
+你没有这个封印装备，我没办法帮你解除封印。\
+<返回/@解除封印>
+[@唤手]
+#IF
+checkitem 唤魔手镯(封印) 1
+#ACT
+inc D0 1
+SENDMSG 5 祝贺你，封印已经成功解除
+goto @解除封印
+#IF
+checkitem 唤魔手镯(封印) 1
+random 24
+#ACT
+take 唤魔手镯(封印) 1
+give 唤魔手镯(神雀) 1
+break
+#IF
+checkitem 唤魔手镯(封印) 1
+random 12
+#ACT
+take 唤魔手镯(封印) 1
+give 唤魔手镯(天作) 1
+break
+#IF
+checkitem 唤魔手镯(封印) 1
+random 9
+#ACT
+take 唤魔手镯(封印) 1
+give 唤魔手镯(敏锐) 1
+break
+#IF
+checkitem 唤魔手镯(封印) 1
+random 6
+#ACT
+take 唤魔手镯(封印) 1
+give 唤魔手镯(流光) 1
+break
+#IF
+checkitem 唤魔手镯(封印) 1
+random 3
+#ACT
+take 唤魔手镯(封印) 1
+give 唤魔手镯(灰暗) 1
+break
+#IF
+checkitem 唤魔手镯(封印) 1
+#ACT
+take 唤魔手镯(封印) 1
+SENDMSG 5 封印力量过于强大，解封失败，封印装备已破碎！
+#ELSESAY
+你没有这个封印装备，我没办法帮你解除封印。\
+<返回/@解除封印>
+[@唤戒]
+#IF
+checkitem 唤魔戒指(封印) 1
+#ACT
+inc D0 1
+SENDMSG 5 祝贺你，封印已经成功解除
+goto @解除封印
+#IF
+checkitem 唤魔戒指(封印) 1
+random 24
+#ACT
+take 唤魔戒指(封印) 1
+give 唤魔戒指(神雀) 1
+break
+#IF
+checkitem 唤魔戒指(封印) 1
+random 12
+#ACT
+take 唤魔戒指(封印) 1
+give 唤魔戒指(天作) 1
+break
+#IF
+checkitem 唤魔戒指(封印) 1
+random 9
+#ACT
+take 唤魔戒指(封印) 1
+give 唤魔戒指(敏锐) 1
+break
+#IF
+checkitem 唤魔戒指(封印) 1
+random 6
+#ACT
+take 唤魔戒指(封印) 1
+give 唤魔戒指(流光) 1
+break
+#IF
+checkitem 唤魔戒指(封印) 1
+random 3
+#ACT
+take 唤魔戒指(封印) 1
+give 唤魔戒指(灰暗) 1
+break
+#IF
+checkitem 唤魔戒指(封印) 1
+#ACT
+take 唤魔戒指(封印) 1
+SENDMSG 5 封印力量过于强大，解封失败，封印装备已破碎！
+#ELSESAY
+你没有这个封印装备，我没办法帮你解除封印。\
+<返回/@解除封印>
+[@启项]
+#IF
+checkitem 启源项链(封印) 1
+#ACT
+inc D0 1
+SENDMSG 5 祝贺你，封印已经成功解除
+goto @解除封印
+#IF
+checkitem 启源项链(封印) 1
+random 24
+#ACT
+take 启源项链(封印) 1
+give 启源项链(天赐) 1
+break
+#IF
+checkitem 启源项链(封印) 1
+random 12
+#ACT
+take 启源项链(封印) 1
+give 启源项链(闪耀) 1
+break
+#IF
+checkitem 启源项链(封印) 1
+random 9
+#ACT
+take 启源项链(封印) 1
+give 启源项链(凌厉) 1
+break
+#IF
+checkitem 启源项链(封印) 1
+random 6
+#ACT
+take 启源项链(封印) 1
+give 启源项链(精良) 1
+break
+#IF
+checkitem 启源项链(封印) 1
+random 3
+#ACT
+take 启源项链(封印) 1
+give 启源项链(暗淡) 1
+break
+#IF
+checkitem 启源项链(封印) 1
+#ACT
+take 启源项链(封印) 1
+SENDMSG 5 封印力量过于强大，解封失败，封印装备已破碎！
+#ELSESAY
+你没有这个封印装备，我没办法帮你解除封印。\
+<返回/@解除封印>
+[@启手]
+#IF
+checkitem 启源手镯(封印) 1
+#ACT
+inc D0 1
+SENDMSG 5 祝贺你，封印已经成功解除
+goto @解除封印
+#IF
+checkitem 启源手镯(封印) 1
+random 24
+#ACT
+take 启源手镯(封印) 1
+give 启源手镯(天赐) 1
+break
+#IF
+checkitem 启源手镯(封印) 1
+random 12
+#ACT
+take 启源手镯(封印) 1
+give 启源手镯(闪耀) 1
+break
+#IF
+checkitem 启源手镯(封印) 1
+random 9
+#ACT
+take 启源手镯(封印) 1
+give 启源手镯(凌厉) 1
+break
+#IF
+checkitem 启源手镯(封印) 1
+random 6
+#ACT
+take 启源手镯(封印) 1
+give 启源手镯(精良) 1
+break
+#IF
+checkitem 启源手镯(封印) 1
+random 3
+#ACT
+take 启源手镯(封印) 1
+give 启源手镯(暗淡) 1
+break
+#IF
+checkitem 启源手镯(封印) 1
+#ACT
+take 启源手镯(封印) 1
+SENDMSG 5 封印力量过于强大，解封失败，封印装备已破碎！
+#ELSESAY
+你没有这个封印装备，我没办法帮你解除封印。\
+<返回/@解除封印>
+[@启戒]
+#IF
+checkitem 启源戒指(封印) 1
+#ACT
+inc D0 1
+SENDMSG 5 祝贺你，封印已经成功解除
+goto @解除封印
+#IF
+checkitem 启源戒指(封印) 1
+random 24
+#ACT
+take 启源戒指(封印) 1
+give 启源戒指(天赐) 1
+break
+#IF
+checkitem 启源戒指(封印) 1
+random 12
+#ACT
+take 启源戒指(封印) 1
+give 启源戒指(闪耀) 1
+break
+#IF
+checkitem 启源戒指(封印) 1
+random 9
+#ACT
+take 启源戒指(封印) 1
+give 启源戒指(凌厉) 1
+break
+#IF
+checkitem 启源戒指(封印) 1
+random 6
+#ACT
+take 启源戒指(封印) 1
+give 启源戒指(精良) 1
+break
+#IF
+checkitem 启源戒指(封印) 1
+random 3
+#ACT
+take 启源戒指(封印) 1
+give 启源戒指(暗淡) 1
+break
+#IF
+checkitem 启源戒指(封印) 1
+#ACT
+take 启源戒指(封印) 1
+SENDMSG 5 封印力量过于强大，解封失败，封印装备已破碎！
+#ELSESAY
+你没有这个封印装备，我没办法帮你解除封印。\
+<返回/@解除封印>
+[@圣项]
+#IF
+checkitem 圣战项链(封印) 1
+#ACT
+inc D0 1
+SENDMSG 5 祝贺你，封印已经成功解除
+goto @解除封印
+#IF
+checkitem 圣战项链(封印) 1
+random 3
+#ACT
+take 圣战项链(封印) 1
+give 圣战项链 1
+break
+#IF
+checkitem 圣战项链(封印) 1
+#ACT
+take 圣战项链(封印) 1
+give 圣战项链 1
+#ELSESAY
+你的包裹里没有“圣战项链(封印)”这件物品。
+[@法项]
+#IF
+checkitem 法神项链(封印) 1
+#ACT
+inc D0 1
+SENDMSG 5 祝贺你，封印已经成功解除
+goto @解除封印
+#IF
+checkitem 法神项链(封印) 1
+random 3
+#ACT
+take 法神项链(封印) 1
+give 法神项链 1
+break
+#IF
+checkitem 法神项链(封印) 1
+#ACT
+take 法神项链(封印) 1
+give 法神项链 1
+#ELSESAY
+你的包裹里没有“法神项链(封印)”这件物品。
+[@天项]
+#IF
+checkitem 天尊项链(封印) 1
+#ACT
+inc D0 1
+SENDMSG 5 祝贺你，封印已经成功解除
+goto @解除封印
+#IF
+checkitem 天尊项链(封印) 1
+random 3
+#ACT
+take 天尊项链(封印) 1
+give 天尊项链 1
+break
+#IF
+checkitem 法神项链(封印) 1
+#ACT
+take 天尊项链(封印) 1
+give 天尊项链 1
+#ELSESAY
+你的包裹里没有“天尊项链(封印)”这件物品。
+[@圣镯]
+#IF
+checkitem 圣战手镯(封印) 1
+#ACT
+inc D0 1
+SENDMSG 5 祝贺你，封印已经成功解除
+goto @解除封印
+#IF
+checkitem 圣战手镯(封印) 1
+random 3
+#ACT
+take 圣战手镯(封印) 1
+give 圣战手镯 1
+break
+#IF
+checkitem 圣战手镯(封印) 1
+#ACT
+take 圣战手镯(封印) 1
+give 圣战手镯 1
+#ELSESAY
+你的包裹里没有“圣战手镯(封印)”这件物品。
+[@法镯]
+#IF
+checkitem 法神手镯(封印) 1
+#ACT
+inc D0 1
+SENDMSG 5 祝贺你，封印已经成功解除
+goto @解除封印
+#IF
+checkitem 法神手镯(封印) 1
+random 3
+#ACT
+take 法神手镯(封印) 1
+give 法神手镯 1
+break
+#IF
+checkitem 法神手镯(封印) 1
+#ACT
+take 法神手镯(封印) 1
+give 法神手镯 1
+#ELSESAY
+你的包裹里没有“法神手镯(封印)”这件物品。
+[@天镯]
+#IF
+checkitem 天尊手镯(封印) 1
+#ACT
+inc D0 1
+SENDMSG 5 祝贺你，封印已经成功解除
+goto @解除封印
+#IF
+checkitem 天尊手镯(封印) 1
+random 3
+#ACT
+take 天尊手镯(封印) 1
+give 天尊手镯 1
+break
+#IF
+checkitem 天尊手镯(封印) 1
+#ACT
+take 天尊手镯(封印) 1
+give 天尊手镯 1
+#ELSESAY
+你的包裹里没有“天尊手镯(封印)”这件物品。
+[@圣戒]
+#IF
+checkitem 圣战戒指(封印) 1
+#ACT
+inc D0 1
+SENDMSG 5 祝贺你，封印已经成功解除
+goto @解除封印
+#IF
+checkitem 圣战戒指(封印) 1
+random 3
+#ACT
+take 圣战戒指(封印) 1
+give 圣战戒指 1
+break
+#IF
+checkitem 圣战戒指(封印) 1
+#ACT
+take 圣战戒指(封印) 1
+give 圣战戒指 1
+#ELSESAY
+你的包裹里没有“圣战戒指(封印)”这件物品。
+[@法戒]
+#IF
+checkitem 法神戒指(封印) 1
+#ACT
+inc D0 1
+SENDMSG 5 祝贺你，封印已经成功解除
+goto @解除封印
+#IF
+checkitem 法神戒指(封印) 1
+random 3
+#ACT
+take 法神戒指(封印) 1
+give 法神戒指 1
+break
+#IF
+checkitem 法神戒指(封印) 1
+#ACT
+take 法神戒指(封印) 1
+give 法神戒指 1
+#ELSESAY
+你的包裹里没有“法神戒指(封印)”这件物品。
+[@天戒]
+#IF
+checkitem 天尊戒指(封印) 1
+#ACT
+inc D0 1
+SENDMSG 5 祝贺你，封印已经成功解除
+goto @解除封印
+#IF
+checkitem 天尊戒指(封印) 1
+random 3
+#ACT
+take 天尊戒指(封印) 1
+give 天尊戒指 1
+break
+#IF
+checkitem 天尊戒指(封印) 1
+#ACT
+take 天尊戒指(封印) 1
+give 天尊戒指 1
+#ELSESAY
+你的包裹里没有“天尊戒指(封印)”这件物品。

@@ -1,0 +1,114 @@
+[@自动存仓]
+{
+#IF
+	ISADMIN
+	#ACT
+	MOV N$边框色值1 255
+	MOV N$边框色值2 250
+	MOV N$边框色值3 249
+	#ELSEACT
+	MOV N$边框色值1 -1
+	MOV N$边框色值2 -1
+	MOV N$边框色值3 -1
+#if
+equal <$SCRIPTPARAM1>
+#act
+mov n$选择内容 0
+#ELSEACT
+MOV N$选择内容 <$SCRIPTPARAM1>
+#if
+#act
+GetListString ..\QuestDiary\数据文件\存仓列表\<$USERNAME>.txt 0 L$存仓数组
+GetListVarCount L$存仓数组 N$数组数量
+MOV N$补丁编号 1
+OPENMERCHANTBIGDLG <$str(N$补丁编号)> 122 1 4 0 0 1 588 24 1
+#if
+#say
+<text:请点击一下物品，将会被记录在自动存仓列表中，再次点击会取消该物品的自动存仓:18:60/FCOLOR=222>\
+<text:以下是被记录的物品，这些物品会被自动存入仓库！再次点击会取消该物品的自动存仓:18:405/FCOLOR=222>\
+<Layout:~#B1:30:360:600:26:<$str(N$边框色值1)>>
+;翻页按钮
+<Text:#B1:第0页:0:0/@自动存仓(0)><Text:#B1: >
+<Text:#B1:第1页:0:0/@自动存仓(1)><Text:#B1: >
+<Text:#B1:第2页:0:0/@自动存仓(2)><Text:#B1: >
+<Text:#B1:第3页:0:0/@自动存仓(3)><Text:#B1: >
+<Text:#B1:第4页:0:0/@自动存仓(4)><Text:#B1: >
+<Text:#B1:第5页:0:0/@自动存仓(5)><Text:#B1: >
+<Text:#B1:第6页:0:0/@自动存仓(6)><Text:#B1: >
+<Text:#B1:第7页:0:0/@自动存仓(7)><Text:#B1: >
+<Text:#B1:第8页:0:0/@自动存仓(8)><Text:#B1: >
+<Text:#B1:第9页:0:0/@自动存仓(9)><Text:#B1: >
+<Text:#B1:第10页:0:0/@自动存仓(10)><Text:#B1: >
+;所有物品列
+<&ListView:~#L1:0:100:500:270:1:0:0:0:0:0:1:1742:1747:1748:1749:1744:1745:1746:1750:1751:1752>
+;已选列
+<&ListView:~#L2:60:460:520:65:1:0:1:0:0:0:1:1772:1766:1767:1768:1763:1764:1765:1769:1770:1771>
+;清空回收列表
+<&ImgEx:~#L4:1:311:312:313:500:327/@清空列表> 
+<&text:#L4~:清空列表:26:12{FCOLOR=56}>
+<&ImgEx:~#L5:1:311:312:313:500:360/@返回> 
+<&text:#L5~:返回:36:12{FCOLOR=251}>
+#ACT
+;重置显示内容
+mov S$显示内容
+;页数乘以100
+MUL N$物品循环开始 100 <$STR(n$选择内容)>
+Mov n$循环开始 0
+While n$循环开始 < 10
+;绿色图层  行
+INC S$显示内容 <Layout:#L1~#L1<$STR(n$循环开始)>:50:0:725:50:<$str(N$边框色值2)>>
+;在每行做十个物品
+GOTO @二次循环1
+Inc n$循环开始 1 
+EndWhile 
+Mov n$循环开始 0
+While n$循环开始 < <$str(N$数组数量)>
+;横向框
+INC S$显示内容 <Layout:#L2~#L2<$STR(n$循环开始)>:0:0:50:50:<$str(N$边框色值3)>>
+INC S$显示内容 <itemshow:#L2<$STR(n$循环开始)>~:<$str(L$存仓数组[<$str(n$循环开始)>])>:0:0:0:1:0:0:0/@点击(<$str(L$存仓数组[<$str(n$循环开始)>])>)>
+Inc n$循环开始 1
+EndWhile 
+#SAY
+<$str(S$显示内容)>
+[@二次循环1]
+#IF
+#ACT
+Mov n$循环开始1 0
+While n$循环开始1 < 10
+INC S$显示内容 <itemshow:#L1<$STR(n$循环开始)>~:<$str(N$物品循环开始)>:0:0:0:1:0:0:0/@点击(<$str(N$物品循环开始)>)>
+inc N$物品循环开始 1
+Inc n$循环开始1 1 
+EndWhile 
+[@清空列表]
+#if
+#ACT
+MOV L$存仓数组 []
+DelTextListLine ..\QuestDiary\数据文件\存仓列表\<$USERNAME>.txt 0 0
+AddTextListEx ..\QuestDiary\数据文件\存仓列表\<$USERNAME>.txt <$str(L$存仓数组)> 0
+;写入个人变量
+mov T0 <$str(L$存仓数组)>
+MessageBox 设置成功！ @确定
+
+[@点击]
+#if
+CheckVarInList L$存仓数组 <$SCRIPTPARAM1>
+#ACT
+	Dec L$存仓数组 <$SCRIPTPARAM1>
+#ELSEACT
+	INC L$存仓数组 <$SCRIPTPARAM1>
+#IF
+#ACT
+DelTextListLine ..\QuestDiary\数据文件\存仓列表\<$USERNAME>.txt 0 0
+AddTextListEx ..\QuestDiary\数据文件\存仓列表\<$USERNAME>.txt <$str(L$存仓数组)> 0
+;写入个人变量，个人变量有字数限制，废弃
+;mov T0 <$str(L$存仓数组)>
+MessageBox 设置成功！ @确定
+[@确定]
+#IF
+	#ACT
+	GOTO @自动存仓(<$str(n$选择内容)>)
+[@返回]
+#IF
+	#ACT
+	GOTO @辅助功能
+}

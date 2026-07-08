@@ -1,0 +1,38 @@
+[@低级宝石升级]
+{
+#IF
+CheckGold 1000
+#ACT
+Take 金币 1000
+SENDMSG 5 花费1000金币进行宝石升级.
+BREAK
+#ELSEACT
+SENDMSG 5 低级宝石升级需要1000金币.
+SetUpgradeFail
+}
+[@中级宝石升级]
+{
+#IF
+CheckGold 20000
+#ACT
+Take 金币 20000
+SENDMSG 5 花费20000金币进行宝石升级.
+BREAK
+#ELSEACT
+SENDMSG 5 中级宝石升级需要20000金币.
+SetUpgradeFail
+}
+
+[@高级宝石升级]
+{
+#IF
+CheckGold 50000
+#ACT
+Take 金币 50000
+SENDMSG 5 花费50000金币进行宝石升级.
+BREAK
+#ELSEACT
+SENDMSG 5 高级宝石升级需要50000金币.
+SetUpgradeFail
+}
+

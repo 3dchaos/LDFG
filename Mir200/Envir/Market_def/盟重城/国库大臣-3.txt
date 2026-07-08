@@ -1,0 +1,84 @@
+[@main]
+\\
+#IF
+	LARGE G0 1
+#SAY
+你也知道了盟重省的秘密？\
+魔龙登陆了盟重省的边境，现在人们可以前往魔龙城了。\
+帮我找到龙影，我让我的部下送你过去。\
+<寻找龙影/@寻找龙影>\
+;<领取礼盒/@领取礼盒>领取断网补偿\
+
+<退出/@exit>
+#ELSESAY
+真是的，我只是负责看管国库的小人物罢了。\
+<退出/@exit>
+
+
+[@领取礼盒]
+#IF
+CHECKLEVEL 45
+#ELSEACT
+MESSAGEBOX 本礼盒只有达到45级才可领取！
+BREAK
+
+#IF
+checknamelist ..\QuestDiary\数据文件\礼盒领取名单.txt
+#ACT
+MESSAGEBOX 你已经领取过了吧！
+BREAK
+
+#IF
+CHECKBAGSIZE 1
+#ELSEACT
+MESSAGEBOX 你的背包已经没有空间了
+BREAK
+
+#IF
+#ACT
+GIVESTATEITEM 老登狐月礼盒 1 1 0 1 1 1 1 1
+ADDTEXTLIST ..\QuestDiary\数据文件\礼盒领取名单.txt <$USERNAME>
+MESSAGEBOX 成功领取礼盒！
+
+[@寻找龙影]
+#IF
+	CHECKLEVEL 30
+	#ELSEACT
+	MESSAGEBOX 你还太稚嫩了，请升级到30后再来吧
+BREAK
+
+
+#IF
+CHECK [35] 1
+CHECK [34] 0
+
+#SAY
+	没找到他吗？详细位置是：盟重的 618 117。\
+	仔细寻找，能进入一个神秘的地洞。快去看看吧！\
+	<好的/@exit>
+	#ACT
+	BREAK
+	
+#IF
+CHECK [34] 0
+#SAY
+当初龙影为寻求财宝四处探险，\
+四年来杳无音讯，如果你能找到他，也算你的机缘了。\
+<他在哪？/@寻找龙影1>\
+#ELSESAY
+辛苦你了，你已经见过他了吧。
+<退出/@exit>
+[@寻找龙影1]
+#IF
+	CHECKBAGSIZE 4
+	#SAY
+	我听传令兵的说，在沙巴克城正北边\
+	的一个龙骨边见过他，那里可能会有一颗奇怪的树\
+	国库里有多余的一些道具应该是他想要的，收下吧。\
+	<退出/@exit>
+	#ACT
+	GIVE 龙鳞 2
+	GIVE 无字天书 2
+	SET [35] 1
+	#ELSEACT
+	MESSAGEBOX 背包请准备4个空格！

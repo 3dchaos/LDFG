@@ -1,0 +1,174 @@
+[@main]
+#IF
+#ACT
+mov N$资源编号 0 
+OpenBigDialogBox <$STR(N$资源编号)> 16 1 4 0 0 1 384 23
+#SAY
+<Img:~#L1:27:<$STR(N$资源编号)>:0:-40>\
+<Img:~#L1:34:<$STR(N$资源编号)>:144:-5>\
+<&Layout:~#L02:200:80:215:240>
+<MText:#L02~:0:0:255:啊，真是不可思议……|
+居然还有人能穿越这片被遗忘之地，|
+来到我的面前。多久了？|
+我已经记不清有多少日子，|
+这里只剩下我与回忆为伴
+>
+<Text:#L02~:就你一个人吗?:0:5{FCOLOR=251}/@就你一个人吗>
+<NewLine:#L02~>
+<Text:#L02~:护送:0:5{FCOLOR=255}><Text:#L02~:返回火龙迷宫:0:5{FCOLOR=251}/@返回火龙迷宫><Text:#L02~:500灵符:0:5{FCOLOR=255}>
+<NewLine:#L02~>
+<Text:#L02~:退出:0:20{FCOLOR=251}/@exit>
+[@就你一个人吗]
+#IF
+#ACT
+mov N$资源编号 0 
+OpenBigDialogBox <$STR(N$资源编号)> 16 1 4 0 0 1 384 23
+#SAY
+<Img:~#L1:27:<$STR(N$资源编号)>:0:-40>\
+<Img:~#L1:34:<$STR(N$资源编号)>:144:-5>\
+<&Layout:~#L02:200:80:215:240>
+<MText:#L02~:0:0:255:我的战友们……他们，|
+有的可能永远沉睡在了某个未知的角落。|
+但心中的执念让我留了下来，|
+守护着这片曾经并肩作战的土地，|
+等待着奇迹的发生。|
+但今天，你，你的到来，|
+或许就是那份我一直期盼的奇迹。|
+你看起来勇敢而坚定，|
+就像我曾经的兄弟们一样。|
+我有一个请求，|
+一个可能让你陷入极大危险的请求。
+>
+<Text:#L02~:我会帮助你的:0:5{FCOLOR=251}/@我会帮助你的>
+<NewLine:#L02~>
+<Text:#L02~:先驱者遗骸是什么？:0:5{FCOLOR=251}/@先驱者遗骸是什么>
+<NewLine:#L02~>
+<Text:#L02~:我忙着呢:0:10{FCOLOR=251}/@exit>
+
+;<购买火龙召唤令/@购买火龙召唤令> 火龙神殿召唤火龙教主\ 
+
+[@返回火龙迷宫]
+#IF
+#ACT
+	CLOSEBIGDIALOGBOX
+#IF
+small <$GAMEGIRD> 500
+#ACT
+#SAY
+你的灵符不够！！需要500灵符\
+<返回/@main>
+#ELSEACT
+GAMEGIRD - 500
+MAPMOVE  hlmg 20 219
+
+[@购买火龙召唤令]
+#IF
+#ACT
+	CLOSEBIGDIALOGBOX
+#IF
+small <$GAMEGIRD> 50000
+#ACT
+#SAY
+你的灵符不够！！需要50000灵符\
+<返回/@main>
+#ELSEACT
+GAMEGIRD - 50000
+give 火龙召唤令 1
+SENDMSG 7 成功购买火龙召唤令！
+
+
+[@先驱者遗骸是什么]
+#IF
+#ACT
+	CLOSEBIGDIALOGBOX
+#SAY
+那是在这个洞穴探险的战士们，他们被这恐怖的怪物吞噬\
+如果你找到他们的遗骸，可以去毒蛇山谷找王大娘\
+她一直在寻找她的孩子。\
+
+[@我会帮助你的]
+#IF
+#ACT
+	CLOSEBIGDIALOGBOX
+#SAY
+在这片土地的深处，隐藏着一个被诅咒的地图，\
+那里盘踞着无尽的黑暗与邪恶。我的战友们，\
+正是为了探索并消除那里的威胁而失踪的。\
+如果你愿意接受这个挑战，我愿意耗尽我最后的力量，\
+将你传送到那个地图的入口。但请记住，\
+那里充满了未知与危险，每一步都可能是生与死的边缘。\\
+
+<送我进去/@送我进去> \ 
+<我需要准备什么?/@我需要准备什么>\
+<我还没准备好/@exit>\
+
+[@我需要准备什么]
+首先清理掉本区域所有的威胁,\
+它们长得像一条金色的大蛇.\
+如果你单人进入,\
+请给我一个[先驱者遗骸],2个金砖\
+如果你组队进入,再给我1个祖玛头像和沃玛号角\
+我要把他们骨骸带回家乡\\
+<返回/@我会帮助你的>\
+
+[@送我进去]
+#IF
+CHECKRANGEMONCOUNTEX hl002 火蟒 36 183 400 > 0 
+#SAY
+这个区域威胁还存在，帮助我清除它们!\
+<好的/@exit>\
+#ELSESAY
+这片区域已经暂时安全，我可以送你进去了\
+<单人进入/@单人进入>\\
+<组队进入/@组队进去>\\
+
+
+[@单人进入] 
+#IF
+  CHECKLEVELEX < 64
+#ACT
+MESSAGEBOX 先升级到65级再来吧！
+BREAK
+
+	#IF
+	checkitem 先驱者遗骸 1
+	checkitem 金砖 2
+	#ACT
+	take 金砖 2
+	take 先驱者遗骸 1
+	MAPMOVE  D2083 42 87
+	SENDMSG 0 火龙宫殿居然有人打扰？是<$USERNAME>闯进去了
+	SCENESHAKE 4 1 3 D2083
+	#ELSEACT
+	MESSAGEBOX 勇士，你的道具准备的还不够。
+	BREAK
+
+[@组队进去]
+#IF
+  CHECKLEVELEX < 64
+#ACT
+MESSAGEBOX 先升级到65级再来吧！
+BREAK
+
+#if
+NOT ISGROUPMASTER
+#ACT
+SendMsg 5 你不是组长,不能组队传送
+BREAK
+
+#IF
+checkitem 金砖 2
+checkitem 先驱者遗骸 1
+checkitem 祖玛头像 1
+checkitem 沃玛号角 1
+#ACT
+take 金砖 2
+take 先驱者遗骸 1
+take 祖玛头像 1
+take 沃玛号角 1
+
+GROUPMAPMOVE D2083 42 87 65
+SENDMSG 0 火龙宫殿居然有人打扰？是<$USERNAME>带领队员闯进去了
+SCENESHAKE 4 1 3 D2083
+#ELSEACT
+	MESSAGEBOX 勇士，你的道具准备的还不够。

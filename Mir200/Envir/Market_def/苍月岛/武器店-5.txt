@@ -1,0 +1,154 @@
+(@buy @sell @repair @s_repair)
+%100
++5
++6
++43
+
+[@main]
+#IF
+	ISADMIN
+	#ACT
+	MOV N$边框色值1 255
+	MOV N$边框色值2 250
+	MOV N$边框色值3 249
+	#ELSEACT
+	MOV N$边框色值1 -1
+	MOV N$边框色值2 -1
+	MOV N$边框色值3 -1
+#IF
+checkpkpoint 2
+#SAY
+我不想和你这样的人打交道.. \ \
+<退出/@exit>
+
+#ELSEACT
+goto @main-1
+
+[@main-1]
+#IF
+#ACT
+mov N$资源编号 0 
+OpenBigDialogBox <$STR(N$资源编号)> 16 1 4 0 0 1 384 23
+#SAY
+<Img:~#L1:97:<$STR(N$资源编号)>:144:10>\
+<&PlayImg:~#L1:1:420:30:200:250:234:0>
+<Img:~#L1:45:<$STR(N$资源编号)>:-278:49>\
+<&Layout:~#L02:210:100:195:240:<$STR(N$边框色值2)>>
+<MText:#L02~:0:0:255:欢迎，感谢你来这里！|
+需要趁手的武器吗?
+>
+<Text:#L02~:买武器:0:20{FCOLOR=251}/@buy>
+<NewLine:#L02~>
+<Text:#L02~:卖武器:0:20{FCOLOR=251}/@sell>
+<NewLine:#L02~>
+<Text:#L02~:修理武器:0:20{FCOLOR=251}/@repair>
+<NewLine:#L02~>
+<Text:#L02~:特殊修理:0:20{FCOLOR=251}/@s_repair>
+<NewLine:#L02~>
+<Text:#L02~:武器升级|支线任务:0:20{FCOLOR=251}/@武器升级>
+<NewLine:#L02~>
+<Text:#L02~:询问武器:0:20{FCOLOR=251}/@qweapon>
+<NewLine:#L02~>
+<Text:#L02~:冶炼金矿:0:20{FCOLOR=70}/@冶炼金矿>
+
+
+[@武器升级]
+#if
+CHECKBAGSIZE  3 
+#ELSESAY
+	MESSAGEBOX 请背包保留3个空格再来！
+	BREAK
+
+#IF
+	CHECK [14] 0
+#ACT
+CLOSEBIGDIALOGBOX
+SET [14] 1
+GiveStateItem 黑铁矿石 1 1 1 1 1 1 
+GiveStateItem 黑铁矿石 1 1 1 1 1 1 
+GiveStateItem 黑铁矿石 1 1 1 1 1 1 
+#SAY
+武器的极限可不止是+4点\
+在沙巴克的武器店里，有一个厉害的大师\
+他的锤子可以让你的武器突破极限\
+我送你三块黑铁矿石，你去找打他试试\
+升级你的武器吧！\ \
+<谢谢/@main>\
+#ELSEACT
+	CLOSEBIGDIALOGBOX
+#ELSESAY
+你去找他试过了吗？\
+ <返回/@main>
+
+[@冶炼金矿]
+
+#IF
+#ACT
+#CALL [系统功能\冶炼金矿.txt] @开始冶炼
+
+[@buy]
+#IF
+#ACT
+CLOSEBIGDIALOGBOX
+#SAY
+您想买些什么武器?\ \ \
+ <返回/@main>
+
+[@sell]
+#IF
+#ACT
+CLOSEBIGDIALOGBOX
+#SAY
+给我您要卖的武器.\ \ \
+ <返回/@main>
+
+[@repair]
+#IF
+#ACT
+CLOSEBIGDIALOGBOX
+#SAY
+您要修理武器吗?\
+给我您要修理的武器.\ \
+ <返回/@main>
+
+[~@repair]
+看起来修好了,欢迎下次再来.\ \
+ <返回/@main>
+
+[@s_repair]
+你这个家伙太幸运了，我正好有材料可以做特种修补.\
+但价格是普通的三倍！
+
+[@qweapon]
+#IF
+#ACT
+CLOSEBIGDIALOGBOX
+#SAY
+店里卖的武器其能力值是定值。\
+但是妖魔身上的武器，有时根据不同情况，\
+具有特殊功能。\
+这种武器拿到店里来，会卖好价钱。\
+对了，武器的价格按种类不同，其价格也不同，\
+但是大体上，耐力越高越昂贵\ \
+ <返回/@main>
+
+[goods]
+木剑            50          10
+乌木剑          50          10
+青铜剑          50          10
+铁剑            50          10
+短剑            50          10
+鹤嘴锄		50	    10
+青铜斧          50          10
+匕首            50          10
+海魂            50          10
+八荒            50          10
+半月            50          10
+凌风            50          10
+鹤嘴锄          50          10
+破魂	        50	    10
+斩马刀	        50          10
+修罗            50          10
+偃月		50	    10
+降魔		50	    10
+凝霜            50          10

@@ -1,0 +1,8 @@
+ld185.pak
+ui_n.pak
+ui1.wzl
+Magic8-16.wzl
+magicre.wzl
+Mon26.wzl
+Magic.wzl
+Mon24.wzl

@@ -1,0 +1,35 @@
+[@挂机召唤]
+{
+
+#IF
+CHECKMAGICNAME 召唤骷髅
+CHECKSLAVECOUNT < <$str(N13)> 变异骷髅 0
+#ACT
+GetMagicInfo 召唤骷髅 0 N$召唤技能等级
+releasemagic 17 0 <$str(N$召唤技能等级)> 2
+BREAK
+
+#IF
+CHECKMAGICNAME 召唤神兽
+CHECKSLAVECOUNT < <$str(N14)> 神兽 0
+#ACT
+GetMagicInfo 召唤神兽 0 N$召唤技能等级
+releasemagic 30 0 <$str(N$召唤技能等级)> 2
+BREAK
+
+#IF
+CHECKMAGICNAME 召唤圣兽
+CHECKSLAVECOUNT < <$str(N15)> 圣兽 0
+#ACT
+GetMagicInfo 召唤圣兽 0 N$召唤技能等级
+releasemagic 76 0 <$str(N$召唤技能等级)> 2
+BREAK
+
+#IF
+CHECKMAGICNAME 召唤月灵
+CHECKSLAVECOUNT < <$str(N16)> 月灵 0
+#ACT
+GetMagicInfo 召唤月灵 0 N$召唤技能等级
+releasemagic 55 0 <$str(N$召唤技能等级)> 2
+BREAK
+}

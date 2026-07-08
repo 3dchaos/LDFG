@@ -1,0 +1,1063 @@
+[@辅助功能]
+#IF
+ISADMIN
+#ACT
+MOV N$边框色值1 255
+MOV N$边框色值2 250
+MOV N$边框色值3 249
+#ELSEACT
+MOV N$边框色值1 -1
+MOV N$边框色值2 -1
+MOV N$边框色值3 -1
+#IF
+#ACT
+OPENMERCHANTBIGDLG 0 19 1 0 0 0 1 575 24
+#if
+#say
+<&Layout:~#L01:40:196:90:240:<$STR(N$边框色值1)>>
+<MText:#L01~:0:0:161:故人今在否？|
+旧江山浑是新愁|
+欲买桂花同载酒|
+终不似，少年游
+>
+<&Layout:#L01~#L02:0:80:90:180:<$STR(N$边框色值2)>>
+<text:#L02~:地图传送/@地图传送>
+<NewLine:#L02~>
+<text:#L02~:货币兑换/@货币兑换>
+<NewLine:#L02~>
+<text:#L02~:无限仓库/@无限仓库>
+<NewLine:#L02~>
+<text:#L02~:金条分解/@捆解金砖金条>
+<NewLine:#L02~>
+<text:#L02~:装备锁定/@装备锁定>
+<NewLine:#L02~>
+<text:#L02~:回收目录/@回收目录>
+<NewLine:#L02~>
+<text:#L02~:立即回收/@手动回收>
+<NewLine:#L02~>
+<text:#L02~:存储仆从/@存储仆从>
+<NewLine:#L02~>
+<text:#L02~:清空背包/@清空背包>
+;回收上方提示
+<&Layout:~#L05:143:63:450:30:<$STR(N$边框色值1)>>
+;<text:#L05~:勾选后拾取自动回收，:5:5{FCOLOR=251}>
+<text:#L05~:自动回收的收益较低且单一，极品回收建议前往商店出售！:5:5{FCOLOR=69}>
+<ImgEx:#L05~#L06:1:311:312:313:15:-5/@取消所有回收>
+<text:#L06~: 取消所有回收:6:13{FCOLOR=251}>
+;回收部分图层
+<&Layout:~#L03:152:100:450:210:<$STR(N$边框色值3)>>
+<Img:#L03~:8<$flag(94)>:0:0:0|7#勾选开启自动回收垃圾装备/@回收垃圾装备>
+<text:#L03~: 回收垃圾装备:2:3{FCOLOR=246}>
+
+<Img:#L03~:8<$flag(93)>:0:40:0|7#勾选开启自动回收垃圾技能/@回收垃圾技能>
+<text:#L03~: 回收垃圾技能:42:3{FCOLOR=246}>
+
+<Img:#L03~:8<$flag(92)>:0:80:0|7#勾选开启自动回收垃圾材料/@回收垃圾材料>
+<text:#L03~: 回收垃圾材料:82:3{FCOLOR=246}>
+<NewLine:#L03~>
+<Img:#L03~:8<$flag(91)>:0:0:12|7#勾选开启自动回收前期装备/@回收前期装备>
+<text:#L03~: 回收前期装备:2:15{FCOLOR=210}>
+
+<Img:#L03~:8<$flag(90)>:0:40:12|7#勾选开启自动回收前期技能/@回收前期技能>
+<text:#L03~: 回收前期技能:42:15{FCOLOR=210}>
+
+<Img:#L03~:8<$flag(89)>:0:80:12|7#勾选开启自动回收沃玛装备/@回收沃玛装备>
+<text:#L03~: 回收沃玛装备:82:15{FCOLOR=210}>
+<NewLine:#L03~>
+<Img:#L03~:8<$flag(88)>:0:0:24|7#勾选开启自动回收祖玛装备/@回收祖玛装备>
+<text:#L03~: 回收祖玛装备:2:27{FCOLOR=147}>
+<Img:#L03~:8<$flag(86)>:0:40:24|7#勾选开启自动回收赤月装备/@回收赤月装备>
+<text:#L03~: 回收赤月装备:42:27{FCOLOR=244}>
+<Img:#L03~:8<$flag(85)>:0:80:24|7#勾选开启自动回收赤月技能/@回收赤月技能>
+<text:#L03~: 回收赤月技能:82:27{FCOLOR=244}>
+<NewLine:#L03~>
+<Img:#L03~:8<$flag(84)>:0:0:36|7#勾选开启自动回收魔龙装备/@回收魔龙装备>
+<text:#L03~: 回收魔龙装备:2:39{FCOLOR=229}>
+<Img:#L03~:8<$flag(83)>:0:40:36|7#勾选开启自动回收魔龙技能/@回收魔龙技能>
+<text:#L03~: 回收魔龙技能:42:39{FCOLOR=229}>
+<Img:#L03~:8<$flag(82)>:0:80:36|7#勾选开启自动回收高级材料/@回收高级材料>
+<text:#L03~: 回收高级材料:82:39{FCOLOR=214}>
+<NewLine:#L03~>
+<Img:#L03~:8<$flag(81)>:0:0:48|7#勾选开启自动回收雷泽装备/@回收雷泽装备>
+<text:#L03~: 回收雷泽装备:2:51{FCOLOR=154}>
+<Img:#L03~:8<$flag(80)>:0:40:48|7#勾选开启自动回收雷泽技能/@回收雷泽技能>
+<text:#L03~: 回收雷泽技能:42:51{FCOLOR=154}>
+<Img:#L03~:8<$flag(79)>:0:80:48|7#勾选开启自动回收星王装备/@回收星王装备>
+<text:#L03~: 回收星王装备:82:51{FCOLOR=151}>
+<NewLine:#L03~>
+<Img:#L03~:8<$flag(77)>:0:0:60|7#勾选开启自动回收王者装备/@回收王者装备>
+<text:#L03~: 回收王者装备:2:63{FCOLOR=151}>
+<Img:#L03~:8<$flag(78)>:0:40:60|7#勾选开启自动回收雪域技能/@回收雪域技能>
+<text:#L03~: 回收雪域技能:42:63{FCOLOR=151}>
+;<Img:#L03~:8<$flag(87)>:0:80:40|7#勾选开启自动回收特殊戒指/@回收特殊戒指>
+;<text:#L03~: 回收特殊戒指:82:43{FCOLOR=249}>
+<Img:#L03~:8<$flag(76)>:0:80:60|7#勾选开启自动回收主宰装备/@回收主宰装备>
+<text:#L03~: 回收主宰装备:82:63{FCOLOR=253}>
+<NewLine:#L03~>
+<Img:#L03~:8<$flag(75)>:0:0:72|7#勾选开启自动回收传奇装备/@回收传奇装备>
+<text:#L03~: 回收传奇装备:2:75{FCOLOR=253}>
+<NewLine:#L03~>
+<text:#L03~:_________________________________________________________________________:0:75{FCOLOR=106}>
+
+;功能开关部分图层
+<&Layout:~#L04:152:310:450:180:<$STR(N$边框色值2)>>
+<Img:#L04~:8<$flag(100)>:0:0:0|7#勾选自动捡取/@开启自动捡取>
+<text:#L04~: 开启自动捡取:2:3{FCOLOR=146}>
+<Img:#L04~:8<$flag(99)>:0:20:0|7#勾选拾取物品后极品存仓/@开启极品存仓>
+<text:#L04~: 开启:22:3{FCOLOR=246}>
+<text:#L04~: <$STR(U9)> |点击设置极品点数:20:3{FCOLOR=149}/@设置极品点数>
+<text:#L04~: 点极品存仓:16:3{FCOLOR=246}>
+<Img:#L04~:8<$flag(98)>:0:30:0|7#勾选自动买药/@自动买药>
+<text:#L04~:开启自动买药:36:3{FCOLOR=250}/@设置买药>
+<NewLine:#L04~>
+<Img:#L04~:8<$flag(97)>:0:0:12|7#勾选拾取物品后启动自动存仓/@开启自动存仓>
+<text:#L04~:开启自动存仓:6:15{FCOLOR=243}/@存仓列表>
+<Img:#L04~:8<$flag(60)>:0:26:12|7#勾选后，挂机时10范围内遇到人便随机/@开启遇人随机>
+<text:#L04~:挂机遇人随机:30:15{FCOLOR=255}>
+<Img:#L04~:8<$flag(95)>:0:78:12|7#勾选启动自动刷新背包/@开启自动刷新背包>
+<text:#L04~:开启自动刷新背包:82:15{FCOLOR=242}>
+<NewLine:#L04~>
+<Img:#L04~:8<$flag(61)>:0:0:24|7#勾选后，挂机时卡死位置8秒自动随机/@开启卡死随机>
+<text:#L04~:挂机卡死随机:6:27{FCOLOR=221}>
+<Img:#L04~:8<$flag(62)>:0:26:24|7#勾选后，挂机时生命值少于20%则自动随机/@开启危险随机>
+<text:#L04~:挂机危险随机|比内挂的残血随机更可靠:30:27{FCOLOR=221}>
+<Img:#L04~:8<$flag(63)>:0:78:24|7#勾选后，屏蔽提示信息/@屏蔽提示>
+<text:#L04~:屏蔽提示:82:27{FCOLOR=242}>
+<NewLine:#L04~>
+<Img:#L04~:8<$flag(64)>:0:0:36|7#勾选将自动跟随目标移动/@开启挂机跟随>
+<text:#L04~:挂机跟随:6:39{FCOLOR=191}/@设置挂机跟随>
+;<text:#L04~:<$STR(T5)> |点击设置跟随人物:6:63{FCOLOR=149}>
+<Img:#L04~:8<$flag(65)>:0:50:36|7#勾选将英雄会自动拾取/@开启英雄拾取>
+<text:#L04~: 英雄拾取:51:39{FCOLOR=151}>
+<Img:#L04~:8<$flag(66)>:0:122:36|7#勾选后出现挂机换图等将持续挂机/@持续挂机>
+<text:#L04~: 持续挂机|记录地图：<$STR(T17)>,<$STR(U0)>,<$STR(U1)>:124:39{FCOLOR=168}>
+<NewLine:#L04~>
+<Img:#L04~:8<$flag(67)>:0:0:48|7#勾选后每十分钟维修一次全身装备，包括英雄。^251#此服务价格高昂，请按需勾选/@定时维修>
+<text:#L04~:定时维修|每次维修需要支付100元宝:6:51{FCOLOR=57}>
+<Img:#L04~:8<$flag(68)>:0:50:48|7#勾选自动召唤/@自动召唤>
+<text:#L04~:挂机自动召唤:55:51{FCOLOR=250}/@挂机自动召唤>
+
+[@挂机自动召唤]
+#IF
+CHECKJOB taoist
+#ACT
+CLOSEBIGDIALOGBOX
+#SAY
+当挂机时骷髅少于 <<$STR(N13)>/AUTOCOLOR=154> 时，召唤骷髅。 \
+ <关闭/@召唤配置(骷髅,0)> <1只骷髅/@召唤配置(骷髅,1)>   <2只骷髅/@召唤配置(骷髅,2)>  <3只骷髅/@召唤配置(骷髅,3)> \
+当挂机时神兽少于 <<$STR(N14)>/AUTOCOLOR=154> 时，召唤神兽。 \
+ <关闭/@召唤配置(神兽,0)> <1只神兽/@召唤配置(神兽,1)>   <2只神兽/@召唤配置(神兽,2)>  <3只神兽/@召唤配置(神兽,3)> \
+当挂机时圣兽少于 <<$STR(N15)>/AUTOCOLOR=154> 时，召唤圣兽。 \
+ <关闭/@召唤配置(圣兽,0)> <1只圣兽/@召唤配置(圣兽,1)>   <2只圣兽/@召唤配置(圣兽,2)>  <3只圣兽/@召唤配置(圣兽,3)> \
+当挂机时月灵少于 <<$STR(N16)>/AUTOCOLOR=154> 时，召唤月灵。 \
+ <关闭/@召唤配置(月灵,0)> <1只月灵/@召唤配置(月灵,1)>   <2只月灵/@召唤配置(月灵,2)>  <3只月灵/@召唤配置(月灵,3)> \
+<返回/@辅助功能>\
+#ELSEACT
+MESSAGEBOX 本功能仅为道士职业使用！
+BREAK
+
+[@召唤配置]
+#IF
+EQUAL <$SCRIPTPARAM1> 骷髅
+CHECKMAGICNAME 召唤骷髅
+#ACT
+MOV N13 <$SCRIPTPARAM2>
+SENDMSG 6 自动召唤骷髅设定为：<$STR(N13)>
+GOTO @挂机自动召唤
+BREAK
+
+#IF
+EQUAL <$SCRIPTPARAM1> 神兽
+CHECKMAGICNAME 召唤神兽
+#ACT
+MOV N14 <$SCRIPTPARAM2>
+SENDMSG 6 自动召唤神兽设定为：<$STR(N14)>
+GOTO @挂机自动召唤
+BREAK
+
+#IF
+EQUAL <$SCRIPTPARAM1> 圣兽
+CHECKMAGICNAME 召唤圣兽
+#ACT
+MOV N15 <$SCRIPTPARAM2>
+SENDMSG 6 自动召唤圣兽设定为：<$STR(N15)>
+GOTO @挂机自动召唤
+BREAK
+
+#IF
+EQUAL <$SCRIPTPARAM1> 月灵
+CHECKMAGICNAME 召唤月灵
+#ACT
+MOV N16 <$SCRIPTPARAM2>
+SENDMSG 6 自动召唤月灵设定为：<$STR(N16)>
+GOTO @挂机自动召唤
+BREAK
+
+#IF
+#ACT
+MESSAGEBOX 设置失败，你并未学习该技能。
+
+
+
+[@自动召唤]
+#IF
+CHECKJOB taoist
+#ELSEACT
+SET [68] 0
+MESSAGEBOX 本功能仅为道士职业使用！
+BREAK
+
+#IF
+check [68] 0
+#ACT
+SET [68] 1
+SENDMSG 6 挂机自动召唤仆从功能开启，根据设定数量宝宝持续召唤。如果正在挂机需重启挂机生效。
+goto @辅助功能
+break
+
+#IF
+check [68] 1
+#ACT
+SET [68] 0
+SENDMSG 6 挂机自动召唤关闭。
+goto @辅助功能
+break
+
+[@定时维修]
+#IF
+check [67] 0
+#ACT
+SET [67] 1
+SETONTIMER 10 600
+SENDMSG 6 自动维修功能已开启，每十分钟支付100元宝全身维修一次
+goto @辅助功能
+break
+
+#IF
+check [67] 1
+#ACT
+SET [67] 0
+SETOFFTIMER 10
+SENDMSG 6 自动维修功能已关闭
+goto @辅助功能
+break
+
+
+[@持续挂机]
+#IF
+CHECKTEXTLIST ..\QuestDiary\系统功能\禁止挂机地图.txt <$MAP>
+#ACT
+SENDMSG 7 本地图禁止使用挂机功能
+BREAK
+
+
+#OR
+CHECKMAPNAME hero1
+CHECKMAPNAME hero2
+CHECKMAPNAME D2083
+CHECKMAPNAME hlmg
+CHECKMAPNAME hlyszm
+CHECKMAPNAME yssd
+#ACT
+MESSAGEBOX 该地图无法持续挂机
+SET [66] 0
+goto @辅助功能
+BREAK
+
+#IF
+check [66] 0
+#ACT
+SET [66] 1
+;MOV T16 <$MAP>
+;MOV T17 <$MapTitle>
+;MOV U0 <$X>
+;MOV U1 <$Y>
+;#CALL [系统功能\老登辅助\挂机.txt] @挂机功能
+goto @辅助功能
+break
+
+#IF
+check [66] 1
+#ACT
+SET [66] 0
+;MOV T16
+;MOV T17
+;MOV U0
+;MOV U1
+;#CALL [系统功能\老登辅助\停止挂机.txt] @停止挂机
+goto @辅助功能
+break
+
+[@清空背包]
+#IF
+#ACT
+MESSAGEBOX 警告：本功能将清除背包内所有道具！！\你确定要清除背包？ @确定清除
+[@开启英雄拾取]
+#if
+not equal G3 1
+#act
+messagebox 英雄功能已关闭
+break
+
+#IF
+check [65] 0
+#ACT
+SET [65] 1
+H.OpenAutoPickItem 1 0 15 1 0 0 500
+goto @辅助功能
+GuildNoticeMsg 255 249 [英雄自动拾取已开启，可以自动拾取周围15*15范围的物品 ] Self
+break
+#IF
+check [65] 1
+#ACT
+SET [65] 0
+H.CloseAutoPickItem
+goto @辅助功能
+GuildNoticeMsg 255 11 [英雄自动拾取已关闭 ] Self
+break
+
+
+[@确定清除]
+#IF
+#ACT
+Gmexecute clearbag self
+SENDMSG 5 背包清空完毕
+
+[@设置挂机跟随]
+#IF
+#ACT
+CLOSEBIGDIALOGBOX
+#SAY
+请输入你想跟随的人物名，当你开启挂机时\
+如果他在你附近，将会自动跟随。 \ \
+<INPUTTEXT:3:0:2:80:15:0:249:255:1:100:输入需要跟随的玩家名:角色名> \ \
+你现在跟随的对象是：<$STR(T5)>\\
+<text:确定跟随:10:6:3/@确定跟随>\\
+<text:返回:10:6/@返回>\
+[@确定跟随]
+#IF
+EQUAL <$NPCINPUT(3)> <$USERNAME>
+#ACT
+MESSAGEBOX 不能设置为自己
+BREAK
+
+#IF
+#ACT
+MOV A687 <$USERNAME>
+MOV A688 <$NPCINPUT(3)>
+Gmexecute 开始提问 @询问跟随
+SENDMSG 6 等待对方同意跟随。
+
+[@开启挂机跟随]
+#IF
+check [64] 0
+EQUAL T5
+#ACT
+MESSAGEBOX 请设置跟随人物再开启
+BREAK
+
+#IF
+check [64] 0
+#ACT
+SET [64] 1
+SET [60] 0
+goto @辅助功能
+break
+#IF
+check [64] 1
+#ACT
+SET [64] 0
+goto @辅助功能
+break
+
+[@屏蔽提示]
+#IF
+check [63] 0
+#ACT
+SET [63] 1
+goto @辅助功能
+break
+#IF
+check [63] 1
+#ACT
+SET [63] 0
+goto @辅助功能
+break
+
+
+[@手动回收]
+#IF
+#ACT
+GOTO @AddBag
+
+[@开启危险随机]
+#IF
+check [62] 0
+#ACT
+SET [62] 1
+goto @辅助功能
+break
+#IF
+check [62] 1
+#ACT
+SET [62] 0
+goto @辅助功能
+break
+
+
+[@开启卡死随机]
+#IF
+check [61] 0
+#ACT
+SET [61] 1
+goto @辅助功能
+break
+#IF
+check [61] 1
+#ACT
+SET [61] 0
+goto @辅助功能
+break
+
+
+[@开启遇人随机]
+#IF
+check [60] 0
+#ACT
+SET [60] 1
+SET [64] 0
+goto @辅助功能
+break
+#IF
+check [60] 1
+#ACT
+SET [60] 0
+goto @辅助功能
+break
+
+[@存储仆从]
+#IF
+#CALL [系统功能\老登辅助\存储仆从.txt] @存储仆从1
+
+[@回收目录]
+#IF
+#CALL [系统功能\老登辅助\回收目录.txt] @回收目录1
+[@开启自动刷新背包]
+#IF
+check [95] 0
+#ACT
+SET [95] 1
+SetOnTimer 84 15
+SENDMSG 7 设置成功，每15秒刷新一次背包
+goto @辅助功能
+break
+#IF
+check [95] 1
+#ACT
+SET [95] 0
+SETOFFTIMER 84
+SENDMSG 7 开启自动刷新背包已关闭
+goto @辅助功能
+break
+
+[@回收垃圾装备]
+#IF
+check [94] 0
+#ACT
+SET [94] 1
+goto @辅助功能
+break
+#IF
+check [94] 1
+#ACT
+SET [94] 0
+goto @辅助功能
+break
+[@回收垃圾技能]
+#IF
+check [93] 0
+#ACT
+SET [93] 1
+goto @辅助功能
+break
+#IF
+check [93] 1
+#ACT
+SET [93] 0
+goto @辅助功能
+break
+[@回收垃圾材料]
+#IF
+check [92] 0
+#ACT
+SET [92] 1
+goto @辅助功能
+break
+#IF
+check [92] 1
+#ACT
+SET [92] 0
+goto @辅助功能
+break
+[@回收前期装备]
+#IF
+check [91] 0
+#ACT
+SET [91] 1
+goto @辅助功能
+break
+#IF
+check [91] 1
+#ACT
+SET [91] 0
+goto @辅助功能
+break
+[@回收前期技能]
+#IF
+check [90] 0
+#ACT
+SET [90] 1
+goto @辅助功能
+break
+#IF
+check [90] 1
+#ACT
+SET [90] 0
+goto @辅助功能
+break
+[@回收沃玛装备]
+#IF
+check [89] 0
+#ACT
+SET [89] 1
+goto @辅助功能
+break
+#IF
+check [89] 1
+#ACT
+SET [89] 0
+goto @辅助功能
+break
+[@回收祖玛装备]
+#IF
+check [88] 0
+#ACT
+SET [88] 1
+goto @辅助功能
+break
+#IF
+check [88] 1
+#ACT
+SET [88] 0
+goto @辅助功能
+break
+[@回收特殊戒指]
+#IF
+check [87] 0
+#ACT
+SET [87] 1
+goto @辅助功能
+break
+#IF
+check [87] 1
+#ACT
+SET [87] 0
+goto @辅助功能
+break
+[@回收赤月装备]
+#IF
+check [86] 0
+#ACT
+SET [86] 1
+goto @辅助功能
+break
+#IF
+check [86] 1
+#ACT
+SET [86] 0
+goto @辅助功能
+break
+[@回收赤月技能]
+#IF
+check [85] 0
+#ACT
+SET [85] 1
+goto @辅助功能
+break
+#IF
+check [85] 1
+#ACT
+SET [85] 0
+goto @辅助功能
+break
+
+[@回收魔龙装备]
+#IF
+check [84] 0
+#ACT
+SET [84] 1
+goto @辅助功能
+break
+#IF
+check [84] 1
+#ACT
+SET [84] 0
+goto @辅助功能
+break
+
+[@回收魔龙技能]
+#IF
+check [83] 0
+#ACT
+SET [83] 1
+goto @辅助功能
+break
+#IF
+check [83] 1
+#ACT
+SET [83] 0
+goto @辅助功能
+break
+
+[@回收高级材料]
+#IF
+check [82] 0
+#ACT
+SET [82] 1
+goto @辅助功能
+break
+#IF
+check [82] 1
+#ACT
+SET [82] 0
+goto @辅助功能
+break
+
+[@回收雷泽装备]
+#IF
+check [81] 0
+#ACT
+SET [81] 1
+goto @辅助功能
+break
+#IF
+check [81] 1
+#ACT
+SET [81] 0
+goto @辅助功能
+break
+
+[@回收雷泽技能]
+#IF
+check [80] 0
+#ACT
+SET [80] 1
+goto @辅助功能
+break
+#IF
+check [80] 1
+#ACT
+SET [80] 0
+goto @辅助功能
+break
+[@回收星王装备]
+#IF
+check [79] 0
+#ACT
+SET [79] 1
+goto @辅助功能
+break
+#IF
+check [79] 1
+#ACT
+SET [79] 0
+goto @辅助功能
+break
+[@回收王者装备]
+#IF
+check [77] 0
+#ACT
+SET [77] 1
+goto @辅助功能
+break
+#IF
+check [77] 1
+#ACT
+SET [77] 0
+goto @辅助功能
+break
+[@回收雪域技能]
+#IF
+check [78] 0
+#ACT
+SET [78] 1
+goto @辅助功能
+break
+#IF
+check [78] 1
+#ACT
+SET [78] 0
+goto @辅助功能
+break
+
+[@回收主宰装备]
+#IF
+check [76] 0
+#ACT
+SET [76] 1
+goto @辅助功能
+break
+#IF
+check [76] 1
+#ACT
+SET [76] 0
+goto @辅助功能
+break
+
+[@回收传奇装备]
+#IF
+check [75] 0
+#ACT
+SET [75] 1
+goto @辅助功能
+break
+#IF
+check [75] 1
+#ACT
+SET [75] 0
+goto @辅助功能
+break
+
+[@取消所有回收]
+#IF
+#ACT
+reset [75] 19
+goto @辅助功能
+
+[@装备锁定]
+#IF
+#ACT
+OPENMERCHANTBIGDLG 0 16 1 4 0 0 1 383 25
+#SAY
+\  \
+<Img:38:0:150:-4>\
+<Img:42:0:18:50>\
+<Text:此功能可以帮助你不被回收功能所烦恼，:170:30{FCOLOR=7}>\
+<Text:把装备放入，1000金币进行锁定或解锁。:170:30{FCOLOR=7}>\
+<Text:被元素熔炼过的道具不可被锁定:170:30{FCOLOR=7}>\
+<ITEMBOX:0:1:730:250:160:45:45:*,11:254#请放入你需要锁定的道具^251#老登传奇>\ \
+<text:开始锁定:230:75:1,2/@开始锁定>\
+<text:解除锁定:230:75:1,2/@解除锁定>\ \
+<text:返回:230:80:1,2/@辅助功能>\
+
+[@开始锁定]
+#IF
+CHECKGOLD 1000
+#ACT
+GOLDCOUNT - 1000
+#ELSEACT
+MESSAGEBOX 锁定需要1000金币
+BREAK
+#IF
+CHECKTEXTLIST ..\QuestDiary\系统功能\绑定物品ID列表.txt <$BOXITEM[0].MAKEINDEX>
+#ACT
+SendMsg 6 被元素熔炼或被其他方式绑定的装备无法再次锁定！
+ReturnBoxItem 0
+BREAK
+
+#IF
+;检测名称不等于空时OK框中有物品,也可以检测其他参数
+NOT Equal <$BOXITEM[0].NAME>
+#ACT
+;关联到OK框物品 才可以使用脚本命令修改自定义OK框中的物品
+SetUpgradeItem 0
+
+;修改该OK框物品的名称
+ChangeItemName boxitem0 <$BOXITEM[0].NAME>-{[锁定]|249}
+UpdateItem boxitem0
+;物品返回到包裹
+
+SETITEMSTATE boxitem0 0 1
+SETITEMSTATE boxitem0 1 1
+;禁止出售
+;SETITEMSTATE boxitem0 4 1
+;禁止爆出
+;SETITEMSTATE boxitem0 5 1
+SETITEMEFFECT boxitem0 6
+ReturnBoxItem 0
+SENDMSG 6 装备锁定成功
+#ELSEACT
+SENDMSG 6 请放入需要锁定的装备
+
+[@解除锁定]
+#IF
+CHECKGOLD 1000
+#ACT
+GOLDCOUNT - 1000
+#ELSEACT
+MESSAGEBOX 解锁需要1000金币
+BREAK
+
+#IF
+NOT Equal <$BOXITEM[0].NAME>
+#ELSEACT
+SENDMSG 6 请放入需要解锁的装备
+BREAK
+
+#IF
+CheckContainsText <$BOXITEM[0].NAME_G> [锁定]
+#ACT
+SetUpgradeItem 0
+
+;修改该OK框物品的名称
+MOV S3 <$BOXITEM[0].NAME>
+ChangeItemName boxitem0 <$STR(S3)>
+SETITEMSTATE boxitem0 0 0
+SETITEMSTATE boxitem0 1 0
+;SETITEMSTATE boxitem0 4 0
+;SETITEMSTATE boxitem0 5 0
+UpdateItem boxitem0
+SETITEMEFFECT boxitem0 0
+ReturnBoxItem 0
+SENDMSG 6 装备解锁成功
+#ELSEACT
+ReturnBoxItem 0
+SENDMSG 6 这不是锁定装备！
+
+[@开启自动存仓]
+#IF
+check [97] 0
+#ACT
+SET [97] 1
+goto @辅助功能
+break
+#IF
+check [97] 1
+#ACT
+SET [97] 0
+goto @辅助功能
+break
+
+[@自动买药]
+#IF
+check [98] 0
+#ACT
+SET [98] 1
+SetOnTimer 3 5
+goto @辅助功能
+break
+#IF
+check [98] 1
+#ACT
+SET [98] 0
+SETOFFTIMER 3
+goto @辅助功能
+break
+
+[@设置买药]
+#IF
+#ACT
+OPENMERCHANTBIGDLG 0 16 1 4 0 0 1 384 24 1
+
+#SAY
+<Img:100:0:144:10>\
+<&Layout:~#L01:40:80:355:240:<$STR(N$边框色值1)>>
+<MText:#L01~:0:0:161:请设置自动购买药品的数量|
+当然本辅助买药要比药店贵一半哦！
+>
+<&Layout:#L01~#L02:10:40:120:186:<$STR(N$边框色值2)>>
+<&Layout:#L01~#L03:152:40:120:186:<$STR(N$边框色值3)>>
+<looks:#L02~:28:34:20:1>
+<looks:#L03~:29:34:20:1>
+<text:#L02~:购买强效金创药数量:-35:75{FCOLOR=243}>
+<text:#L03~:购买强效魔法药数量:-35:75{FCOLOR=243}>
+
+<INPUTNUM:4:-305:200:80:15:0:125:255:0:10000:输入正确的数量:<$STR(U22)>:160>
+<INPUTNUM:5:-242:200:80:15:0:125:255:0:10000:输入正确的数量:<$STR(U23)>:160>
+
+;清空回收列表
+
+<text:确定数量:-450:226:4/@确定数量1>
+<text:确定数量:-350:226:5/@确定数量2>
+<text:返回:-460:256/@辅助功能>
+[@确定数量1]
+#act
+MOV U22 <$NPCINPUT(4)>
+SendMsg 5 自动购买强效金创药数量 <$NPCINPUT(4)>
+[@确定数量2]
+#act
+MOV U23 <$NPCINPUT(5)>
+SendMsg 5 自动购买强效魔法药数量 <$NPCINPUT(5)>
+[@存仓列表]
+#ACT
+#CALL [系统功能\老登辅助\存仓.txt] @自动存仓
+OpenStorageView 1
+[@设置极品点数]
+#IF
+#ACT
+CLOSEBIGDIALOGBOX
+#SAY
+请输入你想存入极品的点数，当所有极品点数总值\
+大于等于此数，将被存入仓库中。 \ \
+
+<INPUTNUM:2:0:2:80:15:0:249:255:1:100:必须输入1-100之间的数字:输入极品点数:160> \
+<text:确定极品数:10:6:2/@确定极品点数>\\
+<text:返回:10:6/@返回>\
+[@确定极品点数]
+#IF
+LARGE <$NPCINPUT(2)> 0
+#ACT
+MOV U9 <$NPCINPUT(2)>
+MESSAGEBOX 设置成功，极品值为<$STR(U9)>
+#ELSEACT
+MESSAGEBOX 设置失败，极品值必须大于0！
+[@开启极品存仓]
+#IF
+SMALL U9 1
+#ACT
+MESSAGEBOX 设置失败，极品值必须大于0，才能开启自动极品存仓！
+SET [99] 0
+goto @辅助功能
+break
+
+#IF
+check [99] 0
+#ACT
+SET [99] 1
+GuildNoticeMsg 255 249 [自动极品存仓已开启，背包中极品点数大于等于<$STR(U9)>将存入仓库 ] Self
+
+goto @辅助功能
+break
+#IF
+check [99] 1
+#ACT
+SET [99] 0
+goto @辅助功能
+GuildNoticeMsg 255 11 [自动极品存仓已关闭 ] Self
+break
+[@开启自动捡取]
+#IF
+check [100] 0
+#ACT
+SET [100] 1
+OpenAutoPickItem 1 0 15 1 0 0 500
+goto @辅助功能
+GuildNoticeMsg 255 249 [自动拾取已开启，可以自动拾取周围15*15范围的物品 ] Self
+break
+#IF
+check [100] 1
+#ACT
+SET [100] 0
+CloseAutoPickItem
+goto @辅助功能
+GuildNoticeMsg 255 11 [自动拾取已关闭 ] Self
+break
+[@地图传送]
+#OR
+CHECKSLAVENAME 红狐狸[伪装]
+#ELSEACT
+CLOSEBIGDIALOGBOX
+#CALL [系统功能\老登辅助\快捷传送.txt] @使用移动
+#ACT
+CLOSEBIGDIALOGBOX
+MESSAGEBOX 你现在无法使用传送服务
+[@货币兑换]
+#IF
+#ACT
+CLOSEBIGDIALOGBOX
+#CALL [系统功能\老登辅助\货币互换.txt] @互换
+[@捆解金砖金条]
+#IF
+#ACT
+CLOSEBIGDIALOGBOX
+GetItemCount 0 金条 N$金条数
+GetItemCount 0 金砖 N$金砖数
+GetItemCount 0 金盒 N$金盒数
+#SAY
+需要兑换金条金砖？建议还是去仓库兑换哦，\
+远程兑换需要收取10%手续费。你考虑清楚。\
+点击图标输入需要兑换的数量！\
+<ItemShow:221:<$str(N$金条数)>:30:20:1/@@InPutInteger7>
+<ItemShow:222:<$str(N$金砖数)>:60:20:1/@@InPutInteger8>
+<ItemShow:223:<$str(N$金盒数)>:90:20:1/@@InPutInteger9>\
+<text:返回:34:60/@返回>\
+[@InPutInteger7]
+#IF
+LARGE N7 0
+SMALL N7 100
+#ELSEACT
+MESSAGEBOX 请输入大于0且小于100的数字
+BREAK
+#IF
+LARGE N7 <$str(N$金条数)>
+#ACT
+MESSAGEBOX 请确认是否拥有此数量
+BREAK
+#IF
+checkitem 金条 <$str(N7)>
+#ACT
+TAKE 金条 <$str(N7)>
+MUL N7 900000
+GOLDCOUNT + <$STR(N7)>
+SENDMSG 6 恭喜你，兑换了<$STR(N7)>金币
+goto @捆解金砖金条
+#ELSEACT
+MESSAGEBOX 收取失败！
+
+[@InPutInteger8]
+#IF
+LARGE N8 0
+SMALL N8 100
+#ELSEACT
+MESSAGEBOX 请输入大于0且小于100的数字
+BREAK
+#IF
+LARGE N8 <$str(N$金砖数)>
+#ACT
+MESSAGEBOX 请确认是否拥有此数量
+BREAK
+#IF
+checkitem 金砖 <$str(N8)>
+#ACT
+TAKE 金砖 <$str(N8)>
+MUL N8 4500000
+GOLDCOUNT + <$STR(N8)>
+SENDMSG 6 恭喜你，兑换了<$STR(N8)>金币
+goto @捆解金砖金条
+#ELSEACT
+MESSAGEBOX 收取失败！
+[@InPutInteger9]
+#IF
+LARGE N9 0
+SMALL N9 100
+#ELSEACT
+MESSAGEBOX 请输入大于0且小于100的数字
+BREAK
+#IF
+LARGE N9 <$str(N$金盒数)>
+#ACT
+MESSAGEBOX 请确认是否拥有此数量
+BREAK
+#IF
+checkitem 金盒 <$str(N9)>
+#ACT
+TAKE 金盒 <$str(N9)>
+MUL N9 9000000
+GOLDCOUNT + <$STR(N9)>
+SENDMSG 6 恭喜你，兑换了<$STR(N9)>金币
+goto @捆解金砖金条
+#ELSEACT
+MESSAGEBOX 收取失败！
+
+[@无限仓库]
+#ACT
+OpenStorageView 1
+[@返回]
+#IF
+#ACT
+goto @辅助功能
+
+
+}
+
+

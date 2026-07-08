@@ -1,0 +1,9 @@
+[@真视道具1]
+{
+#ACT
+HighLevelKillMonFixExp 3600 0
+SENDMSG 7 获得一小时原始经验状态，死亡或下线消失！
+SetArrBuff 1 1 1 1683 3600 30 1684 1 [真视道具]原始经验状态 
+}
+
+

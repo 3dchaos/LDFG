@@ -1,0 +1,29 @@
+[@停止挂机]
+{
+#IF
+#ACT
+StopAutoPlayGame
+DelTextList ..\QuestDiary\数据文件\挂机名单.txt <$USERNAME>
+DelTextList ..\QuestDiary\数据文件\挂机名单.txt <$USERNAME>
+DelTextList ..\QuestDiary\数据文件\挂机名单.txt <$USERNAME>
+DelTextList ..\QuestDiary\数据文件\挂机名单.txt <$HERONAME>
+DelTextList ..\QuestDiary\数据文件\挂机名单.txt <$HERONAME>
+DelTextList ..\QuestDiary\数据文件\挂机名单.txt <$HERONAME>
+SETOFFTIMER 7
+SETOFFTIMER 6
+SETICON 0 -1
+H.SETICON 0 -1
+DELAYGOTO 50 @停止挂机持续 1
+;SENDMSG 6 命令停止挂机，使用点击【辅助】开始挂机
+
+[@停止挂机持续]
+#IF
+check [66] 1
+#ACT
+SENDMSG 6 持续挂机中。。。。如需关闭持续挂机，左下角【辅助】中取消勾选持续挂机。
+#CALL [系统功能\老登辅助\挂机.txt] @挂机功能
+#ELSEACT
+SENDMSG 6 已停止挂机，左下角【辅助】勾选持续挂机可以一直挂机。
+}
+
+

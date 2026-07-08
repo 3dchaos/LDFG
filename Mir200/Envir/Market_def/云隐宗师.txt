@@ -1,0 +1,179 @@
+[@main]
+#IF
+#ACT
+mov N$资源编号 0 
+OpenBigDialogBox <$STR(N$资源编号)> 16 1 4 0 0 1 384 23
+#SAY
+<Img:~#L1:26:<$STR(N$资源编号)>:-20:44>\
+<Img:~#L1:34:<$STR(N$资源编号)>:144:-5>\
+<&Layout:~#L02:200:80:215:240>
+<MText:#L02~:0:0:255:真是令人惊叹的力量与勇气啊，|
+年轻的英雄们。|
+向你们表示最崇高的敬意。|
+你们不仅击败了火龙教主，|
+更打破了恐惧与绝望的枷锁，|
+为这片土地带来了希望。
+>
+<MText:#L02~:0:10:255:作为对你们英勇行为的奖赏，|
+老夫愿意为你们重塑体魄，|
+使你们得到前所未有的提升。
+>
+<Text:#L02~:请为我重塑体魄:0:20{FCOLOR=251}/@重塑体魄>
+<NewLine:#L02~>
+<Text:#L02~:重置属性点|需要一个[焰魂龙纹]:0:20{FCOLOR=251}/@重置属性点>
+<NewLine:#L02~>
+<Text:#L02~:退出:0:20{FCOLOR=251}/@exit>
+
+
+[@重置属性点]
+#IF
+#ACT
+	CLOSEBIGDIALOGBOX
+#IF
+checkitem 焰魂龙纹 1
+#ACT
+take 焰魂龙纹 1
+RESTBONUSPOINT
+SENDMSG 7 老夫已经把你的属性都重置了
+#ELSESAY
+你没有焰魂龙纹，老夫无法为你重塑！
+[@重塑体魄]
+#IF
+#ACT
+	CLOSEBIGDIALOGBOX
+#if
+equal G3 1
+#say
+老夫需要一个[焰魂龙纹]，使用内力将它融入你的身体，\
+过程非常痛苦，你的等级会被随机削减40-90。请慎重选择。\
+注意：你的英雄也会被影响！\
+<重塑后将会送出本地图!/AutoColor=245>\\\
+<帮我重塑为战士/@重生(0)> \
+<帮我重塑为法师/@重生(1)> \
+<帮我重塑为道士/@重生(2)> \
+<我还没准备好/@exit>\
+#ELSESAY
+老夫需要一个[焰魂龙纹]，使用内力将它融入你的身体，\
+过程非常痛苦，你的等级会被随机削减40-90。请慎重选择。\
+<重塑后将会送出本地图!/AutoColor=245>\\\
+<帮我重塑为战士/@重生(0)> \
+<帮我重塑为法师/@重生(1)> \
+<帮我重塑为道士/@重生(2)> \
+<我还没准备好/@exit>\
+
+
+[@重生]
+;#ACT
+;SENDMSG 5 <$SCRIPTPARAM1>
+;BREAK
+
+#IF
+#ACT
+MOV S$转职 warrior
+
+#IF
+EQUAL <$SCRIPTPARAM1> 1
+#ACT
+MOV S$转职 Wizard
+
+#IF
+EQUAL <$SCRIPTPARAM1> 2
+#ACT
+MOV S$转职 Taoist
+
+
+#OR
+not CheckHaveHero
+CheckHeroOnline
+#ELSEACT
+MESSAGEBOX 请把你的英雄召唤出来再重试！
+BREAK
+
+#IF
+CHECKBAGSIZE 28
+#ELSEACT
+MESSAGEBOX 请清理一下你的背包，至少留出28个空格。
+BREAK
+
+#IF
+checkrenewlevel = 10
+#ACT
+MESSAGEBOX 你的转生次数已经够多的了。
+BREAK
+
+#IF
+CHECKLEVELEX < 90
+#ACT
+MESSAGEBOX 你的等级不足90级,承受不了重塑!
+BREAK
+
+#IF
+checkitem 焰魂龙纹 1
+#ACT
+take 焰魂龙纹 1
+map yssd
+#ELSEACT
+MESSAGEBOX 请准备一个焰魂龙纹。
+BREAK
+
+
+#IF
+#ACT
+MOVR N$削减等级 40 90
+MOV N$转生等级 <$LEVEL>
+DEC N$转生等级 <$STR(N$削减等级)>
+;转生次数获得了多出的经验数
+MUL N$转生次数属性点 <$RELEVEL> 50
+;SENDMSG 7 转生<$RELEVEL>次，额外获取属性点<$STR(N$转生次数属性点)>
+;S$转职
+CHANGEJOB <$STR(S$转职)>
+
+;削减等级乘法补偿属性值
+MUL N$转生属性点 <$STR(N$削减等级)> 10
+;SENDMSG 7 等级补偿属性点<$STR(N$转生属性点)>
+INC N$转生属性点 100
+;增加转生基础属性值
+INC N$转生属性点 <$STR(N$转生次数属性点)>
+ChangeHeroLevel - <$STR(N$削减等级)>
+RENEWLEVEL 1 <$STR(N$转生等级)> <$STR(N$转生属性点)>
+;经验条重置
+CHANGEEXP = 1
+CLEARSKILL
+TakeOffItem 0
+TakeOffItem 1
+TakeOffItem 2
+TakeOffItem 3
+TakeOffItem 4
+TakeOffItem 5
+TakeOffItem 6
+TakeOffItem 7
+TakeOffItem 8
+TakeOffItem 9
+TakeOffItem 10
+TakeOffItem 11
+TakeOffItem 12
+TakeOffItem 13
+TakeOffItem 14
+TakeOffItem 15
+TakeOffItem 16
+TakeOffItem 30
+TakeOffItem 31
+TakeOffItem 32
+TakeOffItem 33
+TakeOffItem 34
+TakeOffItem 35
+GIVESTATEITEM 五倍经验神丹 1 1 0 1 1 1 1
+GIVESTATEITEM 五倍经验神丹 1 1 0 1 1 1 1
+GIVESTATEITEM 五倍经验神丹 1 1 0 1 1 1 1
+TAKEBAGITEM 聚灵珠(小) 80 100 0 0 0 N$聚灵珠小 0 0
+H.TakeBagItem 聚灵珠(小) 80 100 0 0 0 N$聚灵珠小 0 0
+TAKEBAGITEM 聚灵珠(大) 80 100 0 0 0 N$聚灵珠小 0 0
+H.TakeBagItem 聚灵珠(大) 80 100 0 0 0 N$聚灵珠小 0 0
+DelStorageItem 1 2 聚灵珠(小)
+DelStorageItem 1 2 聚灵珠(大)
+AddDlg 3 0 95 0 0:0 95:7 2 <$RELEVEL>次
+MESSAGEBOX 你已经重塑体魄了！此次重塑等级被剥夺<$STR(N$削减等级)>级，\总共获得了<$STR(N$转生属性点)>点属性值，\其中每降低一级获得2点属性值，\重塑<$RELEVEL>次额外获取属性点<$STR(N$转生次数属性点)>，基础100点属性值。\此次重塑导致你的所有聚灵珠破碎，背包中的按原价补偿。
+BREAK
+
+
+

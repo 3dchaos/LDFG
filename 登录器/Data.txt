@@ -1,0 +1,4 @@
+D:\热血传奇13周年客户端\LD\Data\Effect.pak.cache
+D:\热血传奇13周年客户端\LD\Data\ld185.pak.cache
+D:\热血传奇13周年客户端\LD\Data\mmap10.pak.cache
+D:\热血传奇13周年客户端\LD\Data\ui_n.pak.cache

@@ -1,0 +1,43 @@
+[@main]
+在镜像里，我无法帮你送去火龙神殿\
+我可以再帮你释放出一些\
+<释放怪物/@刷怪> 2000声望刷一次,可以刷新3次\ 
+
+<离开火龙/@离开火龙> 返回比奇\ 
+
+[@刷怪]
+#IF
+EQUAL <$MAP> <$USERNAME>火龙二
+#ACT
+#ELSEACT
+MESSAGEBOX 你不是地图的拥有者
+
+#IF
+LARGE N$火龙二刷新次数 2
+#ACT
+MESSAGEBOX 你已经刷新太多次了！
+BREAK
+
+#IF
+CHECKCREDITPOINT > 1999
+#ACT
+CREDITPOINT - 2000
+INC N$火龙二刷新次数 1
+MONGENEX <$USERNAME>火龙二 50 50 火蜘蛛 300 300 255 0
+MONGENEX <$USERNAME>火龙二 50 50 火蜘蛛1 300 100 255 0
+MONGENEX <$USERNAME>火龙二 50 50 火蜥蜴 300 300 255 0
+MONGENEX <$USERNAME>火龙二 50 50 火蜥蜴1 300 100 255 0
+MONGENEX <$USERNAME>火龙二 50 50 金杖蜘蛛[狂暴] 300 200 255 0
+MONGENEX <$USERNAME>火龙二 50 50 金杖蜘蛛[精英] 300 100 255 0
+MONGENEX <$USERNAME>火龙二 118 86 火蟒 10 1 243 0
+MONGENEX <$USERNAME>火龙二 36 183 火蟒 10 1 243 0
+#ELSEACT
+MESSAGEBOX 声望不够或者刷新次数太多！
+
+[@离开火龙]
+#if
+#ACT
+MAPMOVE 0 332 267
+SET [251] 0
+CLEARMAPMON <$USERNAME>火龙二
+DelMirrorMap <$USERNAME>火龙二

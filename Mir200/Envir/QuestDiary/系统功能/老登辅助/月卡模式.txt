@@ -1,0 +1,16 @@
+[@月卡模式]
+{
+#IF
+CHECKITEM 老登月卡 1
+#ACT
+BREAK
+
+#IF
+	CHECKMAPNAME YKDD
+	#ACT
+	BREAK
+	#ELSEACT
+	MAP YKDD
+	ShowCustomButton 0 0
+	SENDMSG 6 检查您未拥有月卡，无法正常游戏，请购买月卡继续游戏
+}

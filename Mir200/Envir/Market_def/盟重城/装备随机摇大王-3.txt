@@ -1,0 +1,308 @@
+[@main]
+\\
+;#IF
+; NOT ISADMIN
+;#ACT
+; SendMsg 5 管理员测试中
+; BREAK
+; CLOSE
+
+#if
+#ACT
+;概率默认为2
+mov P10 2
+#SAY
+<你觉得足够幸运吗？/AutoColor=254>\给我100个灵符，给你一件装备随机摇一个属性。\
+幸运的话属性加点的1-3，但是有一半可能洗掉所有加点！\\加点值越高失败的概率越高哦!\\
+<升级装备/@升级装备>\\\
+
+<修正对话框BUG/@修正对话框BUG>\
+<可升级装备目录/@可升级装备目录>\
+[@去除]
+#ACT
+OPENUPGRADEDLG 去除加点
+#SAY
+清理OK框内的道具加点。
+<清理/@去除1>\
+
+
+[@升级装备]
+#ACT
+OPENUPGRADEDLG 升级装备
+
+[@UpgradeDlgItem]
+你要升级:<$DLGITEM.NAME>吗？\
+<幸运摇一摇/@幸运摇一摇>\\\
+<去除装备所有加点/@去除1>50灵符清除所有加点\
+<不摇了，还给我/@修正对话框BUG>\
+[@幸运摇一摇]
+#SAY
+接下来你要做什么？\
+<返回/@main>\
+;排除
+#OR
+CHECKTEXTLIST 洗装备\武器.txt <$DLGITEM.NAME>
+CHECKTEXTLIST 洗装备\其他.txt <$DLGITEM.NAME>
+#ACT
+SendMsg 5 升级的武器为：<$DLGITEM.NAME>
+#ELSEACT
+SendMsg 5 这个装备不能摇呢
+RECLAIMITEM
+BREAK
+
+
+#IF
+small <$GAMEGIRD> 100
+#ACT
+SendMsg 5 你的灵符不够！
+RECLAIMITEM
+BREAK
+
+
+#IF
+CHECKTEXTLIST 洗装备\武器.txt <$DLGITEM.NAME>
+#ACT
+MOVR P3 0 7
+MOVR P2 1 3
+
+#IF
+CHECKTEXTLIST 洗装备\其他.txt <$DLGITEM.NAME>
+#ACT
+MOVR P3 0 5
+MOVR P2 1 3
+
+#IF
+#ACT
+GETITEMADDVALUE -1 0 M10
+GETITEMADDVALUE -1 1 M11
+GETITEMADDVALUE -1 2 M12
+GETITEMADDVALUE -1 3 M13
+GETITEMADDVALUE -1 4 M14
+GETITEMADDVALUE -1 5 M15
+GETITEMADDVALUE -1 6 M16
+GETITEMADDVALUE -1 7 M17
+;重置初始几率
+mov M9 2
+inc M9 <$STR(M10)>
+inc M9 <$STR(M11)>
+inc M9 <$STR(M12)>
+inc M9 <$STR(M13)>
+inc M9 <$STR(M14)>
+inc M9 <$STR(M15)>
+inc M9 <$STR(M16)>
+inc M9 <$STR(M17)>
+SENDMSG 7 此次的摇点几率为 1/<$STR(M9)>.属性位置是：<$STR(P3)>，点数是：<$STR(P2)>
+
+#IF
+RANDOM M9
+#ACT
+CHANGEITEMADDVALUE -1 P3 + P2
+GAMEGIRD - 100
+SENDMSG 7 加点成功！
+RECLAIMITEM
+BREAK
+
+#IF
+RANDOM 2
+#ACT
+
+GAMEGIRD - 100
+CHANGEITEMADDVALUE -1 0 = M10
+CHANGEITEMADDVALUE -1 1 = M11
+CHANGEITEMADDVALUE -1 2 = M12
+CHANGEITEMADDVALUE -1 3 = M13
+CHANGEITEMADDVALUE -1 4 = M14
+CHANGEITEMADDVALUE -1 5 = M15
+CHANGEITEMADDVALUE -1 6 = M16
+CHANGEITEMADDVALUE -1 7 = M17
+SENDMSG 7 加点失败，幸运保留原始属性
+RECLAIMITEM
+BREAK
+
+#IF
+#ACT
+GAMEGIRD - 100
+CHANGEITEMADDVALUE -1 0 = 0
+CHANGEITEMADDVALUE -1 1 = 0
+CHANGEITEMADDVALUE -1 2 = 0
+CHANGEITEMADDVALUE -1 3 = 0
+CHANGEITEMADDVALUE -1 4 = 0
+CHANGEITEMADDVALUE -1 5 = 0
+CHANGEITEMADDVALUE -1 6 = 0
+CHANGEITEMADDVALUE -1 7 = 0
+SENDMSG 7 加点失败，丢失所有加点
+RECLAIMITEM
+BREAK
+
+[@去除1]
+#IF
+small <$GAMEGIRD> 50
+#SAY
+接下来你要做什么？\
+<返回/@main>\
+#ACT
+SendMsg 5 你的灵符不够50个！
+RECLAIMITEM
+BREAK
+#ELSEACT
+GAMEGIRD - 50
+CHANGEITEMADDVALUE -1 0 = 0
+CHANGEITEMADDVALUE -1 1 = 0
+CHANGEITEMADDVALUE -1 2 = 0
+CHANGEITEMADDVALUE -1 3 = 0
+CHANGEITEMADDVALUE -1 4 = 0
+CHANGEITEMADDVALUE -1 5 = 0
+CHANGEITEMADDVALUE -1 6 = 0
+CHANGEITEMADDVALUE -1 7 = 0
+SENDMSG 7 清除加点完毕收费50灵符
+RECLAIMITEM
+BREAK
+
+
+[@修正对话框BUG]
+#IF
+#SAY
+接下来你要做什么？\
+<返回/@main>\
+#ACT
+RECLAIMITEM
+
+[@可升级装备目录]
+#IF
+
+#SAY
+灯笼项链
+记忆项链
+白色虎齿项链
+屠龙
+嗜魂法杖
+逍遥扇
+破馆珍剑\\
+霸者之刃
+龙牙
+怒斩
+开天
+镇天
+玄天
+主宰神剑
+极品主宰神剑\\
+传奇战刃
+传奇魔刃
+传奇道刃
+传奇神剑\\
+极品传奇神剑
+顶级传奇神剑
+黄金裁决
+紫金嗜魂法杖
+赤金逍遥扇
+护身戒指\\
+防御戒指
+麻痹戒指
+复活戒指
+圣战头盔
+圣战项链
+圣战手镯\\
+圣战戒指
+法神头盔
+法神项链
+法神手镯
+法神戒指
+天尊头盔\\
+天尊项链
+天尊手镯
+天尊戒指
+天魔神甲
+圣战宝甲
+法神披风
+霓裳羽衣\\
+天尊道袍
+天师长袍
+雷霆战甲(男)
+雷霆战甲(女)
+雷霆项链
+雷霆护腕
+雷霆战戒
+雷霆腰带\\
+雷霆战靴
+烈焰魔衣(男)
+烈焰魔衣(女)
+烈焰项链
+烈焰护腕
+烈焰魔戒
+烈焰腰带\\
+烈焰魔靴
+光芒道袍(男)
+光芒道袍(女)
+光芒项链
+光芒护腕
+光芒道戒
+光芒腰带
+光芒道靴
+凤天魔甲\\
+凰天魔衣
+战神项链
+战神手镯
+战神戒指
+圣魔项链
+圣魔手镯
+圣魔戒指\\
+真魂项链
+真魂手镯
+真魂戒指
+圣战纹章
+法神纹章
+天尊纹章
+黄金头盔
+主宰神甲(男)\\
+主宰神甲(女)
+主宰项链
+主宰护腕
+主宰之戒
+主宰之冠
+主宰腰带
+主宰之靴
+主宰面巾\\
+主宰勋章
+极品主宰甲(男)
+极品主宰甲(女)
+极品主宰项链
+极品主宰护腕
+极品主宰之戒
+极品主宰之冠
+极品主宰腰带\\
+极品主宰之靴
+极品主宰面巾
+极品主宰勋章
+传奇神甲(男)
+传奇神甲(女)
+传奇之戒
+传奇护腕
+传奇之冠
+传奇项链\\
+传奇腰带
+传奇之靴
+传奇勋章
+传奇面巾
+极品传奇甲(男)
+极品传奇甲(女)
+极品传奇之戒
+极品传奇护腕
+极品传奇之冠
+极品传奇项链
+极品传奇腰带
+极品传奇之靴\\
+极品传奇勋章
+极品传奇面巾
+顶级传奇甲(男)
+顶级传奇甲(女)
+顶级传奇之戒
+顶级传奇护腕
+顶级传奇之冠
+顶级传奇项链
+顶级传奇腰带
+顶级传奇之靴
+顶级传奇勋章
+顶级传奇面巾\\
+强化复活戒指
+强化护身戒指
+强化麻痹戒指

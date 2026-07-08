@@ -1,0 +1,155 @@
+[@帮菜]
+{
+你好，请问有什么可以帮到你？\
+<兑换CDK/@兑换CDK>\
+
+<领取礼品/@单人发送>\
+
+;<测试修复/@测试修复>\
+
+<输入密码/@输入密码>\
+#IF
+  ISADMIN
+#SAY
+管理命令\
+<云隐宗师放GM地图/@云隐宗师放GM地图>\\
+<测试1/@测试1>\\
+<测试2/@测试2>\\
+<调整转生/@调整转生>\\
+<清除狐月标识/@清除狐月标识>\\
+<发送道具/@发送道具>\\
+<召唤/@召唤>\\
+<测试探测/@测试探测>\\
+<持久/@持久>\\
+
+[@兑换CDK]
+#act
+#CALL [\典狱长功能\典狱长CDK.txt] @典狱长CDK
+
+[@持久]
+#if
+#ACT
+GetItemFieldValue 3 name S88
+GetItemFieldValue 3 dura N88
+GetItemFieldValue 3 duramax N80
+
+
+SendMsg 6 21的值为：<$STR(S88)>
+SendMsg 6 dura值为：<$STR(N88)>
+SendMsg 6 duramax值为：<$STR(N80)>
+
+
+[@测试探测]
+#if
+FindMonPoint 0 稻草人 N1 N2
+#act
+SendMsg 6 最近的盟重采集怪坐标为<$STR(N1)>,<$STR(N2)>
+
+
+[@召唤]
+#IF
+#ACT
+releasemagic 30 0 3 2 0 0
+
+[@清除狐月标识]
+#IF
+#ACT
+SET [255] 0
+
+
+[@测试修复]
+#if
+CHECKUSEITEM 16
+#ACT
+MOV S$盾牌名 <$SHIELD>
+
+#ELSEACT
+MESSAGEBOX 你没有佩戴盾牌！
+BREAK
+
+#IF
+LARGE <$GAMEGIRD> 99
+#ACT
+GAMEGIRD - 100
+TakePosW 16
+GIVE <$STR(S$盾牌名)> 1
+TakeOnItem  <$STR(S$盾牌名)> 16
+SENDMSG 6 你的盾牌已经修复完毕！
+#ELSEACT
+MESSAGEBOX 需要100灵符！
+BREAK
+
+[@调整转生]
+#IF
+#ACT
+  RENEWLEVEL 1 999 0
+#SAY
+转生成功。
+
+[@云隐宗师放GM地图]
+
+#ACT
+CreateNPC 云隐宗师 GM001 16 32 78 云隐宗师 1
+
+[@测试1]
+#ACT
+DelNpc 云隐宗师 GM001
+
+[@测试2]
+#ACT
+SET [47] 0
+[@确认]
+#IF
+#ACT
+GetListString ..\..\..\..\..\..\密码组.txt 0 P11 P12 1
+#IF
+EQUAL <$NPCINPUT(2)> <$STR(P11)>
+#ACT
+KILLMONBURSTRATE 200 0 1 
+KILLMONEXPRATE 500 0 1
+POWERRATE 150 0 1 
+MESSAGEBOX 激活永久双倍暴率，1.5倍攻击力，5倍经验值
+BREAK
+
+#IF
+#ACT
+GetListString ..\..\..\..\..\..\密码组.txt 1 P11 P12 1
+#IF
+EQUAL <$NPCINPUT(2)> <$STR(P11)>
+#ACT
+MAP H203
+BREAK
+
+#IF
+#ACT
+GetListString ..\..\..\..\..\..\密码组.txt 2 P11 P12 1
+#IF
+EQUAL <$NPCINPUT(2)> <$STR(P11)>
+#ACT
+MAP H010
+BREAK
+
+#IF
+#ACT
+GetListString ..\..\..\..\..\..\密码组.txt 3 P11 P12 1
+#IF
+EQUAL <$NPCINPUT(2)> <$STR(P11)>
+#ACT
+mapmove D2008
+BREAK
+
+#IF
+#ACT
+MESSAGEBOX 输入密码失败
+[@单人发送]
+#if
+GetStringPosEX 帮助菜单自己领取物品\发送人.txt <$USERNAME> N11 N12 0 0
+#ACT
+;发送人|发送道具
+GetListString 帮助菜单自己领取物品\发送人.txt <$STR(N11)> A41 A42
+GIVE <$STR(A42)> 1
+DelTextListLine 帮助菜单自己领取物品\发送人.txt <$STR(N11)> 0
+#elsesay
+没有东西获取！！！\
+<退出/@exit>\
+}

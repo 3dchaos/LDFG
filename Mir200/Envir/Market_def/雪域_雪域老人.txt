@@ -1,0 +1,54 @@
+[@main]
+你怎么到这来了？\
+冻坏了吧？我这里有一些御寒的药品。 \
+100个灵符我就给你一瓶。\
+<我想要一瓶/@买药>\ \
+怪物已经被消灭干净了？\
+我可以再帮你释放出一些\
+<释放怪物/@刷怪> 1000声望刷一次,可以刷新3次\ 
+<离开雪域/@离开雪域> 返回盟重\ 
+
+[@买药]
+#IF
+small <$GAMEGIRD> 100
+#ACT
+#SAY
+你的灵符不够！！\
+<返回/@main>
+#ELSEACT
+GAMEGIRD - 100
+give 避寒神丹 1
+SENDMSG 7 兑换一瓶避寒神丹！
+
+[@刷怪]
+#IF
+EQUAL S10 <$USERNAME>雪域2
+#ACT
+#ELSEACT
+MESSAGEBOX 你不是地图的拥有者
+
+#IF
+LARGE U21 2
+#ACT
+MESSAGEBOX 你已经刷新太多次了！
+BREAK
+
+#IF
+CHECKCREDITPOINT > 999
+#ACT
+CREDITPOINT - 1000
+INC U21 1
+MONGENEX <$USERNAME>雪域2 50 55 雪域领主 10 2 243 0
+MONGENEX <$USERNAME>雪域2 50 55 冰雪守卫 150 150 255 0
+MONGENEX <$USERNAME>雪域2 50 55 冰雪法王 150 150 255 0
+#ELSEACT
+MESSAGEBOX 声望不够或者刷新次数太多！
+
+[@离开雪域]
+#if
+#ACT
+MAPMOVE 3 333 335
+mov U20 0
+ClearVar S10 1
+CLEARMAPMON <$USERNAME>雪域2
+DelMirrorMap <$USERNAME>雪域2

@@ -1,0 +1,1358 @@
+[@main]
+那个充满雷电与熔炎的地方……最近可是玛法大陆上人门\
+谈论的焦点了。身为玛法最资深的鉴宝人，不少勇士都将\
+他们从那洞穴中找到的神秘装备送给我研究，如今我终于\
+找到了令这些神秘装备力量更上一层楼的方法。\
+年轻人，你也想试试？\
+<不错，我想来升级来自雷炎洞穴的装备/@shengji>    \
+<了解升级配方/@liaojie>                          <我想解除装备的封印/@jiefeng>\
+
+[@shengji]
+恩，请把你要升级的装备带在身上。   ╔═<雷炎装备升级系统/SCOLOR=253>═╗\
+对了，我差点忘记告诉你，我最近眼神 ║        <头盔/@升级头盔>        ║\
+不好，可能会从你包里拿走更多的     ║               <项链/@升级项链> ║\
+<黑铁矿石、首饰、鞋子、腰带和头盔。> ║ <右手手镯/@升级右镯>  <左手手镯/@升级左镯> ║\
+如果你有重要的物品，请你寄存仓库后 ║ <右手戒指/@升级右戒>  <左手戒指/@升级左戒> ║\
+再来找我吧。(注意：拿武器的为右手) ║   <腰带/@升级腰带>      <靴子/@升级靴子>   ║\
+<雷炎装备为：狂雷、逆火、通云套。>   ╚══════════╝\
+<查看升级规则/@雷炎规则>\
+<返回/@main>\
+[@雷炎规则]
+雷炎装备升级至少需要魔龙装备或赤月头盔2件+黑铁矿石2块，\
+当然，超过2件也是可以的。魔龙装备为：雷霆、烈焰、光芒，\
+由于魔龙装备没有头盔，升级材料改为赤月头盔，即圣战、法\
+神、天尊。升级每个部位的雷炎装备需要交对应部位的魔龙装\
+备材料。如升级狂雷战盔，需要圣战头盔2个+黑铁矿石2块。\
+升级狂雷项链，需要雷霆项链2个+黑铁矿石2块。\
+<升级时，务必清理包裹，仅留升级材料。以防其他物品被误收。>\
+<返回/@shengji>\
+
+[@升级头盔]
+#IF
+checkitemw 狂雷战盔 1
+#ACT
+goto @检测头盔
+Break
+#IF
+checkitemw 逆火魔盔 1
+#ACT
+goto @检测头盔
+Break
+#IF
+checkitemw 通云道盔 1
+#ACT
+goto @检测头盔
+Break
+#ELSEACT
+messagebox 你没有佩戴需要升级的雷炎装备！！
+
+[@检测头盔]
+#IF
+CheckItemAddValueEx 4 < 4
+#ACT
+goto @头盔强化
+#ELSEACT
+messagebox 你当前佩戴的雷炎装备属性已为最高，无法再升级！！
+
+[@头盔强化]
+#IF
+random 2
+checkitemw 狂雷战盔 1
+checkitem 圣战头盔 2
+checkitem 黑铁矿石 2
+#ACT
+take 圣战头盔 46
+take 黑铁矿石 46
+messagebox 抱歉，装备升级不成功，强化材料消失！！
+Break
+#IF
+random 2
+checkitemw 逆火魔盔 1
+checkitem 法神头盔 2
+checkitem 黑铁矿石 2
+#ACT
+take 法神头盔 46
+take 黑铁矿石 46
+messagebox 抱歉，装备升级不成功，强化材料消失！！
+Break
+#IF
+random 2
+checkitemw 通云道盔 1
+checkitem 天尊头盔 2
+checkitem 黑铁矿石 2
+#ACT
+take 天尊头盔 46
+take 黑铁矿石 46
+messagebox 抱歉，装备升级不成功，强化材料消失！！
+Break
+#IF
+checkitemw 狂雷战盔 1
+checkitem 圣战头盔 2
+checkitem 黑铁矿石 2
+#ACT
+take 圣战头盔 46
+take 黑铁矿石 46
+CHANGEITEMADDVALUE 4 2 + 1
+messagebox 恭喜，装备升级成功，装备属性已增加！！
+Break
+#IF
+checkitemw 逆火魔盔 1
+checkitem 法神头盔 2
+checkitem 黑铁矿石 2
+#ACT
+take 法神头盔 46
+take 黑铁矿石 46
+CHANGEITEMADDVALUE 4 3 + 1
+messagebox 恭喜，装备升级成功，装备属性已增加！！
+Break
+#IF
+checkitemw 通云道盔 1
+checkitem 天尊头盔 2
+checkitem 黑铁矿石 2
+#ACT
+take 天尊头盔 46
+take 黑铁矿石 46
+CHANGEITEMADDVALUE 4 4 + 1
+messagebox 恭喜，装备升级成功，装备属性已增加！！
+Break
+#ELSEACT
+messagebox 你缺少升级雷炎装备所需要的材料！！
+
+[@升级项链]
+#IF
+checkitemw 狂雷项链 1
+#ACT
+goto @检测项链
+Break
+#IF
+checkitemw 逆火项链 1
+#ACT
+goto @检测项链
+Break
+#IF
+checkitemw 通云项链 1
+#ACT
+goto @检测项链
+Break
+#ELSEACT
+messagebox 你没有佩戴需要升级的雷炎装备！！
+
+[@检测项链]
+#IF
+CheckItemAddValueEx 3 < 4
+#ACT
+goto @项链强化
+#ELSEACT
+messagebox 你当前佩戴的雷炎装备属性已为最高，无法再升级！！
+
+[@项链强化]
+#IF
+random 2
+checkitemw 狂雷项链 1
+checkitem 雷霆项链 2
+checkitem 黑铁矿石 2
+#ACT
+take 雷霆项链 46
+take 黑铁矿石 46
+messagebox 抱歉，装备升级不成功，强化材料消失！！
+Break
+#IF
+random 2
+checkitemw 逆火项链 1
+checkitem 烈焰项链 2
+checkitem 黑铁矿石 2
+#ACT
+take 烈焰项链 46
+take 黑铁矿石 46
+messagebox 抱歉，装备升级不成功，强化材料消失！！
+Break
+#IF
+random 2
+checkitemw 通云项链 1
+checkitem 光芒项链 2
+checkitem 黑铁矿石 2
+#ACT
+take 光芒项链 46
+take 黑铁矿石 46
+messagebox 抱歉，装备升级不成功，强化材料消失！！
+Break
+#IF
+checkitemw 狂雷项链 1
+checkitem 雷霆项链 2
+checkitem 黑铁矿石 2
+#ACT
+take 雷霆项链 46
+take 黑铁矿石 46
+CHANGEITEMADDVALUE 3 2 + 1
+messagebox 恭喜，装备升级成功，装备属性已增加！！
+Break
+#IF
+checkitemw 逆火项链 1
+checkitem 烈焰项链 2
+checkitem 黑铁矿石 2
+#ACT
+take 烈焰项链 46
+take 黑铁矿石 46
+CHANGEITEMADDVALUE 3 3 + 1
+messagebox 恭喜，装备升级成功，装备属性已增加！！
+Break
+#IF
+checkitemw 通云项链 1
+checkitem 光芒项链 2
+checkitem 黑铁矿石 2
+#ACT
+take 光芒项链 46
+take 黑铁矿石 46
+CHANGEITEMADDVALUE 3 4 + 1
+messagebox 恭喜，装备升级成功，装备属性已增加！！
+Break
+#ELSEACT
+messagebox 你缺少升级雷炎装备所需要的材料！！ 
+
+[@升级右镯]
+#IF
+checkitemw 狂雷护腕 1
+COMPARETEXT <$ARMRING_R> 狂雷护腕
+#ACT
+goto @检测右镯
+Break
+#IF
+checkitemw 逆火护腕 1
+COMPARETEXT <$ARMRING_R> 逆火护腕
+#ACT
+goto @检测右镯
+Break
+#IF
+checkitemw 通云护腕 1
+COMPARETEXT <$ARMRING_R> 通云护腕
+#ACT
+goto @检测右镯
+Break
+#ELSEACT
+messagebox 你没有佩戴需要升级的雷炎装备！！
+
+[@检测右镯]
+#IF
+CheckItemAddValueEx 6 < 4
+#ACT
+goto @右镯强化
+#ELSEACT
+messagebox 你当前佩戴的雷炎装备属性已为最高，无法再升级！！
+
+[@右镯强化]
+#IF
+random 2
+checkitemw 狂雷护腕 1
+checkitem 雷霆护腕 2
+checkitem 黑铁矿石 2
+#ACT
+take 雷霆护腕 46
+take 黑铁矿石 46
+messagebox 抱歉，装备升级不成功，强化材料消失！！
+Break
+#IF
+random 2
+checkitemw 逆火护腕 1
+checkitem 烈焰护腕 2
+checkitem 黑铁矿石 2
+#ACT
+take 烈焰护腕 46
+take 黑铁矿石 46
+messagebox 抱歉，装备升级不成功，强化材料消失！！
+Break
+#IF
+random 2
+checkitemw 通云护腕 1
+checkitem 光芒护腕 2
+checkitem 黑铁矿石 2
+#ACT
+take 光芒护腕 46
+take 黑铁矿石 46
+messagebox 抱歉，装备升级不成功，强化材料消失！！
+Break
+#IF
+checkitemw 狂雷护腕 1
+checkitem 雷霆护腕 2
+checkitem 黑铁矿石 2
+#ACT
+take 雷霆护腕 46
+take 黑铁矿石 46
+CHANGEITEMADDVALUE 6 2 + 1
+messagebox 恭喜，装备升级成功，装备属性已增加！！
+Break
+#IF
+checkitemw 逆火护腕 1
+checkitem 烈焰护腕 2
+checkitem 黑铁矿石 2
+#ACT
+take 烈焰护腕 46
+take 黑铁矿石 46
+CHANGEITEMADDVALUE 6 3 + 1
+messagebox 恭喜，装备升级成功，装备属性已增加！！
+Break
+#IF
+checkitemw 通云护腕 1
+checkitem 光芒护腕 2
+checkitem 黑铁矿石 2
+#ACT
+take 光芒护腕 46
+take 黑铁矿石 46
+CHANGEITEMADDVALUE 6 4 + 1
+messagebox 恭喜，装备升级成功，装备属性已增加！！
+Break
+#ELSEACT
+messagebox 你缺少升级雷炎装备所需要的材料！！ 
+
+[@升级左镯]
+#IF
+checkitemw 狂雷护腕 1
+COMPARETEXT <$ARMRING_L> 狂雷护腕
+#ACT
+goto @检测左镯
+Break
+#IF
+checkitemw 逆火护腕 1
+COMPARETEXT <$ARMRING_L 逆火护腕
+#ACT
+goto @检测左镯
+Break
+#IF
+checkitemw 通云护腕 1
+COMPARETEXT <$ARMRING_L> 通云护腕
+#ACT
+goto @检测左镯
+Break
+#ELSEACT
+messagebox 你没有佩戴需要升级的雷炎装备！！
+
+[@检测左镯]
+#IF
+CheckItemAddValueEx 5 < 4
+#ACT
+goto @左镯强化
+#ELSEACT
+messagebox 你当前佩戴的雷炎装备属性已为最高，无法再升级！！
+
+[@左镯强化]
+#IF
+random 2
+checkitemw 狂雷护腕 1
+checkitem 雷霆护腕 2
+checkitem 黑铁矿石 2
+#ACT
+take 雷霆护腕 46
+take 黑铁矿石 46
+messagebox 抱歉，装备升级不成功，强化材料消失！！
+Break
+#IF
+random 2
+checkitemw 逆火护腕 1
+checkitem 烈焰护腕 2
+checkitem 黑铁矿石 2
+#ACT
+take 烈焰护腕 46
+take 黑铁矿石 46
+messagebox 抱歉，装备升级不成功，强化材料消失！！
+Break
+#IF
+random 2
+checkitemw 通云护腕 1
+checkitem 光芒护腕 2
+checkitem 黑铁矿石 2
+#ACT
+take 光芒护腕 46
+take 黑铁矿石 46
+messagebox 抱歉，装备升级不成功，强化材料消失！！
+Break
+#IF
+checkitemw 狂雷护腕 1
+checkitem 雷霆护腕 2
+checkitem 黑铁矿石 2
+#ACT
+take 雷霆护腕 46
+take 黑铁矿石 46
+CHANGEITEMADDVALUE 5 2 + 1
+messagebox 恭喜，装备升级成功，装备属性已增加！！
+Break
+#IF
+checkitemw 逆火护腕 1
+checkitem 烈焰护腕 2
+checkitem 黑铁矿石 2
+#ACT
+take 烈焰护腕 46
+take 黑铁矿石 46
+CHANGEITEMADDVALUE 5 3 + 1
+messagebox 恭喜，装备升级成功，装备属性已增加！！
+Break
+#IF
+checkitemw 通云护腕 1
+checkitem 光芒护腕 2
+checkitem 黑铁矿石 2
+#ACT
+take 光芒护腕 46
+take 黑铁矿石 46
+CHANGEITEMADDVALUE 5 4 + 1
+messagebox 恭喜，装备升级成功，装备属性已增加！！
+Break
+#ELSEACT
+messagebox 你缺少升级雷炎装备所需要的材料！！
+
+[@升级右戒]
+#IF
+checkitemw 狂雷战戒 1
+COMPARETEXT <$RING_R> 狂雷战戒
+#ACT
+goto @检测右戒
+Break
+#IF
+checkitemw 逆火魔戒 1
+COMPARETEXT <$RING_R> 逆火魔戒
+#ACT
+goto @检测右戒
+Break
+#IF
+checkitemw 通云道戒 1
+COMPARETEXT <$RING_R> 通云道戒
+#ACT
+goto @检测右戒
+Break
+#ELSEACT
+messagebox 你没有佩戴需要升级的雷炎装备！！
+
+[@检测右戒]
+#IF
+CheckItemAddValueEx 8 < 4
+#ACT
+goto @右戒强化
+#ELSEACT
+messagebox 你当前佩戴的雷炎装备属性已为最高，无法再升级！！
+
+[@右戒强化]
+#IF
+random 2
+checkitemw 狂雷战戒 1
+checkitem 雷霆战戒 2
+checkitem 黑铁矿石 2
+#ACT
+take 雷霆战戒 46
+take 黑铁矿石 46
+messagebox 抱歉，装备升级不成功，强化材料消失！！
+Break
+#IF
+random 2
+checkitemw 逆火魔戒 1
+checkitem 烈焰魔戒 2
+checkitem 黑铁矿石 2
+#ACT
+take 烈焰魔戒 46
+take 黑铁矿石 46
+messagebox 抱歉，装备升级不成功，强化材料消失！！
+Break
+#IF
+random 2
+checkitemw 通云道戒 1
+checkitem 光芒道戒 2
+checkitem 黑铁矿石 2
+#ACT
+take 光芒道戒 46
+take 黑铁矿石 46
+messagebox 抱歉，装备升级不成功，强化材料消失！！
+Break
+#IF
+checkitemw 狂雷战戒 1
+checkitem 雷霆战戒 2
+checkitem 黑铁矿石 2
+#ACT
+take 雷霆战戒 46
+take 黑铁矿石 46
+CHANGEITEMADDVALUE 8 2 + 1
+messagebox 恭喜，装备升级成功，装备属性已增加！！
+Break
+#IF
+checkitemw 逆火魔戒 1
+checkitem 烈焰魔戒 2
+checkitem 黑铁矿石 2
+#ACT
+take 烈焰魔戒 46
+take 黑铁矿石 46
+CHANGEITEMADDVALUE 8 3 + 1
+messagebox 恭喜，装备升级成功，装备属性已增加！！
+Break
+#IF
+checkitemw 通云道戒 1
+checkitem 光芒道戒 2
+checkitem 黑铁矿石 2
+#ACT
+take 光芒道戒 46
+take 黑铁矿石 46
+CHANGEITEMADDVALUE 8 4 + 1
+messagebox 恭喜，装备升级成功，装备属性已增加！！
+Break
+#ELSEACT
+messagebox 你缺少升级雷炎装备所需要的材料！！
+
+[@升级左戒]
+#IF
+checkitemw 狂雷战戒 1
+COMPARETEXT <$RING_L> 狂雷战戒
+#ACT
+goto @检测左戒
+Break
+#IF
+checkitemw 逆火魔戒 1
+COMPARETEXT <$RING_L> 逆火魔戒
+#ACT
+goto @检测左戒
+Break
+#IF
+checkitemw 通云道戒 1
+COMPARETEXT <$RING_L> 通云道戒
+#ACT
+goto @检测左戒
+Break
+#ELSEACT
+messagebox 你没有佩戴需要升级的雷炎装备！！
+
+[@检测左戒]
+#IF
+CheckItemAddValueEx 7 < 4
+#ACT
+goto @左戒强化
+#ELSEACT
+messagebox 你当前佩戴的雷炎装备属性已为最高，无法再升级！！
+
+[@左戒强化]
+#IF
+random 2
+checkitemw 狂雷战戒 1
+checkitem 雷霆战戒 2
+checkitem 黑铁矿石 2
+#ACT
+take 雷霆战戒 46
+take 黑铁矿石 46
+messagebox 抱歉，装备升级不成功，强化材料消失！！
+Break
+#IF
+random 2
+checkitemw 逆火魔戒 1
+checkitem 烈焰魔戒 2
+checkitem 黑铁矿石 2
+#ACT
+take 烈焰魔戒 46
+take 黑铁矿石 46
+messagebox 抱歉，装备升级不成功，强化材料消失！！
+Break
+#IF
+random 2
+checkitemw 通云道戒 1
+checkitem 光芒道戒 2
+checkitem 黑铁矿石 2
+#ACT
+take 光芒道戒 46
+take 黑铁矿石 46
+messagebox 抱歉，装备升级不成功，强化材料消失！！
+Break
+#IF
+checkitemw 狂雷战戒 1
+checkitem 雷霆战戒 2
+checkitem 黑铁矿石 2
+#ACT
+take 雷霆战戒 46
+take 黑铁矿石 46
+CHANGEITEMADDVALUE 7 2 + 1
+messagebox 恭喜，装备升级成功，装备属性已增加！！
+Break
+#IF
+checkitemw 逆火魔戒 1
+checkitem 烈焰魔戒 2
+checkitem 黑铁矿石 2
+#ACT
+take 烈焰魔戒 46
+take 黑铁矿石 46
+CHANGEITEMADDVALUE 7 3 + 1
+messagebox 恭喜，装备升级成功，装备属性已增加！！
+Break
+#IF
+checkitemw 通云道戒 1
+checkitem 光芒道戒 2
+checkitem 黑铁矿石 2
+#ACT
+take 光芒道戒 46
+take 黑铁矿石 46
+CHANGEITEMADDVALUE 7 4 + 1
+messagebox 恭喜，装备升级成功，装备属性已增加！！
+Break
+#ELSEACT
+messagebox 你缺少升级雷炎装备所需要的材料！！
+
+[@升级腰带]
+#IF
+checkitemw 狂雷腰带 1
+#ACT
+goto @检测腰带
+Break
+#IF
+checkitemw 逆火腰带 1
+#ACT
+goto @检测腰带
+Break
+#IF
+checkitemw 通云腰带 1
+#ACT
+goto @检测腰带
+Break
+#ELSEACT
+messagebox 你没有佩戴需要升级的雷炎装备！！
+
+[@检测腰带]
+#IF
+CheckItemAddValueEx 10 < 4
+#ACT
+goto @腰带强化
+#ELSEACT
+messagebox 你当前佩戴的雷炎装备属性已为最高，无法再升级！！
+
+[@腰带强化]
+#IF
+random 2
+checkitemw 狂雷腰带 1
+checkitem 雷霆腰带 2
+checkitem 黑铁矿石 2
+#ACT
+take 雷霆腰带 46
+take 黑铁矿石 46
+messagebox 抱歉，装备升级不成功，强化材料消失！！
+Break
+#IF
+random 2
+checkitemw 逆火腰带 1
+checkitem 烈焰腰带 2
+checkitem 黑铁矿石 2
+#ACT
+take 烈焰腰带 46
+take 黑铁矿石 46
+messagebox 抱歉，装备升级不成功，强化材料消失！！
+Break
+#IF
+random 2
+checkitemw 通云腰带 1
+checkitem 光芒腰带 2
+checkitem 黑铁矿石 2
+#ACT
+take 光芒腰带 46
+take 黑铁矿石 46
+messagebox 抱歉，装备升级不成功，强化材料消失！！
+Break
+#IF
+checkitemw 狂雷腰带 1
+checkitem 雷霆腰带 2
+checkitem 黑铁矿石 2
+#ACT
+take 雷霆腰带 46
+take 黑铁矿石 46
+CHANGEITEMADDVALUE 10 2 + 1
+messagebox 恭喜，装备升级成功，装备属性已增加！！
+Break
+#IF
+checkitemw 逆火腰带 1
+checkitem 烈焰腰带 2
+checkitem 黑铁矿石 2
+#ACT
+take 烈焰腰带 46
+take 黑铁矿石 46
+CHANGEITEMADDVALUE 10 3 + 1
+messagebox 恭喜，装备升级成功，装备属性已增加！！
+Break
+#IF
+checkitemw 通云腰带 1
+checkitem 光芒腰带 2
+checkitem 黑铁矿石 2
+#ACT
+take 光芒腰带 46
+take 黑铁矿石 46
+CHANGEITEMADDVALUE 10 4 + 1
+messagebox 恭喜，装备升级成功，装备属性已增加！！
+Break
+#ELSEACT
+messagebox 你缺少升级雷炎装备所需要的材料！！ 
+
+[@升级靴子]
+#IF
+checkitemw 狂雷战靴 1
+#ACT
+goto @检测靴子
+Break
+#IF
+checkitemw 逆火魔靴 1
+#ACT
+goto @检测靴子
+Break
+#IF
+checkitemw 通云道靴 1
+#ACT
+goto @检测靴子
+Break
+#ELSEACT
+messagebox 你没有佩戴需要升级的雷炎装备！！
+
+[@检测靴子]
+#IF
+CheckItemAddValueEx 11 < 4
+#ACT
+goto @靴子强化
+#ELSEACT
+messagebox 你当前佩戴的雷炎装备属性已为最高，无法再升级！！
+
+[@靴子强化]
+#IF
+random 2
+checkitemw 狂雷战靴 1
+checkitem 雷霆战靴 2
+checkitem 黑铁矿石 2
+#ACT
+take 雷霆战靴 46
+take 黑铁矿石 46
+messagebox 抱歉，装备升级不成功，强化材料消失！！
+Break
+#IF
+random 2
+checkitemw 逆火魔靴 1
+checkitem 烈焰魔靴 2
+checkitem 黑铁矿石 2
+#ACT
+take 烈焰魔靴 46
+take 黑铁矿石 46
+messagebox 抱歉，装备升级不成功，强化材料消失！！
+Break
+#IF
+random 2
+checkitemw 通云道靴 1
+checkitem 光芒道靴 2
+checkitem 黑铁矿石 2
+#ACT
+take 光芒道靴 46
+take 黑铁矿石 46
+messagebox 抱歉，装备升级不成功，强化材料消失！！
+Break
+#IF
+checkitemw 狂雷战靴 1
+checkitem 雷霆战靴 2
+checkitem 黑铁矿石 2
+#ACT
+take 雷霆战靴 46
+take 黑铁矿石 46
+CHANGEITEMADDVALUE 11 2 + 1
+messagebox 恭喜，装备升级成功，装备属性已增加！！
+Break
+#IF
+checkitemw 逆火魔靴 1
+checkitem 烈焰魔靴 2
+checkitem 黑铁矿石 2
+#ACT
+take 烈焰魔靴 46
+take 黑铁矿石 46
+CHANGEITEMADDVALUE 11 3 + 1
+messagebox 恭喜，装备升级成功，装备属性已增加！！
+Break
+#IF
+checkitemw 通云道靴 1
+checkitem 光芒道靴 2
+checkitem 黑铁矿石 2
+#ACT
+take 光芒道靴 46
+take 黑铁矿石 46
+CHANGEITEMADDVALUE 11 4 + 1
+messagebox 恭喜，装备升级成功，装备属性已增加！！
+Break
+#ELSEACT
+messagebox 你缺少升级雷炎装备所需要的材料！！
+
+[@liaojie]
+看你如此有诚意，我将配方告诉你：升级这种装备至少需要两\
+种东西——黑铁矿石、与要升级的装备相对应的魔龙装备。\
+如：升级狂雷战戒时，你需要用两个以上的雷霆战戒和两个以\
+上的黑铁矿石作为升级材料。\
+\ \
+<恩，我准备齐了/@shengji>             <关于材料的出处/@材料出处>\
+<我现在就去找材料/@exit>\
+
+[@材料出处]
+黑铁矿石嘛……玛法人都知道，在矿洞里用鹤嘴锄便可以挖出，\
+不过为了防止失手，你最好多准备些高品质的黑铁矿石给我。\
+至于来自魔龙的装备，那就是现在风靡玛法的雷霆、烈焰与光\
+芒装备了。由于这三套装备没有头盔，所以如果要升级头盔，\
+你用其他级别的头盔也可以。\
+\ \
+<我知道了/@main>\
+
+[@jiefeng]
+解开封印装备需要雷炎封印装备和一个火龙凭证或雷蛛毒囊\
+若无缘得见，也无可奈何。我会尽力帮你唤醒装备沉睡中的力\
+量，但不敢保证一定能够成功，如果失败，那装备就不复存在\
+了。如果成功，你就能成为它的主人。\
+<说明：雷蛛毒囊成功率100%，火龙凭证解封成功率50% >\ \
+<用雷蛛毒囊解封装备/@JIEBA2>          <用火龙凭证解封/@jieba>\ \
+<谢谢，我明白了/@main>
+
+[@JIEBA2]
+#if
+  checkitem 狂雷战盔(封印) 1
+  checkitem 雷蛛毒囊 1
+#act
+  TAKE 狂雷战盔(封印) 1
+  TAKE 雷蛛毒囊 1
+  GIVE 狂雷战盔 1
+SENDMSG 0 ㄑ系统：恭喜：[<$USERNAME>]：你看到我就激动！成功解封来自雷炎洞穴的封印装备，他将成为此神器的主人!
+SENDMSG 0 ㄑ系统：如果你也有来自雷炎的封印装备，请来英雄酒馆内“鉴宝散人”处为你服务!
+  break
+#if
+  checkitem 狂雷项链(封印) 1
+  checkitem 雷蛛毒囊 1
+#act
+  TAKE 狂雷项链(封印) 1
+  TAKE 雷蛛毒囊 1
+  GIVE 狂雷项链 1
+SENDMSG 0 ㄑ系统：恭喜：[<$USERNAME>]：你看到我就激动！成功解封来自雷炎洞穴的封印装备，他将成为此神器的主人!
+SENDMSG 0 ㄑ系统：如果你也有来自雷炎的封印装备，请来英雄酒馆内“鉴宝散人”处为你服务!
+  break
+#if
+  checkitem 狂雷护腕(封印) 1
+  checkitem 雷蛛毒囊 1
+#act
+  TAKE 狂雷护腕(封印) 1
+  TAKE 雷蛛毒囊 1
+  GIVE 狂雷护腕 1
+SENDMSG 0 ㄑ系统：恭喜：[<$USERNAME>]：你看到我就激动！成功解封来自雷炎洞穴的封印装备，他将成为此神器的主人!
+SENDMSG 0 ㄑ系统：如果你也有来自雷炎的封印装备，请来英雄酒馆内“鉴宝散人”处为你服务!
+  break
+#if
+  checkitem 狂雷战戒(封印) 1
+  checkitem 雷蛛毒囊 1
+#act
+  TAKE 狂雷战戒(封印) 1
+  TAKE 雷蛛毒囊 1
+  GIVE 狂雷战戒 1
+SENDMSG 0 ㄑ系统：恭喜：[<$USERNAME>]：你看到我就激动！成功解封来自雷炎洞穴的封印装备，他将成为此神器的主人!
+SENDMSG 0 ㄑ系统：如果你也有来自雷炎的封印装备，请来英雄酒馆内“鉴宝散人”处为你服务!
+  break
+#if
+  checkitem 狂雷腰带(封印) 1
+  checkitem 雷蛛毒囊 1
+#act
+  TAKE 狂雷腰带(封印) 1
+  TAKE 雷蛛毒囊 1
+  GIVE 狂雷腰带 1
+SENDMSG 0 ㄑ系统：恭喜：[<$USERNAME>]：你看到我就激动！成功解封来自雷炎洞穴的封印装备，他将成为此神器的主人!
+SENDMSG 0 ㄑ系统：如果你也有来自雷炎的封印装备，请来英雄酒馆内“鉴宝散人”处为你服务!
+  break
+#if
+  checkitem 狂雷战靴(封印) 1
+  checkitem 雷蛛毒囊 1
+#act
+  TAKE 狂雷战靴(封印) 1
+  TAKE 雷蛛毒囊 1
+  GIVE 狂雷战靴 1
+SENDMSG 0 ㄑ系统：恭喜：[<$USERNAME>]：你看到我就激动！成功解封来自雷炎洞穴的封印装备，他将成为此神器的主人!
+SENDMSG 0 ㄑ系统：如果你也有来自雷炎的封印装备，请来英雄酒馆内“鉴宝散人”处为你服务!
+  break
+#if
+  checkitem 逆火魔盔(封印) 1
+  checkitem 雷蛛毒囊 1
+#act
+  TAKE 逆火魔盔(封印) 1
+  TAKE 雷蛛毒囊 1
+  GIVE 逆火魔盔 1
+SENDMSG 0 ㄑ系统：恭喜：[<$USERNAME>]：你看到我就激动！成功解封来自雷炎洞穴的封印装备，他将成为此神器的主人!
+SENDMSG 0 ㄑ系统：如果你也有来自雷炎的封印装备，请来英雄酒馆内“鉴宝散人”处为你服务!
+  break
+#if
+  checkitem 逆火项链(封印) 1
+  checkitem 雷蛛毒囊 1
+#act
+  TAKE 逆火项链(封印) 1
+  TAKE 雷蛛毒囊 1
+  GIVE 逆火项链 1
+SENDMSG 0 ㄑ系统：恭喜：[<$USERNAME>]：你看到我就激动！成功解封来自雷炎洞穴的封印装备，他将成为此神器的主人!
+SENDMSG 0 ㄑ系统：如果你也有来自雷炎的封印装备，请来英雄酒馆内“鉴宝散人”处为你服务!
+  break
+#if
+  checkitem 逆火魔戒(封印) 1
+  checkitem 雷蛛毒囊 1
+#act
+  TAKE 逆火魔戒(封印) 1
+  TAKE 雷蛛毒囊 1
+  GIVE 逆火魔戒 1
+SENDMSG 0 ㄑ系统：恭喜：[<$USERNAME>]：你看到我就激动！成功解封来自雷炎洞穴的封印装备，他将成为此神器的主人!
+SENDMSG 0 ㄑ系统：如果你也有来自雷炎的封印装备，请来英雄酒馆内“鉴宝散人”处为你服务!
+  break
+#if
+  checkitem 逆火护腕(封印) 1
+  checkitem 雷蛛毒囊 1
+#act
+  TAKE 逆火护腕(封印) 1
+  TAKE 雷蛛毒囊 1
+  GIVE 逆火护腕 1
+SENDMSG 0 ㄑ系统：恭喜：[<$USERNAME>]：你看到我就激动！成功解封来自雷炎洞穴的封印装备，他将成为此神器的主人!
+SENDMSG 0 ㄑ系统：如果你也有来自雷炎的封印装备，请来英雄酒馆内“鉴宝散人”处为你服务!
+  break
+#if
+  checkitem 逆火腰带(封印) 1
+  checkitem 雷蛛毒囊 1
+#act
+  TAKE 逆火腰带(封印) 1
+  TAKE 雷蛛毒囊 1
+  GIVE 逆火腰带 1
+SENDMSG 0 ㄑ系统：恭喜：[<$USERNAME>]：你看到我就激动！成功解封来自雷炎洞穴的封印装备，他将成为此神器的主人!
+SENDMSG 0 ㄑ系统：如果你也有来自雷炎的封印装备，请来英雄酒馆内“鉴宝散人”处为你服务!
+  break
+#if
+  checkitem 逆火魔靴(封印) 1
+  checkitem 雷蛛毒囊 1
+#act
+  TAKE 逆火魔靴(封印) 1
+  TAKE 雷蛛毒囊 1
+  GIVE 逆火魔靴 1
+SENDMSG 0 ㄑ系统：恭喜：[<$USERNAME>]：你看到我就激动！成功解封来自雷炎洞穴的封印装备，他将成为此神器的主人!
+SENDMSG 0 ㄑ系统：如果你也有来自雷炎的封印装备，请来英雄酒馆内“鉴宝散人”处为你服务!
+  break
+#if
+  checkitem 通云道盔(封印) 1
+  checkitem 火龙凭证 1
+#act
+  TAKE 通云道盔(封印) 1
+  TAKE 雷蛛毒囊 1
+  GIVE 通云道盔 1
+SENDMSG 0 ㄑ系统：恭喜：[<$USERNAME>]：你看到我就激动！成功解封来自雷炎洞穴的封印装备，他将成为此神器的主人!
+SENDMSG 0 ㄑ系统：如果你也有来自雷炎的封印装备，请来英雄酒馆内“鉴宝散人”处为你服务!
+  break
+#if
+  checkitem 通云项链(封印) 1
+  checkitem 雷蛛毒囊 1
+#act
+  TAKE 通云项链(封印) 1
+  TAKE 雷蛛毒囊 1
+  GIVE 通云项链 1
+SENDMSG 0 ㄑ系统：恭喜：[<$USERNAME>]：你看到我就激动！成功解封来自雷炎洞穴的封印装备，他将成为此神器的主人!
+SENDMSG 0 ㄑ系统：如果你也有来自雷炎的封印装备，请来英雄酒馆内“鉴宝散人”处为你服务!
+  break
+#if
+  checkitem 通云道戒(封印) 1
+  checkitem 雷蛛毒囊 1
+#act
+  TAKE 通云道戒(封印) 1
+  TAKE 雷蛛毒囊 1
+  GIVE 通云道戒 1
+SENDMSG 0 ㄑ系统：恭喜：[<$USERNAME>]：你看到我就激动！成功解封来自雷炎洞穴的封印装备，他将成为此神器的主人!
+SENDMSG 0 ㄑ系统：如果你也有来自雷炎的封印装备，请来英雄酒馆内“鉴宝散人”处为你服务!
+  break
+#if
+  checkitem 通云护腕(封印) 1
+  checkitem 雷蛛毒囊 1
+#act
+  TAKE 通云护腕(封印) 1
+  TAKE 雷蛛毒囊 1
+  GIVE 通云护腕 1
+SENDMSG 0 ㄑ系统：恭喜：[<$USERNAME>]：你看到我就激动！成功解封来自雷炎洞穴的封印装备，他将成为此神器的主人!
+SENDMSG 0 ㄑ系统：如果你也有来自雷炎的封印装备，请来英雄酒馆内“鉴宝散人”处为你服务!
+  break
+#if
+  checkitem 通云腰带(封印) 1
+  checkitem 雷蛛毒囊 1
+#act
+  TAKE 通云腰带(封印) 1
+  TAKE 雷蛛毒囊 1
+  GIVE 通云腰带 1
+SENDMSG 0 ㄑ系统：恭喜：[<$USERNAME>]：你看到我就激动！成功解封来自雷炎洞穴的封印装备，他将成为此神器的主人!
+SENDMSG 0 ㄑ系统：如果你也有来自雷炎的封印装备，请来英雄酒馆内“鉴宝散人”处为你服务!
+  break
+#if
+  checkitem 通云道靴(封印) 1
+  checkitem 雷蛛毒囊 1
+#act
+  TAKE 通云道靴(封印) 1
+  TAKE 雷蛛毒囊 1
+  GIVE 通云道靴 1
+SENDMSG 0 ㄑ系统：恭喜：[<$USERNAME>]：你看到我就激动！成功解封来自雷炎洞穴的封印装备，他将成为此神器的主人!
+SENDMSG 0 ㄑ系统：如果你也有来自雷炎的封印装备，请来英雄酒馆内“鉴宝散人”处为你服务!
+  break
+#elsesay
+你没有对应的雷炎封印首饰或雷蛛毒囊
+
+
+
+
+
+[@gongxi]
+恭喜你。成为了此神器的主人\ \
+<谢谢，我明白了/@main>
+
+[@shibai]
+很可惜，鉴定失败了\ \
+<谢谢，我明白了/@main>
+
+[@jieba]
+#if
+  checkitem 狂雷战盔(封印) 1
+  checkitem 火龙凭证 1
+#act
+  goto @z1
+  break
+#if
+  checkitem 狂雷项链(封印) 1
+  checkitem 火龙凭证 1
+#act
+  goto @z2
+  break
+#if
+  checkitem 狂雷战戒(封印) 1
+  checkitem 火龙凭证 1
+#act
+  goto @z3
+  break
+#if
+  checkitem 狂雷护腕(封印) 1
+  checkitem 火龙凭证 1
+#act
+  goto @z4
+  break
+#if
+  checkitem 狂雷腰带(封印) 1
+  checkitem 火龙凭证 1
+#act
+  goto @z5
+  break
+#if
+  checkitem 狂雷战靴(封印) 1
+  checkitem 火龙凭证 1
+#act
+  goto @z6
+  break
+#if
+  checkitem 逆火魔盔(封印) 1
+  checkitem 火龙凭证 1
+#act
+  goto @f1
+  break
+#if
+  checkitem 逆火项链(封印) 1
+  checkitem 火龙凭证 1
+#act
+  goto @f2
+  break
+#if
+  checkitem 逆火魔戒(封印) 1
+  checkitem 火龙凭证 1
+#act
+  goto @f3
+  break
+#if
+  checkitem 逆火护腕(封印) 1
+  checkitem 火龙凭证 1
+#act
+  goto @f4
+  break
+#if
+  checkitem 逆火腰带(封印) 1
+  checkitem 火龙凭证 1
+#act
+  goto @f5
+  break
+#if
+  checkitem 逆火魔靴(封印) 1
+  checkitem 火龙凭证 1
+#act
+  goto @f6
+  break
+#if
+  checkitem 通云道盔(封印) 1
+  checkitem 火龙凭证 1
+#act
+  goto @d1
+  break
+#if
+  checkitem 通云项链(封印) 1
+  checkitem 火龙凭证 1
+#act
+  goto @d2
+  break
+#if
+  checkitem 通云道戒(封印) 1
+  checkitem 火龙凭证 1
+#act
+  goto @d3
+  break
+#if
+  checkitem 通云护腕(封印) 1
+  checkitem 火龙凭证 1
+#act
+  goto @d4
+  break
+#if
+  checkitem 通云腰带(封印) 1
+  checkitem 火龙凭证 1
+#act
+  goto @d5
+  break
+#if
+  checkitem 通云道靴(封印) 1
+  checkitem 火龙凭证 1
+#act
+  goto @d6
+  break
+#elsesay
+你没有对应的雷炎封印首饰或火龙凭证
+
+[@z1]
+#if
+  random 2
+#act
+  give 狂雷战盔 1
+  take 狂雷战盔(封印) 1
+  take 火龙凭证 1
+SENDMSG 0 ㄑ系统：恭喜：[<$USERNAME>]：你看到我就激动！成功解封来自雷炎洞穴的封印装备，他将成为此神器的主人!
+SENDMSG 0 ㄑ系统：如果你也有来自雷炎的封印装备，请来英雄酒馆内“鉴宝散人”处为你服务!
+  goto @gongxi
+#elseact
+  take 狂雷战盔(封印) 1
+  take 火龙凭证 1
+  goto @shibai
+[@z2]
+#if
+  random 2
+#act
+  give 狂雷项链 1
+  take 狂雷项链(封印) 1
+  take 火龙凭证 1
+SENDMSG 0 ㄑ系统：恭喜：[<$USERNAME>]：你看到我就激动！成功解封来自雷炎洞穴的封印装备，他将成为此神器的主人!
+SENDMSG 0 ㄑ系统：如果你也有来自雷炎的封印装备，请来英雄酒馆内“鉴宝散人”处为你服务!
+  goto @gongxi
+#elseact
+  take 狂雷项链(封印) 1
+  take 火龙凭证 1
+  goto @shibai
+[@z3]
+#if
+  random 2
+#act
+  give 狂雷战戒 1
+  take 狂雷战戒(封印) 1
+  take 火龙凭证 1
+SENDMSG 0 ㄑ系统：恭喜：[<$USERNAME>]：你看到我就激动！成功解封来自雷炎洞穴的封印装备，他将成为此神器的主人!
+SENDMSG 0 ㄑ系统：如果你也有来自雷炎的封印装备，请来英雄酒馆内“鉴宝散人”处为你服务!
+  goto @gongxi
+#elseact
+  take 狂雷战戒(封印) 1
+  take 火龙凭证 1
+  goto @shibai
+[@z4]
+#if
+  random 2
+#act
+  give 狂雷护腕 1
+  take 狂雷护腕(封印) 1
+  take 火龙凭证 1
+SENDMSG 0 ㄑ系统：恭喜：[<$USERNAME>]：你看到我就激动！成功解封来自雷炎洞穴的封印装备，他将成为此神器的主人!
+SENDMSG 0 ㄑ系统：如果你也有来自雷炎的封印装备，请来英雄酒馆内“鉴宝散人”处为你服务!
+  goto @gongxi
+#elseact
+  take 狂雷护腕(封印) 1
+  take 火龙凭证 1
+  goto @shibai
+[@z5]
+#if
+  random 2
+#act
+  give 狂雷腰带 1
+  take 狂雷腰带(封印) 1
+  take 火龙凭证 1
+SENDMSG 0 ㄑ系统：恭喜：[<$USERNAME>]：你看到我就激动！成功解封来自雷炎洞穴的封印装备，他将成为此神器的主人!
+SENDMSG 0 ㄑ系统：如果你也有来自雷炎的封印装备，请来英雄酒馆内“鉴宝散人”处为你服务!
+  goto @gongxi
+#elseact
+  take 狂雷腰带(封印) 1
+  take 火龙凭证 1
+  goto @shibai
+[@z6]
+#if
+  random 2
+#act
+  give 狂雷战靴 1
+  take 狂雷战靴(封印) 1
+  take 火龙凭证 1
+SENDMSG 0 ㄑ系统：恭喜：[<$USERNAME>]：你看到我就激动！成功解封来自雷炎洞穴的封印装备，他将成为此神器的主人!
+SENDMSG 0 ㄑ系统：如果你也有来自雷炎的封印装备，请来英雄酒馆内“鉴宝散人”处为你服务!
+  goto @gongxi
+#elseact
+  take 狂雷战靴(封印) 1
+  take 火龙凭证 1
+  goto @shibai
+
+[@f1]
+#if
+  random 2
+#act
+  give 逆火魔盔 1
+  take 逆火魔盔(封印) 1
+  take 火龙凭证 1
+SENDMSG 0 ㄑ系统：恭喜：[<$USERNAME>]：你看到我就激动！成功解封来自雷炎洞穴的封印装备，他将成为此神器的主人!
+SENDMSG 0 ㄑ系统：如果你也有来自雷炎的封印装备，请来英雄酒馆内“鉴宝散人”处为你服务!
+  goto @gongxi
+#elseact
+  take 逆火魔盔(封印) 1
+  take 火龙凭证 1
+  goto @shibai
+[@f2]
+#if
+  random 2
+#act
+  give 逆火项链 1
+  take 逆火项链(封印) 1
+  take 火龙凭证 1
+SENDMSG 0 ㄑ系统：恭喜：[<$USERNAME>]：你看到我就激动！成功解封来自雷炎洞穴的封印装备，他将成为此神器的主人!
+SENDMSG 0 ㄑ系统：如果你也有来自雷炎的封印装备，请来英雄酒馆内“鉴宝散人”处为你服务!
+  goto @gongxi
+#elseact
+  take 逆火项链(封印) 1
+  take 火龙凭证 1
+  goto @shibai
+[@f3]
+#if
+  random 2
+#act
+  give 逆火魔戒 1
+  take 逆火魔戒(封印) 1
+  take 火龙凭证 1
+SENDMSG 0 ㄑ系统：恭喜：[<$USERNAME>]：你看到我就激动！成功解封来自雷炎洞穴的封印装备，他将成为此神器的主人!
+SENDMSG 0 ㄑ系统：如果你也有来自雷炎的封印装备，请来英雄酒馆内“鉴宝散人”处为你服务!
+  goto @gongxi
+#elseact
+  take 逆火魔戒(封印) 1
+  take 火龙凭证 1
+  goto @shibai
+[@f4]
+#if
+  random 2
+#act
+  give 逆火护腕 1
+  take 逆火护腕(封印) 1
+  take 火龙凭证 1
+SENDMSG 0 ㄑ系统：恭喜：[<$USERNAME>]：你看到我就激动！成功解封来自雷炎洞穴的封印装备，他将成为此神器的主人!
+SENDMSG 0 ㄑ系统：如果你也有来自雷炎的封印装备，请来英雄酒馆内“鉴宝散人”处为你服务!
+  goto @gongxi
+#elseact
+  take 逆火护腕(封印) 1
+  take 火龙凭证 1
+  goto @shibai
+[@f5]
+#if
+  random 2
+#act
+  give 逆火腰带 1
+  take 逆火腰带(封印) 1
+  take 火龙凭证 1
+SENDMSG 0 ㄑ系统：恭喜：[<$USERNAME>]：你看到我就激动！成功解封来自雷炎洞穴的封印装备，他将成为此神器的主人!
+SENDMSG 0 ㄑ系统：如果你也有来自雷炎的封印装备，请来英雄酒馆内“鉴宝散人”处为你服务!
+  goto @gongxi
+#elseact
+  take 逆火腰带(封印) 1
+  take 火龙凭证 1
+  goto @shibai
+[@f6]
+#if
+  random 2
+#act
+  give 逆火魔靴 1
+  take 逆火魔靴(封印) 1
+  take 火龙凭证 1
+SENDMSG 0 ㄑ系统：恭喜：[<$USERNAME>]：你看到我就激动！成功解封来自雷炎洞穴的封印装备，他将成为此神器的主人!
+SENDMSG 0 ㄑ系统：如果你也有来自雷炎的封印装备，请来英雄酒馆内“鉴宝散人”处为你服务!
+  goto @gongxi
+#elseact
+  take 逆火魔靴(封印) 1
+  take 火龙凭证 1
+  goto @shibai
+
+[@d1]
+#if
+  random 2
+#act
+  give 通云道盔 1
+  take 通云道盔(封印) 1
+  take 火龙凭证 1
+SENDMSG 0 ㄑ系统：恭喜：[<$USERNAME>]：你看到我就激动！成功解封来自雷炎洞穴的封印装备，他将成为此神器的主人!
+SENDMSG 0 ㄑ系统：如果你也有来自雷炎的封印装备，请来英雄酒馆内“鉴宝散人”处为你服务!
+  goto @gongxi
+#elseact
+  take 通云道盔(封印) 1
+  take 火龙凭证 1
+  goto @shibai
+[@d2]
+#if
+  random 2
+#act
+  give 通云项链 1
+  take 通云项链(封印) 1
+  take 火龙凭证 1
+SENDMSG 0 ㄑ系统：恭喜：[<$USERNAME>]：你看到我就激动！成功解封来自雷炎洞穴的封印装备，他将成为此神器的主人!
+SENDMSG 0 ㄑ系统：如果你也有来自雷炎的封印装备，请来英雄酒馆内“鉴宝散人”处为你服务!
+  goto @gongxi
+#elseact
+  take 通云项链(封印) 1
+  take 火龙凭证 1
+  goto @shibai
+[@d3]
+#if
+  random 2
+#act
+  give 通云道戒 1
+  take 通云道戒(封印) 1
+  take 火龙凭证 1
+SENDMSG 0 ㄑ系统：恭喜：[<$USERNAME>]：你看到我就激动！成功解封来自雷炎洞穴的封印装备，他将成为此神器的主人!
+SENDMSG 0 ㄑ系统：如果你也有来自雷炎的封印装备，请来英雄酒馆内“鉴宝散人”处为你服务!
+  goto @gongxi
+#elseact
+  take 通云道戒(封印) 1
+  take 火龙凭证 1
+  goto @shibai
+[@d4]
+#if
+  random 2
+#act
+  give 通云护腕 1
+  take 通云护腕(封印) 1
+  take 火龙凭证 1
+SENDMSG 0 ㄑ系统：恭喜：[<$USERNAME>]：你看到我就激动！成功解封来自雷炎洞穴的封印装备，他将成为此神器的主人!
+SENDMSG 0 ㄑ系统：如果你也有来自雷炎的封印装备，请来英雄酒馆内“鉴宝散人”处为你服务!
+  goto @gongxi
+#elseact
+  take 通云护腕(封印) 1
+  take 火龙凭证 1
+  goto @shibai
+[@d5]
+#if
+  random 2
+#act
+  give 通云腰带 1
+  take 通云腰带(封印) 1
+  take 火龙凭证 1
+SENDMSG 0 ㄑ系统：恭喜：[<$USERNAME>]：你看到我就激动！成功解封来自雷炎洞穴的封印装备，他将成为此神器的主人!
+SENDMSG 0 ㄑ系统：如果你也有来自雷炎的封印装备，请来英雄酒馆内“鉴宝散人”处为你服务!
+  goto @gongxi
+#elseact
+  take 通云腰带(封印) 1
+  take 火龙凭证 1
+  goto @shibai
+[@d6]
+#if
+  random 2
+#act
+  give 通云道靴 1
+  take 通云道靴(封印) 1
+  take 火龙凭证 1
+  SENDMSG 0 ㄑ系统：恭喜：[<$USERNAME>]：你看到我就激动！成功解封来自雷炎洞穴的封印装备，他将成为此神器的主人!
+  SENDMSG 0 ㄑ系统：如果你也有来自雷炎的封印装备，请来英雄酒馆内“鉴宝散人”处为你服务!
+  goto @gongxi
+#elseact
+  take 通云道靴(封印) 1
+  take 火龙凭证 1
+  goto @shibai

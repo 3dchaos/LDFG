@@ -1,0 +1,124 @@
+[@新探测]
+{
+#SAY
+你需要获取什么信息？\
+<帮我找人/@找人>\
+<帮我找怪/@找怪>\
+<不需要/@exit>\
+
+[@找人]
+#IF
+#SAY
+请输入你要找的人的名字！\
+<INPUTTEXT:7:10:10:240:24:193:230:246:0:30:输入不正确:请输入要查询的玩家名字:159> \ \
+<text:确定:10:6:7/@查询该玩家> \
+<text:返回:10:16/@新探测>\
+[@查询该玩家]
+#IF
+CHECKITEMW  探测项链 1 
+#ACT
+Gmexecute 作废探测 <$NPCINPUT(7)>
+ChangeItemDura 3 - 1000
+updateitem 3
+SENDMSG 5 探测道具已扣除持久。
+GOTO @回收探测
+#ELSEACT
+MESSAGEBOX 需要佩戴探测项链才能执行该命令！
+BREAK
+
+[@回收探测]
+#IF
+CheckItemDura 3 < 1000 0
+#ACT
+TakePosW 3
+SENDMSG 5 探测道具消失
+
+[@找怪]
+#IF
+CHECKITEMW  探测项链 1 
+#ACT
+GOTO @找怪1
+#ELSEACT
+MESSAGEBOX 需要佩戴探测项链才能执行该命令！
+BREAK
+
+[@找怪1]
+#ACT
+mov S$触龙神坐标 未知
+mov S$沃玛教主坐标 未知
+mov S$祖玛教主坐标 未知
+mov S$赤月恶魔坐标 未知
+mov S$虹魔教主坐标 未知
+mov S$黄泉教主坐标 未知
+mov S$牛魔王坐标 未知
+mov S$米尔皇帝坐标 未知
+mov S$魔龙教主坐标 未知
+;SENDMSG 6 初始化完毕
+
+#IF
+FindMonPoint D606 触龙神 P1 P2
+#ACT
+mov S$触龙神坐标 在死亡棺材的<$STR(P1)>,<$STR(P2)>
+
+#IF
+FindMonPoint D024 沃玛教主 P3 P4
+#ACT
+mov S$沃玛教主坐标 在沃玛寺庙的<$STR(P3)>,<$STR(P4)>
+
+#IF
+FindMonPoint D515 祖玛教主 P5 P6
+#ACT
+mov S$祖玛教主坐标 在祖玛教主之家的<$STR(P5)>,<$STR(P6)>
+
+#IF
+FindMonPoint D10062 赤月恶魔 P7 P8
+#ACT
+mov S$赤月恶魔坐标 在赤月魔穴的<$STR(P7)>,<$STR(P8)>
+
+#IF
+FindMonPoint D2013 虹魔教主 P9 P10
+#ACT
+mov S$虹魔教主坐标 在封魔殿的<$STR(P9)>,<$STR(P10)>
+
+#OR
+FindMonPoint D2067 黄泉教主 P11 P12
+FindMonPoint D2067 黄泉教主0 P11 P12
+#ACT
+mov S$黄泉教主坐标 在骨魔洞五层的<$STR(P11)>,<$STR(P12)>
+
+#IF
+FindMonPoint D2079 牛魔王 P13 P14
+#ACT
+mov S$牛魔王坐标 在牛魔寺庙大厅的<$STR(P13)>,<$STR(P14)>
+
+#IF
+FindMonPoint F004 米尔皇帝 P15 P16
+#ACT
+mov S$米尔皇帝坐标 在奴隶山谷的<$STR(P15)>,<$STR(P16)>
+
+#IF
+FindMonPoint 66 魔龙教主 P17 P18
+#ACT
+mov S$魔龙教主坐标 在魔龙血域的<$STR(P17)>,<$STR(P18)>
+
+#IF
+#ACT
+ChangeItemDura 3 - 1000
+updateitem 3
+GOTO @回收探测
+
+#IF
+#SAY
+触龙神位置<$STR(S$触龙神坐标)>\
+沃玛教主位置<$STR(S$沃玛教主坐标)>\
+祖玛教主位置<$STR(S$祖玛教主坐标)>\
+赤月恶魔位置<$STR(S$赤月恶魔坐标)>\
+虹魔教主位置<$STR(S$虹魔教主坐标)>\
+黄泉教主位置<$STR(S$黄泉教主坐标)>\
+牛魔王位置<$STR(S$牛魔王坐标)>\
+米尔皇帝位置<$STR(S$米尔皇帝坐标)>\
+魔龙教主位置<$STR(S$魔龙教主坐标)>\
+<返回/@新探测>\
+#ACT
+SENDMSG 5 探测道具已扣除持久。
+}

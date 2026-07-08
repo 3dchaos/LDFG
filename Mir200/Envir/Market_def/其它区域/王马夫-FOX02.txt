@@ -1,0 +1,118 @@
+[@main]
+哈哈，我从小就生活在这里了。\
+我曾经骑着我那匹心爱的马，去过很多地方，\
+见过很多世面，我可以帮你提升坐骑和盾牌。\
+相同的坐骑可以升级更高级的坐骑。\
+相同的盾牌也可以升级更高级的盾牌。\ \
+
+<坐骑升级/@坐骑升级>\
+<盾牌升级/@盾牌升级>\
+;<维修盾牌/@维修盾牌>需要100灵符\
+;<维修马牌/@维修马牌>需要100灵符\
+
+<退出/@exit>\
+
+[@维修马牌]
+#if
+CHECKUSEITEM 15
+#ACT
+MOV S$马牌名 <$HORSE>
+
+#ELSEACT
+MESSAGEBOX 你没有佩戴马牌名！
+BREAK
+
+#IF
+LARGE <$GAMEGIRD> 99
+#ACT
+GAMEGIRD - 100
+TakePosW 15
+GIVE <$STR(S$马牌名)> 1
+TakeOnItem  <$STR(S$马牌名)> 15
+SENDMSG 6 你的马牌已经修复完毕！
+#ELSEACT
+MESSAGEBOX 需要100灵符！
+BREAK
+
+
+[@维修盾牌]
+#if
+CHECKUSEITEM 16
+#ACT
+MOV S$盾牌名 <$SHIELD>
+
+#ELSEACT
+MESSAGEBOX 你没有佩戴盾牌！
+BREAK
+
+#IF
+LARGE <$GAMEGIRD> 99
+#ACT
+GAMEGIRD - 100
+TakePosW 16
+GIVE <$STR(S$盾牌名)> 1
+TakeOnItem  <$STR(S$盾牌名)> 16
+SENDMSG 6 你的盾牌已经修复完毕！
+#ELSEACT
+MESSAGEBOX 需要100灵符！
+BREAK
+
+
+
+
+[@坐骑升级]
+<升级黑鬃马[二品]/@升级马(小红马[一品],黑鬃马[二品],500,2,10)>支付500灵符，10个狐火二合一\
+<升级赤兔马[三品]/@升级马(黑鬃马[二品],赤兔马[三品],1000,2,10)>支付1000灵符，10个狐火二合一\
+<升级汗血马[四品]/@升级马(赤兔马[三品],汗血马[四品],2000,2,20)>支付2000灵符，20个狐火二合一\
+<升级白龙马[五品]/@升级马(汗血马[四品],白龙马[五品],5000,2,30)>支付5000灵符，30个狐火二合一\
+<升级迎亲马[六品]/@升级马(白龙马[五品],迎亲马[六品],5000,2,40)>支付5000灵符，40个狐火二合一\
+<升级黄金战马[七品]/@升级马(迎亲马[六品],黄金战马[七品],8000,2,50)>支付8000灵符，50个狐火二合一\
+<升级卓越战马[八品]/@升级马(黄金战马[七品],卓越战马[八品],10000,2,60)>支付10000灵符，60个狐火二合一\
+<升级御狐灵兽[极品]/@升级马(卓越战马[八品],御狐灵兽[极品],15000,4,100>支付15000灵符，100个狐火四合一\
+<返回/@main>\
+
+
+[@盾牌升级]
+<升级钢护盾/@升级盾(铁卫盾,钢护盾,500,2,10)>支付500灵符，10个皓月晶石二合一\
+<升级银辉盾/@升级盾(钢护盾,银辉盾,1000,2,20)>支付1000灵符，20个皓月晶石二合一\
+<升级金璇盾/@升级盾(银辉盾,金璇盾,5000,2,50)>支付5000灵符，50个皓月晶石二合一\
+<升级龙纹盾/@升级盾(金璇盾,龙纹盾,20000,4,100)>支付20000灵符，100个皓月晶石四合一\
+<返回/@main>\
+
+[@升级盾]
+#IF
+checkitem <$SCRIPTPARAM1> <$SCRIPTPARAM4>
+#ELSEACT
+MESSAGEBOX 需要<$SCRIPTPARAM4>块<$SCRIPTPARAM1>才能升级<$SCRIPTPARAM2>\
+BREAK
+
+#IF
+checkitem 皓月晶石 <$SCRIPTPARAM5>
+small <$GAMEGIRD> <$SCRIPTPARAM3>
+#ACT
+MESSAGEBOX 你的灵符或皓月晶石不够，快去收集吧！\
+#ELSEACT
+GAMEGIRD - <$SCRIPTPARAM3>
+TAKE 皓月晶石 <$SCRIPTPARAM5>
+TAKE <$SCRIPTPARAM1> <$SCRIPTPARAM4>
+GIVE <$SCRIPTPARAM2> 1
+MESSAGEBOX 你的坐骑升级成功！\
+
+[@升级马]
+#IF
+checkitem <$SCRIPTPARAM1> <$SCRIPTPARAM4>
+#ELSEACT
+MESSAGEBOX 需要<$SCRIPTPARAM4>匹<$SCRIPTPARAM1>才能升级<$SCRIPTPARAM2>\
+BREAK
+
+#IF
+small <$GAMEGIRD> <$SCRIPTPARAM3>
+checkitem 狐火 <$SCRIPTPARAM5>
+#ACT
+MESSAGEBOX 你的灵符或狐火不够，快去收集吧！\
+#ELSEACT
+TAKE 狐火 <$SCRIPTPARAM5>
+GAMEGIRD - <$SCRIPTPARAM3>
+TAKE <$SCRIPTPARAM1> <$SCRIPTPARAM4>
+GIVE <$SCRIPTPARAM2> 1
+MESSAGEBOX 你的坐骑升级成功！\

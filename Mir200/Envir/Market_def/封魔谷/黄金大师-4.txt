@@ -1,0 +1,134 @@
+()
+%100
+[@main]
+你手里有很多黄金?交给我,我可以帮你提升你的装备.\
+可以让你的装备焕然一新!\\
+<解封黑铁头盔/@解封黑铁头盔>20%几率       <黑铁头盔升级极品/@黑铁头盔升级极品>50%几率\
+<炼黄金面具/@黄金面具>需要一根金条和黑铁头盔(极品)20%几率\
+<炼黄金裁决/@黄金裁决>需要一块金砖和裁决之杖20%几率\
+<炼紫金嗜魂法杖/@紫金嗜魂法杖>需要一块金砖和嗜魂法杖20%几率\
+<炼赤金逍遥扇/@赤金逍遥扇>需要一块金砖和逍遥扇20%几率\
+<返回/@main>\
+
+
+[@解封黑铁头盔]
+#IF
+checkitem 黑铁头盔(封印) 1
+#ACT
+
+#ELSEACT
+MESSAGEBOX 没看到你的背包里有封印的黑铁头盔.\\
+BREAK
+
+#IF
+random 5
+#ACT
+TAKE 黑铁头盔(封印) 1
+MESSAGEBOX 幸运降临与你,我成功解封了黑铁头盔\\
+GIVE 黑铁头盔(极品) 1
+#ELSEACT
+TAKE 黑铁头盔(封印) 1
+MESSAGEBOX 抱歉了,解封失败,你的头盔破碎了,下次再来吧\\
+
+[@黑铁头盔升级极品]
+#IF
+checkitem 黑铁头盔 1
+#ACT
+
+#ELSEACT
+MESSAGEBOX 没看到你的背包里的黑铁头盔.\\
+BREAK
+
+#IF
+random 2
+#ACT
+TAKE 黑铁头盔 1
+MESSAGEBOX 幸运降临与你,我成功升级了黑铁头盔\\
+GIVE 黑铁头盔(极品) 1
+#ELSEACT
+TAKE 黑铁头盔 1
+MESSAGEBOX 抱歉了,升级失败,你的头盔破碎了,下次再来吧\\
+
+[@黄金面具]
+#IF
+checkitem 黑铁头盔(极品) 1
+checkitem 金条 1
+#ACT
+#ELSEACT
+MESSAGEBOX 检查一下你是否准备好黑铁头盔(极品)和金条一根.\\
+BREAK
+
+#IF
+random 5
+#ACT
+TAKE 黑铁头盔(极品) 1
+TAKE 金条 1
+MESSAGEBOX 我已经成功熔炼金条升级你的头盔,请收好你的神器.\\
+GIVE 黄金头盔 1
+#ELSEACT
+TAKE 黑铁头盔(极品) 1
+TAKE 金条 1
+MESSAGEBOX 抱歉了,熔炼失败了,金条和头盔都毁坏了.\\
+
+[@黄金裁决]
+#IF
+checkitem 裁决之杖 1
+checkitem 金砖 1
+#ACT
+#ELSEACT
+MESSAGEBOX 检查一下你是否准备好裁决之杖和金砖.\\
+BREAK
+
+#IF
+random 5
+#ACT
+TAKE 裁决之杖 1
+TAKE 金砖 1
+MESSAGEBOX 我已经成功熔炼金条升级你的神兵,你真是幸运啊!\\
+GIVE 黄金裁决 1
+#ELSEACT
+TAKE 裁决之杖 1
+TAKE 金砖 1
+MESSAGEBOX 抱歉了,熔炼失败了,金砖和神兵都毁坏了.\\
+
+[@紫金嗜魂法杖]
+#IF
+checkitem 嗜魂法杖 1
+checkitem 金砖 1
+#ACT
+#ELSEACT
+MESSAGEBOX 检查一下你是否准备好嗜魂法杖和金砖.\\
+BREAK
+
+#IF
+random 5
+#ACT
+TAKE 嗜魂法杖 1
+TAKE 金砖 1
+MESSAGEBOX 我已经成功熔炼金条升级你的神兵,你真是幸运啊!\\
+GIVE 紫金嗜魂法杖 1
+#ELSEACT
+TAKE 嗜魂法杖 1
+TAKE 金砖 1
+MESSAGEBOX 抱歉了,熔炼失败了,金砖和神兵都毁坏了.\\
+
+[@赤金逍遥扇]
+#IF
+checkitem 逍遥扇 1
+checkitem 金砖 1
+#ACT
+#ELSEACT
+MESSAGEBOX 检查一下你是否准备好逍遥扇和金砖.\\
+BREAK
+
+#IF
+random 5
+#ACT
+TAKE 逍遥扇 1
+TAKE 金砖 1
+MESSAGEBOX 我已经成功熔炼金条升级你的神兵,你真是幸运啊!\\
+GIVE 赤金逍遥扇 1
+#ELSEACT
+TAKE 逍遥扇 1
+TAKE 金砖 1
+MESSAGEBOX 抱歉了,熔炼失败了,金砖和神兵都毁坏了.\\

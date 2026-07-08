@@ -1,0 +1,31 @@
+[@main]
+\\
+#IF
+#say
+挖矿可不是一件简单的事，里面有太多未知的怪物\
+从我这里可以雇佣一个护卫，随时护卫你的安全\
+但是它离开矿洞就会死亡，你要买它吗？\\
+<购买挖矿护卫/@护卫>需要50元宝\\
+<退出/@exit>
+
+[@护卫]
+#IF
+small <$GAMEGOLD> 50
+#ACT
+MESSAGEBOX 你的元宝不够50枚！！\
+BREAK
+
+#OR
+CHECKSLAVECOUNT = 1
+CHECKSLAVECOUNT > 1
+#act
+MESSAGEBOX 目前你只能拥有这些仆从了!
+CLOSE
+BREAK
+#if
+#act
+GAMEGOLD - 50
+RECALLMOB 地狱犬 0
+MESSAGEBOX 召唤成功
+SetOnTimer 1 5
+CLOSE

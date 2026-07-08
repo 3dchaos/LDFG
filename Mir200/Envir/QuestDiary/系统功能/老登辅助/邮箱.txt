@@ -1,0 +1,413 @@
+[@邮箱]
+{
+#IF
+CHECKBAGSIZE 1
+#ELSEACT
+MESSAGEBOX 背包至少要有一个空格才可以使用邮箱哦！
+BREAK
+#IF
+	ISADMIN
+	#ACT
+	MOV N$边框色值1 255
+	MOV N$边框色值2 250
+	MOV N$边框色值3 249
+	#ELSEACT
+	MOV N$边框色值1 -1
+	MOV N$边框色值2 -1
+	MOV N$边框色值3 -1
+#if
+#act
+;OpenStorageView 1
+CLOSEBIGDIALOGBOX
+GetListString  ..\QuestDiary\数据文件\邮箱\<$USERNAME>.txt 0 S$内容
+GetTextLineCount ..\QuestDiary\数据文件\邮箱\<$USERNAME>.txt N$邮件数量
+mov S$显示内容
+INC S$显示内容 <Layout:~#B1:185:50:150:230:<$str(N$边框色值1)>>
+INC S$显示内容 <Layout:~#L1:200:50:150:230:<$str(N$边框色值2)>>\
+INC S$显示内容 <Layout:~#T1:235:250:220:30:<$str(N$边框色值3)>>\
+INC S$显示内容 <Layout:~#M1:212:-22:200:30:<$str(N$边框色值1)>>\
+#IF
+EQUAL S$内容
+#ACT
+MOV S$头部文本 你没有信件
+MOV N$头部文本颜色 159
+;显示"空"字
+INC S$显示内容 <Img:#B1~:412:1:33:62>
+INC S$显示内容 <NewLine:#B1~>
+;刷新按钮
+INC S$显示内容 <&ImgEx:#B1~#B2:1:311:312:313:30:165/@邮箱> 
+INC S$显示内容 <NewLine:#B1~>
+INC S$显示内容 <&text:#B2~:刷新:36:12{FCOLOR=251}>
+mov N$寄出按钮高度 151
+mov N$寄出文字高度 164
+#ELSEACT
+mov N$寄出按钮高度 135
+mov N$寄出文字高度 148
+MOV S$头部文本 你有<$STR(N$邮件数量)>件新的信件！
+MOV N$头部文本颜色 250
+;寄件人:道具唯一ID:时间:寄语:道具名字
+EXTRACTSTRING : <$STR(S$内容)> S$寄件人 S$道具唯一ID N$时间戳 S$寄语 S$收到道具名 N$收到物品IDX N$收到物品LOOKS
+GetListString  ..\QuestDiary\数据文件\邮箱\邮箱道具库\<$STR(S$道具唯一ID)>.txt 0 L$物品属性数组
+
+SENDMSG 6 你收到了<$STR(S$寄件人)>寄来的<$STR(S$收到道具名)>
+;UnixToStr <$STR(N1)> S1 0
+UnixToStr <$STR(N$时间戳)> S$时间 0
+TextReplace <$STR(S$时间)> : - S$时间替换 0 0
+INC S$显示内容 <text:#B1~:寄信人：<$STR(S$寄件人)>:0:30/FCOLOR=246>
+INC S$显示内容 <NewLine:#B1~>
+INC S$显示内容 <&text:#B1~:<$STR(S$时间替换)>:0:50/FCOLOR=246>
+
+;显示装备老方法
+;INC S$显示内容 <ITEMBOX:#B1~#B2:2:1:730:45:70:45:45:*:254#信中的道具^251#老登传奇>\
+
+;显示装备
+INC S$显示内容 <looks:<$str(N$收到物品LOOKS)>:215:80:1>\
+
+INC S$显示内容 <NewLine:#B1~>
+INC S$显示内容 <text:#B1~:<$STR(S$收到道具名)>:0:100/FCOLOR=254>
+
+INC S$显示内容 <NewLine:#B1~>
+INC S$显示内容 <text:#B1~:寄语：<$STR(S$寄语)>:0:100/FCOLOR=247>
+INC S$显示内容 <NewLine:#B1~>
+INC S$显示内容 <&ImgEx:#B1~#B3:1:311:312:313:28:165/@收件箱收下> 
+INC S$显示内容 <&text:#B3~:收下:36:12{FCOLOR=251}>
+
+#IF
+#ACT
+;寄出部分
+INC S$显示内容 <text:#L1~:寄给：:0:42/FCOLOR=246>
+INC S$显示内容 <NewLine:#L1~>
+INC S$显示内容 <text:#L1~:寄语：:0:50/FCOLOR=151>
+INC S$显示内容 <NewLine:#L1~>
+INC S$显示内容 <ITEMBOX:#L1~#L2:1:1:730:50:85:45:45:3,4,5,6,7,10,11,12,15,16,19,20,21,22,23,24,25,26,28,55,56,56,58,59,62,63,64,65,11:254#请放入你需要寄出去的道具^251#老登传奇>\
+INC S$显示内容 <NewLine:#L1~>
+INC S$显示内容 <text:#M1~:<$STR(S$头部文本)>:85:0/FCOLOR=<$str(N$头部文本颜色)>> 
+INC S$显示内容 <NewLine:#L1~>
+INC S$显示内容 <text:#L1~:请务必输入正确名字！:20:80/FCOLOR=251> 
+INC S$显示内容 <NewLine:#L1~>
+INC S$显示内容 <text:#T1~:投递一次邮件需要收费100金币哦！|即使人不在线也可以发送哦！:0:0/FCOLOR=247> 
+INC S$显示内容 <NewLine:#L1~>
+;寄出按钮
+INC S$显示内容 <ImgEx:1:311:312:313:378:<$STR(N$寄出按钮高度)>:*/@寄出> 
+;INC S$显示内容 <&ImgEx:#L1~#L3:1:311:312:313:28:165:4,5/@寄出> 
+INC S$显示内容 <text:寄出:317:<$STR(N$寄出文字高度)>{FCOLOR=251}>
+
+
+
+#if
+#act
+OPENMERCHANTBIGDLG 1 411 1 4 0 0 1 516 24 1
+
+#if
+#say
+<INPUTTEXT:4:386:120:80:15:0:103:255:4:20:姓名必须在4-10位长:输入姓名:160>\
+<INPUTTEXT:5:386:130:80:15:0:103:251:0:999:你输入的文字无效:输入寄语:69>\
+
+<$str(S$显示内容)>\
+
+;GiveOnItem 装备位置 物品名称 数量默认写1(数量大于1时只对OK框叠加物品有效) 参数4 参数5 参数6 参数7 参数8 参数9
+
+;物品位置：
+;-1升级框
+;0--29：装备栏和时装栏
+;30-35：首饰盒
+;40-51：神佑袋
+;boxitem0-boxitem7：OK框
+
+;参数4-参数9 参考 GIVE的扩展
+
+[@更新框]
+#ACT
+GiveOnItem boxitem2 <$STR(S$收到道具名)> 1 
+SetUpgradeItem 2
+;SENDMSG 6 绑定成功
+;L$物品属性数组[3] L$物品属性数组[4] L$物品属性数组[5] L$物品属性数组[6] L$物品属性数组[7] L$物品属性数组[8] L$物品属性数组[9] L$物品属性数组[10] L$物品属性数组[11] L$物品属性数组[12] L$物品属性数组[13] L$物品属性数组[14] L$物品属性数组[15] L$物品属性数组[16] L$物品属性数组[17] L$物品属性数组[18] L$物品属性数组[19] L$物品属性数组[20] L$物品属性数组[21] L$物品属性数组[22] L$物品属性数组[23] L$物品属性数组[24] L$物品属性数组[25] L$物品属性数组[26] L$物品属性数组[27]
+MOV N$物品极品起始位置 0
+MOV N$数组起始位置 3
+While N$数组起始位置 < 17
+CHANGEITEMADDVALUE boxitem2 <$STR(N$物品极品起始位置)> = <$STR(L$物品属性数组[<$STR(N$数组起始位置)>])>
+;SENDMSG 5 写入<$STR(N$物品极品起始位置)>的值为<$STR(L$物品属性数组[<$STR(N$数组起始位置)>])>
+Inc N$物品极品起始位置 1
+Inc N$数组起始位置 1
+EndWhile
+MOV N$数组起始位置 17
+MOV N$物品元素起始位置 0
+While N$数组起始位置 < 44
+SetNewItemValue boxitem2 <$STR(N$物品元素起始位置)> = <$STR(L$物品属性数组[<$STR(N$数组起始位置)>])>
+;SetNewItemValue 1 19 = 20
+;SENDMSG 5 写入<$STR(N$物品元素起始位置)>的值为<$STR(L$物品属性数组[<$STR(N$数组起始位置)>])>
+Inc N$物品元素起始位置 1
+Inc N$数组起始位置 1
+EndWhile
+#IF
+EQUAL  <$STR(L$物品属性数组[44])>
+#ELSEACT
+SetItemFrom boxitem2 0 <$STR(L$物品属性数组[44])>
+#IF
+EQUAL  <$STR(L$物品属性数组[45])>
+#ELSEACT
+SetItemFrom boxitem2 1 <$STR(L$物品属性数组[45])>
+#IF
+EQUAL  <$STR(L$物品属性数组[46])>
+#ELSEACT
+SetItemFrom boxitem2 2 <$STR(L$物品属性数组[46])>
+#IF
+EQUAL  <$STR(L$物品属性数组[47])>
+#ELSEACT
+SetItemFrom boxitem2 3 <$STR(L$物品属性数组[47])>
+;SetItemFrom boxitem2 4 <$STR(L$物品属性数组[48])>
+UpdateItem boxitem2
+SetCustomItemText boxitem2 <$STR(L$物品属性数组[49])>
+SetCustomItemTextColor boxitem2 254
+
+[@收件箱收下]
+#OR
+NOT EQUAL S$内容
+CHECKBAGSIZE 1
+#ACT
+DelTextListLine ..\QuestDiary\数据文件\邮箱\<$USERNAME>.txt 0 0
+GOTO @收取邮箱道具
+GOTO @邮箱
+BREAK
+#ELSEACT
+MESSAGEBOX 错误！请确保你收到邮件和有背包空格
+
+[@收取邮箱道具]
+#IF
+#ACT
+give <$STR(S$收到道具名)> 1
+LINKGIVEITEM
+;绑定下面的操作只对绑定的装备生效
+
+MOV N$物品极品起始位置 0
+MOV N$数组起始位置 3
+While N$数组起始位置 < 17
+CHANGEITEMADDVALUE -1 <$STR(N$物品极品起始位置)> = <$STR(L$物品属性数组[<$STR(N$数组起始位置)>])>
+;SENDMSG 5 写入<$STR(N$物品极品起始位置)>的值为<$STR(L$物品属性数组[<$STR(N$数组起始位置)>])>
+Inc N$物品极品起始位置 1
+Inc N$数组起始位置 1
+EndWhile
+MOV N$数组起始位置 17
+MOV N$物品元素起始位置 0
+While N$数组起始位置 < 44
+SetNewItemValue -1 <$STR(N$物品元素起始位置)> = <$STR(L$物品属性数组[<$STR(N$数组起始位置)>])>
+;SetNewItemValue 1 19 = 20
+;SENDMSG 5 写入<$STR(N$物品元素起始位置)>的值为<$STR(L$物品属性数组[<$STR(N$数组起始位置)>])>
+Inc N$物品元素起始位置 1
+Inc N$数组起始位置 1
+EndWhile
+#IF
+EQUAL  <$STR(L$物品属性数组[44])>
+#ELSEACT
+SetItemFrom -1 0 <$STR(L$物品属性数组[44])>
+#IF
+EQUAL  <$STR(L$物品属性数组[45])>
+#ELSEACT
+SetItemFrom -1 1 <$STR(L$物品属性数组[45])>
+#IF
+EQUAL  <$STR(L$物品属性数组[46])>
+#ELSEACT
+SetItemFrom -1 2 <$STR(L$物品属性数组[46])>
+#IF
+EQUAL  <$STR(L$物品属性数组[47])>
+#ELSEACT
+SetItemFrom -1 3 <$STR(L$物品属性数组[47])>
+;SetItemFrom boxitem2 4 <$STR(L$物品属性数组[48])>
+
+SetCustomItemText -1 <$STR(L$物品属性数组[49])>
+SetCustomItemTextColor -1 254
+
+updateitem -1
+;刷新到客户端
+clearLinkItem
+;解除绑定，不然刷新包裹物品不刷新 break
+
+[@寄出]
+;#ACT
+;SENDMSG 5 4:<$NPCINPUT(4)>,5:<$NPCINPUT(5)>
+#OR
+CheckItemState boxitem1 0
+CheckItemState boxitem1 1
+CheckItemState boxitem1 2
+CheckItemState boxitem1 3
+CheckItemState boxitem1 4
+CheckItemState boxitem1 5
+#ACT
+MESSAGEBOX 该道具已经被绑定无法邮寄
+BREAK
+
+#IF
+EQUAL <$NPCINPUT(4)> <$USERNAME>
+#ACT
+MESSAGEBOX 你怎么能寄给自己呢？
+BREAK
+
+#IF
+EQUAL <$NPCINPUT(4)>
+#ACT
+MESSAGEBOX 你要寄给谁啊？
+BREAK
+
+
+#IF
+CheckContainsText <$BOXITEM[0].NAME_G> [锁定]
+#ACT
+MESSAGEBOX 请解锁后再邮寄哦！
+BREAK
+
+#IF
+CheckBoxItemCount 1
+#ELSEACT
+MESSAGEBOX 请放入要寄出的道具
+BREAK
+#ACT
+MOV L$禁邮道具 <$STR(A31)>
+#if
+CheckVarInList L$禁邮道具 <$BOXITEM[1].NAME>
+#act
+SendMsg 6 <$BOXITEM[1].NAME>不允许邮寄！
+BREAK
+
+#IF
+CHECKGOLD 100
+
+#ACT
+TAKE 金币 100
+#ELSEACT
+MESSAGEBOX 哼哼，你还支付不起邮费呢！
+#IF
+#ACT
+;获取物品IDX
+GetDBItemFieldValue <$BOXITEM[1].NAME> idx <$STR(N$物品IDX)>
+;获取物品LOOKS
+GetDBItemFieldValue <$BOXITEM[1].NAME> looks <$STR(N$物品LOOKS)>
+;组合寄件人信息
+;寄件人:道具唯一ID:时间:寄语:道具名字:IDX:LOOKS
+MOV S$寄件人信息 <$USERNAME>:<$BOXITEM[1].MAKEINDEX>:<$UTCNow>:<$NPCINPUT(5)>:<$BOXITEM[1].NAME>:<$STR(N$物品IDX)>:<$STR(N$物品LOOKS)>
+
+AddTextListEx ..\QuestDiary\数据文件\邮箱\<$NPCINPUT(4)>.txt <$STR(S$寄件人信息)> 
+;开始记录道具数据
+MOV L$道具具体数据 []
+;道具持久
+INC L$道具具体数据 <$BOXITEM[1].DURA>
+;道具最大持久
+INC L$道具具体数据 <$BOXITEM[1].DURAMAX>
+;星星数
+INC L$道具具体数据 <$BOXITEM[1].UPGRADECOUNT>
+;极品+元素
+GETITEMADDVALUE boxitem1 0 N$装备临时
+INC L$道具具体数据 <$STR(N$装备临时)>
+GETITEMADDVALUE boxitem1 1 N$装备临时
+INC L$道具具体数据 <$STR(N$装备临时)>
+GETITEMADDVALUE boxitem1 2 N$装备临时
+INC L$道具具体数据 <$STR(N$装备临时)>
+GETITEMADDVALUE boxitem1 3 N$装备临时
+INC L$道具具体数据 <$STR(N$装备临时)>
+GETITEMADDVALUE boxitem1 4 N$装备临时
+INC L$道具具体数据 <$STR(N$装备临时)>
+GETITEMADDVALUE boxitem1 5 N$装备临时
+INC L$道具具体数据 <$STR(N$装备临时)>
+GETITEMADDVALUE boxitem1 6 N$装备临时
+INC L$道具具体数据 <$STR(N$装备临时)>
+GETITEMADDVALUE boxitem1 7 N$装备临时
+INC L$道具具体数据 <$STR(N$装备临时)>
+GETITEMADDVALUE boxitem1 8 N$装备临时
+INC L$道具具体数据 <$STR(N$装备临时)>
+GETITEMADDVALUE boxitem1 9 N$装备临时
+INC L$道具具体数据 <$STR(N$装备临时)>
+GETITEMADDVALUE boxitem1 10 N$装备临时
+INC L$道具具体数据 <$STR(N$装备临时)>
+GETITEMADDVALUE boxitem1 11 N$装备临时
+INC L$道具具体数据 <$STR(N$装备临时)>
+GETITEMADDVALUE boxitem1 12 N$装备临时
+INC L$道具具体数据 <$STR(N$装备临时)>
+GETITEMADDVALUE boxitem1 13 N$装备临时
+INC L$道具具体数据 <$STR(N$装备临时)>
+GETNEWITEMVALUE boxitem1 0 N$装备临时
+INC L$道具具体数据 <$STR(N$装备临时)>
+GETNEWITEMVALUE boxitem1 1 N$装备临时
+INC L$道具具体数据 <$STR(N$装备临时)>
+GETNEWITEMVALUE boxitem1 2 N$装备临时
+INC L$道具具体数据 <$STR(N$装备临时)>
+GETNEWITEMVALUE boxitem1 3 N$装备临时
+INC L$道具具体数据 <$STR(N$装备临时)>
+GETNEWITEMVALUE boxitem1 4 N$装备临时
+INC L$道具具体数据 <$STR(N$装备临时)>
+GETNEWITEMVALUE boxitem1 5 N$装备临时
+INC L$道具具体数据 <$STR(N$装备临时)>
+GETNEWITEMVALUE boxitem1 6 N$装备临时
+INC L$道具具体数据 <$STR(N$装备临时)>
+GETNEWITEMVALUE boxitem1 7 N$装备临时
+INC L$道具具体数据 <$STR(N$装备临时)>
+GETNEWITEMVALUE boxitem1 8 N$装备临时
+INC L$道具具体数据 <$STR(N$装备临时)>
+GETNEWITEMVALUE boxitem1 9 N$装备临时
+INC L$道具具体数据 <$STR(N$装备临时)>
+GETNEWITEMVALUE boxitem1 10 N$装备临时
+INC L$道具具体数据 <$STR(N$装备临时)>
+GETNEWITEMVALUE boxitem1 11 N$装备临时
+INC L$道具具体数据 <$STR(N$装备临时)>
+GETNEWITEMVALUE boxitem1 12 N$装备临时
+INC L$道具具体数据 <$STR(N$装备临时)>
+GETNEWITEMVALUE boxitem1 13 N$装备临时
+INC L$道具具体数据 <$STR(N$装备临时)>
+GETNEWITEMVALUE boxitem1 14 N$装备临时
+INC L$道具具体数据 <$STR(N$装备临时)>
+GETNEWITEMVALUE boxitem1 15 N$装备临时
+INC L$道具具体数据 <$STR(N$装备临时)>
+GETNEWITEMVALUE boxitem1 16 N$装备临时
+INC L$道具具体数据 <$STR(N$装备临时)>
+GETNEWITEMVALUE boxitem1 17 N$装备临时
+INC L$道具具体数据 <$STR(N$装备临时)>
+GETNEWITEMVALUE boxitem1 18 N$装备临时
+INC L$道具具体数据 <$STR(N$装备临时)>
+GETNEWITEMVALUE boxitem1 19 N$装备临时
+INC L$道具具体数据 <$STR(N$装备临时)>
+GETNEWITEMVALUE boxitem1 20 N$装备临时
+INC L$道具具体数据 <$STR(N$装备临时)>
+GETNEWITEMVALUE boxitem1 21 N$装备临时
+INC L$道具具体数据 <$STR(N$装备临时)>
+GETNEWITEMVALUE boxitem1 22 N$装备临时
+INC L$道具具体数据 <$STR(N$装备临时)>
+GETNEWITEMVALUE boxitem1 23 N$装备临时
+INC L$道具具体数据 <$STR(N$装备临时)>
+GETNEWITEMVALUE boxitem1 24 N$装备临时
+INC L$道具具体数据 <$STR(N$装备临时)>
+GETNEWITEMVALUE boxitem1 25 N$装备临时
+INC L$道具具体数据 <$STR(N$装备临时)>
+GETNEWITEMVALUE boxitem1 26 N$装备临时
+INC L$道具具体数据 <$STR(N$装备临时)>
+;数组42
+;来源物品来源
+MOV S$装备临时 
+GetItemFrom boxitem1 0 S$装备临时
+INC L$道具具体数据 <$STR(S$装备临时)>
+;来源地图
+MOV S$装备临时 
+GetItemFrom boxitem1 1 S$装备临时
+INC L$道具具体数据 <$STR(S$装备临时)>
+
+;来源杀死怪物
+MOV S$装备临时 
+GetItemFrom boxitem1 2 S$装备临时
+INC L$道具具体数据 <$STR(S$装备临时)>
+
+;来源经手人
+MOV S$装备临时 
+GetItemFrom boxitem1 3 S$装备临时
+INC L$道具具体数据 <$STR(S$装备临时)>
+;来源时间
+MOV S$装备临时 
+GetItemFrom boxitem1 4 S$装备临时
+INC L$道具具体数据 <$STR(S$装备临时)>
+;易碎
+GetCustomItemText boxitem1 S$装备临时
+INC L$道具具体数据 <$STR(S$装备临时)>
+;写入文件
+AddTextListEx ..\QuestDiary\数据文件\邮箱\邮箱道具库\<$BOXITEM[1].MAKEINDEX>.txt <$STR(L$道具具体数据)> 0
+DelBoxItem 1
+MOV A689 <$NPCINPUT(4)>
+Gmexecute 开始提问 @邮件送达
+MESSAGEBOX 恭喜！！邮件已经发送给他了。
+}
+

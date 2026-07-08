@@ -1,0 +1,571 @@
+(@@sendmsg @storage @PlayOffline @getback @buy @sell @repair @s_repair @@offlinemsg @storage @getback @getnextpage @getPreviouspage @@INPUTINTEGER @@InPutString )
+[@ButtonClick2]
+#ACT
+#CALL [系统功能\老登辅助\辅助.txt] @辅助功能
+break
+
+[@MapEventWalk]
+#IF
+#ACT
+#CALL [系统功能\老登辅助\优化卡帧.txt] @优化卡帧
+
+;界面UI第一个按钮
+;背包按钮
+
+;组队触发
+[@GroupCreate]
+#IF
+#ACT
+mov T11 <$TEAM1>
+mov T12 <$TEAM2>
+mov T13 <$TEAM3>
+mov T14 <$TEAM4>
+mov T15 <$TEAM5>
+
+[@CustomButtonClick]
+#IF
+equal <$CustomButtonID> 20
+#ACT
+OpenStorageView 1
+break
+#IF
+equal <$CustomButtonID> 0
+#ACT
+#CALL [系统功能\老登辅助\辅助.txt] @辅助功能
+break
+[@ButtonClick1]
+#IF
+#ACT
+OpenMissionDlg
+
+;聚灵珠吃触发
+[@BeginUseExpSpiritBeads]
+#if
+CHECKLEVELEX < 35
+#act
+StopUseExpSpiritBeads
+SENDMSG 6 等级大于35级才可使用聚灵珠
+;#if
+;equal <$UseItemFrom> 1
+;#ELSEACT
+;StopUseExpSpiritBeads
+;	MESSAGEBOX 此道具只允许英雄使用
+;	BREAK
+
+[@火龙]
+#IF
+CHECK [422] 1
+#ELSEACT
+SENDMSG 6 你并不是火龙勇士！不能踏入此地！
+MAPMOVE 0 329 262
+
+[@OnKillMob]
+#ACT
+#CALL [系统功能\老登辅助\杀怪触发.txt] @杀怪触发
+;死亡触发
+[@PlayDie]
+#ACT
+#CALL [系统功能\老登辅助\死亡触发.txt] @死亡触发
+
+;升级触发
+[@PlayLevelUp]
+#ACT
+#CALL [系统功能\活动.txt] @活动
+
+[@云隐宗师消失]
+#IF
+#ACT
+DelNpc 云隐宗师 D2083
+SENDMSG 1 云隐宗师失去了踪迹
+[@ClosedBagItemClick]
+#ACT
+#CALL [系统功能\老登辅助\解锁背包.txt] @解锁背包
+;入包触发
+[@AddBag]
+#IF
+CHECK [97] 1
+#ACT
+#CALL [系统功能\老登辅助\普通存仓.txt] @普通存仓入包触发
+
+
+#IF
+CHECK [99] 1
+#ACT
+#CALL [系统功能\老登辅助\极品存仓.txt] @极品存仓入包触发
+
+#IF
+#ACT
+#CALL [系统功能\老登辅助\入包回收.txt] @入包回收
+;小地图点击邮件
+[@MinMapCustomButtonClick2]
+#ACT
+#CALL [系统功能\老登辅助\邮箱.txt] @邮箱
+
+;挂机无敌判断
+[@Attack]
+
+#ACT
+#CALL [系统功能\老登辅助\攻击触发.txt] @攻击触发
+
+[@MagicAttack]
+#ACT
+#CALL [系统功能\老登辅助\攻击触发.txt] @攻击触发
+[@SlaveAttackDamage]
+#ACT
+#CALL [系统功能\老登辅助\攻击触发.txt] @攻击触发
+
+;宝石升级出发触发
+[@ItemUpgrade]
+#OR
+CheckUpgradeItemName 1 初级攻击宝石
+CheckUpgradeItemName 1 初级魔法宝石
+CheckUpgradeItemName 1 初级精神力宝石
+CheckUpgradeItemName 1 初级防御宝石
+CheckUpgradeItemName 1 初级魔御宝石
+#ACT
+#CALL [系统功能\老登辅助\宝石升级.txt] @低级宝石升级
+BREAK
+
+#OR
+CheckUpgradeItemName 1 中级攻击宝石
+CheckUpgradeItemName 1 中级魔法宝石
+CheckUpgradeItemName 1 中级精神力宝石
+CheckUpgradeItemName 1 中级防御宝石
+CheckUpgradeItemName 1 中级魔御宝石
+#ACT
+#CALL [系统功能\老登辅助\宝石升级.txt] @中级宝石升级
+BREAK
+
+#OR
+CheckUpgradeItemName 1 高级攻击宝石
+CheckUpgradeItemName 1 高级魔法宝石
+CheckUpgradeItemName 1 高级精神力宝石
+CheckUpgradeItemName 1 高级防御宝石
+CheckUpgradeItemName 1 高级魔御宝石
+#ACT
+#CALL [系统功能\老登辅助\宝石升级.txt] @高级宝石升级
+BREAK
+
+
+;人物被物理攻击触发
+[@Struck]
+#IF
+CHECKCURRTARGETRACE = 206
+#ACT
+GOTO @蛛网效果
+
+#IF
+CHECKCURRTARGETRACE = 124
+#ACT
+GOTO @麻痹效果
+
+;人物被魔法攻击触发
+[@MagicStruck]
+#IF
+CHECKCURRTARGETRACE = 124
+#ACT
+SENDMSG 7 被魔法攻击
+[@蛛网效果]
+#if
+random 20
+#act
+ChangeState 3 5
+BREAK
+
+[@麻痹效果]
+#if
+random 50
+#act
+ChangeState 1 5
+BREAK
+
+;地图事件
+
+[@经验密境]
+#IF
+CHECK [4] 0
+#ACT
+map 1
+SENDMSG 7 你没有经验密境许可！不能踏入！
+SENDMSG 7 你没有经验密境许可！不能踏入！
+SENDMSG 7 你没有经验密镜许可！不能踏入！
+
+
+
+;学习心灵召唤
+[@StdModeFunc50]
+#IF
+#ACT
+ADDSKILL 心灵召唤 0
+SENDMSG 7 学习成功
+
+[@StdModeFunc51]
+#IF
+CHECKMAPNAME D2083
+#ELSEACT
+GIVE 火龙召唤令 1
+SENDMSG 7 请在火龙神殿使用！
+BREAK
+
+#if
+CheckMapSameMonCount D2083 火龙教主 < 1
+#ACT
+MonGenEx D2083 82 44 火龙教主 0 1 251
+SENDMSG 1 火龙召唤令被使用，火龙教主回应了召唤！
+Break
+#ELSEACT
+SENDMSG 1 神殿的火龙教主还未被消灭，你的召唤令将失效！
+; 好友召唤令
+[@StdModeFunc53]
+#ACT
+GIVE 好友召唤令 1
+#IF
+
+;真视道具
+[@StdModeFunc54]
+#ACT
+#CALL [系统功能\老登辅助\真视道具1.txt] @真视道具1
+
+[@StdModeFunc55]
+#ACT
+#CALL [系统功能\老登辅助\真视道具2.txt] @真视道具2
+;上下马脚本命令：
+[@UpOrDownHorse]
+#if
+#act
+UpOrDownHorse
+Sendmsg 7 OK！
+break
+[@UPHORSE]
+#CALL [系统功能\老登辅助\骑马触发.txt] @骑马触发
+
+
+[@DOWNHORSE]
+#if
+#act
+CHANGESPEED 1 1
+Sendmsg 7 您的坐骑成功被收回！
+break
+
+[@StdModeFunc52]
+#IF
+#ACT
+GIVE 装备转移宝盒 1
+#IF
+CHECKLEVELEX < 44
+#ACT
+MESSAGEBOX 先升级到45级再来吧！
+#ELSEACT
+#CALL [系统功能\装备转移.TXT] @装备转移
+
+
+BREAK
+
+[@UserCmd0]
+#If
+CHECKUSEITEM  12
+COMPARETEXT <$CHARM> 千里传音(小)
+#ELSEACT
+MESSAGEBOX 请佩戴千里传音
+BREAK
+
+#If
+CheckItemDura 12 < 1000 0
+#ACT
+MESSAGEBOX 道具使用次数已经用完！
+#ELSEACT
+MOV S1 <$PARAMS>
+GAMEGOLD - 1
+SENDMSG 0 【千里传音】<$USERNAME>:<$STR(S1)> 255 253 0
+SENDMSG 1 【千里传音】<$USERNAME>:<$STR(S1)> 255 253 0
+SendCenterMsg 180 251 【千里传音】<$USERNAME>:<$STR(S1)> 1 30
+ChangeItemDura 12 - 1000
+
+;探测功能
+[@UserCmd1]
+#ACT
+#CALL [系统功能\老登辅助\探测.txt] @新探测
+
+[@Help]
+#ACT
+#CALL [系统功能\帮助菜单.txt] @帮菜
+
+
+;点开始挂机触发
+[@StartAutoOnline]
+#IF
+CHECKTEXTLIST ..\QuestDiary\系统功能\禁止挂机地图.txt <$MAP>
+#ACT
+SENDMSG 7 本地图禁止使用挂机功能
+BREAK
+
+;不准返回的地图
+#OR
+CHECKMAPNAME hero1
+CHECKMAPNAME hero2
+CHECKMAPNAME D2083
+CHECKMAPNAME hlmg
+CHECKMAPNAME hlyszm
+CHECKMAPNAME yssd
+#ACT
+SET [66] 0
+MOV T16 
+MOV T17
+MOV U0 <$X>
+MOV U1 <$Y>
+#ELSEACT
+;SET [66] 1
+MOV T16 <$MAP>
+MOV T17 <$MapTitle>
+MOV U0 <$X>
+MOV U1 <$Y>
+
+#IF
+#ACT
+#CALL [系统功能\老登辅助\挂机.txt] @挂机功能
+
+
+;点停止挂机触发
+[@StopAutoOnline]
+#ACT
+#CALL [系统功能\老登辅助\停止挂机.txt] @停止挂机
+
+[@QueryMyShopFail]
+#ACT
+MESSAGEBOX 你还没有个人商店，是否创建你的个人商店？\\点击确定创建个人商店。 @创建个人商店 @取消
+
+[@创建个人商店]
+亲爱的玩家你好。这里可以申请开店。\
+你可以把你的物品放到你的店铺里出售，\
+游戏中的玩家可以查询到你要出售的物品。\
+也可以把不用的物品放到店铺的仓库里。\
+点击客户端中“店”就可以进入到你的店铺中,\
+也可以查询其他用户的店铺和物品，\
+可以很方便的把仓库物品和出售的物品相互转移。\
+还可以进行摆摊操作。\
+
+<我要开店(点击输入你喜欢的店铺名称)/@@InputString80>\
+[@取消]
+#ACT
+CLOSE
+[@InputString80]
+#IF
+CHECKMYSHOP
+#ACT
+MESSAGEBOX 你已经有店铺了
+BREAK
+
+#IF
+CHECKSHOPNAME <$STR(S80)>
+#ACT
+MESSAGEBOX <$STR(S80)>店铺名称已经存在，请重新选择一个
+BREAK
+
+#IF
+#ACT
+CREATEMYSHOP <$STR(S80)>
+
+[@CreateMyShopOK]
+#SAY
+你的店铺创建成功
+
+[@CreateMyShopFail]
+#SAY
+你的店铺创建失败
+[@StdModeFunc45]
+#IF
+#ACT
+REPAIRALL
+H.REPAIRALL
+
+[@StdModeFunc43]
+#IF
+CHECKLEVEL 45
+CHECKBAGSIZE 15
+#ACT
+GIVESTATEITEM 冰核 1 1 0 1 1 1 1 3
+GIVESTATEITEM 火龙召唤令 1 1 0 1 1 1 1 3
+GIVESTATEITEM 焰魂龙纹 1 1 0 1 1 1 1 3
+GIVESTATEITEM 先驱者遗骸 1 1 0 1 1 1 1 3
+GIVESTATEITEM 高级防御宝石 1 1 0 1 1 1 1 1
+GIVESTATEITEM 高级魔御宝石 1 1 0 1 1 1 1 1
+GIVESTATEITEM 高级运气宝石 1 1 0 1 1 1 1 1
+GIVESTATEITEM 顶级宝石 1 1 0 1 1 1 1 1
+GIVESTATEITEM 高级精神力宝石 1 1 0 1 1 1 1 1
+GIVESTATEITEM 高级魔法宝石 1 1 0 1 1 1 1 1
+GIVESTATEITEM 魔血石(大) 1 1 0 1 1 1 1 1
+GIVESTATEITEM 金砖 1 1 0 1 1 1 1 3
+GIVESTATEITEM 装备转移宝盒 1 1 0 1 1 1 1 3
+GIVESTATEITEM 小红马[一品] 1 1 0 1 1 1 1 1
+GIVESTATEITEM 铁卫盾 1 1 0 1 1 1 1 1
+SENDMSG 6 狐月版本礼品，赠送的道具为绑定的，无法交易，修理，丢弃！
+#ELSEACT
+GIVESTATEITEM 老登狐月礼盒 1 1 0 1 1 1 1 1
+MESSAGEBOX 请升级到45级再打开礼包！并留出15个背包空格
+
+
+[@StdModeFunc44]
+#IF
+CHECKLEVEL 40
+#ACT
+GIVESTATEITEM 冰核 1 1 0 1 1 1 1 3
+GIVESTATEITEM 火龙召唤令 1 1 0 1 1 1 1 3
+GIVESTATEITEM 焰魂龙纹 1 1 0 1 1 1 1 3
+GIVESTATEITEM 先驱者遗骸 1 1 0 1 1 1 1 3
+GIVESTATEITEM 高级防御宝石 1 1 0 1 1 1 1 1
+GIVESTATEITEM 高级魔御宝石 1 1 0 1 1 1 1 1
+GIVESTATEITEM 高级运气宝石 1 1 0 1 1 1 1 1
+GIVESTATEITEM 顶级宝石 1 1 0 1 1 1 1 1
+GIVESTATEITEM 高级精神力宝石 1 1 0 1 1 1 1 1
+GIVESTATEITEM 高级魔法宝石 1 1 0 1 1 1 1 1
+GIVESTATEITEM 魔血石(大) 1 1 0 1 1 1 1 1
+GIVESTATEITEM 金砖 1 1 0 1 1 1 1 3
+RECYCFENGHAO ALL
+GIVEFENGHAO 国庆老登 1
+SENDMSG 6 国庆快乐，赠送的道具为绑定的，无法交易丢弃！
+#ELSEACT
+GIVESTATEITEM 老登国庆礼品盒 1 1 0 1 1 1 1 1
+MESSAGEBOX 请升级到40级再打开礼包！
+
+[@StdModeFunc41]
+#IF
+#ACT
+Mov D41 10000000
+changeexp + D41
+
+
+[@StdModeFunc40]
+#IF
+#ACT
+Mov D40 5000000
+changeexp + D40
+
+
+[@StdModeFunc39]
+#IF
+#ACT
+Mov D39 1000000
+changeexp + D39
+
+[@StdModeFunc38]
+#IF
+#ACT
+Mov D38 200000
+changeexp + D38
+
+[@StdModeFunc37]
+#IF
+#ACT
+Mov D37 100000
+changeexp + D37
+
+[@StdModeFunc36]
+#IF
+#ACT
+Mov D36 50000
+changeexp + D36
+
+[@StdModeFunc35]
+#IF
+RANDOM 5
+#ACT
+SetNewItemValue 1 19 + 5
+SENDMSG 7 你的武器永久获得了防冰冻属性！
+#ELSEACT
+SENDMSG 7 无效！
+
+[@StdModeFunc33]
+#IF
+#ACT
+Gmexecute showeffect 76
+KILLMONEXPRATE 1000 3600 1
+SENDMSG 7 你获得了1个小时十倍经验,期间死亡或下线不会失效,重复使用无效!
+
+
+[@StdModeFunc32]
+#IF
+#ACT
+Gmexecute showeffect 76
+KILLMONEXPRATE 500 3600 1
+SENDMSG 7 你获得了1个小时五倍经验,期间死亡或下线不会失效,重复使用无效!
+
+[@StdModeFunc31]
+#IF
+#ACT
+Gmexecute showeffect 76
+KILLMONEXPRATE 300 3600 1
+SENDMSG 7 你获得了1个小时三倍经验,期间死亡或下线不会失效,重复使用无效!
+
+[@StdModeFunc28]
+#IF
+#ACT
+Gmexecute showeffect 76
+KILLMONEXPRATE 200 3600 1
+SENDMSG 7 你获得了1个小时两倍经验,期间死亡或下线不会失效,重复使用无效!
+
+
+[@StdModeFunc30]
+#IF
+CHECKLEVEL 40
+#ACT
+KILLMONEXPRATE 110 3600 1
+SENDMSG 7 你已经40级了，双倍卷轴效果不佳!
+SENDMSG 7 你获得了1小时1.1倍经验,期间死亡或下线不会失效,重复使用无效!
+BREAK
+
+#IF
+CHECKLEVEL 30
+#ACT
+KILLMONEXPRATE 120 3600 1
+SENDMSG 7 你已经30级了，双倍卷轴效果一般!
+SENDMSG 7 你获得了1小时1.2倍经验,期间死亡或下线不会失效,重复使用无效!
+BREAK
+
+#IF
+CHECKLEVEL 20
+#ACT
+KILLMONEXPRATE 150 3600 1
+SENDMSG 7 你已经20级了，双倍卷轴效果良好!
+SENDMSG 7 你获得了1小时1.5倍经验,期间死亡或下线不会失效,重复使用无效!
+BREAK
+
+#IF
+#ACT
+KILLMONEXPRATE 200 3600 1
+SENDMSG 7 你未满20级了，双倍卷轴效果显著!
+SENDMSG 7 你获得了1小时2倍经验,期间死亡或下线不会失效,重复使用无效!
+BREAK
+
+;攻击神水效果
+[@StdModeFunc29]
+#IF
+CHECKLEVEL 40
+#ACT
+POWERRATE 110 1800 1
+SENDMSG 7 你已经40级了，攻击神水效果不佳!
+SENDMSG 7 你获得了半小时1.1倍攻击力,期间死亡或下线不会失效,重复使用无效!
+BREAK
+
+#IF
+CHECKLEVEL 30
+#ACT
+POWERRATE 120 1800 1
+SENDMSG 7 你已经30级了，攻击神水效果一般!
+SENDMSG 7 你获得了半小时1.2倍攻击力,期间死亡或下线不会失效,重复使用无效!
+BREAK
+
+#IF
+CHECKLEVEL 20
+#ACT
+POWERRATE 130 1800 1
+SENDMSG 7 你已经20级了，攻击神水效果良好!
+SENDMSG 7 你获得了半小时1.3倍攻击力,期间死亡或下线不会失效,重复使用无效!
+BREAK
+
+#IF
+#ACT
+POWERRATE 150 1800 1
+SENDMSG 7 你没满20级，攻击神水效果显著!
+SENDMSG 7 你获得了半小时1.5倍攻击力,期间死亡或下线不会失效,重复使用无效!
+BREAK
+

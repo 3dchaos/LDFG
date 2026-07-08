@@ -1,0 +1,116 @@
+[@main]
+\\
+#IF
+#say
+上古时期，大陆被一只狐型大妖搅得天翻地覆。\
+传说中的战，法，道三位大仙降世，联手才镇压\
+这只妖兽，此时，三仙已登入仙境，大陆才进入\
+真正的和平时期。百年前妖兽的封印隐隐有松动\
+的迹象！，因此老夫在此镇守妖兽数十年，从未\
+松懈,你有什么问题要问？\\
+<分解皓月装备/@分解皓月装备>获得大量皓月晶石\
+老夫所处的地方是一个传送阵，可以传送至一个神秘的隧道\
+隧道的尽头便是狐妖的祭坛，这一去就回不来了。\
+（死亡或退出会回到狐月岛。）
+<前往封印祭坛/@前往封印祭坛>支付5000灵符\
+<组队前往封印祭坛/@组队前往封印祭坛>支付5000灵符以及号角和头像\
+[@组队前往封印祭坛]
+#if
+NOT ISGROUPMASTER
+#ACT
+SendMsg 5 你不是组长,不能组队传送
+BREAK
+
+#IF
+small <$GAMEGIRD> 5000
+checkitem 祖玛头像 1
+checkitem 沃玛号角 1
+#ACT
+BREAK
+#SAY
+你的需要的东西没准备好！！\
+<返回/@main>
+#ELSEACT
+take 祖玛头像 1
+take 沃玛号角 1
+GAMEGIRD - 5000
+GROUPMAPMOVE  FOX01 274 126 @GROUPMAPMOVE 400
+[@GROUPMAPMOVE]
+#IF
+#ACT
+SENDMSG 6 组队传送 
+[@前往封印祭坛]
+#IF
+small <$GAMEGIRD> 5000
+#ACT
+BREAK
+#SAY
+你的灵符不够！！\
+<返回/@main>
+#ELSEACT
+GAMEGIRD - 5000
+MAPMOVE  FOX01 274 126
+
+[@分解皓月装备]
+你身上有皓月装备吗？太好了，这可是仙境留下\
+的套装，老夫需要你的一些灵符，帮你分解皓月装备！\
+分解后可以获得皓月晶石，这可是好东西，在狐月神殿\
+找到皓月仙人可以兑换高级皓月装备！\\
+<皓月分解/@皓月分解>支付2000灵符\
+<皓天分解/@皓天分解>支付5000灵符\
+<皓宇分解/@皓宇分解>支付10000灵符\
+
+[@皓月分解]
+#IF
+small <$GAMEGIRD> 2000
+#ACT
+MESSAGEBOX 你的灵符不够，老夫没办法帮你了\
+BREAK
+
+#IF
+CheckBagItems ..\QuestDiary\系统功能\装备回收\狐月熔炼皓月.txt S1 N1
+#ACT
+GAMEGIRD - 2000
+TakeBagItemex 721-737 46 0 0 0 0 N3 0
+MUL N3 5
+GIVE 皓月晶石 <$STR(N3)>
+MESSAGEBOX 分解皓月装备。获得了<$STR(N3)>个皓月晶石\
+#ELSEACT
+SendMsg 6 未检测到背包中有皓月装备
+
+[@皓天分解]
+#IF
+small <$GAMEGIRD> 5000
+#ACT
+MESSAGEBOX 你的灵符不够，老夫没办法帮你了\
+BREAK
+
+#IF
+CheckBagItems ..\QuestDiary\系统功能\装备回收\狐月熔炼皓天.txt S1 N1
+#ACT
+GAMEGIRD - 5000
+TakeBagItemex 738-773 46 0 0 0 0 N3 0
+MUL N3 25
+GIVE 皓月晶石 <$STR(N3)>
+MESSAGEBOX 分解皓天装备。获得了<$STR(N3)>个皓月晶石\
+#ELSEACT
+SendMsg 6 未检测到背包中有皓天装备
+
+
+[@皓宇分解]
+#IF
+small <$GAMEGIRD> 10000
+#ACT
+MESSAGEBOX 你的灵符不够，老夫没办法帮你了\
+BREAK
+
+#IF
+CheckBagItems ..\QuestDiary\系统功能\装备回收\狐月熔炼皓宇.txt S1 N1
+#ACT
+GAMEGIRD - 10000
+TakeBagItemex 774-809 46 0 0 0 0 N3 0
+MUL N3 50
+GIVE 皓月晶石 <$STR(N3)>
+MESSAGEBOX 分解皓宇装备。获得了<$STR(N3)>个皓月晶石\
+#ELSEACT
+SendMsg 6 未检测到背包中有皓宇装备

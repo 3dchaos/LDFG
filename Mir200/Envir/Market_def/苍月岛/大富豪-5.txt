@@ -1,0 +1,226 @@
+[@main]
+#IF
+#SAY
+我喜欢收集各种神兵宝藏，你这有吗？\
+如果你这有我感兴趣的宝藏，请卖给我，\
+
+<我要回收/@OK框>\\
+<回收目录/@回收目录>\\
+<修正对话框BUG/@修正对话框BUG>\
+
+[@OK框]
+#ACT
+OPENUPGRADEDLG 回收物品
+[@UpgradeDlgItem]
+#IF
+  CHECKLEVELEX < 45
+#ACT
+MESSAGEBOX 您的等级太低了，我无法相信你，请到45级后再来吧
+BREAK
+#IF
+CHECKTEXTLIST 大富豪回收\中级书.txt <$DLGITEM.NAME>
+#ACT
+Mov P1 20000
+;Mul P1 <$KILLMONEXPRATE>
+changeexp + P1
+gamegird + 50
+SendMsg 5 恭喜你获得了50灵符
+TAKEDLGITEM
+BREAK
+
+	#IF
+	CHECKTEXTLIST 大富豪回收\高级书.txt <$DLGITEM.NAME>
+	#ACT
+	Mov P2 50000
+;	Mul P2 <$KILLMONEXPRATE>
+	changeexp + P2
+	gamegird + 100
+	SendMsg 5 恭喜你获得了100灵符
+	TAKEDLGITEM
+	BREAK
+
+		#IF
+		CHECKTEXTLIST 大富豪回收\中级雪域装备.txt <$DLGITEM.NAME>
+		#ACT
+		Mov P3 100000
+;		Mul P3 <$KILLMONEXPRATE>
+		changeexp + P3
+		gamegird + 500
+		SendMsg 5 恭喜你获得了500灵符
+		TAKEDLGITEM
+		BREAK
+		
+		#IF
+		CHECKTEXTLIST 大富豪回收\高级雪域装备.txt <$DLGITEM.NAME>
+		#ACT
+		Mov P4 100000
+;		Mul P4 <$KILLMONEXPRATE>
+		changeexp + P4
+		gamegird + 1000
+		SendMsg 5 恭喜你获得了1000灵符
+		TAKEDLGITEM
+		BREAK
+		#IF
+		CHECKTEXTLIST 大富豪回收\火龙主宰.txt <$DLGITEM.NAME>
+		#ACT
+		Mov P5 300000
+;		Mul P4 <$KILLMONEXPRATE>
+		changeexp + P5
+		gamegird + 3000
+		SendMsg 5 恭喜你获得了3000灵符
+		TAKEDLGITEM
+		BREAK
+		#IF
+		CHECKTEXTLIST 大富豪回收\火龙传奇.txt <$DLGITEM.NAME>
+		#ACT
+		Mov P6 500000
+;		Mul P4 <$KILLMONEXPRATE>
+		changeexp + P6
+		gamegird + 5000
+		SendMsg 5 恭喜你获得了5000灵符
+		TAKEDLGITEM
+		BREAK
+#IF
+#ACT
+	SendMsg 5 不回收此物品
+	RECLAIMITEM
+	BREAK
+			
+[@回收目录]
+#SAY
+中级书有：开天斩，
+流星火雨，
+新群体施毒术，\
+飓风破，
+逐日剑法，
+新武力盾。\\
+高级书有：
+旋风斩，
+冰霜群雨，
+召唤月灵。\\
+<下一页/@2页>\
+<返回/@main>\
+[@2页]
+#SAY
+中级雪域装备有：护身戒指
+，复活戒指
+，麻痹戒指\
+，星王圣剑
+，星王魔剑
+，星王道剑\
+，星王战盔
+，星王法冠
+，星王道盔\
+，星王腰带(战)
+，星王腰带(法)
+，星王腰带(道)\
+，星王战靴
+，星王法靴
+，星王道靴
+，星王项链(战)
+，星王护腕(战)\
+，星王战戒
+，星王项链(法)
+，星王护腕(法)
+，星王魔戒\
+，星王项链(道)
+，星王道戒
+，星王护腕(道)
+\\
+<下一页/@3页>\
+<返回/@main>\
+[@3页]
+#SAY
+高级雪域装备有：王者战盔
+王者之刃
+王者之杖
+王者之剑
+王者战盔
+王者法冠
+王者道盔\
+王者斗笠(战)
+王者斗笠(法)
+王者斗笠(道)
+王者项链(战)
+王者项链(法)
+王者项链(道)\
+王者战戒
+王者魔戒
+王者道戒
+王者护腕(战)
+王者护腕(法)
+王者护腕(道)
+王者腰带(战)
+王者腰带(法)
+王者腰带(道)\
+王者战靴
+王者法靴
+王者道靴
+王者勋章(战)
+王者勋章(法)
+王者勋章(道)\
+王者之刃
+王者之杖
+王者之剑
+王者战甲(男)\
+王者战甲(女)
+王者魔衣(男)
+王者魔衣(女)
+王者道袍(男)
+王者道袍(女)\
+初级攻击宝石
+初级魔法宝石
+初级精神力宝石
+初级防御宝石
+初级魔御宝石
+初级运气宝石\
+中级攻击宝石
+中级魔法宝石
+中级精神力宝石
+中级防御宝石
+中级魔御宝石
+中级运气宝石
+\\
+<下一页/@4页>\
+<返回/@main>\
+[@4页]
+#SAY
+火龙主宰装备有：主宰神甲(男)
+主宰神甲(女)
+主宰神剑
+主宰项链
+主宰护腕
+主宰之戒
+主宰之冠
+主宰腰带
+主宰之靴
+主宰面巾
+主宰勋章\
+高级攻击宝石
+高级魔法宝石
+高级精神力宝石
+高级防御宝石
+高级魔御宝石
+高级运气宝石
+\\
+<下一页/@5页>\
+<返回/@main>\
+[@5页]
+#SAY
+火龙传奇装备有：传奇神甲(男)
+传奇神甲(女)
+传奇神剑
+传奇之戒
+传奇护腕
+传奇之冠\
+传奇项链
+传奇腰带
+传奇之靴
+传奇勋章
+传奇面巾
+\\
+<返回/@main>\
+[@修正对话框BUG]
+#IF
+#ACT
+RECLAIMITEM

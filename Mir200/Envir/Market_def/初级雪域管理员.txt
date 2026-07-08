@@ -1,0 +1,93 @@
+[@main]
+怪物已经被消灭干净了？\
+我可以再帮你释放出一些\
+<释放怪物/@刷怪> 1000声望刷一次,可以刷新3次\ 
+我可以送你去下一层\
+可是，下去了就回不去哦！\
+你确定吗？\
+<去往雪域迷城/@去往下一层>  <组队去往雪域迷城/@组队去往下一层>\ \
+<离开雪域/@离开雪域> 返回盟重\ 
+
+[@去往下一层]
+#if
+EQUAL S10 <$USERNAME>雪域
+#ACT
+GetMirrorMapTime <$USERNAME>雪域 N21 N22
+AddMirrorMap JZ002 <$USERNAME>雪域1 雪域迷城 <$STR(N22)> 3 311 U20 1
+CreateNPC 高级雪域管理员 <$USERNAME>雪域1 208 102 16 高级雪域管理员 1
+MOV S10 <$USERNAME>雪域1
+mov U21 0
+GOTO @刷怪1
+MAPMOVE  <$USERNAME>雪域1 46 30
+CLEARMAPMON <$USERNAME>雪域
+DelMirrorMap <$USERNAME>雪域
+#ELSEACT
+MESSAGEBOX 你不是地图的拥有者
+
+[@组队去往下一层]
+#if
+NOT ISGROUPMASTER
+#ACT
+SendMsg 5 你不是组长,不能组队传送
+BREAK
+#if
+EQUAL S10 <$USERNAME>雪域
+#ACT
+GetMirrorMapTime <$USERNAME>雪域 N21 N22
+AddMirrorMap JZ002 <$USERNAME>雪域1 雪域迷城 <$STR(N22)> 3 311 U20 1
+CreateNPC 高级雪域管理员 <$USERNAME>雪域1 208 102 16 高级雪域管理员 1
+MOV S10 <$USERNAME>雪域1
+mov U21 0
+GOTO @刷怪1
+GROUPMAPMOVE <$USERNAME>雪域1 46 30 45
+CLEARMAPMON <$USERNAME>雪域
+DelMirrorMap <$USERNAME>雪域
+#ELSEACT
+MESSAGEBOX 你不是地图的拥有者
+
+
+[@刷怪1]
+#IF
+#ACT
+MONGENEX <$USERNAME>雪域1 119 106 冰雪法王1 200 110 255 0
+MONGENEX <$USERNAME>雪域1 119 106 冰雪法王 200 110 255 0
+MONGENEX <$USERNAME>雪域1 119 106 冰雪守卫1 200 110 255 0
+MONGENEX <$USERNAME>雪域1 119 106 冰雪守卫 200 110 255 0
+MONGENEX <$USERNAME>雪域1 119 106 雪域冰甲虫1 200 70 255 0
+MONGENEX <$USERNAME>雪域1 119 106 雪域冰甲虫 200 70 255 0
+
+[@刷怪]
+#IF
+EQUAL S10 <$USERNAME>雪域
+#ACT
+#ELSEACT
+MESSAGEBOX 你不是地图的拥有者
+
+#IF
+LARGE U21 2
+#ACT
+MESSAGEBOX 你已经刷新太多次了！
+BREAK
+
+#IF
+CHECKCREDITPOINT > 999
+#ACT
+CREDITPOINT - 1000
+INC U21 1
+MONGENEX <$USERNAME>雪域 135 125 冰雪法王1 200 150 255 0
+MONGENEX <$USERNAME>雪域 135 125 冰雪法王 200 10 255 0
+MONGENEX <$USERNAME>雪域 135 125 雪域冰甲虫1 200 100 255 0
+MONGENEX <$USERNAME>雪域 135 125 雪域冰甲虫 200 30 255 0
+MONGENEX <$USERNAME>雪域 135 125 冰雪守卫1 200 50 255 0
+MONGENEX <$USERNAME>雪域 135 125 冰雪守卫 200 5 255 0
+#ELSEACT
+MESSAGEBOX 声望不够或者刷新次数太多！
+
+[@离开雪域]
+#if
+#ACT
+MAPMOVE 3 333 335
+mov U20 0
+ClearVar S10 1
+CLEARMAPMON <$USERNAME>雪域
+DelMirrorMap <$USERNAME>雪域

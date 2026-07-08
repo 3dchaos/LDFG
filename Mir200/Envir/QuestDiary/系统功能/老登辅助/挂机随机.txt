@@ -1,0 +1,110 @@
+[@挂机随机]
+{
+#IF
+CheckAttackMode 1
+#ELSEACT
+StopAutoPlayGame
+DelTextList ..\QuestDiary\数据文件\挂机名单.txt <$USERNAME>
+SETOFFTIMER 7
+SETICON 0 -1
+SENDMSG 6 攻击模式被修改，停止挂机！
+BREAK
+
+#IF
+NOT EQUAL <$MAP> <$STR(T16)>
+CHECK [66] 1
+#ACT
+MAP <$STR(T16)> <$STR(U0)> <$STR(U1)>
+SENDMSG 6 返回挂机地图：<$STR(T17)>
+#ELSEACT
+;SENDMSG 6 持续挂机地图：<$STR(T16)>
+
+#IF
+CHECK [60] 1
+CheckRangeHumCount <$MAP> <$X> <$Y> 10 > 1
+#ACT
+	GOTO @触发自动随机
+
+#IF
+	CHECK [61] 1
+	#ACT
+	GOTO @触发卡死
+
+
+#IF
+	CHECK [62] 1
+	#ACT
+	GOTO @触发危险
+
+
+	
+[@触发危险]
+#IF
+CheckHpPer < 20
+#ELSEACT
+	BREAK
+#IF
+	CHECKTEXTLIST ..\QuestDiary\数据文件\挂机禁止随机地图.txt <$MAP>
+	#ACT
+	SENDMSG 6 危险随机失败，该地图禁止随机
+	BREAK
+	#ELSEACT
+	map <$MAP>
+	SETICON 0 0 200 44 -30 10 0 0 150 0
+
+#IF
+	CHECK [63] 1
+	#ELSEACT
+	SENDMSG 6 危险随机触发
+
+[@触发卡死]
+
+#IF
+	EQUAL N$gx <$X>
+	EQUAL N$gy <$Y>
+#ACT
+	INC U30 1
+#ELSEACT
+	MOV N$gx <$X>
+	MOV N$gy <$Y>
+	BREAK
+
+;检测3次还为一致	
+#IF
+	LARGE U30 3
+#ELSEACT
+	BREAK
+;检查是否有攻击目标
+#IF
+	NOT EQUAL <$ATTACKMONSTER_NAMEEX>
+	#ACT
+	MOV U30 0
+	BREAK
+#IF
+	CHECKTEXTLIST ..\QuestDiary\数据文件\挂机禁止随机地图.txt <$MAP>
+	#ACT
+	SENDMSG 6 卡死随机失败，该地图禁止随机
+	BREAK
+	#ELSEACT
+	map <$MAP>
+	MOV U30 0
+	SETICON 0 0 200 44 -30 10 0 0 150 0
+	#IF
+	CHECK [63] 1
+	#ELSEACT
+	SENDMSG 6 卡死随机触发
+[@触发自动随机]
+#IF
+	CHECKTEXTLIST ..\QuestDiary\数据文件\挂机禁止随机地图.txt <$MAP>
+	#ACT
+	SENDMSG 6 遇人随机失败，该地图禁止随机
+	BREAK
+	#ELSEACT
+	map <$MAP>
+	SETICON 0 0 200 44 -30 10 0 0 150 0
+	#IF
+	CHECK [63] 1
+	#ELSEACT
+	SENDMSG 6 遇人随机触发
+
+}

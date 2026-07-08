@@ -1,0 +1,97 @@
+[@main]
+#IF
+	LARGE G0 5
+#ACT
+mov N$资源编号 0 
+OpenBigDialogBox <$STR(N$资源编号)> 16 1 4 0 0 1 384 23
+	#SAY
+<Img:~#L1:24:<$STR(N$资源编号)>:-50:44>\
+<Img:~#L1:34:<$STR(N$资源编号)>:144:-5>\
+<&Layout:~#L02:230:120:215:240>
+<MText:#L02~:0:0:255:你好，勇士。我叫阿狸，|
+是来自遥远海岛的狐妖。|
+我被困在这个大陆上无法回去。|
+你可以帮帮我吗？
+>
+<Text:#L02~:当然可以|需要重塑过体魄且达到80级:0:20{FCOLOR=251}/@可以>
+<NewLine:#L02~>
+<Text:#L02~:我很忙:0:20{FCOLOR=251}/@exit>
+#ELSESAY
+	我一直在苦苦寻找回家的路（狐月内容）
+[@可以]
+#OR
+  CHECKLEVELEX < 80
+  CHECKRENEWLEVEL < 1
+#ACT
+MESSAGEBOX 那个地方太危险了，请升级到80级且重塑1次体魄！
+BREAK
+
+#IF
+check [255] 1
+#ACT
+mov N$资源编号 0 
+OpenBigDialogBox <$STR(N$资源编号)> 16 1 4 0 0 1 384 23
+#SAY
+<Img:~#L1:24:<$STR(N$资源编号)>:-50:44>\
+<Img:~#L1:34:<$STR(N$资源编号)>:144:-5>\
+<&Layout:~#L02:230:120:215:240>
+<MText:#L02~:0:0:255:你已经获得了渔夫的信任，|
+你直接上船即可！|
+海边老兵他在比奇大城的城门口|
+具体位置[322，656]
+>
+<Text:#L02~:明白了:0:20{FCOLOR=251}/@exit>
+#ELSEACT
+OpenBigDialogBox <$STR(N$资源编号)> 16 1 4 0 0 1 384 23
+#ELSESAY
+<Img:~#L1:24:<$STR(N$资源编号)>:-50:44>\
+<Img:~#L1:34:<$STR(N$资源编号)>:144:-5>\
+<&Layout:~#L02:230:120:215:240>
+<MText:#L02~:0:0:255:在比奇大城的天下第一关的城门口，|
+有一个海边老兵[322，656]，|
+只有他可以带我回去。|
+可是他却能鉴别我的真身，|
+他非常讨厌妖族|
+不过，我可以幻化成狐狸，|
+你护送我过去，|
+有可能可以蒙混过去。
+>
+<Text:#L02~:帮助化形|消耗2000灵符:0:20{FCOLOR=251}/@帮助化形>
+<NewLine:#L02~>
+<Text:#L02~:下次吧:0:20{FCOLOR=251}/@exit>
+
+
+[@帮助化形]
+
+#IF
+small <$GAMEGIRD> 2000
+#ACT
+MESSAGEBOX 化形失败！你的灵符不够！！
+BREAK
+
+#IF 
+CHECKSLAVENAME 红狐狸[伪装]
+#ACT 
+MESSAGEBOX 你是否已经有我的幻化分身？
+BREAK
+#IF
+  CHECKSLAVECOUNT > 4
+#ACT
+MESSAGEBOX 你已经有5个或以上的仆从，无法幻化。
+BREAK
+
+#IF
+  RANDOM 3
+#ACT
+  RECALLMOB 红狐狸[伪装] 0 10  1 243
+  GAMEGIRD - 2000
+CLOSEBIGDIALOGBOX
+#SAY
+幻化成功了，我只能撑十分钟，\
+十分钟后神魂就会脱离狐狸\
+带着我的分身去试试\
+能不能通过那个渔夫的法眼吧\
+<好的/@exit>
+#ELSEACT
+GAMEGIRD - 2000
+MESSAGEBOX 幻化失败了，果然我的法力已经衰退了，请稍等再试吧！

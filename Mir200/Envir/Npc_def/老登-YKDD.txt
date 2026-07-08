@@ -1,0 +1,35 @@
+[@main]
+本服已开启月卡收费模式，请购买月卡再继续游戏哦！\
+请联系管理购买月卡秘钥，输入月卡秘钥后点击验证\
+<INPUTTEXT:6:10:10:240:24:193:230:246:0:100:输入的秘钥不正确:请输入购买的月卡秘钥:159> \ \
+<text:验证月卡秘钥:10:6:6/@兑换月卡>\ \
+
+我已经买好了<送我出去/@送我出去>\
+
+[@兑换月卡]
+#ACT
+SendMsg 5 输入的姓名为 <$NPCINPUT(6)>
+#IF
+CHECKBAGSIZE 1
+#ELSEACT
+MESSAGEBOX 请留出一个背包空格
+BREAK
+
+#IF
+CHECKTEXTLIST ..\QuestDiary\数据文件\月卡秘钥.txt <$NPCINPUT(6)>
+#ACT
+DELTEXTLIST ..\QuestDiary\数据文件\月卡秘钥.txt <$NPCINPUT(6)>
+GIVESTATEITEM 老登月卡 1 1 1 1 1 1 1
+SENDMSG 6 验证成功，祝你游玩开心。
+#ELSEACT
+MESSAGEBOX 验证错误，请检查你的秘钥是否有效
+
+[@送我出去]
+#IF
+CHECKITEM 老登月卡 1
+#ACT
+MESSAGEBOX 验证成功，祝你游玩开心。\你的月卡已经领取成功！请点击NPC继续游玩吧
+ShowCustomButton 0 1
+mapmove 0 333 268
+#ELSEACT
+MESSAGEBOX 没看到你的背包里有月卡，请购买后再游玩

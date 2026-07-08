@@ -1,0 +1,266 @@
+[@入包回收]
+{
+#IF
+CHECK [94] 1
+#ACT
+GetListString ..\QuestDiary\系统功能\装备回收\垃圾装备.txt 0 S$回收目录
+GetListString ..\QuestDiary\系统功能\装备回收\垃圾装备.txt 1 N$回收价格
+GetListString ..\QuestDiary\系统功能\装备回收\垃圾装备.txt 2 N$回收经验
+TakeBagItem <$STR(S$回收目录)> 46 0 <$STR(N$回收价格)> 0 N$回收经验 N$回收数量 1 1 * 0 1 0
+#IF
+CHECK [94] 1
+CheckHeroOnline
+#ACT
+H.TakeBagItem <$STR(S$回收目录)> 46 0 <$STR(N$回收价格)> 0 N$回收经验 N$回收数量 1 1 * 0 1 0
+
+#IF
+CHECK [93] 1
+#ACT
+GetListString ..\QuestDiary\系统功能\装备回收\垃圾技能书.txt 0 S$回收目录
+GetListString ..\QuestDiary\系统功能\装备回收\垃圾技能书.txt 1 N$回收价格
+GetListString ..\QuestDiary\系统功能\装备回收\垃圾技能书.txt 2 N$回收经验
+TakeBagItem <$STR(S$回收目录)> 46 0 <$STR(N$回收价格)> 0 N$回收经验 N$回收数量 1 1 * 0 1 0
+#IF
+CHECK [93] 1
+CheckHeroOnline
+#ACT
+H.TakeBagItem <$STR(S$回收目录)> 46 0 <$STR(N$回收价格)> 0 N$回收经验 N$回收数量 1 1 * 0 1 0
+
+#IF
+CHECK [92] 1
+#ACT
+GetListString ..\QuestDiary\系统功能\装备回收\垃圾材料.txt 0 S$回收目录
+GetListString ..\QuestDiary\系统功能\装备回收\垃圾材料.txt 1 N$回收价格
+GetListString ..\QuestDiary\系统功能\装备回收\垃圾材料.txt 2 N$回收经验
+TakeBagItem <$STR(S$回收目录)> 46 0 <$STR(N$回收价格)> 0 N$回收经验 N$回收数量 1 1 * 0 1 0		
+#IF
+CHECK [92] 1
+CheckHeroOnline
+#ACT
+H.TakeBagItem <$STR(S$回收目录)> 46 0 <$STR(N$回收价格)> 0 N$回收经验 N$回收数量 1 1 * 0 1 0		
+
+#IF
+CHECK [91] 1
+#ACT
+GetListString ..\QuestDiary\系统功能\装备回收\前期装备.txt 0 S$回收目录
+GetListString ..\QuestDiary\系统功能\装备回收\前期装备.txt 1 N$回收价格
+GetListString ..\QuestDiary\系统功能\装备回收\前期装备.txt 2 N$回收经验
+TakeBagItem <$STR(S$回收目录)> 46 0 <$STR(N$回收价格)> 0 N$回收经验 N$回收数量 1 1 * 0 1 0		
+#IF
+CHECK [91] 1
+CheckHeroOnline
+#ACT
+H.TakeBagItem <$STR(S$回收目录)> 46 0 <$STR(N$回收价格)> 0 N$回收经验 N$回收数量 1 1 * 0 1 0		
+
+#IF
+CHECK [90] 1
+#ACT
+GetListString ..\QuestDiary\系统功能\装备回收\前期技能书.txt 0 S$回收目录
+GetListString ..\QuestDiary\系统功能\装备回收\前期技能书.txt 1 N$回收价格
+GetListString ..\QuestDiary\系统功能\装备回收\前期技能书.txt 2 N$回收经验
+TakeBagItem <$STR(S$回收目录)> 46 0 <$STR(N$回收价格)> 0 N$回收经验 N$回收数量 1 1 * 0 1 0		
+#IF
+CHECK [90] 1
+CheckHeroOnline
+#ACT
+H.TakeBagItem <$STR(S$回收目录)> 46 0 <$STR(N$回收价格)> 0 N$回收经验 N$回收数量 1 1 * 0 1 0		
+
+#IF
+CHECK [89] 1
+#ACT
+GetListString ..\QuestDiary\系统功能\装备回收\沃玛装备.txt 0 S$回收目录
+GetListString ..\QuestDiary\系统功能\装备回收\沃玛装备.txt 1 N$回收价格
+GetListString ..\QuestDiary\系统功能\装备回收\沃玛装备.txt 2 N$回收经验
+TakeBagItem <$STR(S$回收目录)> 46 0 <$STR(N$回收价格)> 0 N$回收经验 N$回收数量 1 1 * 0 1 0		
+#IF
+CHECK [89] 1
+CheckHeroOnline
+#ACT
+H.TakeBagItem <$STR(S$回收目录)> 46 0 <$STR(N$回收价格)> 0 N$回收经验 N$回收数量 1 1 * 0 1 0		
+
+#IF
+CHECK [88] 1
+#ACT
+GetListString ..\QuestDiary\系统功能\装备回收\祖玛装备.txt 0 S$回收目录
+GetListString ..\QuestDiary\系统功能\装备回收\祖玛装备.txt 1 N$回收价格
+GetListString ..\QuestDiary\系统功能\装备回收\祖玛装备.txt 2 N$回收经验
+TakeBagItem <$STR(S$回收目录)> 46 0 <$STR(N$回收价格)> 0 N$回收经验 N$回收数量 1 1 * 0 1 0		
+#IF
+CHECK [88] 1
+CheckHeroOnline
+#ACT
+H.TakeBagItem <$STR(S$回收目录)> 46 0 <$STR(N$回收价格)> 0 N$回收经验 N$回收数量 1 1 * 0 1 0		
+
+
+#IF
+CHECK [87] 1
+#ACT
+GetListString ..\QuestDiary\系统功能\装备回收\特殊戒指.txt 0 S$回收目录
+GetListString ..\QuestDiary\系统功能\装备回收\特殊戒指.txt 1 N$回收价格
+GetListString ..\QuestDiary\系统功能\装备回收\特殊戒指.txt 2 N$回收经验
+TakeBagItem <$STR(S$回收目录)> 46 0 <$STR(N$回收价格)> 0 N$回收经验 N$回收数量 1 1 * 0 1 0	
+#IF
+CHECK [87] 1
+CheckHeroOnline
+#ACT
+H.TakeBagItem <$STR(S$回收目录)> 46 0 <$STR(N$回收价格)> 0 N$回收经验 N$回收数量 1 1 * 0 1 0	
+
+#IF
+CHECK [86] 1
+#ACT
+GetListString ..\QuestDiary\系统功能\装备回收\赤月装备.txt 0 S$回收目录
+GetListString ..\QuestDiary\系统功能\装备回收\赤月装备.txt 1 N$回收价格
+GetListString ..\QuestDiary\系统功能\装备回收\赤月装备.txt 2 N$回收经验
+TakeBagItem <$STR(S$回收目录)> 46 0 <$STR(N$回收价格)> 0 N$回收经验 N$回收数量 1 1 * 0 1 0	
+#IF
+CHECK [86] 1
+CheckHeroOnline
+#ACT
+H.TakeBagItem <$STR(S$回收目录)> 46 0 <$STR(N$回收价格)> 0 N$回收经验 N$回收数量 1 1 * 0 1 0	
+
+#IF
+CHECK [85] 1
+#ACT
+GetListString ..\QuestDiary\系统功能\装备回收\赤月技能书.txt 0 S$回收目录
+GetListString ..\QuestDiary\系统功能\装备回收\赤月技能书.txt 1 N$回收价格
+GetListString ..\QuestDiary\系统功能\装备回收\赤月技能书.txt 2 N$回收经验
+TakeBagItem <$STR(S$回收目录)> 46 0 <$STR(N$回收价格)> 0 N$回收经验 N$回收数量 1 1 * 0 1 0	
+#IF
+CHECK [85] 1
+CheckHeroOnline
+#ACT
+H.TakeBagItem <$STR(S$回收目录)> 46 0 <$STR(N$回收价格)> 0 N$回收经验 N$回收数量 1 1 * 0 1 0	
+
+#IF
+CHECK [84] 1
+#ACT
+GetListString ..\QuestDiary\系统功能\装备回收\魔龙装备.txt 0 S$回收目录
+GetListString ..\QuestDiary\系统功能\装备回收\魔龙装备.txt 1 N$回收价格
+GetListString ..\QuestDiary\系统功能\装备回收\魔龙装备.txt 2 N$回收经验
+TakeBagItem <$STR(S$回收目录)> 46 0 <$STR(N$回收价格)> 0 N$回收经验 N$回收数量 1 1 * 0 1 0	
+#IF
+CHECK [84] 1
+CheckHeroOnline
+#ACT
+H.TakeBagItem <$STR(S$回收目录)> 46 0 <$STR(N$回收价格)> 0 N$回收经验 N$回收数量 1 1 * 0 1 0	
+
+#IF
+CHECK [83] 1
+#ACT
+GetListString ..\QuestDiary\系统功能\装备回收\魔龙技能书.txt 0 S$回收目录
+GetListString ..\QuestDiary\系统功能\装备回收\魔龙技能书.txt 1 N$回收价格
+GetListString ..\QuestDiary\系统功能\装备回收\魔龙技能书.txt 2 N$回收经验
+TakeBagItem <$STR(S$回收目录)> 46 0 <$STR(N$回收价格)> 0 N$回收经验 N$回收数量 1 1 * 0 1 0	
+#IF
+CHECK [83] 1
+CheckHeroOnline
+#ACT
+H.TakeBagItem <$STR(S$回收目录)> 46 0 <$STR(N$回收价格)> 0 N$回收经验 N$回收数量 1 1 * 0 1 0	
+
+#IF
+CHECK [82] 1
+#ACT
+GetListString ..\QuestDiary\系统功能\装备回收\高级材料.txt 0 S$回收目录
+GetListString ..\QuestDiary\系统功能\装备回收\高级材料.txt 1 N$回收价格
+GetListString ..\QuestDiary\系统功能\装备回收\高级材料.txt 2 N$回收经验
+TakeBagItem <$STR(S$回收目录)> 46 0 <$STR(N$回收价格)> 0 N$回收经验 N$回收数量 1 1 * 0 1 0	
+#IF
+CHECK [82] 1
+CheckHeroOnline
+#ACT
+H.TakeBagItem <$STR(S$回收目录)> 46 0 <$STR(N$回收价格)> 0 N$回收经验 N$回收数量 1 1 * 0 1 0	
+
+#IF
+CHECK [81] 1
+#ACT
+GetListString ..\QuestDiary\系统功能\装备回收\雷泽装备.txt 0 S$回收目录
+GetListString ..\QuestDiary\系统功能\装备回收\雷泽装备.txt 1 N$回收价格
+GetListString ..\QuestDiary\系统功能\装备回收\雷泽装备.txt 2 N$回收经验
+TakeBagItem <$STR(S$回收目录)> 46 0 <$STR(N$回收价格)> 0 N$回收经验 N$回收数量 1 1 * 0 1 0	
+#IF
+CHECK [81] 1
+CheckHeroOnline
+#ACT
+H.TakeBagItem <$STR(S$回收目录)> 46 0 <$STR(N$回收价格)> 0 N$回收经验 N$回收数量 1 1 * 0 1 0	
+
+#IF
+CHECK [80] 1
+#ACT
+GetListString ..\QuestDiary\系统功能\装备回收\雷泽技能书.txt 0 S$回收目录
+GetListString ..\QuestDiary\系统功能\装备回收\雷泽技能书.txt 1 N$回收价格
+GetListString ..\QuestDiary\系统功能\装备回收\雷泽技能书.txt 2 N$回收经验
+TakeBagItem <$STR(S$回收目录)> 46 0 <$STR(N$回收价格)> 0 N$回收经验 N$回收数量 1 1 * 0 1 0	
+#IF
+CHECK [80] 1
+CheckHeroOnline
+#ACT
+H.TakeBagItem <$STR(S$回收目录)> 46 0 <$STR(N$回收价格)> 0 N$回收经验 N$回收数量 1 1 * 0 1 0	
+
+#IF
+CHECK [79] 1
+#ACT
+GetListString ..\QuestDiary\系统功能\装备回收\星王装备.txt 0 S$回收目录
+GetListString ..\QuestDiary\系统功能\装备回收\星王装备.txt 1 N$回收价格
+GetListString ..\QuestDiary\系统功能\装备回收\星王装备.txt 2 N$回收经验
+TakeBagItem <$STR(S$回收目录)> 46 0 <$STR(N$回收价格)> 0 N$回收经验 N$回收数量 1 1 * 0 1 0	
+#IF
+CHECK [79] 1
+CheckHeroOnline
+#ACT
+H.TakeBagItem <$STR(S$回收目录)> 46 0 <$STR(N$回收价格)> 0 N$回收经验 N$回收数量 1 1 * 0 1 0	
+
+#IF
+CHECK [78] 1
+#ACT
+GetListString ..\QuestDiary\系统功能\装备回收\雪域技能书.txt 0 S$回收目录
+GetListString ..\QuestDiary\系统功能\装备回收\雪域技能书.txt 1 N$回收价格
+GetListString ..\QuestDiary\系统功能\装备回收\雪域技能书.txt 2 N$回收经验
+TakeBagItem <$STR(S$回收目录)> 46 0 <$STR(N$回收价格)> 0 N$回收经验 N$回收数量 1 1 * 0 1 0	
+#IF
+CHECK [78] 1
+CheckHeroOnline
+#ACT
+H.TakeBagItem <$STR(S$回收目录)> 46 0 <$STR(N$回收价格)> 0 N$回收经验 N$回收数量 1 1 * 0 1 0	
+
+#IF
+CHECK [77] 1
+#ACT
+GetListString ..\QuestDiary\系统功能\装备回收\王者装备.txt 0 S$回收目录
+GetListString ..\QuestDiary\系统功能\装备回收\王者装备.txt 1 N$回收价格
+GetListString ..\QuestDiary\系统功能\装备回收\王者装备.txt 2 N$回收经验
+TakeBagItem <$STR(S$回收目录)> 46 0 <$STR(N$回收价格)> 0 N$回收经验 N$回收数量 1 1 * 0 1 0	
+#IF
+CHECK [77] 1
+CheckHeroOnline
+#ACT
+H.TakeBagItem <$STR(S$回收目录)> 46 0 <$STR(N$回收价格)> 0 N$回收经验 N$回收数量 1 1 * 0 1 0	
+
+#IF
+CHECK [76] 1
+#ACT
+GetListString ..\QuestDiary\系统功能\装备回收\主宰装备.txt 0 S$回收目录
+GetListString ..\QuestDiary\系统功能\装备回收\主宰装备.txt 1 N$回收价格
+GetListString ..\QuestDiary\系统功能\装备回收\主宰装备.txt 2 N$回收经验
+TakeBagItem <$STR(S$回收目录)> 46 0 <$STR(N$回收价格)> 0 N$回收经验 N$回收数量 1 1 * 0 1 0	
+#IF
+CHECK [76] 1
+CheckHeroOnline
+#ACT
+H.TakeBagItem <$STR(S$回收目录)> 46 0 <$STR(N$回收价格)> 0 N$回收经验 N$回收数量 1 1 * 0 1 0	
+
+#IF
+CHECK [75] 1
+#ACT
+GetListString ..\QuestDiary\系统功能\装备回收\传奇装备.txt 0 S$回收目录
+GetListString ..\QuestDiary\系统功能\装备回收\传奇装备.txt 1 N$回收价格
+GetListString ..\QuestDiary\系统功能\装备回收\传奇装备.txt 2 N$回收经验
+TakeBagItem <$STR(S$回收目录)> 46 0 <$STR(N$回收价格)> 0 N$回收经验 N$回收数量 1 1 * 0 1 0	
+#IF
+CHECK [75] 1
+CheckHeroOnline
+#ACT
+H.TakeBagItem <$STR(S$回收目录)> 46 0 <$STR(N$回收价格)> 0 N$回收经验 N$回收数量 1 1 * 0 1 0	
+
+}
+
+

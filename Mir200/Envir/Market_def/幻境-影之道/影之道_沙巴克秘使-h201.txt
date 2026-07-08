@@ -1,0 +1,127 @@
+[@main]
+#IF
+CHECK [46] 1
+#SAY
+感觉不错吧？整个幻境都为你颤抖\
+告诉你个消息，我听沙巴克的同事说的\
+最近听说盟重地下也出现了一个奇怪的洞。\
+就在酒馆下面，我的外甥女刚好在那当掌柜的。\
+感兴趣吗？你可以去看看。\
+<我这就去/@exit>\
+#IF
+#SAY
+我经常站在这里等待有人进来跟我说说话。\
+<关于幻境/@关于幻境>180主线\
+
+[@关于幻境]
+#IF
+	LARGE G0 1
+#SAY
+幻境从何而来？哈哈哈。其实幻境衔接的是魔龙大军。\
+你问我为何知道，当然是因为我知道怎么把它们带进来。\
+你想试试吗？魔龙大群入侵幻境。幻境将彻底混乱。\
+我需一块金砖和一个火龙凭证。\
+<发动魔龙入侵/@发动魔龙入侵>\
+<退出/@exit>
+#ELSESAY
+幻境对我来说已经像家一样熟悉了，不想再回沙比克了。\
+<退出/@exit>
+
+[@发动魔龙入侵]
+#IF
+CHECKITEM 金砖 1
+CHECKITEM 火龙凭证 1
+#ACT
+TAKE 金砖 1
+TAKE 火龙凭证 1
+SET [46] 1
+RefreshMissPage 180任务
+GOTO @秘使发动魔龙入侵
+#ELSEACT
+MESSAGEBOX 发动入侵需要火龙凭证和一块金砖！
+
+
+[@秘使发动魔龙入侵]
+#IF
+RANDOM 4
+#ACT
+PARAM1 H003
+PARAM2 60
+PARAM3 60
+MONGEN 魔龙射手 5 20
+MONGEN 魔龙刀兵 5 20
+MONGEN 魔龙破甲兵 5 20
+MONGEN 电僵王8 5 20
+MONGEN 暗之触龙神8 2 20
+MONGEN 魔龙战将 1 20
+MONGEN 魔龙力士[魔化] 1 20
+MONGEN 魔龙巨蛾 1 20
+MONGEN 魔龙树妖 1 20
+MONGEN 魔影巨人 1 20
+MONGEN 暗之魔龙教主 1 20
+SENDMSG 1 【<$USERNAME>】通过沙比克秘使发动了魔龙入侵！！邪恶的怪物军团正向幻境三层发起一场声势浩大的进攻
+SENDMOVEMSG 0 251 0 10 1 【<$USERNAME>】通过沙比克秘使发动了魔龙入侵！！邪恶的怪物军团正向幻境三层发起一场声势浩大的进攻 16 20 0
+
+Break
+
+#IF
+RANDOM 3
+#ACT
+PARAM1 H006
+PARAM2 100
+PARAM3 100
+MONGEN 魔龙射手 5 20
+MONGEN 魔龙刀兵 5 20
+MONGEN 魔龙破甲兵 5 20
+MONGEN 电僵王8 5 20
+MONGEN 暗之触龙神8 2 20
+MONGEN 魔龙战将 1 20
+MONGEN 魔龙力士[魔化] 1 20
+MONGEN 魔龙巨蛾 1 20
+MONGEN 魔龙树妖 1 20
+MONGEN 魔影巨人 1 20
+MONGEN 暗之魔龙教主 1 20
+SENDMSG 1 【<$USERNAME>】通过沙比克秘使发动了魔龙入侵！！邪恶的怪物军团正向幻境六层发起一场声势浩大的进攻
+SENDMOVEMSG 0 251 0 10 1 【<$USERNAME>】通过沙比克秘使发动了魔龙入侵！！邪恶的怪物军团正向幻境六层发起一场声势浩大的进攻 16 20 0
+Break
+
+#IF
+RANDOM 2
+#ACT
+PARAM1 H007
+PARAM2 100
+PARAM3 100
+MONGEN 魔龙射手 5 20
+MONGEN 魔龙刀兵 5 20
+MONGEN 魔龙破甲兵 5 20
+MONGEN 电僵王8 5 20
+MONGEN 暗之触龙神8 2 20
+MONGEN 魔龙战将 1 20
+MONGEN 魔龙力士[魔化] 1 20
+MONGEN 魔龙巨蛾 1 20
+MONGEN 魔龙树妖 1 20
+MONGEN 魔影巨人 1 20
+MONGEN 暗之魔龙教主 1 20
+SENDMSG 1 【<$USERNAME>】过沙比克秘使发动了魔龙入侵！！邪恶的怪物军团正向幻境七层发起一场声势浩大的进攻
+SENDMOVEMSG 0 251 0 10 1 【<$USERNAME>】通过沙比克秘使发动了魔龙入侵！！邪恶的怪物军团正向幻境七层发起一场声势浩大的进攻 16 20 0
+Break
+
+#IF
+#ACT
+PARAM1 H008
+PARAM2 40
+PARAM3 45
+MONGEN 魔龙射手 5 20
+MONGEN 魔龙刀兵 5 20
+MONGEN 魔龙破甲兵 5 20
+MONGEN 电僵王8 5 20
+MONGEN 暗之触龙神8 2 20
+MONGEN 魔龙战将 1 20
+MONGEN 魔龙力士[魔化] 1 20
+MONGEN 魔龙巨蛾 1 20
+MONGEN 魔龙树妖 1 20
+MONGEN 魔影巨人 1 20
+MONGEN 暗之魔龙教主 1 20
+SENDMSG 1 【<$USERNAME>】通过沙比克秘使发动了魔龙入侵！！邪恶的怪物军团正向幻境八层发起一场声势浩大的进攻
+SENDMOVEMSG 0 251 0 10 1 【<$USERNAME>】通过沙比克秘使发动了魔龙入侵！！邪恶的怪物军团正向幻境八层发起一场声势浩大的进攻 16 20 0
+Break

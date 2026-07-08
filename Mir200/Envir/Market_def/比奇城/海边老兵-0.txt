@@ -1,0 +1,108 @@
+[@main]
+#IF
+	LARGE G0 0
+	#SAY
+	海上总是有很多新鲜事，\
+我的这艘小船可以送你一程。\
+<苍月岛在哪/@苍月岛在哪>\
+<去圣域/@j>勋章地图\
+#IF
+	LARGE G0 5
+	#ELSESAY
+	前段时间我在捕鱼的时候发现一个奇怪的岛屿，\
+	迷雾中影影绰绰有一个倩影！（狐月开放内容）
+	#ELSEACT
+	BREAK
+#SAY
+<打听狐月岛/@打听狐月岛>\
+
+[@打听狐月岛]
+#IF
+check [255] 1
+#SAY
+哦！是你啊，我认识你，直接上船吧！\
+<直接买票/@直接买票>支付1000灵符\
+#ELSESAY
+新面孔啊？\
+嗯,消息挺灵的嘛，这么快就找我到这。\
+你想去寻找神秘的狐月岛？\
+最近总有些妖怪想混入我的船\
+让我看看你是不是妖怪变的。\
+<可以带上我的仆从吗？/@仆从>支付1000灵符\
+<不去了/@exit>\
+
+[@直接买票]
+#IF
+small <$GAMEGIRD> 1000
+#ACT
+BREAK
+#SAY
+你的灵符不够！！\
+<返回/@main>
+#ELSEACT
+GAMEGIRD - 1000
+MAPMOVE  FOX02 50 76
+
+[@仆从]
+#IF 
+CHECKSLAVENAME 红狐狸[伪装]
+#ELSEACT
+MESSAGEBOX 你的仆从呢？
+BREAK
+
+#IF
+RANDOM 2
+#SAY
+很好，我没看出问题，支付船费登船吧。\\
+<买票/@买票> 支付金币500\
+<不去了/@exit>\
+#ELSESAY
+这明明是只狐妖所幻化的精怪！\
+你休想靠近我的船！\
+<离开/@exit>\
+#ELSEACT
+KILLSLAVE 1 红狐狸[伪装]
+SENDMSG 5 幻化被识破，幻象已经湮灭。
+
+[@买票]
+#IF
+checkgold 500
+#ACT
+take 金币 500
+KILLSLAVE 1 红狐狸[伪装]
+MAPMOVE  FOX02 50 76
+SET [255] 1
+#ELSEACT
+MESSAGEBOX 船票都买不起，还想登船？
+
+[@苍月岛在哪]
+苍月岛在一个神秘的海域，一般人无法到达。\
+偏偏你找到了我，我的小舟还能载下你，你有50元宝吗？\
+对了，听说地下洞穴有一个神秘的路径可以进入苍月岛。\\
+<我有50元宝/@我有50元宝>\
+
+<返回/@main>
+
+
+[@j]
+#IF 
+checkgold 300000
+#ACT
+take 金币 300000
+TimeRecall 60
+mapmove B101A
+break 
+#ELSESAY 
+你没有30万金币!\ \
+<取消/@exit>\
+
+
+[@我有50元宝]
+#IF
+small <$GAMEGOLD> 50
+#ACT
+#SAY
+你的元宝不够！！\
+#ELSEACT
+GAMEGOLD - 50
+mapmove 5 106 355

@@ -1,0 +1,13 @@
+[@main]
+支付我100灵符，我送你去桃源之门。\
+<送我进去/@送我进去>\
+<我还是等等洞吧/@exit>\
+
+[@送我进去]
+#IF
+large <$GAMEGIRD> 99
+#ACT
+GAMEGIRD - 100
+mapmove R001 162 169
+#ELSEACT
+MESSAGEBOX 你好像没有这么多灵符，请检查一下

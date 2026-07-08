@@ -1,0 +1,76 @@
+[@定时]
+{
+#IF
+EQUAL U76 0
+#ACT
+MOV U76 1
+
+#IF
+EQUAL U75 0
+#ACT
+MOV U75 1
+
+#IF
+EQUAL U74 0
+#ACT
+MOV U74 1
+#IF
+#ACT
+OPENMERCHANTBIGDLG 24 14 1 0 0 0 1 383 25 
+#SAY
+\  \
+<Img:63:24:150:-4>\
+<Img:25<$STR(U76)>:24:20:40|7#勾选自动使用五倍神丹/@自动五倍神丹>  <Text:勾选后，一小时使用五倍神丹:20:40{FCOLOR=7}>  <ItemShow:520:1:20:30:1:0:0>\
+<Img:25<$STR(U75)>:24:20:70|7#勾选自动使用双倍神丹/@自动双倍神丹>  <Text:勾选后，一小时使用双倍神丹:20:70{FCOLOR=7}>  <ItemShow:518:1:20:60:1:0:0>\
+<Img:25<$STR(U74)>:24:20:110|7#勾选自动使用攻击神水/@自动攻击神水>  <Text:勾选后，半小时使用攻击神水:20:110{FCOLOR=7}>  <ItemShow:319:1:20:100:1:0:0>\
+<text:返回:20:140:1,2/@回收界面>\
+
+
+
+[@自动五倍神丹]
+#IF
+EQUAL U76 1
+#ACT
+MOV U76 2
+SetOnTimer 86 3600
+goto @定时
+break
+
+#IF
+EQUAL U76 2
+#ACT
+MOV U76 1
+goto @定时
+break
+[@自动双倍神丹]
+#IF
+EQUAL U75 1
+#ACT
+MOV U75 2
+SetOnTimer 86 3600
+goto @定时
+break
+
+#IF
+EQUAL U75 2
+#ACT
+MOV U75 1
+goto @定时
+break
+[@自动攻击神水]
+#IF
+EQUAL U74 1
+#ACT
+MOV U74 2
+SetOnTimer 85 1800
+goto @定时
+break
+
+#IF
+EQUAL U74 2
+#ACT
+MOV U74 1
+SETOFFTIMER 85
+goto @定时
+break
+}

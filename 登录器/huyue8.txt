@@ -1,0 +1,18 @@
+[Setup]
+公告地址=http://43.140.242.182/LDFG8.html
+官方首页=http://43.140.242.182/LDFG8.html
+自动刷新=1
+刷新速度=10
+
+[Server]
+0=老登传奇[群服]|老登8区|老登8区|43.140.242.182|7000|1|43.140.242.182|8000|0
+1=老登传奇[单机]|老登传奇[单机]|老登传奇[单机]|127.0.0.1|7000|1|127.0.0.1|0|0
+
+[Upgrade]
+0=0	Map	3.map	c2be5e1d7d18855fbc2dcdb7a11cd226	http://43.140.242.182/BD/3.map
+1=0	Wav	Game over2.wav	d440316d0033dd5b8389da89dad7dea0	http://43.140.242.182/BD/Game%20over2.wav
+2=0	Wav	main_theme.wav	2cff7a6febd5cc189a0c9f937755a4d7	http://43.140.242.182/BD/main_theme.wav
+3=0	LD\Data	Effect.pak	e7081a01456d803111bf869245964839	http://43.140.242.182/BD/Effect.pak
+4=0	LD\Data	ld185.pak	c931f92622a015f9cbecaee14bf97e8d	http://43.140.242.182/BD/ld185.pak
+5=0	LD\Data	ui_n.pak	5cbe5f10e5db72c6d71954f424a200c6	http://43.140.242.182/BD/ui_n.pak
+

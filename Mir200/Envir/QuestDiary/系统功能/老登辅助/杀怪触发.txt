@@ -1,0 +1,91 @@
+[@杀怪触发]
+{
+#IF
+CheckKillMonName 火龙教主
+#ACT
+DelNpc 云隐宗师 D2083
+CreateNPC 云隐宗师 D2083 78 48 78 云隐宗师 1
+MAPEFFECT D2083 78 48 4 540 10 10 300 1 1 
+DELAYCALL 300000 @云隐宗师消失
+SENDMSG 1 云隐宗师在火龙出现了.
+
+#IF
+CheckKillMonName 尸王2
+CHECK [8] 1
+#ACT
+SET [9] 1
+SENDMSG 5 提示：成功击杀尸王，把这个消息告诉土城的书店老板吧
+RefreshMissPage 170任务
+ADDBUTTON 0 1 82 83 84 153 150 7 <PlayImg:0:82:2:200:0:0:0> 251#任务\250#打开任务窗口
+
+#IF
+CheckKillMonName 尸王
+CHECK [8] 1
+#ACT
+SET [9] 1
+SENDMSG 5 提示：成功击杀尸王，把这个消息告诉土城的书店老板吧
+RefreshMissPage 170任务
+ADDBUTTON 0 1 82 83 84 153 150 7 <PlayImg:0:82:2:200:0:0:0> 251#任务\250#打开任务窗口
+
+#IF
+CheckKillMonName 祖玛教主
+CHECK [17] 1
+#ACT
+SET [18] 1
+SENDMSG 5 提示：盟重土城的阴霾已被你抹杀，请前往国王处汇报此事！
+RefreshMissPage 170任务
+ADDBUTTON 0 1 82 83 84 153 150 7 <PlayImg:0:82:2:200:0:0:0> 251#任务\250#打开任务窗口
+
+#IF
+CheckKillMonName 暴牙蜘蛛
+CHECK [21] 1
+#ACT
+INC U31 1
+SENDMSG 5 提示：你已经击杀了<$STR(U31)>/10只暴牙蜘蛛。
+RefreshMissPage 176任务
+
+
+#IF
+CheckKillMonName 暴牙蜘蛛0
+CHECK [21] 1
+#ACT
+INC U31 1
+SENDMSG 5 提示：你已经击杀了<$STR(U31)>/10只暴牙蜘蛛。
+RefreshMissPage 176任务
+
+#IF
+CheckKillMonName 魔龙教主
+CHECKITEMW  探测项链[枯竭] 1 
+#ACT
+TakePosW 3
+GIVE 探测项链 1
+SENDMSG 7 探测项链已被魔力注满，恢复如初，项链已放入背包！
+
+#IF
+CheckKillMonName 魔龙教主
+EQUAL <$MAP> 66
+CHECK [41] 0
+CHECK [40] 1
+#ACT
+SET [41] 1
+SENDMSG 5 提示：你成功击杀魔龙血域的魔力教主。寻找魔龙老兵领取奖励。
+
+#IF
+CheckKillMonName 魔龙力士1
+EQUAL <$MAP> EM300
+CHECK [43] 1
+CHECK [44] 0
+#ACT
+INC U32 1
+SENDMSG 5 提示：你已经击杀了<$STR(U32)>/10只魔龙力士。
+RefreshMissPage 180任务
+
+#IF
+CheckKillMonName 魔龙教主
+EQUAL <$MAP> GA1
+CHECK [45] 0
+#ACT
+SET [45] 1
+SENDMSG 5 提示：你已经完成近在咫尺任务。
+RefreshMissPage 180任务
+}

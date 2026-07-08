@@ -1,0 +1,151 @@
+(@@CreateHero)
+[@main]
+#if
+not equal G3 1
+#act
+messagebox 英雄功能已关闭
+break
+
+#IF
+LARGE G0 2
+#ELSESAY
+要一起喝一杯吗？
+#ELSEACT
+BREAK
+
+#IF
+CHECKLEVEL 35
+#SAY
+你好，我是影月，我在此为勇士配选他们忠诚的追随者。\ \
+战战  合击技能：破魂斩      战法  合击技能：雷霆一击\
+法道  合击技能：末日审判    法法  合击技能：火龙气焰\
+道战  合击技能：劈星斩      道道  合计技能：噬魂沼泽\ \
+领取英雄：<英雄取名/@@CreateHero>          领取物品：<火龙之心/@火龙之心>\
+解雇英雄：<解雇英雄/@删除英雄>          英雄转职：<英雄转职/@英雄转职>
+#ELSESAY
+你的实力还不够，升级到35再来吧。\
+[@@CreateHero]
+请选择你想要创建的英雄职业、性别。\ \ \
+创建<男战士/@CREATEHERO_WARR_MAN>英雄        创建<女战士/@CREATEHERO_WARR_WOM>英雄\
+创建<男法师/@CREATEHERO_WIZA_MAN>英雄        创建<女法师/@CREATEHERO_WIZA_WOM>英雄\
+创建<男道士/@CREATEHERO_TAOS_MAN>英雄        创建<女道士/@CREATEHERO_TAOS_WOM>英雄\ \
+<关闭/@exit>
+[@英雄转职]
+想变换你英雄的职业？简单，\
+我需要一个先驱者遗骸和两个金砖，我可以重塑英雄的职业。\
+<英雄转战士/@英雄转战士>\
+<英雄转法师/@英雄转法师>\
+<英雄转道士/@英雄转道士>\
+<关闭/@exit>
+[@英雄转战士]
+
+#IF
+checkitem 先驱者遗骸 1
+checkitem 金砖 2
+#ACT
+take 金砖 2
+take 先驱者遗骸 1
+H.CLEARSKILL
+H.CHANGEJOB warrior
+MESSAGEBOX 你的英雄已经转职为战士
+#ELSEACT
+MESSAGEBOX 转职道具准备的还不够。
+BREAK
+
+[@英雄转法师]
+
+#IF
+checkitem 先驱者遗骸 1
+checkitem 金砖 2
+#ACT
+take 金砖 2
+take 先驱者遗骸 1
+H.CLEARSKILL
+H.CHANGEJOB WIZARD
+MESSAGEBOX 你的英雄已经转职为法师
+#ELSEACT
+MESSAGEBOX 转职道具准备的还不够。
+BREAK
+
+[@英雄转道士]
+
+#IF
+checkitem 先驱者遗骸 1
+checkitem 金砖 2
+#ACT
+take 金砖 2
+take 先驱者遗骸 1
+H.CLEARSKILL
+H.CHANGEJOB taoist
+MESSAGEBOX 你的英雄已经转职为道士
+#ELSEACT
+MESSAGEBOX 转职道具准备的还不够。
+BREAK
+[@CREATEHERO_WARR_MAN]
+#ACT
+CREATEHERO 0 0
+MESSAGEBOX 恭喜你，拥有了新的英雄
+[@CREATEHERO_WARR_WOM]
+#ACT
+CREATEHERO 0 1
+MESSAGEBOX 恭喜你，拥有了新的英雄
+[@CREATEHERO_WIZA_MAN]
+#ACT
+CREATEHERO 1 0
+MESSAGEBOX 恭喜你，拥有了新的英雄
+[@CREATEHERO_WIZA_WOM]
+#ACT
+CREATEHERO 1 1
+MESSAGEBOX 恭喜你，拥有了新的英雄
+[@CREATEHERO_TAOS_MAN]
+#ACT
+CREATEHERO 2 0
+MESSAGEBOX 恭喜你，拥有了新的英雄
+[@CREATEHERO_TAOS_WOM]
+#ACT
+CREATEHERO 2 1
+MESSAGEBOX 恭喜你，拥有了新的英雄
+[@HeroNameFilter]
+领取英雄失败！\
+名字中包含禁止字符或长度超过14位字符……
+
+[@CreateingHero]
+系统正在接受申请，请稍候……
+
+[@HaveHero]
+您已经有英雄了！
+
+[@SetHeroName]
+请先给您的英雄取名字！
+
+[@删除英雄]
+你确定要<解雇>你当前的英雄吗？\
+还是再认真考虑一下吧！\ \
+<提示：解雇英雄后，英雄包裹及身上物品都将消失，请注意！> \ \
+解雇英雄：<解雇英雄/@DelMyHero>\
+再想想吧：<返回/@main>
+
+[@DelMyHero]
+#if
+#act
+DELETEHERO
+;give 英雄内功心法 1
+messagebox  \英雄已删除。
+
+[@NotHaveHero]
+你还没有领取过英雄！
+
+[@LogOutHeroFirst]
+请先将英雄设置下线！
+
+[@火龙之心]
+#if
+check [634] 1
+#act
+#say
+每位勇士都可以在我这里免费领取一次<火龙之心>，不能重复\
+领取！\ \ \ \ \
+<离开/@exit>
+#elseact
+set [634] 1
+give 火龙之心 1

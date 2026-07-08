@@ -1,0 +1,428 @@
+;启动游戏重置
+[@Startup]
+#ACT
+#CALL [系统功能\环境初始化.TXT] @环境初始化
+
+[@邮件送达]
+#IF
+EQUAL A689 <$USERNAME>
+#ACT
+GuildNoticeMsg 255 249 [你有新邮件送达，请点开小地图上的邮件接收吧！] Self
+
+[@询问跟随]
+#IF
+EQUAL A688 <$USERNAME>
+#ACT
+MESSAGEBOX <$STR(A687)>请求挂机跟随你，请问是否接受？ @同意跟随 @拒绝跟随
+
+[@同意跟随]
+#IF
+#ACT
+MOV T20 <$STR(A687)>
+SetOnTimer 5 2
+Gmexecute 开始提问 @同意跟随1
+
+[@拒绝跟随]
+#IF
+#ACT
+Gmexecute 开始提问 @拒绝跟随1
+
+[@同意跟随1]
+#IF
+EQUAL A687 <$USERNAME>
+#ACT
+MESSAGEBOX 对方已同意你的跟随
+MOV T5 <$STR(A688)>
+MOV A687
+MOV A688
+
+[@拒绝跟随1]
+#IF
+EQUAL A687 <$USERNAME>
+#ACT
+MESSAGEBOX 对方拒绝你的跟随
+MOV T5
+MOV A687
+MOV A688
+
+;传输坐标
+[@OnTimer5]
+#IF
+#ACT
+DelTextListLine ..\QuestDiary\数据文件\跟随目录\<$USERNAME>.txt 0 0
+AddTextListEx ..\QuestDiary\数据文件\跟随目录\<$USERNAME>.txt <$STR(T20)>|<$MAP>|<$X>|<$Y> 0
+
+[@归队]
+#IF
+EQUAL <$SCRIPTPARAM1>
+#ACT
+BREAK
+#IF
+EQUAL T11 <$SCRIPTPARAM1>
+#ACT
+CreatGroup <$SCRIPTPARAM1>
+MOV T11
+SENDMSG 6 组员已回归队伍
+#IF
+EQUAL T12 <$SCRIPTPARAM1>
+#ACT
+CreatGroup <$SCRIPTPARAM1>
+MOV T12
+SENDMSG 6 组员已回归队伍
+#IF
+EQUAL T13 <$SCRIPTPARAM1>
+#ACT
+CreatGroup <$SCRIPTPARAM1>
+MOV T13
+SENDMSG 6 组员已回归队伍
+
+#IF
+EQUAL T14 <$SCRIPTPARAM1>
+#ACT
+CreatGroup <$SCRIPTPARAM1>
+MOV T14
+SENDMSG 6 组员已回归队伍
+#IF
+EQUAL T15 <$SCRIPTPARAM1>
+#ACT
+CreatGroup <$SCRIPTPARAM1>
+MOV T15
+SENDMSG 6 组员已回归队伍
+;矿场护卫
+[@OnTimer1]
+#ACT
+#CALL [系统功能\老登辅助\矿场检查.txt] @矿场检查
+;界面攻击倍率界面经验倍率
+[@OnTimer2]
+#IF
+#ACT
+AddDlg 2 0 93 0 5:5 95:7 6 <$POWERRATE>倍
+AddDlg 1 0 94 0 5:-20 95:7 6 <$KILLMONEXPRATE>倍
+
+;天下第一检查
+[@OnTimer4]
+#OR
+EQUAL A6 <$USERNAME>
+EQUAL A10 <$USERNAME>
+EQUAL A14 <$USERNAME>
+EQUAL A26 <$USERNAME>
+EQUAL A22 <$USERNAME>
+EQUAL A18 <$USERNAME>
+#ELSEACT
+SENDMSG 6 你的天下第一已经被夺走，攻击倍率已经被清除！
+POWERRATE 100 0 1 1
+SETOFFTIMER 4
+[@OnTimer3]
+#ACT
+#CALL [系统功能\老登辅助\买药脚本.txt] @买药脚本
+;自动回收强制开启 10 执行一次
+
+;挂机检查周围人
+[@OnTimer7]
+#ACT
+#CALL [系统功能\老登辅助\挂机随机.txt] @挂机随机
+
+[@OnTimer8]
+#CALL [系统功能\老登辅助\挂机跟踪.txt] @挂机跟踪
+;刷新背包
+
+[@OnTimer84]
+#IF
+#ACT
+RefreshBag
+
+#IF
+CHECK [63] 1
+#ELSEACT
+SENDMSG 7 成功刷新背包
+
+;月卡检查
+[@OnTimer9]
+#CALL [系统功能\老登辅助\月卡模式.txt] @月卡模式
+
+;定时维修
+[@OnTimer10]
+#IF
+CHECKGAMEGOLD > 99
+#ACT
+GAMEGOLD - 100
+REPAIRALL
+H.REPAIRALL
+#ELSEACT
+SENDMSG 5 元宝不足自动维修失败！！！
+BREAK
+
+#IF
+CHECK [63] 1
+#ELSEACT
+SENDMSG 7 自动维修成功！
+;挂机自动召唤
+[@OnTimer6]
+#IF
+check [68] 1
+#ACT
+#CALL [系统功能\老登辅助\挂机召唤.txt] @挂机召唤
+
+;刷新背包
+[@Login]
+#IF
+#ACT
+SetOnTimer 117 1
+
+;=======================================植入@Login=典狱长Login群服注入结束=======================================
+;清除连续挂机
+#IF
+CHECK [66] 1
+#ACT
+SET [66] 0
+
+;月卡模式
+#IF
+CHECKLEVEL 30
+EQUAL G1 1
+#ACT
+SetOnTimer 9 2
+
+;自动修复
+#IF
+CHECK [67] 1
+#ACT
+SETONTIMER 10 600
+
+#IF
+#ACT
+DELAYGOTO 1 @MAIN
+
+
+
+[@MAIN]
+#IF
+CHECKTEXTLIST ..\QuestDiary\数据文件\挂机名单.txt <$USERNAME>
+#ACT
+DelTextList ..\QuestDiary\数据文件\挂机名单.txt <$USERNAME>
+
+#IF
+CHECKTEXTLIST ..\QuestDiary\数据文件\挂机名单.txt <$HERONAME>
+#ACT
+DelTextList ..\QuestDiary\数据文件\挂机名单.txt <$HERONAME>
+
+#OR
+EQUAL A6 <$USERNAME>
+EQUAL A10 <$USERNAME>
+EQUAL A14 <$USERNAME>
+EQUAL A26 <$USERNAME>
+EQUAL A22 <$USERNAME>
+EQUAL A18 <$USERNAME>
+#ACT
+SENDMSG 1 天下第一【<$USERNAME>】登录游戏，获得24小时1.2倍攻击力
+POWERRATE 120 86400 0 0
+SETONTIMER 4 30
+
+#IF
+ISADMIN
+#ACT
+SENDMSG 5 欢迎你，管理员
+CHANGEMODE 1 1
+CHANGEMODE 2 1
+CHANGEMODE 3 1
+
+#IF
+#ACT
+#CALL [系统功能\活动.txt] @活动
+#IF
+EQUAL G0 0
+#ACT
+ADDBUTTON 0 2 101 101 101 45 105 7 -1
+#IF
+EQUAL G0 1
+#ACT
+ADDBUTTON 0 2 102 102 102 45 105 7 -1
+#IF
+EQUAL G0 2
+#ACT
+ADDBUTTON 0 2 103 103 103 45 105 7 -1
+#IF
+EQUAL G0 3
+#ACT
+ADDBUTTON 0 2 104 104 104 95 125 7 -1
+;#IF
+;	ISADMIN
+;#ACT
+;	ADDBUTTON 0 2 104 104 104 95 125 7 -1
+;添加重塑体魄次数按钮
+#IF
+LARGE G0 4
+#ACT
+AddDlg 3 0 95 0 0:0 95:7 2 <$RELEVEL>次
+;战士攻速补偿
+#IF
+CHECKJOB warrior
+#ACT
+CHANGESPEED 2 3
+;回收战士称号
+#if(2)
+CHECKJOB wizard
+CHECKJOB taoist
+CHECKFENGHAO 手术刀
+#ACT
+RECYCFENGHAO 手术刀
+
+;开启自动拾取
+#IF
+check [100] 1
+#ACT
+OpenAutoPickItem 1 0 15 1 0 0 500
+GuildNoticeMsg 255 249 [自动拾取已开启，可以自动拾取周围15*15范围的物品 ] Self
+
+#IF
+check [95] 1
+#ACT
+SetOnTimer 84 15
+SENDMSG 7 已开启自动刷新背包
+
+#IF
+check [98] 1
+#ACT
+SetOnTimer 3 5
+SENDMSG 7 已开启自动买药
+
+#IF
+check [99] 1
+#ACT
+SENDMSG 7 已开启拾取极品自动存仓
+
+;重置替死鬼
+#IF
+check [59] 1
+#ACT
+SET [59] 0
+
+
+
+;藏宝阁镜像重置
+#IF
+CHECK [30] 1
+#ACT
+SET [30] 0
+SET [31] 0
+mov N$刷怪次数 0
+Delnpc <$USERNAME>藏宝阁管理员
+DelMirrorMap <$USERNAME>藏宝阁
+
+#IF
+#ACT
+;赌场会用到的人物缓存变量
+VAR INTEGER HUMAN Cache
+CALCVAR HUMAN Cache = 0
+;添加任务按钮
+ADDBUTTON 0 1 82 83 84 153 150 7 -1
+;开启界面刷新
+SetOnTimer 2 1
+;背包货币
+AddDlg 4 0 109 0 316:428 0:0 3 <$$CreditPoint>
+;归队
+;Gmexecute 开始提问 @测试提问
+Gmexecute 开始提问 @归队(<$USERNAME>)
+;清空跟踪名字
+mov T5
+;清空自动跟踪状态
+SET [116] 0
+#IF
+ISNEWHUMAN
+#ACT
+;开启首饰盒
+activationcasket
+SetSndacasket 1
+OpenMissionDlg
+OpenClientDlg 5 0
+OpenClientDlg 3 1 100 10
+OpenClientDlg 4 0
+;任务图标指引闪烁
+ADDBUTTON 0 1 82 83 84 153 150 7 <PlayImg:0:82:2:200:0:0:0> 251#任务\250#打开任务窗口
+;CreateFile ..\QuestDiary\数据文件\存仓列表\<$USERNAME>.txt
+AddTextListEx ..\QuestDiary\数据文件\存仓列表\<$USERNAME>.txt [] 0
+;宝宝存储初始化
+mov T1 []
+GiveStateItem 传送符 1 1 1 1 1 1
+#IF
+ISCASTLEMASTER
+#ACT
+SENDMSG 0 万众欢呼，号令天下的沙城主『<$USERNAME>』进入游戏!
+;城主
+SetIcon 0 65535
+
+[@HeroLogin]
+#IF
+#ACT
+
+;英雄开启首饰盒
+h.activationcasket
+h.SetSndacasket 1
+
+;英雄copy称号
+mov N1 0
+GetAllFengHao L$称号名
+GetListVarCount L$称号名 N$数量
+#IF
+LARGE N$数量 0
+#ACT
+Loopgoto @复制称号 N$数量
+#CALL [系统功能\老登辅助\特效.txt] @英雄登场
+
+#IF
+CheckHeroJob WARRIOR
+#ACT
+H.CHANGESPEED 2 3
+SENDMSG 6 战士英雄攻速，准确补偿开启
+
+
+#IF
+CheckHeroJob WARRIOR
+H.CHECKFENGHAO 手术刀
+#ELSEACT
+H.GIVEFENGHAO 手术刀
+;开启自动拾取
+#IF
+check [65] 1
+#ACT
+H.OpenAutoPickItem 1 0 15 1 0 0 500
+GuildNoticeMsg 255 249 [英雄自动拾取已开启，可以自动拾取周围15*15范围的物品 ] Self
+
+
+;开启定时维修
+#IF
+check [67] 1
+#ACT
+SETONTIMER 10 600
+
+
+[@HeroLogout]
+#IF
+#ACT
+SENDMSG 5 英雄退场
+#CALL [系统功能\老登辅助\特效.txt] @英雄退场
+
+[@复制称号]
+#IF
+H.CHECKFENGHAO <$str(L$称号名[<$str(N1)>])>
+#ELSEACT
+H.GIVEFENGHAO <$str(L$称号名[<$str(N1)>])>
+
+#IF
+#ACT
+Inc N1 1
+
+;=======================================典狱长群服专用QMange开始=======================================
+
+[@OnTimer117]
+#IF
+GetStringPosEX ..\..\..\..\通区\认证账号.txt <$USERID>:<$SERVERNAME> N$认证行 S1
+#ACT
+TextSplit | <$STR(S1)> s10
+SetranKlevelName %s\※典狱长群服-<$SERVERNAME>※\绑定QQ号:<$STR(s11)>
+BREAK
+#ELSESAY
+典狱长群成员检查未通过\请发送以下信息给管理注册机器人(781369990),等待验证\
+<复制信息/@@CopyToClipboard1(绑定 <$SERVERNAME> <$USERID>)>绑定 <$SERVERNAME> <$USERID>
+#ELSEACT
+ChangeState 1 10

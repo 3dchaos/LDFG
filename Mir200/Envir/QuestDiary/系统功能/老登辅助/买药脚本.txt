@@ -1,0 +1,70 @@
+[@买药脚本]
+{
+#IF
+	LARGE U22 0
+	#ACT
+	GOTO @买红
+#IF
+	LARGE U23 0
+	#ACT
+	GOTO @买蓝
+
+[@买红]
+#IF
+	LARGE U22 0
+	#ACT
+	GetItemCount 0 强效金创药 N$红数量
+	MOV N$红药差 <$STR(U22)>
+	DEC N$红药差 <$STR(N$红数量)>
+
+	#ELSEACT
+	BREAK
+#IF
+	LARGE N$红药差 0
+	#ACT
+	MUL N$红药钱 <$STR(N$红药差)> 900
+	#ELSEACT
+	BREAK
+#IF
+	CHECKGOLD <$STR(N$红药钱)>
+#ACT
+	GOLDCOUNT - <$STR(N$红药钱)>
+	GIVE 强效金创药 <$STR(N$红药差)>
+	#ELSEACT
+	SENDMSG 7 强效金创药购买失败！金币不足。需要<$STR(N$红药钱)>金币
+	BREAK
+#IF
+	CHECK [63] 1
+	#ELSEACT
+	SENDMSG 7 成功购买<$STR(N$红药差)>个强效金创药
+
+[@买蓝]
+#IF
+	LARGE U23 0
+	#ACT
+	GetItemCount 0 强效魔法药 N$蓝数量
+	MOV N$蓝药差 <$STR(U23)>
+	DEC N$蓝药差 <$STR(N$蓝数量)>
+	#ELSEACT
+	BREAK
+#IF
+	LARGE N$蓝药差 0
+	#ACT
+	MUL N$蓝药钱 <$STR(N$蓝药差)> 900
+	#ELSEACT
+	BREAK
+#IF
+	CHECKGOLD <$STR(N$蓝药钱)>
+#ACT
+	GOLDCOUNT - <$STR(N$蓝药钱)>
+	GIVE 强效魔法药 <$STR(N$蓝药差)>
+	#ELSEACT
+	SENDMSG 7 强效魔法药购买失败！金币不足。需要<$STR(N$蓝药钱)>金币
+	BREAK
+
+#IF
+	CHECK [63] 1
+	#ELSEACT
+	SENDMSG 7 成功购买<$STR(N$蓝药差)>个强效魔法药
+
+}

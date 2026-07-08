@@ -1,0 +1,267 @@
+[@main]
+
+#IF
+#ACT
+OPENMERCHANTBIGDLG 0 22 1 0 0 0 1 622 16 
+#SAY
+;老登副本标题
+<Img:36:0:225:7>\
+;地图缩略
+<Img:49:0:27:29>\
+;boss图
+<Img:59:0:30:170>\
+;boss图框
+<Img:57:0:30:150>\
+<Img:63:0:208:260|7#进入火龙地图野外4块金砖,1个火龙凭证/@野图>
+<Img:60:0:240:260|7#单人副本4块金砖,1个火龙凭证/@单人>
+<Img:61:0:275:260|7#组队副本4块金砖,1个火龙凭证,1个祖玛头像,1个沃玛号角/@组队>\
+<Text:我比奇国的一名将军，镇守了一处非常危险的地域:180:0{FCOLOR=7}>\
+<Text:那里非常危险,什么？你想去出一份力？:180:5{FCOLOR=7}>\
+<Text:让我看看你有没有这个实力吧！:180:7{FCOLOR=7}>\
+<Text:如果成为火龙勇士，4块:180:20{FCOLOR=7}><Text:金砖:180:20{FCOLOR=251}><Text:，1个:180:20{FCOLOR=7}><Text:火龙凭证:180:20{FCOLOR=251}><Text:，我便可以送你进去:180:20{FCOLOR=7}>\
+<Text:里面有滚烫的岩浆，每分钟需要60元宝购买护体真气:180:20{FCOLOR=249}>\
+<Text:我可以为你创建一个专属镜像，一个人的话请给我4块:180:27{FCOLOR=7}><Text:金砖:180:27{FCOLOR=251}><Text:，1个:180:27{FCOLOR=7}><Text:火龙凭证:180:27{FCOLOR=251}>\
+<Text:如果你还要带上你的伙伴(65级队员)，请准备以下道具:180:27{FCOLOR=7}>\
+<Text:4个:180:27{FCOLOR=7}><Text:金砖:180:27{FCOLOR=251}><Text:1个:180:27{FCOLOR=7}><Text:火龙凭证:180:27{FCOLOR=251}><Text:1个:180:27{FCOLOR=7}><Text:祖玛头像:180:27{FCOLOR=251}> <Text:1个:180:27{FCOLOR=7}><Text:沃玛号角:180:27{FCOLOR=251}>\
+<Text:镜像的世界只能稳定120分钟，请把握机会:180:33{FCOLOR=7}>\
+<Text:如果你退出地图，你将不能再次进入！必须清除后再次创建:180:35{FCOLOR=249}>\
+#IF
+CHECK [251] 1
+#SAY
+<Text:你目前已拥有火龙镜像:180:38{FCOLOR=57}><Text:清除镜像:180:38{FCOLOR=251}/@清除副本> \
+<Text:成为火龙勇士:180:38{FCOLOR=251}/@成为火龙勇士>   <Text:什么魔血石？:180:38{FCOLOR=251}/@魔血石> \
+#ELSESAY
+<Text:你目前未拥有火龙镜像:180:38{FCOLOR=246}>\
+<Text:成为火龙勇士:180:38{FCOLOR=251}/@成为火龙勇士>   <Text:什么魔血石？:180:38{FCOLOR=251}/@魔血石> \
+
+[@野图]
+#IF
+	LARGE G0 4
+	#ELSEACT
+	MESSAGEBOX 这个区域还是太危险,等我们探索完毕...
+	BREAK
+
+#IF
+  CHECKLEVELEX < 64
+#ACT
+MESSAGEBOX 先升级到65级再来吧！
+BREAK
+
+#IF
+	CHECKGAMEGOLD < 300
+	#ACT
+	MESSAGEBOX 注意！里面可是时刻需要消耗元宝\你至少准备300个吧！
+	BREAK
+
+#IF
+CHECK [422] 0
+#ACT
+MESSAGEBOX 你还不是火龙勇士，我没办法让你去这么危险的地方
+BREAK
+
+#IF
+checkitem 金砖 4
+checkitem 火龙凭证 1
+#ACT
+take 金砖 4
+take 火龙凭证 1
+MAPMOVE  hlmg 385 346
+SENDMSG 0 勇敢的『<$USERNAME>』勇士正在前往恐怖火龙洞穴。
+#ELSEACT
+MESSAGEBOX 你的东西还没准备好！
+BREAK
+
+[@魔血石]           
+#ACT
+CLOSEMERCHANTBIGDLG
+#SAY
+\ 
+<Text:极度危险的地图会使药品失效！所以需要上古神秘的:15:20{FCOLOR=7}>\
+<Text:魔血石佩戴在身上来回复血量，当然道士有回复能力:15:20{FCOLOR=7}>\
+<Text:你想制作魔血石？去问问盟重土城神秘药店的老板试试吧:15:20{FCOLOR=7}>\
+
+<Text:他在哪？:15:38{FCOLOR=251}/@他在哪> \
+<Text:返回:15:38{FCOLOR=251}/@main> \
+
+[@他在哪]           
+#ACT
+OPENMERCHANTBIGDLG 24 20 1 0 0 0 1 390 20 1
+#SAY
+\ 
+<Text:盟重土城的267：353就是神秘药店的位置了:15:20{FCOLOR=7}>\
+<Text:快去看看吧！:15:20{FCOLOR=7}>\
+<Text:返回:15:38{FCOLOR=251}/@main> \
+
+[@单人]
+
+#IF
+	LARGE G0 4
+	#ELSEACT
+	MESSAGEBOX 这个区域还是太危险,等我们探索完毕...
+	BREAK
+#IF
+  CHECKLEVELEX < 64
+#ACT
+MESSAGEBOX 先升级到65级再来吧！
+BREAK
+
+
+#IF
+CHECK [422] 0
+#ACT
+MESSAGEBOX 你还不是火龙勇士，我没办法让你去这么危险的地方
+BREAK
+;判断是否拥有镜像
+#IF
+CHECK [251] 1
+#ACT
+MESSAGEBOX 你已经拥有镜像了！请清除再创建
+BREAK
+
+;判断创建次数
+#IF
+LARGE J3 2
+#ACT
+MESSAGEBOX 今天我已经无法为你创建镜像了
+BREAK
+
+
+#IF
+checkitem 金砖 4
+checkitem 火龙凭证 1
+#ACT
+take 金砖 4
+take 火龙凭证 1
+AddMirrorMap hl001 <$USERNAME>火龙一 火龙迷宫 14400 0 304 N$火龙成功判断 1
+CreateNPC 火龙新兵 <$USERNAME>火龙一 21 221 32 火龙新兵 1
+INC J3 1
+SET [251] 1
+GOTO @刷怪
+MOV N$火龙一刷新次数 0
+MAPMOVE  <$USERNAME>火龙一 385 346
+SENDMSG 0 勇敢的『<$USERNAME>』勇士正在前往恐怖火龙洞穴(镜像)。
+#ELSEACT
+MESSAGEBOX 请检查你的道具是否准备好！
+BREAK
+
+[@组队]
+#IF
+	LARGE G0 4
+	#ELSEACT
+	MESSAGEBOX 这个区域还是太危险,等我们探索完毕...
+	BREAK
+#IF
+  CHECKLEVELEX < 64
+#ACT
+MESSAGEBOX 先升级到65级再来吧！
+BREAK
+
+
+#IF
+CHECK [422] 0
+#ACT
+MESSAGEBOX 你还不是火龙勇士，我没办法让你去这么危险的地方
+BREAK
+
+#IF
+CHECK [251] 1
+#ACT
+MESSAGEBOX 你已经拥有镜像了！请清除再创建
+BREAK
+
+
+#if
+NOT ISGROUPMASTER
+#ACT
+SendMsg 5 你不是组长,不能组队传送
+BREAK
+
+;判断创建次数
+#IF
+LARGE J3 2
+#ACT
+MESSAGEBOX 今天我已经无法为你创建镜像了
+BREAK
+
+#IF
+checkitem 金砖 4
+checkitem 火龙凭证 1
+checkitem 祖玛头像 1
+checkitem 沃玛号角 1
+#ACT
+take 金砖 4
+take 火龙凭证 1
+take 祖玛头像 1
+take 沃玛号角 1
+MOV N$火龙一刷新次数 0
+AddMirrorMap hl001 <$USERNAME>火龙一 火龙迷宫 14400 0 304 N$火龙成功判断 1
+CreateNPC 火龙新兵 <$USERNAME>火龙一 21 221 32 火龙新兵 1
+INC J3 1
+SET [251] 1
+GOTO @刷怪
+GROUPMAPMOVE <$USERNAME>火龙一 385 346 65
+SENDMSG 0 伟大的『<$USERNAME>』勇士们组队前往恐怖火龙洞穴(镜像)。
+#ELSEACT
+MESSAGEBOX 请检查你的道具是否准备好！
+BREAK
+
+[@清除副本]
+#if
+#ACT
+SET [251] 0
+DelMirrorMap <$USERNAME>火龙一
+DelMirrorMap <$USERNAME>火龙二
+DelMirrorMap <$USERNAME>火龙三
+GOTO @main
+
+
+[@刷怪]
+#IF
+#ACT
+MONGENEX <$USERNAME>火龙一 193 210 火蜘蛛 400 50 255 0
+MONGENEX <$USERNAME>火龙一 193 210 火蜘蛛1 400 300 255 0
+MONGENEX <$USERNAME>火龙一 193 210 火蜥蜴 400 40 255 0
+MONGENEX <$USERNAME>火龙一 193 210 火蜥蜴1 400 300 255 0
+MONGENEX <$USERNAME>火龙一 193 210 金杖蜘蛛[狂暴] 400 100 255 0
+MONGENEX <$USERNAME>火龙一 193 210 金杖蜘蛛[精英] 400 200 255 0
+
+
+[@成为火龙勇士]
+#IF
+CHECKFENGHAO 火龙勇士
+#ACT
+MESSAGEBOX 你已经是火龙勇士了！
+BREAK
+
+#IF
+CHECK [422] 1
+#ACT
+MESSAGEBOX 你已经是火龙勇士了！
+GIVEFENGHAO 火龙勇士
+BREAK
+
+#IF
+#ACT
+CLOSEMERCHANTBIGDLG
+#SAY
+\ 
+<Text:必须成为真正的勇士，我才能带你进去，去魔龙地图击杀boss:15:20{FCOLOR=7}>\
+<Text:给我他们掉落的凭证，我就让你加入我们！:15:20{FCOLOR=7}>\
+
+<Text:我带来了:15:38{FCOLOR=251}/@我带来了> \
+<Text:返回:15:38{FCOLOR=251}/@main> \
+
+[@我带来了]
+
+#IF
+checkitem 火龙凭证 1
+#ACT
+take 火龙凭证 1
+SET [422] 1
+SENDMSG 1 『<$USERNAME>』在比奇加入了火龙军团，成为了火龙勇士！
+GIVEFENGHAO 火龙勇士
+#CALL [系统功能\老登辅助\特效.txt] @播放礼花
+CLOSE
+#ELSEACT
+MESSAGEBOX 你还没有火龙凭证呢，去击杀魔龙怪物获取吧！
+CLOSE

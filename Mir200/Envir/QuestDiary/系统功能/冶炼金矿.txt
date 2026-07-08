@@ -1,0 +1,168 @@
+[@开始冶炼]
+{
+#IF
+	ISADMIN
+	#ACT
+	MOV N$边框色值1 255
+	MOV N$边框色值2 250
+	MOV N$边框色值3 249
+	#ELSEACT
+	MOV N$边框色值1 -1
+	MOV N$边框色值2 -1
+	MOV N$边框色值3 -1
+#IF
+#ACT
+GetBagItemCount 金矿 N$金矿数
+#IF
+#ACT
+mov N$资源编号 0 
+OpenBigDialogBox <$STR(N$资源编号)> 16 1 4 0 0 1 384 23
+#SAY
+<Img:~#L1:97:<$STR(N$资源编号)>:144:10>\
+<&PlayImg:~#L1:1:420:30:200:250:234:0>
+<Img:~#L1:96:<$STR(N$资源编号)>:-278:49>\
+<&Layout:~#L02:190:80:195:310:<$STR(N$边框色值2)>>
+<MText:#L02~:0:0:255:你获得了金矿?|
+这个是个好东西呀！|
+交给我,我能为你炼出金砖哦！|
+每次需要消耗1000金币|
+金矿放在背包里就可以了|
+>
+<Text:#L02~:冶炼金矿完全免费:0:10{FCOLOR=215}>
+<NewLine:#L02~>
+<Img:#L02~:1032:1:60:12>
+<ItemShow:287:<$STR(N$金矿数)>:45:167:1:0:0>
+<NewLine:#L02~>
+<ImgEx:#L02~#L03:1:1668:1669:1668:0:65/@冶炼金矿1>
+<Text:#L03~:冶炼一块|冶炼一块金矿有几率获得金条和金砖:13:9{FCOLOR=243}/@冶炼金矿1>
+<ImgEx:#L02~#L04:1:1668:1669:1668:30:65/@冶炼金矿6>
+<Text:#L04~:冶炼十块|冶炼十块金矿有几率获得金盒，金条和金砖:13:9{FCOLOR=251}/@冶炼金矿6>
+[@冶炼金矿6]
+#IF
+checkitem 金矿 10
+;checkgold 10000
+#ACT
+GOTO @挖矿任务
+MOV N$循环次数 1
+MOV N$获得金币 0
+MOV N$获得金条 0
+MOV N$获得金砖 0
+MOV N$获得金盒 0
+
+While N$循环次数 < 10
+GOTO @冶炼金矿7
+Inc N$循环次数 1
+EndWhile
+MESSAGEBOX 冶炼十次完毕！\获得金币：<$STR(N$获得金币)>，获得金条：<$STR(N$获得金条)>，获得金砖：<$STR(N$获得金砖)>，获得金盒：<$STR(N$获得金盒)>。
+GOTO @开始冶炼
+#ELSEACT
+MESSAGEBOX 别开玩笑了,你根本没准备好金矿
+GOTO @开始冶炼
+[@冶炼金矿1]
+#IF
+checkitem 金矿 1
+;checkgold 1000
+#ACT
+GOTO @挖矿任务
+GOTO @冶炼金矿2
+#ELSEACT
+MESSAGEBOX 别开玩笑了,你根本没准备好金矿
+[@冶炼金矿2]
+#IF
+ random 100
+ #act
+ take 金矿 1
+ take 金币 1000
+  MESSAGEBOX 天哪,你居然练出了金砖!!!恭喜你
+  SENDMSG 0 『<$USERNAME>』玩家在武器店冶炼金矿获得了金砖!!!
+  GIVE 金砖 1
+  GOTO @开始冶炼
+  BREAK
+#IF
+ random 20
+ #act
+ take 金矿 1
+ take 金币 1000
+  MESSAGEBOX 天哪,你居然练出了金条!!恭喜你
+  SENDMSG 0 『<$USERNAME>』玩家在武器店冶炼金矿获得了金条!!!
+  GIVE 金条 1
+  GOTO @开始冶炼
+  BREAK
+#IF
+ random 2
+ #act
+ take 金矿 1
+ take 金币 1000
+  MESSAGEBOX 我尽量了,炼出了100金币,你先拿着吧
+  give 金币 100
+	GOTO @开始冶炼
+  BREAK
+
+#IF
+#act
+ take 金矿 1
+ take 金币 1000
+  MESSAGEBOX 金矿质量堪忧,并没有获得什么,祝你下次好运吧！
+GOTO @开始冶炼
+  BREAK
+  
+
+[@冶炼金矿7]
+#IF
+ RANDOM 1000
+  #act
+ take 金矿 1
+ take 金币 1000
+  SENDMSG 6 天哪,你居然练出了金盒!!!恭喜你
+  SENDMSG 0 『<$USERNAME>』玩家在武器店冶炼金矿获得了金盒!!!
+  SENDMSG 0 『<$USERNAME>』玩家在武器店冶炼金矿获得了金盒!!!
+  GIVE 金盒 1
+  Inc N$获得金盒 1
+  BREAK
+  
+#IF
+ random 100
+ #act
+ take 金矿 1
+ take 金币 1000
+  SENDMSG 6 天哪,你居然练出了金砖!!!恭喜你
+  SENDMSG 0 『<$USERNAME>』玩家在武器店冶炼金矿获得了金砖!!!
+  GIVE 金砖 1
+  Inc N$获得金砖 1
+  BREAK
+#IF
+ random 20
+ #act
+ take 金矿 1
+ take 金币 1000
+  SENDMSG 6 天哪,你居然练出了金条!!恭喜你
+  SENDMSG 0 『<$USERNAME>』玩家在武器店冶炼金矿获得了金条!!!
+  GIVE 金条 1
+  Inc N$获得金条 1
+  BREAK
+#IF
+ random 2
+ #act
+ take 金矿 1
+ take 金币 1000
+  SENDMSG 6 我尽力了,炼出了100金币,你先拿着吧
+  give 金币 100
+  Inc N$获得金币 100
+  BREAK
+#IF
+#act
+ take 金矿 1
+ take 金币 1000
+  SENDMSG 6 金矿质量堪忧,并没有获得什么,祝你下次好运吧！
+  BREAK
+
+
+[@挖矿任务]
+#IF
+	CHECK [5] 0
+	#ACT
+	SET [5] 1
+	SENDMSG 5 提示：完成支线任务：金子？金子！！
+	RefreshMissPage 170任务
+	ADDBUTTON 0 1 82 83 84 153 150 7 <PlayImg:0:82:2:200:0:0:0> 251#任务\250#打开任务窗口
+}

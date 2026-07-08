@@ -1,0 +1,18 @@
+#AutoRun NPC RUNONDAY 23:59 @清理每日
+#AutoRun NPC MIN 8 @虎卫检测
+#AutoRun NPC MIN 10 @全天公告
+
+#AutoRun NPC RUNONDAY 15:00 @下午宫殿
+#AutoRun NPC RUNONDAY 19:00 @晚上宫殿
+;#AutoRun NPC RUNONDAY 19:30 @幻境魔影
+;#AutoRun NPC RUNONDAY 23:30 @幻境魔影
+
+#AutoRun NPC MIN 1 @活动结束
+#AutoRun NPC MIN 30 @刷新魔龙树
+#AutoRun NPC MIN 1 @密境刷新
+#AutoRun NPC MIN 1 @幻十刷新
+#AutoRun NPC RUNONDAY 7:00 @火龙降临
+#AutoRun NPC RUNONDAY 12:00 @火龙降临
+#AutoRun NPC RUNONDAY 16:00 @火龙降临
+#AutoRun NPC RUNONDAY 22:00 @火龙降临
+;#AutoRun NPC SEC 10 @关闭开区活动

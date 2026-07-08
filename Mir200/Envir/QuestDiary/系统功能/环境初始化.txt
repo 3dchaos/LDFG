@@ -1,0 +1,19 @@
+[@环境初始化]
+{
+#IF
+#ACT
+GetListString ..\QuestDiary\系统功能\禁止存仓目录.txt 0 A30
+GetListString ..\QuestDiary\系统功能\禁止邮寄道具.txt 0 A31
+#IF
+	LARGE G0 0
+#ACT
+AddMapGate 打开丛林迷宫 11 347 241 1 12 322 475
+AddMapGate 打开丛林迷宫 11 348 240 1 12 323 474
+AddMapGate 打开丛林迷宫 11 349 239 1 12 324 473
+AddMapGate 打开丛林迷宫 11 350 238 1 12 325 472
+AddMapGate 打开丛林迷宫 11 351 237 1 12 326 471
+AddMapGate 打开丛林迷宫 11 352 236 1 12 327 470
+#IF
+#ACT
+MOV I776 1
+}

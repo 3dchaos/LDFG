@@ -1,0 +1,72 @@
+()
+%100
+[@main]
+\\
+你好啊，怎么忧心忡忡的？\
+<抹除宝石镶嵌/@抹除宝石镶嵌>痕迹。\
+;<修复易碎/@修复易碎>痕迹。\
+
+[@修复易碎]
+装备转移损伤了装备？易碎状态让你心有余悸？\
+你算找对人了，我有祖上传下来的手艺。可以修复装备的易碎。\
+当然花费不会少，你打算试试吗？\
+<ITEMBOX:7:1:730:300:100:45:45:*:254#请放入要修复的道具^251#老登传奇>\
+<抹除易碎/@抹除易碎>支付20000点声望值。\
+<返回/@main>\
+
+[@抹除易碎]
+#ACT
+GetCustomItemText boxitem7 <$STR(S1)>
+
+#IF
+CheckContainsText <$STR(S1)> [易碎]
+#ELSEACT
+MESSAGEBOX 这个道具并没有易碎，不可以修复。
+BREAK
+#IF
+CHECKCREDITPOINT > 19999
+#ACT
+CREDITPOINT - 20000
+SetCustomItemText boxitem7 
+UpdateItem boxitem7
+ReturnBoxItem 7
+MESSAGEBOX 恭喜！装备易碎修复成功
+#ELSEACT
+MESSAGEBOX 你的声望值不够！
+BREAK
+
+
+
+[@抹除宝石镶嵌]
+装备镶嵌的痕迹太多了？我可以帮助你修复宝石镶嵌的痕迹。\
+让它焕然一新！并不会损伤武器的极品点数！\
+去准备3个品质为20的黑铁矿石，5000点声望值。\
+<我准备好了/@我准备好了>\
+<返回/@main>\
+[@我准备好了]
+#ACT
+OPENUPGRADEDLG 抹除宝石痕迹
+
+[@UpgradeDlgItem]
+#IF
+CheckMine 黑铁矿石 3 > 19
+CHECKCREDITPOINT > 4999
+#ACT
+TakeMine 黑铁矿石 3 > 19
+CREDITPOINT - 5000
+ChangeItemUpgradeCount -1 - 5
+MESSAGEBOX 我已经成功修复了，镶嵌次数减少了。拿好
+RECLAIMITEM
+#ELSEACT
+RECLAIMITEM
+#ELSESAY
+请准备好我说的这些东西。
+<返回/@main>\
+
+[@修正对话框BUG]
+#IF
+#SAY
+请拿好你的东西\
+<返回/@main>\
+#ACT
+RECLAIMITEM

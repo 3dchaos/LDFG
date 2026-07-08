@@ -1,0 +1,218 @@
+;[@关闭开区活动]
+;#IF
+;#ACT
+;Gmexecute 开始提问 @关闭经验活动
+
+;#IF
+;CHECKLEVEL 30
+;#ACT
+;SENDMSG 6 全区双倍经验活动已经结束,新人双倍开启，30级以下新人小退触发
+;CloseArrBuff 1 2
+;KILLMONEXPRATE 100 2 0
+;#ELSEACT
+;SENDMSG 6 全区双倍经验活动已经结束,新人双倍开启，30级以下新人小退触发
+
+
+;[@关闭经验活动]
+;#IF
+;CHECKLEVEL 30
+;#ACT
+;SENDMSG 6 全区双倍经验活动已经结束,新人双倍开启，30级以下新人小退触发
+;CloseArrBuff 1 2
+;KILLMONEXPRATE 100 2 0
+;#ELSEACT
+;SENDMSG 6 全区双倍经验活动已经结束,新人双倍开启，30级以下新人小退触发
+
+
+
+[@清理每日]
+#IF
+#ACT
+CLEARNAMELIST ..\QuestDiary\数据文件\新人元宝IP检测.txt
+CLEARNAMELIST ..\QuestDiary\数据文件\新人元宝名单.txt
+
+[@全天公告]
+#IF
+#ACT
+SENDMOVEMSG 0 251 0 10 1 请不要开加速和超级不卡等非法外挂，珍惜群服环境！ 16 20 0
+
+[@幻十刷新]
+#IF
+CheckMapSameMonCount H010 牛魔侍卫8 < 470
+#ACT
+MonGenEx H010 205 210 牛魔侍卫8 200 470 0 255
+#IF
+CheckMapSameMonCount H010 牛魔法师8 < 470
+#ACT
+MonGenEx H010 205 210 牛魔法师8 200 470 0 255
+#IF
+CheckMapSameMonCount H010 牛魔将军8 < 470
+#ACT
+MonGenEx H010 205 210 牛魔将军8 200 470 0 255
+#IF
+CheckMapSameMonCount H010 牛魔祭司0 < 470
+#ACT
+MonGenEx H010 205 210 牛魔祭司0 200 470 0 255
+
+[@密境刷新]
+#IF
+CheckMapSameMonCount hero1 经验白野猪 < 400
+#ACT
+MonGenEx hero1 127 122 经验白野猪 200 400 0 156
+
+#IF
+CheckMapSameMonCount hero2 经验白野猪 < 400
+#ACT
+MonGenEx hero2 127 122 经验白野猪 200 400 0 156
+
+
+[@虎卫检测]
+#IF
+CheckMonMap 1002 1
+CheckMapSameMonCount 1002 虎卫 > 0
+#ELSEACT
+GOTO @虎卫刷新
+#ACT
+MOV I11 1
+
+[@虎卫刷新]
+#IF
+#ACT
+MonGenEx 1002 12 12 虎卫 5 3 0 255
+MOV I11 1
+break
+
+
+[@下午宫殿]
+#IF
+	LARGE G0 1
+#ELSEACT
+	BREAK
+#IF
+#ACT
+CLEARMAPMON GA1
+MonGenEx GA1 19 30 魔龙教主 10 1 0 255
+SENDMSG 1 魔龙教主已在魔龙宫殿出现，与其一决胜负,将其消灭，就能得到魔龙教主身上携带着的大量珍奇宝藏。
+
+[@刷新魔龙树]
+#IF
+	LARGE G0 1
+#ELSEACT
+	BREAK
+#IF
+#ACT
+RandomKillMon 3 魔龙树妖 1 1
+MonGenEx 3 618 117 魔龙树妖 0 1 255
+
+[@晚上宫殿]
+#IF
+	LARGE G0 1
+#ELSEACT
+	BREAK
+#IF
+#ACT
+CLEARMAPMON GA1
+MonGenEx GA1 19 30 魔龙教主 10 1 0 255
+SENDMSG 1 魔龙教主已在魔龙宫殿出现，与其一决胜负,将其消灭，就能得到魔龙教主身上携带着的大量珍奇宝藏。
+
+[@火龙降临]
+#IF
+	LARGE G0 4
+#ELSEACT
+	BREAK
+#if
+CheckMapSameMonCount D2083 火龙教主 < 1
+#ACT
+MonGenEx D2083 82 44 火龙教主 0 1 0 251
+SENDMSG 1 火龙教主，这位沉睡已久的霸主，携带着足以焚尽万物的火焰之力，从古老的沉睡中苏醒。它的出现，不仅标志着火龙洞深处隐藏的秘密即将揭开，更是对所有勇士勇气与实力的终极考验！
+Break
+;火龙巢穴
+;D2083	82	44	火龙教主	0	1	30	1	255
+
+
+
+[@幻境魔影]
+#IF
+	LARGE G0 1
+#ELSEACT
+	BREAK
+	
+#IF
+RANDOM 4
+#ACT
+PARAM1 H003
+PARAM2 60
+PARAM3 60
+MONGEN 魔龙射手 5 20
+MONGEN 魔龙刀兵 5 20
+MONGEN 魔龙破甲兵 5 20
+MONGEN 电僵王8 5 20
+MONGEN 暗之触龙神8 2 20
+MONGEN 魔龙战将 1 20
+MONGEN 魔龙力士[魔化] 1 20
+MONGEN 魔龙巨蛾 1 20
+MONGEN 魔龙树妖 1 20
+MONGEN 魔影巨人 1 20
+MONGEN 暗之魔龙教主 1 20
+;H008	40	45	暗之魔龙教主	30	1	30	0	243	
+SENDMSG 1 邪恶的怪物军团正向玛法大陆幻境三层发起一场声势浩大的进攻，同时也带来了一个振奋人心的消息。据说这些怪物的身上携带了人们期待已久超级属性的三大至尊头盔。
+Break
+
+#IF
+RANDOM 3
+#ACT
+PARAM1 H006
+PARAM2 100
+PARAM3 100
+MONGEN 魔龙射手 5 20
+MONGEN 魔龙刀兵 5 20
+MONGEN 魔龙破甲兵 5 20
+MONGEN 电僵王8 5 20
+MONGEN 暗之触龙神8 2 20
+MONGEN 魔龙战将 1 20
+MONGEN 魔龙力士[魔化] 1 20
+MONGEN 魔龙巨蛾 1 20
+MONGEN 魔龙树妖 1 20
+MONGEN 魔影巨人 1 20
+MONGEN 暗之魔龙教主 1 20
+SENDMSG 1 邪恶的怪物军团正向玛法大陆幻境六层发起一场声势浩大的进攻，同时也带来了一个振奋人心的消息。据说这些怪物的身上携带了人们期待已久超级属性的三大至尊头盔。
+Break
+
+#IF
+RANDOM 2
+#ACT
+PARAM1 H007
+PARAM2 100
+PARAM3 100
+MONGEN 魔龙射手 5 20
+MONGEN 魔龙刀兵 5 20
+MONGEN 魔龙破甲兵 5 20
+MONGEN 电僵王8 5 20
+MONGEN 暗之触龙神8 2 20
+MONGEN 魔龙战将 1 20
+MONGEN 魔龙力士[魔化] 1 20
+MONGEN 魔龙巨蛾 1 20
+MONGEN 魔龙树妖 1 20
+MONGEN 魔影巨人 1 20
+MONGEN 暗之魔龙教主 1 20
+SENDMSG 1 邪恶的怪物军团正向玛法大陆幻境七层发起一场声势浩大的进攻，同时也带来了一个振奋人心的消息。据说这些怪物的身上携带了人们期待已久超级属性的三大至尊头盔。
+Break
+
+#IF
+#ACT
+PARAM1 H008
+PARAM2 40
+PARAM3 45
+MONGEN 魔龙射手 5 20
+MONGEN 魔龙刀兵 5 20
+MONGEN 魔龙破甲兵 5 20
+MONGEN 电僵王8 5 20
+MONGEN 暗之触龙神8 2 20
+MONGEN 魔龙战将 1 20
+MONGEN 魔龙力士[魔化] 1 20
+MONGEN 魔龙巨蛾 1 20
+MONGEN 魔龙树妖 1 20
+MONGEN 魔影巨人 1 20
+MONGEN 暗之魔龙教主 1 20
+SENDMSG 1 邪恶的怪物军团正向玛法大陆幻境八层发起一场声势浩大的进攻，同时也带来了一个振奋人心的消息。据说这些怪物的身上携带了人们期待已久超级属性的三大至尊头盔。
+Break

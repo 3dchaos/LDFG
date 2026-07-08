@@ -1,0 +1,265 @@
+[@main]
+#IF
+	LARGE G0 3
+	#ELSESAY
+	没有任何回应，这个奇怪的雪人在这很久了（1.85开放内容）
+	#ELSEACT
+	BREAK
+#IF
+#ACT
+OPENMERCHANTBIGDLG 0 22 1 0 0 0 1 622 16 
+#SAY
+;老登副本标题
+<Img:36:0:225:7>\
+;地图缩略
+<Img:50:0:27:29>\
+;boss图
+<Img:58:0:30:170>\
+;boss图框
+<Img:57:0:30:150>\
+<Img:62:0:208:250|7#进入雪域地图野外2块金砖/@野图>
+<Img:60:0:240:250|7#单人副本2块金砖/@单人>
+<Img:61:0:275:250|7#组队副本2块金砖,1个祖玛头像,1个沃玛号角/@组队>\
+<Text:在遥远的北方有一个神秘的雪域，有很多机遇和宝藏！:180:0{FCOLOR=7}>\
+<Text:我这里可以帮你到达那里，一个人的话请给我2块:180:20{FCOLOR=7}><Text:金砖:180:20{FCOLOR=251}>\
+<Text:注意：雪域里每时每刻都要真气护体，不然你会被冻僵的！每分钟收费30元宝:180:20{FCOLOR=249}>\
+<Text:我还可以为你创建一个专属镜像，一个人的话请给我2块:180:27{FCOLOR=7}><Text:金砖:180:27{FCOLOR=251}>\
+<Text:如果你还要带上你的伙伴(45级队员)，请准备以下道具:180:27{FCOLOR=7}>\
+<Text:2个:180:27{FCOLOR=7}><Text:金砖:180:27{FCOLOR=251}><Text:1个:180:27{FCOLOR=7}><Text:祖玛头像:180:27{FCOLOR=251}> <Text:1个:180:27{FCOLOR=7}><Text:沃玛号角:180:27{FCOLOR=251}>\
+<Text:镜像的世界只能稳定120分钟，请把握机会:180:33{FCOLOR=7}>\
+<Text:如果你退出地图，你将不能再次进入！必须清除后再次创建:180:35{FCOLOR=249}>\
+
+#IF
+CHECK [250] 1
+#SAY
+<Text:你目前已拥有雪域镜像:180:38{FCOLOR=57}><Text:清除镜像:180:38{FCOLOR=251}/@清除副本> \
+#ELSESAY
+<Text:你目前未拥有雪域镜像:180:38{FCOLOR=246}>\
+[@野图]
+#IF
+  CHECKLEVELEX < 44
+#ACT
+MESSAGEBOX 您的等级还没到45级，去不了雪域
+BREAK
+
+#IF
+	CHECKGAMEGOLD < 300
+	#ACT
+	MESSAGEBOX 注意！里面可是时刻需要消耗元宝\你至少准备300个吧！
+	BREAK
+
+#IF
+checkitem 金砖 2
+#ACT
+take 金砖 2
+MAPMOVE  hell201 418 390
+SENDMSG 0 伟大的『<$USERNAME>』勇士正在前往神秘雪域！！
+#ELSEACT
+MESSAGEBOX 请检查你的道具是否准备好！
+BREAK
+
+[@单人]
+#IF
+	LARGE G0 3
+	#ELSEACT
+	MESSAGEBOX 暂未开放
+	BREAK
+#IF
+  CHECKLEVELEX < 44
+#ACT
+MESSAGEBOX 您的等级还没到45级，去不了雪域
+BREAK
+
+#IF
+	CHECKGAMEGOLD < 300
+	#ACT
+	MESSAGEBOX 注意！里面可是时刻需要消耗元宝\你至少准备300个吧！
+	BREAK
+;判断是否拥有镜像
+#IF
+CHECK [250] 1
+#ACT
+MESSAGEBOX 你已经拥有镜像了！请清除再创建
+BREAK
+
+;判断创建次数
+#IF
+LARGE J2 2
+#ACT
+MESSAGEBOX 今天我已经无法为你创建镜像了
+BREAK
+
+;判断道具
+#IF
+checkitem 金砖 2
+#ACT
+take 金砖 2
+AddMirrorMap hell201 <$USERNAME>雪域一 雪山一层 7200 3 13134 N$成功判断 1
+AddMirrorMap hell202 <$USERNAME>雪域二 雪山二层 7200 3 13135 N$成功判断 1
+AddMirrorMap hell203 <$USERNAME>雪域三 雪山三层 7200 3 13136 N$成功判断 1
+AddMirrorMap hell206 <$USERNAME>雪域四 勇闯雪域 7200 3 13139 N$成功判断 1
+AddMirrorMap YXSD <$USERNAME>雪域五 万寂冰宫 7200 3 9916 N$成功判断 1
+AddMapGate 连接<$USERNAME>1 <$USERNAME>雪域一 18 56 1 <$USERNAME>雪域二 29 477 7200
+AddMapGate 连接<$USERNAME>2 <$USERNAME>雪域二 449 48 2 <$USERNAME>雪域三 88 454 7200
+AddMapGate 连接<$USERNAME>3 <$USERNAME>雪域三 420 41 2 <$USERNAME>雪域四 33 171 7200
+AddMapGate 连接<$USERNAME>4 <$USERNAME>雪域四 139 50 4 <$USERNAME>雪域五 51 19 7200
+INC J2 1
+SET [250] 1
+GOTO @刷怪
+MAPMOVE  <$USERNAME>雪域一 418 390
+SENDMSG 0 伟大的『<$USERNAME>』勇士正在前往神秘雪域(镜像)！！
+SENDMSG 5 注意！！镜像中的怪物无法再次刷新，请珍惜机会！
+#ELSEACT
+MESSAGEBOX 请检查你的道具是否准备好！
+BREAK
+
+[@组队]
+#IF
+	LARGE G0 3
+	#ELSEACT
+	MESSAGEBOX 暂未开放
+	BREAK
+#IF
+  CHECKLEVELEX < 44
+#ACT
+MESSAGEBOX 您的等级还没到45级，去不了雪域
+BREAK
+#if
+NOT ISGROUPMASTER
+#ACT
+SendMsg 5 你不是组长,不能组队传送
+BREAK
+#IF
+	CHECKGAMEGOLD < 300
+	#ACT
+	MESSAGEBOX 注意！里面可是时刻需要消耗元宝\你至少准备300个吧！
+	BREAK
+;判断是否拥有镜像
+#IF
+CHECK [250] 1
+#ACT
+MESSAGEBOX 你已经拥有镜像了！请清除再创建
+BREAK
+;判断创建次数
+#IF
+LARGE J2 2
+#ACT
+MESSAGEBOX 今天我已经无法为你创建镜像了
+BREAK
+
+#IF
+checkitem 金砖 2
+checkitem 祖玛头像 1
+checkitem 沃玛号角 1
+#ACT
+take 金砖 2
+take 祖玛头像 1
+take 沃玛号角 1
+AddMirrorMap hell201 <$USERNAME>雪域一 雪山一层 7200 3 13134 N$成功判断 1
+AddMirrorMap hell202 <$USERNAME>雪域二 雪山二层 7200 3 13135 N$成功判断 1
+AddMirrorMap hell203 <$USERNAME>雪域三 雪山三层 7200 3 13136 N$成功判断 1
+AddMirrorMap hell206 <$USERNAME>雪域四 勇闯雪域 7200 3 13139 N$成功判断 1
+AddMirrorMap YXSD <$USERNAME>雪域五 万寂冰宫 7200 3 9916 N$成功判断 1
+AddMapGate 连接<$USERNAME>1 <$USERNAME>雪域一 18 56 1 <$USERNAME>雪域二 29 477 7200
+AddMapGate 连接<$USERNAME>2 <$USERNAME>雪域二 449 48 2 <$USERNAME>雪域三 88 454 7200
+AddMapGate 连接<$USERNAME>3 <$USERNAME>雪域三 420 41 2 <$USERNAME>雪域四 33 171 7200
+AddMapGate 连接<$USERNAME>4 <$USERNAME>雪域四 139 50 4 <$USERNAME>雪域五 51 19 7200
+INC J2 1
+SET [250] 1
+GOTO @刷怪
+GROUPMAPMOVE  <$USERNAME>雪域一 418 390 45
+SENDMSG 0 伟大的『<$USERNAME>』勇士们组队前往神秘雪域(镜像)！！
+SENDMSG 5 注意！！镜像中的怪物无法再次刷新，请珍惜机会！
+#ELSEACT
+MESSAGEBOX 请检查你的道具是否准备好！
+BREAK
+
+[@清除副本]
+#if
+#ACT
+SET [250] 0
+DelMirrorMap <$USERNAME>雪域一
+DelMirrorMap <$USERNAME>雪域二
+DelMirrorMap <$USERNAME>雪域三
+DelMirrorMap <$USERNAME>雪域四
+DelMirrorMap <$USERNAME>雪域五
+DELMAPGATE 连接<$USERNAME>1 <$USERNAME>雪域一
+DELMAPGATE 连接<$USERNAME>2 <$USERNAME>雪域二
+DELMAPGATE 连接<$USERNAME>3 <$USERNAME>雪域三
+DELMAPGATE 连接<$USERNAME>4 <$USERNAME>雪域四
+GOTO @main
+
+[@刷怪]
+#ACT
+;------------------------ 雪域一层镜像 ------------------------
+MONGENEX <$USERNAME>雪域一 145 135 雪域冰甲虫 400 460 246
+MONGENEX <$USERNAME>雪域一 146 135 雪域冰狼 400 445 246
+MONGENEX <$USERNAME>雪域一 147 135 雪域野人 400 450 246
+MONGENEX <$USERNAME>雪域一 148 135 雪域毛人 400 445 246
+MONGENEX <$USERNAME>雪域一 149 135 雪域羊人 400 440 246
+MONGENEX <$USERNAME>雪域一 144 135 雪域灭天魔 400 53 252
+MONGENEX <$USERNAME>雪域一 143 135 雪域寒冰魔 400 53 252
+MONGENEX <$USERNAME>雪域一 102 139 雪域冰甲虫 400 118 246
+MONGENEX <$USERNAME>雪域一 102 138 雪域冰狼 400 119 246
+MONGENEX <$USERNAME>雪域一 102 137 雪域野人 400 116 246
+MONGENEX <$USERNAME>雪域一 58 74 雪域羊人 400 116 246
+MONGENEX <$USERNAME>雪域一 57 73 雪域寒冰魔 400 13 252
+MONGENEX <$USERNAME>雪域一 56 74 雪域灭天魔 400 13 252
+MONGENEX <$USERNAME>雪域一 55 72 雪域冰狼 400 16 246
+MONGENEX <$USERNAME>雪域一 135 125 冰雪法王1 400 150 252
+MONGENEX <$USERNAME>雪域一 136 126 冰雪法王 400 10 252
+MONGENEX <$USERNAME>雪域一 135 126 雪域力士 400 5 246
+
+;------------------------ 雪域二层镜像 ------------------------
+MONGENEX <$USERNAME>雪域二 121 111 雪域野人 400 250 246
+MONGENEX <$USERNAME>雪域二 121 112 雪域羊人 400 150 246
+MONGENEX <$USERNAME>雪域二 123 113 雪域灭天魔 400 52 252
+MONGENEX <$USERNAME>雪域二 124 113 雪域寒冰魔 400 52 252
+MONGENEX <$USERNAME>雪域二 123 112 雪域五毒魔 400 52 252
+MONGENEX <$USERNAME>雪域二 123 113 雪域战将 400 55 252
+MONGENEX <$USERNAME>雪域二 123 111 雪域侍卫 400 55 246
+MONGENEX <$USERNAME>雪域二 122 112 雪域力士 400 55 246
+MONGENEX <$USERNAME>雪域二 125 111 雪域卫士 400 55 246
+MONGENEX <$USERNAME>雪域二 123 113 雪域天将 400 12 252
+MONGENEX <$USERNAME>雪域二 119 105 冰雪法王 400 110 252
+MONGENEX <$USERNAME>雪域二 119 106 冰雪法王1 400 110 252
+
+;------------------------ 雪域三层镜像 ------------------------
+MONGENEX <$USERNAME>雪域三 121 111 雪域野人 400 250 246
+MONGENEX <$USERNAME>雪域三 121 112 雪域羊人 400 150 246
+MONGENEX <$USERNAME>雪域三 123 113 雪域灭天魔 400 52 252
+MONGENEX <$USERNAME>雪域三 124 113 雪域寒冰魔 400 52 252
+MONGENEX <$USERNAME>雪域三 123 112 雪域五毒魔 400 52 252
+MONGENEX <$USERNAME>雪域三 123 113 雪域战将 400 75 252
+MONGENEX <$USERNAME>雪域三 123 111 雪域侍卫 400 75 246
+MONGENEX <$USERNAME>雪域三 122 112 雪域力士 400 75 246
+MONGENEX <$USERNAME>雪域三 125 111 雪域卫士 400 75 246
+MONGENEX <$USERNAME>雪域三 123 113 雪域天将 400 20 252
+MONGENEX <$USERNAME>雪域三 119 105 冰雪法王 400 110 252
+MONGENEX <$USERNAME>雪域三 119 106 冰雪法王1 400 110 252
+
+;------------------------ 寒冰王座A镜像 ------------------------
+MONGENEX <$USERNAME>雪域四 85 80 雪域冰甲虫 200 250 246
+MONGENEX <$USERNAME>雪域四 85 80 雪域冰狼 200 250 246
+MONGENEX <$USERNAME>雪域四 85 80 雪域野人 200 150 246
+MONGENEX <$USERNAME>雪域四 85 80 雪域羊人 200 150 246
+MONGENEX <$USERNAME>雪域四 85 80 雪域灭天魔 200 2 252
+MONGENEX <$USERNAME>雪域四 85 80 雪域寒冰魔 200 2 252
+MONGENEX <$USERNAME>雪域四 85 80 雪域五毒魔 200 2 252
+MONGENEX <$USERNAME>雪域四 85 80 雪域战将 200 80 252
+MONGENEX <$USERNAME>雪域四 85 80 雪域侍卫 200 80 246
+MONGENEX <$USERNAME>雪域四 85 80 雪域力士 200 80 246
+MONGENEX <$USERNAME>雪域四 85 80 雪域卫士 200 80 246
+MONGENEX <$USERNAME>雪域四 85 80 雪域天将 200 4 252
+MONGENEX <$USERNAME>雪域四 85 80 冰眼巨魔 200 2 252
+MONGENEX <$USERNAME>雪域四 85 80 雪域魔王[BOSS] 200 1 151
+MONGENEX <$USERNAME>雪域四 119 105 冰雪法王 200 110 252
+MONGENEX <$USERNAME>雪域四 119 106 冰雪法王1 200 110 252
+
+;------------------------ 万寂冰宫镜像 ------------------------
+MONGENEX <$USERNAME>雪域五 50 55 雪域魔王[BOSS] 10 1 151
+MONGENEX <$USERNAME>雪域五 50 55 雪域领主[狂化] 10 2 151
+MONGENEX <$USERNAME>雪域五 50 55 雪域力士 150 150 246
+MONGENEX <$USERNAME>雪域五 85 80 冰眼巨魔 200 4 252
+MONGENEX <$USERNAME>雪域五 50 55 冰雪法王 150 150 252
+MONGENEX <$USERNAME>雪域五 85 80 雪域天将 200 8 252

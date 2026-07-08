@@ -1,0 +1,248 @@
+[@main]
+#ACT
+mov N$资源编号 0 
+OpenBigDialogBox <$STR(N$资源编号)> 16 1 4 0 0 1 384 23
+	#SAY
+<Img:~#L1:23:<$STR(N$资源编号)>:-50:44>\
+<Img:~#L1:34:<$STR(N$资源编号)>:144:-5>\
+<&Layout:~#L02:230:120:215:240>
+<MText:#L02~:0:0:255:谢谢你把我送来，|
+要小心这里的狐狸们哦！|
+狐狸们可不是可爱的宠物。|
+如果你收集了狐火，|
+可以给我。我知道怎么利用它！
+>
+;<Text:#L02~:狐火突破等级:0:20{FCOLOR=251}/@突破等级><Text:#L02~:仙级技能【待开放】:30:20{FCOLOR=251}/@仙级技能>
+<Text:#L02~:狐火突破等级:0:20{FCOLOR=251}/@突破等级><Text:#L02~:偷师学艺:30:20{FCOLOR=251}/@偷师学艺>
+
+<NewLine:#L02~>
+<Text:#L02~:狐月山的秘密:0:20{FCOLOR=251}/@狐月山的秘密><Text:#L02~:兑换顶级运气宝石:30:20{FCOLOR=251}/@兑换顶级运气宝石>
+<NewLine:#L02~>
+<Text:#L02~:吞噬天珠任务【待开放】:0:20{FCOLOR=251}/@吞噬天珠任务【待开放】><Text:#L02~:狐火补充魔血石:30:20{FCOLOR=251}/@补充魔血石>
+<NewLine:#L02~>
+<Text:#L02~:退出:0:20{FCOLOR=251}/@exit>
+
+[@帮我修复]
+#IF
+LARGE <$GAMEGIRD> 999
+checkitem 狐火 20
+checkitem 魔血石 1
+#ACT
+take 狐火 20
+take 魔血石 1
+GAMEGIRD - 1000
+GIVE 魔血石 1
+MESSAGEBOX 你的魔血石修复了！
+#ELSEACT
+MESSAGEBOX 需要20个狐火，1000灵符，魔血石也要放在背包中！
+
+[@兑换顶级运气宝石]
+#IF
+#ACT
+CLOSEBIGDIALOGBOX
+#SAY
+给我50狐火可以，我私藏的顶级运气宝石可以送给你，\
+这可不是钱可以买来的哦！\
+可以让宝石升级提升25%的概率！\\
+<兑换一个宝石/@兑换一个宝石>\
+<返回/@main>\
+<退出/@exit>\
+
+[@兑换一个宝石]
+#IF
+checkitem 狐火 100
+#ACT
+take 狐火 100
+GIVE 顶级运气宝石 1
+MESSAGEBOX 兑换宝石成功
+#ELSEACT
+MESSAGEBOX 你的狐火不够哦，我需要100个狐火！
+[@吞噬天珠任务]
+无限重塑体魄任务
+ 还没到开启的时候呢！
+;这是一个几乎不可能完成的任务，100狐火召唤\
+
+<返回/@main>\
+
+
+[@装备转移宝盒]
+我这里有一个神奇的神器，可以帮你转移装备属性哦！\
+30狐火兑换一个！数量稀缺哦！\\
+<兑换宝盒/@兑换转移宝盒>\\
+<返回/@main>\
+
+[@兑换转移宝盒]
+#IF
+checkitem 狐火 30
+#ACT
+take 狐火 30
+GIVESTATEITEM 装备转移宝盒 1 1 1 1 1 1 0
+MESSAGEBOX 兑换宝盒成功
+#ELSEACT
+MESSAGEBOX 你的狐火不够哦！
+
+[@偷师学艺]
+狐狸的本事就是偷学人类哦！\
+我也可以悄悄告诉你别的职业的秘密。\
+但是也需要代价，给我20个狐火，10000灵符\
+我就试着帮你学习吧！\\
+<学习施毒术/@施毒术>     <学习地狱雷光/@地狱雷光>\
+<学习十步一杀/@十步一杀>   <学习狮子吼/@狮子吼>\
+<学习魔法盾/@魔法盾>   \
+<返回/@main>\
+
+[@补充魔血石]
+#IF
+#ACT
+CLOSEBIGDIALOGBOX
+#SAY
+魔血石亏损了？这里可不太好修理魔血石呢。\
+不过我这倒是可以用法力帮你补充，当然我需要一灵符。\
+请把你要补充的魔血石放背包中。\\
+<修复魔血石/@帮我修复>  \
+[@刺杀剑术]
+#IF
+checkitem 狐火 20
+LARGE <$GAMEGIRD> 9999
+not checkmagicname 狮子吼
+#ACT
+take 狐火 20
+GAMEGIRD - 10000
+#ELSEACT
+MESSAGEBOX 无法学习，请检查道具，或者你已学习该技能
+BREAK
+#IF
+RANDOM 3
+#ACT
+ADDSKILL 狮子吼
+MESSAGEBOX 恭喜你，学习技能成功！
+#ELSEACT
+MESSAGEBOX 尝试失败咯，不过东西我还是要收下的！
+[@魔法盾]
+#IF
+checkitem 狐火 20
+LARGE <$GAMEGIRD> 9999
+not checkmagicname 魔法盾
+#ACT
+take 狐火 20
+GAMEGIRD - 10000
+#ELSEACT
+MESSAGEBOX 无法学习，请检查道具，或者你已学习该技能
+BREAK
+#IF
+RANDOM 3
+#ACT
+ADDSKILL 魔法盾
+MESSAGEBOX 恭喜你，学习技能成功！
+#ELSEACT
+MESSAGEBOX 尝试失败咯，不过东西我还是要收下的！
+
+[@十步一杀]
+#IF
+checkitem 狐火 20
+LARGE <$GAMEGIRD> 9999
+not checkmagicname 十步一杀
+#ACT
+take 狐火 20
+GAMEGIRD - 10000
+#ELSEACT
+MESSAGEBOX 无法学习，请检查道具，或者你已学习该技能
+BREAK
+#IF
+RANDOM 3
+#ACT
+ADDSKILL 十步一杀
+MESSAGEBOX 恭喜你，学习技能成功！
+#ELSEACT
+MESSAGEBOX 尝试失败咯，不过东西我还是要收下的！
+[@地狱雷光]
+#IF
+checkitem 狐火 20
+LARGE <$GAMEGIRD> 9999
+not checkmagicname 地狱雷光
+#ACT
+take 狐火 20
+GAMEGIRD - 10000
+#ELSEACT
+MESSAGEBOX 无法学习，请检查道具，或者你已学习该技能
+BREAK
+#IF
+RANDOM 3
+#ACT
+ADDSKILL 地狱雷光
+MESSAGEBOX 恭喜你，学习技能成功！
+#ELSEACT
+MESSAGEBOX 尝试失败咯，不过东西我还是要收下的！
+
+[@施毒术]
+#IF
+checkitem 狐火 20
+LARGE <$GAMEGIRD> 9999
+not checkmagicname 施毒术
+#ACT
+take 狐火 20
+GAMEGIRD - 10000
+#ELSEACT
+MESSAGEBOX 无法学习，请检查道具，或者你已学习该技能
+BREAK
+#IF
+RANDOM 3
+#ACT
+ADDSKILL 施毒术
+MESSAGEBOX 恭喜你，学习技能成功！
+#ELSEACT
+MESSAGEBOX 尝试失败咯，不过东西我还是要收下的！
+
+
+[@突破等级]
+#IF
+#ACT
+CLOSEBIGDIALOGBOX
+#SAY
+狐火中蕴含神奇的天地气力，释放出来可以帮你\
+突破等级桎梏。10个火狐和10000灵符即可提升一级。\\
+<帮我突破/@帮我突破>\
+<返回/@main>\
+
+[@帮我突破]
+#IF
+checkitem 狐火 10
+LARGE <$GAMEGIRD> 9999
+#ACT
+take 狐火 10
+GAMEGIRD - 10000
+CHANGELEVEL + 1
+MESSAGEBOX 恭喜，你的等级突破了！
+#ELSEACT
+MESSAGEBOX 你的东西还没准备好呢
+
+[@狐月山的秘密]
+#IF
+#ACT
+CLOSEBIGDIALOGBOX
+#SAY
+狐月山，一个古老而神秘的传说之地，它并非凡间之物，\
+而是源自上古仙境的一隅，不知何时降临于世，\
+成为人间与仙境之间的一道奇妙桥梁。这里，\
+是一个被云雾缭绕、四季如春的岛屿，\
+宛如一颗遗落人间的璀璨明珠。\
+在狐月山的中心，隐藏着一个古老而神秘的阵法。\\
+<下一页/@狐月山的秘密2>\
+
+[@狐月山的秘密2]
+这个阵法散发着淡淡的荧光，宛如一轮明月\
+看守这个阵法的，是一位年迈的老人。\
+他站在狐月山的下方[226,306]\
+他拥有着令人敬畏的力量。老人守护在此数十年，\
+见证着狐月山的兴衰更替，也守护着那份通往仙境\
+的珍贵秘密。他常年在阵法旁冥想，\
+与天地灵气共鸣，守护着这片土地的安宁与和谐。\
+然而，狐月山并非一片祥和之地。\\
+<下一页/@狐月山的秘密3>\
+[@狐月山的秘密3]
+随着人类世界的纷扰逐渐侵扰这片净土，\
+一些贪婪的探险者和邪恶的势力开始觊觎\
+这里的宝藏与力量。他们试图破解阵法，\
+打开通往仙境的大门，为自己谋取私利。\
+这使得狐月山陷入了一场前所未有的危机之中。\\
+<返回/@main>\

@@ -1,0 +1,133 @@
+[@main]
+
+#IF
+	LARGE G0 1
+	#SAY
+
+这个地方只有两类人才能进入\
+一类实力超绝，拥有幻境凭证和5点声望的人\
+一类智勇双全，超过45级的人\
+你属于哪里一类人呢？\
+想去藏宝阁吗？\ \
+ <我有幻境凭证和声望，请让我通过/@tongguo>\
+ <我有45级，请让我通过/@tongguo1>\
+ <对话/@对话>\
+ <我什么都没有/@exit>
+	#ELSESAY
+	我负责看守这个通道，再往里的区域，\
+	就是沙巴克神秘藏宝的秘密！\
+	<对话/@对话>\
+	<退出/@exit>\
+
+
+[@对话]
+#IF
+	CHECK [36] 1
+	#SAY
+感觉如何？沙巴克的财富可远不止这些！\
+<返回/@main>\
+#ACT
+BREAK
+
+#IF
+	CHECK [29] 1
+	#SAY
+这里通向哪里？嘿嘿。这可大有来头。\
+里面藏着沙比克最宝贵的财富。\
+既然你帮了我，我可以免费送你进去一次。\
+下次来可就要收费咯！\
+<免费进入/@免费进入>\
+#ACT
+BREAK
+
+	
+#IF
+	CHECK [27] 1
+	#SAY
+	好久没听到他的消息了，太感谢你了\
+	可惜我有使命在身，谢谢你的消息。\
+	我这里有一颗从藏宝阁里偷来的神丹送给你\
+	希望对你有用！\
+	<我应该做的/@我应该做的>\
+	<返回/@main>\
+	#ACT
+	BREAK
+
+#IF
+#SAY
+	我给你没什么好说的\
+	<返回/@main>\
+
+[@我应该做的]
+#IF
+	CHECKBAGSIZE 2
+	#ACT
+	SET [29] 1
+	GIVESTATEITEM 五倍经验神丹 1 1 0 0 1 1 1
+	GIVE 幻境凭证
+	CHANGEEXP + 200000
+	CREDITPOINT + 10
+	SENDMSG 5 提示：任务已完成，你获得了10点声望，当前声望：<$CREDITPOINT>点...
+	RefreshMissPage 176任务
+	ADDBUTTON 0 1 82 83 84 153 150 7 <PlayImg:0:82:2:200:0:0:0> 251#任务\250#打开任务窗口
+GOTO @main	
+#ELSEACT
+	MESSAGEBOX 领取失败，背包请留两个空格。
+	
+		
+[@tongguo]
+#IF
+checkitem 幻境凭证 1
+CHECKCREDITPOINT > 4
+#SAY
+里面便是沙巴克的幻境秘道，\
+多年来只有沙巴克的成员可以独享里面的宝藏。\
+进入秘道，我需要收取一张幻境凭证作为费用\
+你只有同意以上收费标准,我才能送你进入沙巴克幻境秘道中。\
+ <同意/@tongyi>\
+ <不同意/@exit>\
+#ELSESAY
+你连幻境凭证和5点声望的条件都没有还想诓骗我!离开吧!\ \
+ <退出/@exit>\
+
+[@tongguo1]
+#IF
+checklevel 45
+#SAY
+里面便是沙巴克的幻境秘道，\
+多年来只有沙巴克的成员可以独享里面的宝藏。\
+进入秘道，我需要你拥有45级的高等级，\
+你只有拥有以上条件,我才能送你进入沙巴克幻境秘道中。\
+ <同意/@tongyi1>\
+ <不同意/@exit>\
+#ELSESAY
+你根本没有45级还想诓骗我!离开吧!\ \ 
+ <退出/@exit>\
+
+[@tongyi]
+#IF
+checkitem 幻境凭证 1
+CHECKCREDITPOINT > 4
+#ACT
+take 幻境凭证 1
+CREDITPOINT - 5
+SENDMSG 5 提示：已使用传送服务，你减少了5点声望，当前声望：<$CREDITPOINT>点...
+mapmove h201 13 103
+#ELSESAY
+你连幻境凭证和5点声望的条件都没有还想诓骗我!离开吧!\ \
+<退出/@exit>\
+break 
+
+[@tongyi1]
+#IF
+checklevel 45
+#ACT
+mapmove h201 13 103
+break
+[@免费进入]
+#IF
+#ACT
+mapmove h201 13 103
+SET [36] 1
+break
+

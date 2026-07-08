@@ -1,0 +1,14 @@
+[@解锁背包]
+{
+#if 
+CHECKGAMEGOLD > 19
+#act
+GAMEGOLD - 20
+ExtBagPageCount = 1
+ExtBagOpenItemCount + 1
+SENDMSG 7 你的扩展背包已扩展到<$ExtBagOpenItemCount>格
+ExtBagPageCount = 0
+
+#ELSEACT
+	MESSAGEBOX 您的元宝不够解锁扩展背包\需要20元宝扩展背包
+}

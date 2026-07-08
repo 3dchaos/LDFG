@@ -1,0 +1,16 @@
+[@死亡触发]
+{
+#IF
+checkitem 替死鬼符 1
+CHECK [59] 0
+#ACT
+TAKE 替死鬼符 1
+SET [59] 1
+ShowProgressbarDlg 3 @原地复活 替死鬼生效原地复活%d%... 0
+[@原地复活]
+#IF
+	#ACT
+	PLAYEFFECT 3 200 20 1 50 1
+	REALIVE
+SENDMSG 6 危机时刻，替死鬼符替你抵挡死亡一次，下次要靠你自己了。
+}

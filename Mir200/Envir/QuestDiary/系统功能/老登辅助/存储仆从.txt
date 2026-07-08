@@ -1,0 +1,123 @@
+[@存储仆从1]
+{
+#IF
+	CheckJob Wizard
+#ELSEACT
+	SENDMSG 6 法师才能使用该功能。
+	BREAK
+#IF
+#ACT
+MOV S$宝宝0 空位
+MOV S$宝宝1 空位
+MOV S$宝宝2 空位
+MOV S$宝宝3 空位
+MOV S$宝宝4 空位
+MOV L$存宝 <$STR(T1)>
+GetListVarCount L$存宝 N$宝宝数
+mov N$宝宝计次 0
+While N$宝宝计次 < N$宝宝数
+MOV S$宝宝<$STR(N$宝宝计次)> <$str(L$存宝[<$STR(N$宝宝计次)>])>
+Inc N$宝宝计次 1
+EndWhile
+
+
+#IF
+#ACT
+CLOSEBIGDIALOGBOX
+#say
+这里可以给您提供仆从存储功能，解决你下线后仆从消失的苦恼\
+以下是你存储的仆从。当然它们的等级也会被清空。\
+
+【<<$STR(S$宝宝0)>/@宝宝(<$STR(S$宝宝0)>,0)>】    【<<$STR(S$宝宝1)>/@宝宝(<$STR(S$宝宝1)>,1)>】    【<<$STR(S$宝宝2)>/@宝宝(<$STR(S$宝宝2)>,2)>】\
+【<<$STR(S$宝宝3)>/@宝宝(<$STR(S$宝宝3)>,3)>】    【<<$STR(S$宝宝4)>/@宝宝(<$STR(S$宝宝4)>,4)>】\ \
+
+<返回/@辅助功能>\
+
+[@宝宝]
+#ACT
+GetMagicInfo 诱惑之光 0 N$诱惑之光等级
+Formulation <$STR(N$诱惑之光等级)>+2 N$诱惑数量
+GetListVarCount L$存宝 N$存宝数量
+
+#IF
+	CHECKGAMEGOLD > 19
+	#ELSEACT
+	MESSAGEBOX 你的元宝不够，本服务收费20元宝
+	BREAK
+
+#IF
+	EQUAL <$SCRIPTPARAM1> 空位
+#ELSESAY
+	你要取出仆从<$SCRIPTPARAM1>吗？\ \
+	<取回仆从/@取回仆从(<$SCRIPTPARAM1>)>     <返回/@存储仆从1>\
+#ELSEACT
+BREAK
+
+#IF
+	SMALL N$存宝数量 <$STR(N$诱惑数量)>
+#SAY
+	请输入你要存储的仆从名称：\
+	<INPUTTEXT:3:10:10:240:24:193:230:246:0:30:输入不正确:请输入要存储的仆从名称:159> \ \
+	<text:确定:10:6:3/@提交宝宝名(<$SCRIPTPARAM2>)>
+#ELSEACT
+	MESSAGEBOX 你目前的诱惑之光等级只允许存储<$STR(N$诱惑数量)>个仆从\目前你已经存储了：<$STR(N$存宝数量)>个仆从
+
+[@提交宝宝名]
+#OR
+	EQUAL <$NPCINPUT(3)> 骷髅
+	EQUAL <$NPCINPUT(3)> 神兽
+	EQUAL <$NPCINPUT(3)> 圣兽
+	EQUAL <$NPCINPUT(3)> 月灵
+	EQUAL <$NPCINPUT(3)> 地狱犬
+	EQUAL <$NPCINPUT(3)> 红狐狸[伪装]
+	EQUAL <$NPCINPUT(3)> 黄狐狸[容器]
+	#ACT
+	MESSAGEBOX 你输入的：【<$NPCINPUT(3)>】，禁止存储！
+	GOTO @存储仆从1
+	BREAK
+
+#IF 
+CHECKSLAVENAME <$NPCINPUT(3)>
+#ACT 
+	GAMEGOLD - 20
+	KillCallMob <$NPCINPUT(3)> 1 1
+	INC L$存宝 <$NPCINPUT(3)>
+	MOV T1 <$STR(L$存宝)>
+	SENDMSG 5 提示:你的仆从<$NPCINPUT(3)>已存入本系统
+	GOTO @存储仆从1
+#ELSEACT
+MESSAGEBOX 你输入的：【<$NPCINPUT(3)>】有误，请检查宝宝名称。
+GOTO @存储仆从1
+
+[@取回仆从]
+#ACT
+GetMagicInfo 诱惑之光 0 N$诱惑之光等级
+;获取诱惑之光等级
+MOV N$取出数量 <$STR(N$诱惑之光等级)>
+INC N$取出数量 2
+;GetListVarCount L$存宝 N$存宝数量
+;DEC N$取出数量 <$STR(N$存宝数量)>
+
+#IF
+ CHECKSLAVECOUNT > 4
+#ACT
+MESSAGEBOX 抱歉！取回失败，你拥有太多仆从，最多只能拥有5个仆从。
+GOTO @存储仆从1
+BREAK
+
+
+#OR
+CHECKSLAVECOUNT = <$STR(N$取出数量)>
+CHECKSLAVECOUNT > <$STR(N$取出数量)>
+#ACT
+	MESSAGEBOX 抱歉！取回失败，诱惑之光等级允许拥有<$STR(N$取出数量)>个仆从。
+	GOTO @存储仆从1
+	BREAK
+
+#ELSEACT
+	RECALLMOB <$SCRIPTPARAM1> 1 9999 0 0 5 1
+	Dec L$存宝 <$SCRIPTPARAM1>
+	MOV T1 <$STR(L$存宝)>
+	MESSAGEBOX 你的仆从：【<$SCRIPTPARAM1>】已成功召回。
+	GOTO @存储仆从1
+}

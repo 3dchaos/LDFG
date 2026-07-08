@@ -1,0 +1,47 @@
+(@storage @getback )
+%100
+[@main]
+#IF
+LARGE G0 2
+#ELSESAY
+我现在忙着呢。\
+<不跟你计较/@exit>\
+#ELSEACT
+BREAK
+
+#IF
+CHECKLEVEL 42
+#ELSESAY
+本店不招待不满42级的客官。\
+#ELSEACT
+BREAK
+
+
+#IF
+CHECK [38] 1
+#SAY
+<$USERNAME>，欢迎来到卧龙酒馆！\ \
+老板娘跟你说过了？好吧我告诉你\
+<打听消息/@打听消息>关于雷炎\
+<不感兴趣/@exit>\
+#ELSESAY
+我现在忙着呢。\
+有事找我老板娘。\\
+<不跟你计较/@exit>\
+
+[@打听消息]
+酒馆背后的地窖连接着一个恐怖的地下世界,\
+我的两个兄弟已经下去探索了。\
+如果你也想下去看看，给我一块金条，我带你进去。\
+
+<告诉我在哪/@告诉我在哪>给一块金条\
+<不感兴趣/@exit>\
+
+[@告诉我在哪]
+#IF
+CHECKITEM 金条 1
+#ACT
+take 金条 1
+mapmove hl001 389 301
+#ELSEACT
+MESSAGEBOX 准备好金条再来吧,我可不会白白送你进去。

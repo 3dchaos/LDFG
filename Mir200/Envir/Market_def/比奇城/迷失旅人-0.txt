@@ -1,0 +1,125 @@
+()
+%100
+[@main]
+\\
+#IF
+LARGE G0 3
+#ACT
+	GetMapHumCount hero1 0 N$东区人数
+	GetMapHumCount hero2 0 N$西区人数
+#ELSESAY
+我还没回忆起去往秘境的路,下次再来吧\\
+<好吧/@exit>
+#ELSEACT
+BREAK
+
+#IF
+  CHECKLEVELEX < 50
+#say
+您的等级太低，请升级到50再来吧\\
+<好吧/@exit>
+#ELSEACT
+mov N$资源编号 0 
+OpenBigDialogBox <$STR(N$资源编号)> 16 1 4 0 0 1 384 23
+#ELSESAY
+<Img:~#L1:28:<$STR(N$资源编号)>:-20:44>\
+<Img:~#L1:34:<$STR(N$资源编号)>:144:-5>\
+<&Layout:~#L02:185:100:215:240>
+<MText:#L02~:0:0:255:比奇附近出现了一个密境，|
+我刚从里面逃了出来。|
+在里面可以获得大量经验，|
+是提升等级的好地方。|
+准备好一个冰核，|
+我可以把你送进去一个小时。|
+每次探密结束后，|
+如果你的背包还有冰核将继续留在密境
+>
+<Text:#L02~:密境东区|目前东区有<$STR(N$东区人数)>位:0:20{FCOLOR=251}/@密境东区>
+<NewLine:#L02~>
+<Text:#L02~:密境西区|目前西区有<$STR(N$西区人数)>位:0:20{FCOLOR=251}/@密境西区>
+<NewLine:#L02~>
+<Text:#L02~:退出:0:20{FCOLOR=251}/@exit>
+
+
+
+[@密境东区]
+#IF
+#ACT
+	CLOSEBIGDIALOGBOX
+#IF
+checkitem 冰核 1
+#ACT
+take 冰核 1
+SET [4] 1
+map hero1
+SENDDELAYMSG 密境探险时间还剩%s 3600 255 1 @密境东区结束
+#ELSESAY 
+你还没有冰核呢，去雪域地图获取吧！\
+<返回/@main>\\               
+
+[@密境西区]
+#IF
+#ACT
+	CLOSEBIGDIALOGBOX
+#IF
+checkitem 冰核 1
+#ACT
+take 冰核 1
+SET [4] 1
+map hero2
+SENDDELAYMSG 密境探险时间还剩%s 3600 255 1 @密境西区结束
+#ELSESAY 
+你还没有冰核呢，去雪域地图获取吧！\
+<返回/@main>\\               
+
+
+
+[@密境东区结束]
+#IF
+checkitem 冰核 1
+#ACT
+take 冰核 1
+SENDDELAYMSG 密境探险时间还剩%s 3600 255 1 @密境东区结束
+#ELSEACT
+SET [4] 0;给变量赋值
+map 1
+SENDMSG 7 经验密境探险结束了！
+
+[@密境西区结束]
+#IF
+checkitem 冰核 1
+#ACT
+take 冰核 1
+SENDDELAYMSG 密境探险时间还剩%s 3600 255 1 @密境西区结束
+#ELSEACT
+SET [4] 0;给变量赋值
+map 1
+SENDMSG 7 经验密境探险结束了！
+
+[@冰核兑换经验神丹]
+#IF
+#SAY
+你打算跟换是什么经验丹呢？\\
+<1个冰核换三倍经验神丹/@五倍>\\
+<4个冰核换五倍经验神丹/@十倍>\\
+
+[@五倍]
+#IF
+checkitem 冰核 1
+#ACT
+take 冰核 1
+give 三倍经验神丹 1
+SENDMSG 5 兑换成功！
+#ELSEACT
+SENDMSG 2 你没有那么多的冰核啊！
+
+[@十倍]
+#IF
+checkitem 冰核 4
+#ACT
+take 冰核 4
+give 五倍经验神丹 1
+SENDMSG 5 兑换成功！
+SENDMSG 0 『<$USERNAME>』在迷失旅人NPC处用4个冰核兑换了五倍经验神丹！！
+#ELSEACT
+SENDMSG 2 你没有那么多的冰核啊！

@@ -1,0 +1,481 @@
+[@使用移动]
+{
+
+#SAY
+\  \
+<Img:75:24:150:-4>\
+<Text:比奇大城{FCOLOR=251}/@比奇大城> <Text:毒蛇村庄{FCOLOR=251}/@毒蛇山谷> <Text:盟重土城{FCOLOR=251}/@盟重土城> <Text:封 魔 谷{FCOLOR=251}/@封魔神谷> <Text:苍 月 岛{FCOLOR=251}/@苍月之岛> <Text:白 日 门{FCOLOR=251}/@白日门>\
+<Text:〓〓〓〓〓〓〓〓 危险区域  两万金币 〓〓〓〓〓〓〓〓{FCOLOR=7}>\
+<Text:兽人古墓{FCOLOR=251}/@兽人古墓> <Text:天然洞穴{FCOLOR=251}/@天然洞穴> <Text:沃玛入口{FCOLOR=251}/@沃玛入口> <Text:蜈蚣洞口{FCOLOR=251}/@蜈蚣洞口> <Text:石墓入口{FCOLOR=251}/@石墓入口> <Text:祖玛入口{FCOLOR=251}/@祖玛入口>\
+\
+<Text:比奇矿区{FCOLOR=251}/@比奇矿区> <Text:封魔矿区{FCOLOR=251}/@封魔矿区> <Text:毒蛇矿区{FCOLOR=251}/@毒蛇矿区>\
+#IF
+	LARGE G0 1
+	#SAY
+<Text:幻境一层|30万金币和幻境凭证{FCOLOR=154}/@幻境一层> 	\
+#IF
+	#SAY
+<Text:返回{FCOLOR=251}/@辅助功能>\
+　　　　　　　　　　　　　　　　　　　　
+[@危险区域]
+※<〓〓〓〓〓〓〓〓〓〓>危险区域<〓〓〓〓〓〓〓〓〓〓>※\
+※<兽人古墓/@兽人古墓>※<天然洞穴/@天然洞穴>※<比奇矿区/@比奇矿区>※<毒蛇矿区/@毒蛇矿区>※<尸 王 殿/@尸王殿>※\ \
+※<沃玛入口/@沃玛入口>※<蜈蚣洞口/@蜈蚣洞口>※<未知暗殿/@未知暗殿>※<石墓入口/@石墓入口>※<祖玛入口/@祖玛入口>※\ \
+※<封魔矿区/@封魔矿区>※<霸者大厅/@霸者大厅>※<尸魔洞口/@尸魔洞口>※<骨魔洞口/@骨魔洞口>※<牛魔入口/@牛魔入口>※\ 
+※<〓〓〓〓〓〓〓〓〓〓>危险区域<〓〓〓〓〓〓〓〓〓〓>※\ \
+※    需要两万金币的传送费    ※<上 一 页/@使用移动>※<下 一 页/@恐怖区域>※\ 
+
+[@恐怖区域]
+※<〓〓〓〓〓〓〓〓〓〓>恐怖区域<〓〓〓〓〓〓〓〓〓〓>※\
+※<死亡棺材/@死亡棺材>※<沃玛三层/@沃玛三层>※<石墓五层/@石墓五层>※<祖玛六层/@祖玛六层>※<炼狱回廊/@炼狱回廊>※\ \
+※<尸魔三层/@尸魔三层>※<骨魔五层/@骨魔五层>※<牛魔七层/@牛魔七层>※<不 归 路/@不归路>※<丛林迷宫/@丛林迷宫>※\ \
+※<抉择之地/@抉择之地>※<影 之 道/@影之道>※<幻境六层/@幻境六层>※<圣域地图/@圣域地图>※<六新衣服/@六新衣服>※\
+※<〓〓〓〓〓〓〓〓〓〓>恐怖区域<〓〓〓〓〓〓〓〓〓〓>※\ \
+※　  需要五万金币的传送费　  ※<上 一 页/@危险区域>※<返回首页/@辅助>※\
+
+[@六新衣服]
+※<〓〓〓〓〓〓〓〓〓〓>六新衣服<〓〓〓〓〓〓〓〓〓〓>※\
+※<困惑殿堂（男战士）/@困惑殿堂>※　　　　※<地狱烈焰（女战士）/@地狱烈焰>※\ \
+※<堕落坟场（男法师）/@堕落坟场>※　　　　※<死亡神殿（女法师）/@死亡神殿>※\ \
+※<深渊魔域（男道士）/@深渊魔域>※　　　　※<钳虫巢穴（女道士）/@钳虫巢穴>※\ 
+※<〓〓〓〓〓〓〓〓〓〓>六新衣服<〓〓〓〓〓〓〓〓〓〓>※\ \
+※　       需要五万金币的传送费　       ※<返    回/@恐怖区域>※\ 
+[@幻境一层]
+#IF
+	checkitem 幻境凭证 1
+#ELSESAY
+	你身上没有带幻境凭证，盟重的流浪汉那里有卖。\
+	#ELSEACT
+	break
+#IF
+
+checkgold 300000
+#ACT
+take 幻境凭证 1
+take 金币 300000
+mapmove H001 73 67
+break
+#ELSESAY
+你没有足够的金币用来支付我的服务费用!\
+[@沃玛森林]
+#act
+mapmove 1 562 553
+
+[@红名村]
+#act
+mapmove 3 830 650
+
+[@姻缘神殿]
+#act
+mapmove M101 21 33
+
+[@客栈赌场]
+#act
+mapmove 0101 8 8
+
+[@兽人古墓]
+#if
+checkgold 20000
+#act
+take 金币 20000
+
+mapmove 0 147 34
+#ELSEACT
+SendMsg 6 金币不足
+[@天然洞穴]
+#if
+checkgold 20000
+#act
+take 金币 20000
+
+mapmove 0 42 109 
+#ELSEACT
+SendMsg 6 金币不足
+
+[@毒蛇矿区]
+#if
+checkgold 20000
+#act
+take 金币 20000
+
+mapmove 2 564 171
+#ELSEACT
+SendMsg 6 金币不足
+
+[@沃玛入口]
+#if
+checkgold 20000
+#act
+take 金币 20000
+
+mapmove D021 25 25
+#ELSEACT
+SendMsg 6 金币不足
+
+[@蜈蚣洞口]
+#if
+checkgold 20000
+#act
+take 金币 20000
+
+mapmove 3 140 87 
+#ELSEACT
+SendMsg 6 金币不足
+
+[@石墓入口]
+#if
+checkgold 20000
+#act
+take 金币 20000
+
+mapmove D710 26 20
+#ELSEACT
+SendMsg 6 金币不足
+
+[@祖玛入口]
+#if
+checkgold 20000
+#act
+take 金币 20000
+
+mapmove 0157 19 16
+#ELSEACT
+SendMsg 6 金币不足
+
+[@丛林迷宫]
+#if
+checkgold 50000
+#act
+take 金币 50000
+
+mapmove 11 356 246
+#ELSEACT
+SendMsg 6 金币不足
+
+[@封魔矿区]
+#if
+checkgold 20000
+#act
+take 金币 20000
+
+mapmove D2000 77 15
+#ELSEACT
+SendMsg 6 金币不足
+
+[@尸王殿]
+#if
+checkgold 20000
+#act
+take 金币 20000
+
+mapmove Q004
+#ELSEACT
+SendMsg 6 金币不足
+
+[@未知暗殿]
+#if
+checkgold 20000
+#act
+take 金币 20000
+
+mapmove M001
+#ELSEACT
+SendMsg 6 金币不足
+
+[@石墓五层]
+#if
+checkgold 50000
+#act
+take 金币 50000
+
+mapmove D715 84 80
+#ELSEACT
+SendMsg 6 金币不足
+
+[@祖玛六层]
+#if
+checkgold 50000
+#act
+take 金币 50000
+
+mapmove D5071
+#ELSEACT
+SendMsg 6 金币不足
+
+[@霸者大厅]
+#if
+checkgold 20000
+#act
+take 金币 20000
+
+mapmove D2008
+#ELSEACT
+SendMsg 6 金币不足
+
+[@尸魔三层]
+#if
+checkgold 50000
+#act
+take 金币 50000
+
+mapmove D2052
+#ELSEACT
+SendMsg 6 金币不足
+
+[@骨魔五层]
+#if
+checkgold 50000
+#act
+take 金币 50000
+
+mapmove D2067
+#ELSEACT
+SendMsg 6 金币不足
+
+[@牛魔七层]
+#if
+checkgold 50000
+#act
+take 金币 50000
+
+mapmove D2079
+#ELSEACT
+SendMsg 6 金币不足
+
+
+[@钳虫巢穴]
+#if
+checkgold 50000
+#act
+take 金币 50000
+
+mapmove 11 343 325
+#ELSEACT
+SendMsg 6 金币不足
+
+[@死亡神殿]
+#if
+checkgold 50000
+#act
+take 金币 50000
+
+mapmove 4 205 218
+#ELSEACT
+SendMsg 6 金币不足
+
+[@地狱烈焰]
+#if
+checkgold 50000
+#act
+take 金币 50000
+
+mapmove 0 428 474
+#ELSEACT
+SendMsg 6 金币不足
+
+[@深渊魔域]
+#if
+checkgold 50000
+#act
+take 金币 50000
+
+mapmove 1 215 312
+#ELSEACT
+SendMsg 6 金币不足
+
+[@堕落坟场]
+#if
+checkgold 50000
+#act
+take 金币 50000
+
+mapmove 1 320 56
+#ELSEACT
+SendMsg 6 金币不足
+
+[@困惑殿堂]
+#if
+checkgold 50000
+#act
+take 金币 50000
+
+mapmove r001 55 94
+#ELSEACT
+SendMsg 6 金币不足
+
+[@牛魔入口]
+
+#if
+checkgold 20000
+#act
+take 金币 20000
+
+mapmove D2070 31 20
+#ELSEACT
+SendMsg 6 金币不足
+
+[@尸魔洞口]
+
+#if
+checkgold 20000
+#act
+take 金币 20000
+
+mapmove 5 526 612
+#ELSEACT
+SendMsg 6 金币不足
+
+[@骨魔洞口]
+
+#if
+checkgold 20000
+#act
+take 金币 20000
+
+mapmove 5 548 128
+#ELSEACT
+SendMsg 6 金币不足
+
+[@抉择之地]
+#if
+checkgold 50000
+#act
+take 金币 50000
+
+mapmove D1004
+#ELSEACT
+SendMsg 6 金币不足
+
+[@比奇矿区]
+#if
+checkgold 20000
+#act
+take 金币 20000
+
+mapmove 0 664 214
+#ELSEACT
+SendMsg 6 金币不足
+
+[@沃玛三层]
+#if
+checkgold 50000
+#act
+take 金币 50000
+
+mapmove D024 16 19
+#ELSEACT
+SendMsg 6 金币不足
+
+[@死亡棺材]
+#if
+checkgold 50000
+#act
+take 金币 50000
+
+MAPMOVE D606
+#ELSEACT
+SendMsg 6 金币不足
+
+[@土城书店]
+#ACT
+
+mapmove 3 410 323
+
+[@封魔堡]
+#ACT
+mapmove B341 21 26
+
+[@比奇宫殿]
+#ACT
+
+mapmove 0122 21 33
+
+[@沙巴克]
+#ACT
+
+mapmove 3 675 333
+[@比奇大城]
+#if
+checkgold 1000
+#act
+take 金币 1000
+GIVE 回城卷
+mapmove 0 333 268
+#ELSEACT
+SendMsg 6 金币不足1000
+
+[@银杏小村]
+#if
+checkgold 1000
+#act
+take 金币 1000
+GIVE 回城卷
+mapmove 0 634 612
+#ELSEACT
+SendMsg 6 金币不足1000
+
+
+[@边界小村]
+#if
+checkgold 1000
+#act
+take 金币 1000
+GIVE 回城卷
+mapmove 0 288 615
+#ELSEACT
+SendMsg 6 金币不足1000
+
+[@盟重土城]
+#if
+checkgold 1000
+#act
+take 金币 1000
+GIVE 回城卷
+mapmove 3 330 330
+#ELSEACT
+SendMsg 6 金币不足1000
+
+[@白日门]
+#if
+checkgold 1000
+#act
+take 金币 1000
+GIVE 回城卷
+mapmove 11 177 324
+#ELSEACT
+SendMsg 6 金币不足1000
+[@苍月之岛]
+#IF
+	LARGE G0 0
+#ELSEACT
+	MESSAGEBOX 苍月岛还未开放
+BREAK
+#if
+checkgold 1000
+#act
+take 金币 1000
+GIVE 回城卷
+mapmove 5 139 337
+#ELSEACT
+SendMsg 6 金币不足1000
+[@封魔神谷]
+
+#if
+checkgold 1000
+#act
+take 金币 1000
+GIVE 回城卷
+mapmove 4 233 210
+#ELSEACT
+SendMsg 6 金币不足1000
+[@毒蛇山谷]
+#if
+checkgold 1000
+#act
+take 金币 1000
+GIVE 回城卷
+mapmove 2 503 482
+#ELSEACT
+SendMsg 6 金币不足1000
+
+}

@@ -1,0 +1,108 @@
+[@main]
+
+这是一片神奇的空间\
+我可以为你服务。\
+<请通过我退出幻境，如果回城，/AUTOCOLOR=154>\
+<传送出去会计算失败/AUTOCOLOR=154>\ \
+每次镜像地图可以刷新3次。\
+<刷怪/@刷怪>200声望刷一次 \ 
+<退出镜像/@退出镜像>返回沙巴克藏宝阁\
+[@退出镜像]
+#IF
+#ACT
+SET [30] 0
+SET [31] 0
+mov N$刷怪次数 0
+mapmove H204 50 50
+Delnpc <$USERNAME>藏宝阁管理员 
+DelMirrorMap <$USERNAME>藏宝阁
+
+[@刷怪]
+#IF
+CHECK [31] 1
+#ELSESAY
+你不是镜像拥有人!
+#ELSEACT
+BREAK
+
+#IF
+CHECKCREDITPOINT > 199
+SMALL N$刷怪次数 3
+#ACT
+CREDITPOINT - 200
+INC N$刷怪次数 1
+GOTO @刷怪1
+#ELSEACT
+MESSAGEBOX 声望不够或者刷新次数太多！
+
+
+[@刷怪1]
+#IF
+CheckMapSameMonCount <$USERNAME>藏宝阁 地藏王 < 1
+#ACT
+MONGENEX <$USERNAME>藏宝阁 100 100 地藏王 50 1 255 0
+#IF
+CheckMapSameMonCount <$USERNAME>藏宝阁 重装使者 < 1
+#ACT
+MONGENEX <$USERNAME>藏宝阁 100 100 重装使者 50 1 255 0
+#IF
+CheckMapSameMonCount <$USERNAME>藏宝阁 祖玛教主 < 1
+#ACT
+MONGENEX <$USERNAME>藏宝阁 100 50 祖玛教主 140 1 255 0
+#IF
+CheckMapSameMonCount <$USERNAME>藏宝阁 沃玛教主 < 1
+#ACT
+MONGENEX <$USERNAME>藏宝阁 100 100 沃玛教主 140 1 255 0
+#IF
+CheckMapSameMonCount <$USERNAME>藏宝阁 黄泉教主8 < 1
+#ACT
+MONGENEX <$USERNAME>藏宝阁 100 100 黄泉教主8 100 1 255 0
+#IF
+CheckMapSameMonCount <$USERNAME>藏宝阁 牛魔王8 < 1
+#ACT
+MONGENEX <$USERNAME>藏宝阁 100 100 牛魔王8 100 1 255 0
+#IF
+CheckMapSameMonCount <$USERNAME>藏宝阁 暗之牛魔王8 < 1
+#ACT
+MONGENEX <$USERNAME>藏宝阁 100 100 暗之牛魔王8 100 1 255 0
+#IF
+CheckMapSameMonCount <$USERNAME>藏宝阁 虹魔教主8 < 1
+#ACT
+MONGENEX <$USERNAME>藏宝阁 100 100 虹魔教主8 100 1 255 0
+#IF
+CheckMapSameMonCount <$USERNAME>藏宝阁 虹魔猪卫8 < 7
+#ACT
+MONGENEX <$USERNAME>藏宝阁 100 100 虹魔猪卫8 100 5 255 0
+#IF
+CheckMapSameMonCount <$USERNAME>藏宝阁 虹魔蝎卫8 < 7
+#ACT
+MONGENEX <$USERNAME>藏宝阁 100 100 虹魔蝎卫8 100 5 255 0
+#IF
+CheckMapSameMonCount <$USERNAME>藏宝阁 白野猪8 < 7
+#ACT
+MONGENEX <$USERNAME>藏宝阁 100 100 白野猪8 100 8 255 0
+
+#IF
+CheckMapSameMonCount <$USERNAME>藏宝阁 沃玛卫士8 < 7
+#ACT
+MONGENEX <$USERNAME>藏宝阁 100 100 沃玛卫士8 100 9 255 0
+
+#IF
+CheckMapSameMonCount <$USERNAME>藏宝阁 祖玛卫士8 < 10
+#ACT
+MONGENEX <$USERNAME>藏宝阁 100 100 祖玛卫士8 100 10 255 0
+
+#IF
+CheckMapSameMonCount <$USERNAME>藏宝阁 祖玛雕像8 < 10
+#ACT
+MONGENEX <$USERNAME>藏宝阁 100 100 祖玛雕像8 100 10 255 0
+
+#IF
+CheckMapSameMonCount <$USERNAME>藏宝阁 祖玛弓箭手[变异]8 < 15
+#ACT
+MONGENEX <$USERNAME>藏宝阁 100 100 祖玛弓箭手[变异]8 100 15 255 0
+
+#IF
+CheckMapSameMonCount <$USERNAME>藏宝阁 楔蛾8 < 15
+#ACT
+MONGENEX <$USERNAME>藏宝阁 100 100 楔蛾8 100 15 255 0
