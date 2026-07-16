@@ -7,7 +7,7 @@
 魔龙登陆了盟重省的边境，现在人们可以前往魔龙城了。\
 帮我找到龙影，我让我的部下送你过去。\
 <寻找龙影/@寻找龙影>\
-;<领取礼盒/@领取礼盒>领取断网补偿\
+<领取补偿/@领取补偿>领取合区补偿\
 
 <退出/@exit>
 #ELSESAY
@@ -15,11 +15,16 @@
 <退出/@exit>
 
 
-[@领取礼盒]
+[@领取补偿]
+#IF
+EQUAL G21 1
+#ELSEACT
+BREAK
+
 #IF
 CHECKLEVEL 45
 #ELSEACT
-MESSAGEBOX 本礼盒只有达到45级才可领取！
+MESSAGEBOX 只有达到45级才可领取！
 BREAK
 
 #IF
@@ -29,16 +34,17 @@ MESSAGEBOX 你已经领取过了吧！
 BREAK
 
 #IF
-CHECKBAGSIZE 1
+CHECKBAGSIZE 2
 #ELSEACT
 MESSAGEBOX 你的背包已经没有空间了
 BREAK
 
 #IF
 #ACT
-GIVESTATEITEM 老登狐月礼盒 1 1 0 1 1 1 1 1
+GIVESTATEITEM 冰核 1 1 0 1 1 1 1 1
+GIVESTATEITEM 冰核 1 1 0 1 1 1 1 1
 ADDTEXTLIST ..\QuestDiary\数据文件\礼盒领取名单.txt <$USERNAME>
-MESSAGEBOX 成功领取礼盒！
+MESSAGEBOX 成功领取补偿！
 
 [@寻找龙影]
 #IF

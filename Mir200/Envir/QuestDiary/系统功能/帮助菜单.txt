@@ -92,9 +92,38 @@ BREAK
 CreateNPC 云隐宗师 GM001 16 32 78 云隐宗师 1
 
 [@测试1]
-#ACT
-DelNpc 云隐宗师 GM001
+#if
+FindMonPoint <$MAP> <$STR(T50)> N1 N2
+#act
+GOTO @计算距离
 
+;SendMsg 6 <$STR(T50)>距离是<$STR(N1)>，<$STR(N2)>
+;DEC N$距离平方 <$STR(N1)> <$STR(<$X>)>
+;MUL N$距离平方 <$STR(N$距离平方)>
+
+;;FORMULATION (<$STR(N1)>-<$STR(<$X>)*(<$STR(N1)>-<$STR(<$X>) N$距离平方
+;SendMsg 6 距离是<$STR(N$距离平方)>
+
+[@计算距离]
+#IF
+LARGE N1 <$X>
+#ACT
+FORMULATION <$STR(N1)>-<$X> N$X距离平方
+#ELSEACT
+FORMULATION <$X>-<$STR(N1)> N$X距离平方
+#IF
+LARGE N2 <$Y>
+#ACT
+FORMULATION <$STR(N2)>-<$Y> N$Y距离平方
+#ELSEACT
+FORMULATION <$Y>-<$STR(N2)> N$Y距离平方
+
+#IF
+#ACT
+FORMULATION <$STR(N$X距离平方)>*<$STR(N$Y距离平方)> N$距离平方
+;SendMsg 6 距离是<$STR(N$X距离平方)>
+;SendMsg 6 距离是<$STR(N$y距离平方)>
+;SendMsg 6 距离是<$STR(N$距离平方)>
 [@测试2]
 #ACT
 SET [47] 0

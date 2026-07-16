@@ -118,9 +118,10 @@ SETOFFTIMER 4
 ;自动回收强制开启 10 执行一次
 
 ;挂机检查周围人
-[@OnTimer7]
+[@OnTimerEx7]
 #ACT
 #CALL [系统功能\老登辅助\挂机随机.txt] @挂机随机
+
 
 [@OnTimer8]
 #CALL [系统功能\老登辅助\挂机跟踪.txt] @挂机跟踪

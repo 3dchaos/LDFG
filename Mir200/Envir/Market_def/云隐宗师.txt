@@ -134,7 +134,9 @@ MUL N$转生属性点 <$STR(N$削减等级)> 10
 INC N$转生属性点 100
 ;增加转生基础属性值
 INC N$转生属性点 <$STR(N$转生次数属性点)>
-ChangeHeroLevel - <$STR(N$削减等级)>
+;英雄降级
+goto @英雄降级
+
 RENEWLEVEL 1 <$STR(N$转生等级)> <$STR(N$转生属性点)>
 ;经验条重置
 CHANGEEXP = 1
@@ -162,6 +164,31 @@ TakeOffItem 32
 TakeOffItem 33
 TakeOffItem 34
 TakeOffItem 35
+H.CHANGEEXP = 1
+H.CLEARSKILL
+H.TakeOffItem 0
+H.TakeOffItem 1
+H.TakeOffItem 2
+H.TakeOffItem 3
+H.TakeOffItem 4
+H.TakeOffItem 5
+H.TakeOffItem 6
+H.TakeOffItem 7
+H.TakeOffItem 8
+H.TakeOffItem 9
+H.TakeOffItem 10
+H.TakeOffItem 11
+H.TakeOffItem 12
+H.TakeOffItem 13
+H.TakeOffItem 14
+H.TakeOffItem 15
+H.TakeOffItem 16
+H.TakeOffItem 30
+H.TakeOffItem 31
+H.TakeOffItem 32
+H.TakeOffItem 33
+H.TakeOffItem 34
+H.TakeOffItem 35
 GIVESTATEITEM 五倍经验神丹 1 1 0 1 1 1 1
 GIVESTATEITEM 五倍经验神丹 1 1 0 1 1 1 1
 GIVESTATEITEM 五倍经验神丹 1 1 0 1 1 1 1
@@ -175,5 +202,10 @@ AddDlg 3 0 95 0 0:0 95:7 2 <$RELEVEL>次
 MESSAGEBOX 你已经重塑体魄了！此次重塑等级被剥夺<$STR(N$削减等级)>级，\总共获得了<$STR(N$转生属性点)>点属性值，\其中每降低一级获得2点属性值，\重塑<$RELEVEL>次额外获取属性点<$STR(N$转生次数属性点)>，基础100点属性值。\此次重塑导致你的所有聚灵珠破碎，背包中的按原价补偿。
 BREAK
 
-
-
+[@英雄降级]
+#IF
+NOT H.CHECKLEVELEX > <$STR(N$削减等级)>
+#ACT
+ChangeHeroLevel = 1
+#ELSEACT
+ChangeHeroLevel - <$STR(N$削减等级)>

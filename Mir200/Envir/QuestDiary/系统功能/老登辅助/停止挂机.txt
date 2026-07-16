@@ -9,7 +9,7 @@ DelTextList ..\QuestDiary\数据文件\挂机名单.txt <$USERNAME>
 DelTextList ..\QuestDiary\数据文件\挂机名单.txt <$HERONAME>
 DelTextList ..\QuestDiary\数据文件\挂机名单.txt <$HERONAME>
 DelTextList ..\QuestDiary\数据文件\挂机名单.txt <$HERONAME>
-SETOFFTIMER 7
+SETOFFTIMEREX 7
 SETOFFTIMER 6
 SETICON 0 -1
 H.SETICON 0 -1

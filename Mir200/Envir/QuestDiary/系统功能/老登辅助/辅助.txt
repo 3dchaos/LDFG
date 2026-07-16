@@ -119,10 +119,10 @@ OPENMERCHANTBIGDLG 0 19 1 0 0 0 1 575 24
 <NewLine:#L04~>
 <Img:#L04~:8<$flag(61)>:0:0:24|7#勾选后，挂机时卡死位置8秒自动随机/@开启卡死随机>
 <text:#L04~:挂机卡死随机:6:27{FCOLOR=221}>
-<Img:#L04~:8<$flag(62)>:0:26:24|7#勾选后，挂机时生命值少于20%则自动随机/@开启危险随机>
-<text:#L04~:挂机危险随机|比内挂的残血随机更可靠:30:27{FCOLOR=221}>
+<Img:#L04~:8<$flag(62)>:0:26:24|7#勾选后，挂机时低生命值自动随机/@开启危险随机>
+<text:#L04~:挂机危险随机|挂机生命值少于<$STR(U13)>%随机^250#遇到危险怪物自动随机^125#比内挂的残血随机更可靠:30:27{FCOLOR=22}/@设置危险血量点数>
 <Img:#L04~:8<$flag(63)>:0:78:24|7#勾选后，屏蔽提示信息/@屏蔽提示>
-<text:#L04~:屏蔽提示:82:27{FCOLOR=242}>
+<text:#L04~:屏蔽提示:82:27{FCOLOR=242}/@设置残血点数>
 <NewLine:#L04~>
 <Img:#L04~:8<$flag(64)>:0:0:36|7#勾选将自动跟随目标移动/@开启挂机跟随>
 <text:#L04~:挂机跟随:6:39{FCOLOR=191}/@设置挂机跟随>
@@ -892,6 +892,79 @@ SendMsg 5 自动购买强效魔法药数量 <$NPCINPUT(5)>
 #ACT
 #CALL [系统功能\老登辅助\存仓.txt] @自动存仓
 OpenStorageView 1
+[@设置危险血量点数]
+#IF
+EQUAL T50
+#ACT
+MOV T50 空
+#IF
+EQUAL T51
+#ACT
+MOV T51 空
+#IF
+EQUAL T52
+#ACT
+MOV T52 空
+#IF
+EQUAL T53
+#ACT
+MOV T53 空
+
+#IF
+#ACT
+CLOSEBIGDIALOGBOX
+#SAY
+请输入危险随机的血量百分比，目前是的<$STR(U13)>%\
+挂机时低于次血量将自动随机\
+
+<INPUTNUM:3:0:2:80:15:0:249:255:1:100:必须输入1-100之间的数字:输入血量百分比:160> \
+<text:确定:10:6:3/@确定危险血量点数>   <text:返回:10:6/@返回>\ \
+请输入躲避的怪物名称，挂机遇到以下怪物的时候会自动随机\
+<$STR(T50)>，<$STR(T51)>，<$STR(T52)>，<$STR(T53)> \
+<INPUTTEXT:4:0:0:80:15:0:249:255:0:20:怪物名必须在0-20位长:<$STR(T50)>:160>  
+<INPUTTEXT:5:10:0:80:15:0:249:255:0:20:怪物名必须在0-20位长:<$STR(T51)>:160>  
+<INPUTTEXT:6:20:0:80:15:0:249:255:0:20:怪物名必须在0-20位长:<$STR(T52)>:160>  
+<INPUTTEXT:7:30:0:80:15:0:249:255:0:20:怪物名必须在0-20位长:<$STR(T53)>:160>\ 
+<text:确定:10:6:4,5,6,7/@确定危险怪物>    <text:返回:10:6/@返回>\ \
+
+
+[@确定危险怪物]
+#IF
+not EQUAL <$NPCINPUT(4)>
+#ACT
+MOV T50 <$NPCINPUT(4)>
+
+#IF
+not EQUAL <$NPCINPUT(5)>
+#ACT
+MOV T51 <$NPCINPUT(5)>
+
+#IF
+not EQUAL <$NPCINPUT(6)>
+#ACT
+MOV T52 <$NPCINPUT(6)>
+
+#IF
+not EQUAL <$NPCINPUT(7)>
+#ACT
+MOV T53 <$NPCINPUT(7)>
+
+#IF
+#ACT
+MESSAGEBOX 设置完毕，当挂机遇到<$STR(T50)>，<$STR(T51)>，<$STR(T52)>，<$STR(T53)>的时候会自动随机
+
+
+
+[@确定危险血量点数]
+#IF
+LARGE <$NPCINPUT(3)> 0
+#ACT
+MOV U13 <$NPCINPUT(3)>
+MESSAGEBOX 设置成功，危险血线为<$STR(U13)>%
+#ELSEACT
+MESSAGEBOX 设置失败，血线须大于0！
+
+
 [@设置极品点数]
 #IF
 #ACT

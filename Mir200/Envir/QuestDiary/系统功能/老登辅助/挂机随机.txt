@@ -5,7 +5,8 @@ CheckAttackMode 1
 #ELSEACT
 StopAutoPlayGame
 DelTextList ..\QuestDiary\数据文件\挂机名单.txt <$USERNAME>
-SETOFFTIMER 7
+SETOFFTIMEREX 7
+
 SETICON 0 -1
 SENDMSG 6 攻击模式被修改，停止挂机！
 BREAK
@@ -40,7 +41,33 @@ CheckRangeHumCount <$MAP> <$X> <$Y> 10 > 1
 	
 [@触发危险]
 #IF
-CheckHpPer < 20
+LARGE N$危险冷却时间 1
+#ACT
+DEC N$危险冷却时间 1
+BREAK
+
+#if
+FindMonPoint <$MAP> <$STR(T50)> N1 N2
+#act
+GOTO @计算距离
+
+#if
+FindMonPoint <$MAP> <$STR(T51)> N1 N2
+#act
+GOTO @计算距离
+
+#if
+FindMonPoint <$MAP> <$STR(T52)> N1 N2
+#act
+GOTO @计算距离
+
+#if
+FindMonPoint <$MAP> <$STR(T53)> N1 N2
+#act
+GOTO @计算距离
+
+#IF
+CheckHpPer < <$STR(U13)>
 #ELSEACT
 	BREAK
 #IF
@@ -50,12 +77,60 @@ CheckHpPer < 20
 	BREAK
 	#ELSEACT
 	map <$MAP>
+	MOV N$危险冷却时间 10
+	SHOWPROGRESSBARDLG 3 @冷却结束 挂机危险随机冷却中 0
 	SETICON 0 0 200 44 -30 10 0 0 150 0
 
 #IF
 	CHECK [63] 1
 	#ELSEACT
 	SENDMSG 6 危险随机触发
+
+
+[@计算距离]
+#IF
+LARGE N1 <$X>
+#ACT
+FORMULATION <$STR(N1)>-<$X> N$X距离平方
+#ELSEACT
+FORMULATION <$X>-<$STR(N1)> N$X距离平方
+#IF
+LARGE N2 <$Y>
+#ACT
+FORMULATION <$STR(N2)>-<$Y> N$Y距离平方
+#ELSEACT
+FORMULATION <$Y>-<$STR(N2)> N$Y距离平方
+
+#IF
+#ACT
+FORMULATION <$STR(N$X距离平方)>*<$STR(N$Y距离平方)> N$距离平方
+
+#IF
+SMALL N$距离平方 100
+
+#ELSEACT
+BREAK
+
+#IF
+	CHECKTEXTLIST ..\QuestDiary\数据文件\挂机禁止随机地图.txt <$MAP>
+	#ACT
+	SENDMSG 6 危险随机失败，该地图禁止随机
+	BREAK
+#ELSEACT
+	map <$MAP>
+	MOV N$危险冷却时间 10
+	SHOWPROGRESSBARDLG 3 @冷却结束 挂机危险随机冷却中 0
+	SETICON 0 0 200 44 -30 10 0 0 150 0
+
+#IF
+	CHECK [63] 1
+	#ELSEACT
+	SENDMSG 6 遇到危险怪物触发危险随机
+
+
+;SendMsg 6 距离是<$STR(N$X距离平方)>
+;SendMsg 6 距离是<$STR(N$y距离平方)>
+;SendMsg 6 距离是<$STR(N$距离平方)>
 
 [@触发卡死]
 
@@ -69,9 +144,9 @@ CheckHpPer < 20
 	MOV N$gy <$Y>
 	BREAK
 
-;检测3次还为一致	
+;检测20次还为一致	
 #IF
-	LARGE U30 3
+	LARGE U30 20
 #ELSEACT
 	BREAK
 ;检查是否有攻击目标
@@ -88,11 +163,19 @@ CheckHpPer < 20
 	#ELSEACT
 	map <$MAP>
 	MOV U30 0
+	SHOWPROGRESSBARDLG 6 @冷却结束 挂机卡死随机冷却中 0
 	SETICON 0 0 200 44 -30 10 0 0 150 0
 	#IF
 	CHECK [63] 1
 	#ELSEACT
 	SENDMSG 6 卡死随机触发
+
+[@冷却结束]
+	#IF
+	CHECK [63] 1
+	#ELSEACT
+	SENDMSG 6 挂机随机冷却结束
+
 [@触发自动随机]
 #IF
 	CHECKTEXTLIST ..\QuestDiary\数据文件\挂机禁止随机地图.txt <$MAP>

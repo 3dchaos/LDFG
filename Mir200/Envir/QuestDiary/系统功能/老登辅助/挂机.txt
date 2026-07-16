@@ -82,7 +82,8 @@ AddTextList ..\QuestDiary\数据文件\挂机名单.txt <$USERNAME>
 AddTextList ..\QuestDiary\数据文件\挂机名单.txt <$HERONAME>
 SETICON 0 0 200 44 -30 10 0 0 150 0
 H.SETICON 0 0 200 44 -30 10 0 0 150 0
-SETONTIMER 7 2
+SETONTIMEREX 7 300
+;SETONTIMER 7 2
 
 }
 
