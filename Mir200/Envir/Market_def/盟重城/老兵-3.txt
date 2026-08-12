@@ -4,7 +4,7 @@
 +15
 [@main]
 #IF
-	LARGE G0 1
+	LARGE G0 7
 #SAY
 哦，魔龙城吗？那可真是个神秘的地方。\
 它位于地图的东部边缘，东临磅礴的大陆。\ \
@@ -30,6 +30,12 @@
 先得到旁边的国库大臣的认可再说吧\
 <我去证明自己/@exit>
 [@去魔龙城1]
+#IF
+SMALL G0 8
+#ACT
+MESSAGEBOX 当前区域尚未开放。
+BREAK
+
 #IF
 large <$GAMEGIRD> 99
 #ACT
@@ -72,6 +78,12 @@ map 0161
    <移动/@pay1> \
    <不/@exit>   
 [@pay1]
+#IF
+SMALL G0 6
+#ACT
+MESSAGEBOX 当前区域尚未开放。
+BREAK
+
 #IF
 checkgold 20000
 #ACT

@@ -16,6 +16,12 @@
 <组队前往封印祭坛/@组队前往封印祭坛>支付5000灵符以及号角和头像\
 [@组队前往封印祭坛]
 #if
+SMALL G0 9
+#ACT
+MESSAGEBOX 当前区域尚未开放。
+BREAK
+
+#if
 NOT ISGROUPMASTER
 #ACT
 SendMsg 5 你不是组长,不能组队传送
@@ -40,6 +46,12 @@ GROUPMAPMOVE  FOX01 274 126 @GROUPMAPMOVE 400
 #ACT
 SENDMSG 6 组队传送 
 [@前往封印祭坛]
+#IF
+SMALL G0 9
+#ACT
+MESSAGEBOX 当前区域尚未开放。
+BREAK
+
 #IF
 small <$GAMEGIRD> 5000
 #ACT

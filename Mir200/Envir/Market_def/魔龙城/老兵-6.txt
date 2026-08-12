@@ -155,6 +155,12 @@ BREAK
 
 [@move4]
 #if
+SMALL G0 6
+#ACT
+MESSAGEBOX 当前区域尚未开放。
+BREAK
+
+#if
 #act
 mapmove 5 140 330
 break
@@ -175,6 +181,12 @@ break
 <不同意/@exit>
 
 [@h2]
+#if
+SMALL G0 7
+#ACT
+MESSAGEBOX 当前区域尚未开放。
+BREAK
+
 #if
 checkgold 300000
 #act

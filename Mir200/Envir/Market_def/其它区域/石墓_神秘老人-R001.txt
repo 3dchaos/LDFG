@@ -47,6 +47,12 @@
 <我准备好了/@我准备好了>送我进去吧\
 [@我准备好了]
 #IF
+SMALL G0 9
+#ACT
+MESSAGEBOX 当前区域尚未开放。
+BREAK
+
+#IF
 small <$GAMEGIRD> 10000
 #SAY
 也不知是你眼花还是我眼花，你再数数你的灵符数？\
@@ -69,6 +75,12 @@ SENDMSG 0  狡猾的『<$USERNAME>』贿赂神秘老人潜入了元素圣殿。
 <好吧/@exit>
 
 [@灵符请收下]
+#IF
+SMALL G0 9
+#ACT
+MESSAGEBOX 当前区域尚未开放。
+BREAK
+
 #IF
 small <$GAMEGIRD> 8000
 #ACT

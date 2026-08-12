@@ -7,6 +7,13 @@ break
 [@MapEventWalk]
 #IF
 #ACT
+#CALL [系统功能\地图开放.txt] @地图开放_越境纠正
+#CALL [系统功能\老登辅助\优化卡帧.txt] @优化卡帧
+
+[@MapEventRun]
+#IF
+#ACT
+#CALL [系统功能\地图开放.txt] @地图开放_越境纠正
 #CALL [系统功能\老登辅助\优化卡帧.txt] @优化卡帧
 
 ;界面UI第一个按钮

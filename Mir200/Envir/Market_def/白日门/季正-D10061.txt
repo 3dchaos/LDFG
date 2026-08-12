@@ -42,6 +42,12 @@ GOTO @main
 
 [@创建镜像]
 #IF
+SMALL G0 4
+#ACT
+MESSAGEBOX 当前区域尚未开放。
+BREAK
+
+#IF
 CHECKCREDITPOINT > 199
 #ACT
 CREDITPOINT - 200
@@ -336,6 +342,12 @@ SET [406] 1
 <退出/@exit>
 
 [@next_quest]
+#IF
+SMALL G0 4
+#ACT
+MESSAGEBOX 当前区域尚未开放。
+BREAK
+
 #IF
 checkhum D10071 2
 #SAY 

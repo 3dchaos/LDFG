@@ -116,6 +116,12 @@ map 0103
 
 [@bairi]
 #if
+SMALL G0 4
+#ACT
+MESSAGEBOX 当前区域尚未开放。
+BREAK
+
+#if
 checkgold 2000
 #act
 take 金币 2000
@@ -133,6 +139,12 @@ MESSAGEBOX 需要2000金币用来支付我们的服务费用!
 <返回/@main>\\
 
 [@tucheng]
+#if
+SMALL G0 3
+#ACT
+MESSAGEBOX 当前区域尚未开放。
+BREAK
+
 #if
 checkgold 5000
 #act
@@ -180,6 +192,12 @@ MESSAGEBOX 需要1000金币用来支付我们的服务费用!
 
 
 [@fengmo]
+
+#if
+SMALL G0 5
+#ACT
+MESSAGEBOX 当前区域尚未开放。
+BREAK
 
 #if
 checkgold 2000

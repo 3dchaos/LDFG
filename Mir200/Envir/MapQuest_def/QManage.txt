@@ -2,6 +2,7 @@
 [@Startup]
 #ACT
 #CALL [系统功能\环境初始化.TXT] @环境初始化
+#CALL [系统功能\地图开放.txt] @地图开放_刷新链接
 
 [@邮件送达]
 #IF
@@ -166,6 +167,10 @@ check [68] 1
 
 ;刷新背包
 [@Login]
+#IF
+#ACT
+#CALL [系统功能\地图开放.txt] @地图开放_越境纠正
+
 #IF
 #ACT
 SetOnTimer 117 1

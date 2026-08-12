@@ -88,4 +88,8 @@ CHECK [45] 0
 SET [45] 1
 SENDMSG 5 提示：你已经完成近在咫尺任务。
 RefreshMissPage 180任务
+
+#IF
+#ACT
+#CALL [系统功能\地图开放.txt] @地图开放_杀怪触发
 }

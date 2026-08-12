@@ -4,7 +4,7 @@
 +15
 [@main]
 #IF
-	LARGE G0 0
+	LARGE G0 6
 #SAY
 封锁已久的苍月岛竟然还有客人？难道你\
 真的不怕死？现在离开还来的及！我也许可以帮你！\
@@ -45,12 +45,24 @@
 
 [@送我进去]
 #IF
+SMALL G0 7
+#ACT
+MESSAGEBOX 当前区域尚未开放。
+BREAK
+
+#IF
 #ACT
 mapmove H001 73 67
 SET [28] 1
 break
 
 [@pay4]
+#IF
+SMALL G0 7
+#ACT
+MESSAGEBOX 当前区域尚未开放。
+BREAK
+
 #IF
 	checkitem 幻境凭证 1
 #ELSESAY

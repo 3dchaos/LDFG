@@ -1,13 +1,13 @@
 [@main]
 #IF
-	LARGE G0 0
+	LARGE G0 5
 	#SAY
 	海上总是有很多新鲜事，\
 我的这艘小船可以送你一程。\
 <苍月岛在哪/@苍月岛在哪>\
 <去圣域/@j>勋章地图\
 #IF
-	LARGE G0 5
+	LARGE G0 8
 	#ELSESAY
 	前段时间我在捕鱼的时候发现一个奇怪的岛屿，\
 	迷雾中影影绰绰有一个倩影！（狐月开放内容）
@@ -32,6 +32,12 @@ check [255] 1
 <不去了/@exit>\
 
 [@直接买票]
+#IF
+SMALL G0 9
+#ACT
+MESSAGEBOX 当前区域尚未开放。
+BREAK
+
 #IF
 small <$GAMEGIRD> 1000
 #ACT
@@ -65,6 +71,12 @@ KILLSLAVE 1 红狐狸[伪装]
 SENDMSG 5 幻化被识破，幻象已经湮灭。
 
 [@买票]
+#IF
+SMALL G0 9
+#ACT
+MESSAGEBOX 当前区域尚未开放。
+BREAK
+
 #IF
 checkgold 500
 #ACT

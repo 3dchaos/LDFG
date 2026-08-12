@@ -3,7 +3,7 @@
 [@main]
 \\
 #IF
-LARGE G0 3
+LARGE G0 8
 #ACT
 	GetMapHumCount hero1 0 N$东区人数
 	GetMapHumCount hero2 0 N$西区人数
@@ -44,6 +44,12 @@ OpenBigDialogBox <$STR(N$资源编号)> 16 1 4 0 0 1 384 23
 
 [@密境东区]
 #IF
+SMALL G0 9
+#ACT
+MESSAGEBOX 当前区域尚未开放。
+BREAK
+
+#IF
 #ACT
 	CLOSEBIGDIALOGBOX
 #IF
@@ -58,6 +64,12 @@ SENDDELAYMSG 密境探险时间还剩%s 3600 255 1 @密境东区结束
 <返回/@main>\\               
 
 [@密境西区]
+#IF
+SMALL G0 9
+#ACT
+MESSAGEBOX 当前区域尚未开放。
+BREAK
+
 #IF
 #ACT
 	CLOSEBIGDIALOGBOX

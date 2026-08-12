@@ -42,6 +42,12 @@
 ※　       需要五万金币的传送费　       ※<返    回/@恐怖区域>※\ 
 [@幻境一层]
 #IF
+SMALL G0 7
+#ACT
+MESSAGEBOX 幻境区域还未开放
+BREAK
+
+#IF
 	checkitem 幻境凭证 1
 #ELSESAY
 	你身上没有带幻境凭证，盟重的流浪汉那里有卖。\
@@ -58,6 +64,12 @@ break
 #ELSESAY
 你没有足够的金币用来支付我的服务费用!\
 [@沃玛森林]
+#IF
+SMALL G0 1
+#ACT
+MESSAGEBOX 沃玛森林区域还未开放
+BREAK
+
 #act
 mapmove 1 562 553
 
@@ -93,6 +105,12 @@ mapmove 0 42 109
 SendMsg 6 金币不足
 
 [@毒蛇矿区]
+#IF
+SMALL G0 2
+#ACT
+MESSAGEBOX 毒蛇山谷与矿区还未开放
+BREAK
+
 #if
 checkgold 20000
 #act
@@ -103,6 +121,12 @@ mapmove 2 564 171
 SendMsg 6 金币不足
 
 [@沃玛入口]
+#IF
+SMALL G0 1
+#ACT
+MESSAGEBOX 沃玛森林区域还未开放
+BREAK
+
 #if
 checkgold 20000
 #act
@@ -113,6 +137,12 @@ mapmove D021 25 25
 SendMsg 6 金币不足
 
 [@蜈蚣洞口]
+#IF
+SMALL G0 3
+#ACT
+MESSAGEBOX 盟重省区域还未开放
+BREAK
+
 #if
 checkgold 20000
 #act
@@ -123,6 +153,12 @@ mapmove 3 140 87
 SendMsg 6 金币不足
 
 [@石墓入口]
+#IF
+SMALL G0 3
+#ACT
+MESSAGEBOX 盟重省区域还未开放
+BREAK
+
 #if
 checkgold 20000
 #act
@@ -133,6 +169,12 @@ mapmove D710 26 20
 SendMsg 6 金币不足
 
 [@祖玛入口]
+#IF
+SMALL G0 3
+#ACT
+MESSAGEBOX 盟重省区域还未开放
+BREAK
+
 #if
 checkgold 20000
 #act
@@ -143,6 +185,12 @@ mapmove 0157 19 16
 SendMsg 6 金币不足
 
 [@丛林迷宫]
+#IF
+SMALL G0 4
+#ACT
+MESSAGEBOX 白日门与赤月区域还未开放
+BREAK
+
 #if
 checkgold 50000
 #act
@@ -153,6 +201,12 @@ mapmove 11 356 246
 SendMsg 6 金币不足
 
 [@封魔矿区]
+#IF
+SMALL G0 5
+#ACT
+MESSAGEBOX 封魔谷区域还未开放
+BREAK
+
 #if
 checkgold 20000
 #act
@@ -163,6 +217,12 @@ mapmove D2000 77 15
 SendMsg 6 金币不足
 
 [@尸王殿]
+#IF
+SMALL G0 2
+#ACT
+MESSAGEBOX 毒蛇山谷与矿区还未开放
+BREAK
+
 #if
 checkgold 20000
 #act
@@ -183,6 +243,12 @@ mapmove M001
 SendMsg 6 金币不足
 
 [@石墓五层]
+#IF
+SMALL G0 3
+#ACT
+MESSAGEBOX 盟重省区域还未开放
+BREAK
+
 #if
 checkgold 50000
 #act
@@ -193,6 +259,12 @@ mapmove D715 84 80
 SendMsg 6 金币不足
 
 [@祖玛六层]
+#IF
+SMALL G0 3
+#ACT
+MESSAGEBOX 盟重省区域还未开放
+BREAK
+
 #if
 checkgold 50000
 #act
@@ -203,6 +275,12 @@ mapmove D5071
 SendMsg 6 金币不足
 
 [@霸者大厅]
+#IF
+SMALL G0 5
+#ACT
+MESSAGEBOX 封魔谷区域还未开放
+BREAK
+
 #if
 checkgold 20000
 #act
@@ -213,6 +291,12 @@ mapmove D2008
 SendMsg 6 金币不足
 
 [@尸魔三层]
+#IF
+SMALL G0 6
+#ACT
+MESSAGEBOX 苍月岛区域还未开放
+BREAK
+
 #if
 checkgold 50000
 #act
@@ -223,6 +307,12 @@ mapmove D2052
 SendMsg 6 金币不足
 
 [@骨魔五层]
+#IF
+SMALL G0 6
+#ACT
+MESSAGEBOX 苍月岛区域还未开放
+BREAK
+
 #if
 checkgold 50000
 #act
@@ -233,6 +323,12 @@ mapmove D2067
 SendMsg 6 金币不足
 
 [@牛魔七层]
+#IF
+SMALL G0 6
+#ACT
+MESSAGEBOX 苍月岛区域还未开放
+BREAK
+
 #if
 checkgold 50000
 #act
@@ -244,6 +340,12 @@ SendMsg 6 金币不足
 
 
 [@钳虫巢穴]
+#IF
+SMALL G0 4
+#ACT
+MESSAGEBOX 白日门与赤月区域还未开放
+BREAK
+
 #if
 checkgold 50000
 #act
@@ -254,6 +356,12 @@ mapmove 11 343 325
 SendMsg 6 金币不足
 
 [@死亡神殿]
+#IF
+SMALL G0 5
+#ACT
+MESSAGEBOX 封魔谷区域还未开放
+BREAK
+
 #if
 checkgold 50000
 #act
@@ -304,6 +412,12 @@ mapmove r001 55 94
 SendMsg 6 金币不足
 
 [@牛魔入口]
+#IF
+SMALL G0 6
+#ACT
+MESSAGEBOX 苍月岛区域还未开放
+BREAK
+
 
 #if
 checkgold 20000
@@ -315,6 +429,12 @@ mapmove D2070 31 20
 SendMsg 6 金币不足
 
 [@尸魔洞口]
+#IF
+SMALL G0 6
+#ACT
+MESSAGEBOX 苍月岛区域还未开放
+BREAK
+
 
 #if
 checkgold 20000
@@ -326,6 +446,12 @@ mapmove 5 526 612
 SendMsg 6 金币不足
 
 [@骨魔洞口]
+#IF
+SMALL G0 6
+#ACT
+MESSAGEBOX 苍月岛区域还未开放
+BREAK
+
 
 #if
 checkgold 20000
@@ -337,6 +463,12 @@ mapmove 5 548 128
 SendMsg 6 金币不足
 
 [@抉择之地]
+#IF
+SMALL G0 4
+#ACT
+MESSAGEBOX 白日门与赤月区域还未开放
+BREAK
+
 #if
 checkgold 50000
 #act
@@ -357,6 +489,12 @@ mapmove 0 664 214
 SendMsg 6 金币不足
 
 [@沃玛三层]
+#IF
+SMALL G0 1
+#ACT
+MESSAGEBOX 沃玛森林区域还未开放
+BREAK
+
 #if
 checkgold 50000
 #act
@@ -367,6 +505,12 @@ mapmove D024 16 19
 SendMsg 6 金币不足
 
 [@死亡棺材]
+#IF
+SMALL G0 3
+#ACT
+MESSAGEBOX 盟重省区域还未开放
+BREAK
+
 #if
 checkgold 50000
 #act
@@ -377,11 +521,23 @@ MAPMOVE D606
 SendMsg 6 金币不足
 
 [@土城书店]
+#IF
+SMALL G0 3
+#ACT
+MESSAGEBOX 盟重省区域还未开放
+BREAK
+
 #ACT
 
 mapmove 3 410 323
 
 [@封魔堡]
+#IF
+SMALL G0 5
+#ACT
+MESSAGEBOX 封魔谷区域还未开放
+BREAK
+
 #ACT
 mapmove B341 21 26
 
@@ -391,6 +547,12 @@ mapmove B341 21 26
 mapmove 0122 21 33
 
 [@沙巴克]
+#IF
+SMALL G0 3
+#ACT
+MESSAGEBOX 盟重省区域还未开放
+BREAK
+
 #ACT
 
 mapmove 3 675 333
@@ -426,6 +588,12 @@ mapmove 0 288 615
 SendMsg 6 金币不足1000
 
 [@盟重土城]
+#IF
+SMALL G0 3
+#ACT
+MESSAGEBOX 盟重省区域还未开放
+BREAK
+
 #if
 checkgold 1000
 #act
@@ -436,6 +604,12 @@ mapmove 3 330 330
 SendMsg 6 金币不足1000
 
 [@白日门]
+#IF
+SMALL G0 4
+#ACT
+MESSAGEBOX 白日门与赤月区域还未开放
+BREAK
+
 #if
 checkgold 1000
 #act
@@ -445,6 +619,12 @@ mapmove 11 177 324
 #ELSEACT
 SendMsg 6 金币不足1000
 [@苍月之岛]
+#IF
+SMALL G0 6
+#ACT
+MESSAGEBOX 苍月岛区域还未开放
+BREAK
+
 #IF
 	LARGE G0 0
 #ELSEACT
@@ -459,6 +639,12 @@ mapmove 5 139 337
 #ELSEACT
 SendMsg 6 金币不足1000
 [@封魔神谷]
+#IF
+SMALL G0 5
+#ACT
+MESSAGEBOX 封魔谷区域还未开放
+BREAK
+
 
 #if
 checkgold 1000
@@ -469,6 +655,12 @@ mapmove 4 233 210
 #ELSEACT
 SendMsg 6 金币不足1000
 [@毒蛇山谷]
+#IF
+SMALL G0 2
+#ACT
+MESSAGEBOX 毒蛇山谷与矿区还未开放
+BREAK
+
 #if
 checkgold 1000
 #act

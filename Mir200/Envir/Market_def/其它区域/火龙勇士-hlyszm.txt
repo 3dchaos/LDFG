@@ -49,6 +49,12 @@ OpenBigDialogBox <$STR(N$资源编号)> 16 1 4 0 0 1 384 23
 
 [@返回火龙迷宫]
 #IF
+SMALL G0 9
+#ACT
+MESSAGEBOX 当前区域尚未开放。
+BREAK
+
+#IF
 #ACT
 	CLOSEBIGDIALOGBOX
 #IF
@@ -125,6 +131,12 @@ CHECKRANGEMONCOUNTEX hl002 火蟒 36 183 400 > 0
 
 [@单人进入] 
 #IF
+SMALL G0 9
+#ACT
+MESSAGEBOX 当前区域尚未开放。
+BREAK
+
+#IF
   CHECKLEVELEX < 64
 #ACT
 MESSAGEBOX 先升级到65级再来吧！
@@ -144,6 +156,12 @@ BREAK
 	BREAK
 
 [@组队进去]
+#IF
+SMALL G0 9
+#ACT
+MESSAGEBOX 当前区域尚未开放。
+BREAK
+
 #IF
   CHECKLEVELEX < 64
 #ACT
