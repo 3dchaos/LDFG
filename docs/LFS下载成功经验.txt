@@ -1,0 +1,10 @@
+Clash Verge 全局代理美国
+
+git 改全局代理
+$ # 全局代理示例，端口改成你自己的
+git config --global http.proxy socks5://127.0.0.1:7897
+git config --global https.proxy socks5://127.0.0.1:7897
+再执行
+$ git lfs pull
+
+拉取大文件就不会慢了
