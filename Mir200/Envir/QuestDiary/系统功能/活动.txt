@@ -1,6 +1,11 @@
 [@活动]
 {
+#IF
+#ACT
+BREAK
 
+#IF
+LARGE G0 8
 #ACT
 GOTO @狐月活动
 
