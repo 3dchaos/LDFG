@@ -1,4 +1,4 @@
-D:\热血传奇13周年客户端\LD\Data\Effect.pak|破解的人生儿子没有PY
-D:\热血传奇13周年客户端\LD\Data\ld185.pak|破解的人生儿子没有PY
-D:\热血传奇13周年客户端\LD\Data\mmap10.pak|破解的人生儿子没有PY
-D:\热血传奇13周年客户端\LD\Data\ui_n.pak|破解的人生儿子没有PY
+D:\wangsiProject\老登四合一GitHub\登录器\补丁文件夹\LD\Data\Effect.pak|破解的人生儿子没有PY
+D:\wangsiProject\老登四合一GitHub\登录器\补丁文件夹\LD\Data\ld185.pak|破解的人生儿子没有PY
+D:\wangsiProject\老登四合一GitHub\登录器\补丁文件夹\LD\Data\mmap10.pak|破解的人生儿子没有PY
+D:\wangsiProject\老登四合一GitHub\登录器\补丁文件夹\LD\Data\ui_n.pak|破解的人生儿子没有PY

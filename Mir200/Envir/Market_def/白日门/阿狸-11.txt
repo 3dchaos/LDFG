@@ -16,6 +16,8 @@ OpenBigDialogBox <$STR(N$资源编号)> 16 1 4 0 0 1 384 23
 <Text:#L02~:当然可以|需要重塑过体魄且达到80级:0:20{FCOLOR=251}/@可以>
 <NewLine:#L02~>
 <Text:#L02~:我很忙:0:20{FCOLOR=251}/@exit>
+<NewLine:#L02~>
+<Text:#L02~:狐月归途:0:20{FCOLOR=251}/@后期奇遇_狐月归途>
 #ELSESAY
 	我一直在苦苦寻找回家的路（狐月内容）
 [@可以]
@@ -85,6 +87,7 @@ BREAK
 #ACT
   RECALLMOB 红狐狸[伪装] 0 10  1 243
   GAMEGIRD - 2000
+  #CALL [系统功能\老登辅助\后期奇遇.txt] @后期奇遇_刷新
 CLOSEBIGDIALOGBOX
 #SAY
 幻化成功了，我只能撑十分钟，\
@@ -95,3 +98,30 @@ CLOSEBIGDIALOGBOX
 #ELSEACT
 GAMEGIRD - 2000
 MESSAGEBOX 幻化失败了，果然我的法力已经衰退了，请稍等再试吧！
+
+[@后期奇遇_狐月归途]
+#IF
+CHECK [520] 0
+#SAY
+你身上还没有火龙余烬的气息。\
+狐月山不是普通海岛，贸然过去只会被灵压撕碎。\
+<返回/@main> \
+#ACT
+BREAK
+
+#IF
+CHECK [521] 1
+#SAY
+海边老兵已经信任你了。\
+直接坐他的船去狐月岛，到了那里再来找我。\
+<返回/@main> \
+#ACT
+BREAK
+
+#IF
+#SAY
+我不是不想回去，是狐月山正在松动。\
+你若真从火龙那边走来，就护送我的化形去海边老兵那里。\
+他讨厌妖，却也懂得分辨人心。\
+<帮助化形/@帮助化形>\
+<返回/@main> \

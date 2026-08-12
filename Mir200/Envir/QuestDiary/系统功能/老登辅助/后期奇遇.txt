@@ -1,0 +1,285 @@
+[@后期奇遇_刷新]
+{
+#IF
+#ACT
+RefreshMissPage 奇遇
+ADDBUTTON 0 1 82 83 84 153 150 7 <PlayImg:0:82:2:200:0:0:0> 251#任务\250#打开任务窗口
+}
+
+[@后期奇遇_穆家店接雪域]
+{
+#IF
+CHECK [48] 1
+CHECK [500] 0
+#ACT
+SET [500] 1
+SET [501] 1
+#CALL [系统功能\老登辅助\后期奇遇.txt] @后期奇遇_刷新
+SENDMSG 5 提示：后期奇遇已开启，请前往雪域寻找魂器真相。
+BREAK
+
+#IF
+CHECK [48] 1
+CHECK [501] 0
+CHECK [505] 0
+#ACT
+SET [501] 1
+#CALL [系统功能\老登辅助\后期奇遇.txt] @后期奇遇_刷新
+SENDMSG 5 提示：请前往雪域寻找魂器真相。
+BREAK
+}
+
+[@后期奇遇_穆家店收束雪域]
+{
+#IF
+CHECK [504] 1
+CHECK [505] 0
+CHECKBAGSIZE 2
+#ACT
+SET [505] 1
+SET [510] 1
+CREDITPOINT + 50
+GIVE 火龙凭证 1
+GIVE 金砖 1
+GIVEFENGHAO 雪域寻魂 1
+#CALL [系统功能\老登辅助\后期奇遇.txt] @后期奇遇_刷新
+SENDMSG 5 提示：雪域奇遇已完成，请带着旧军令去找比奇火龙将军。
+BREAK
+
+#IF
+CHECK [504] 1
+CHECK [505] 0
+#ACT
+MESSAGEBOX 请准备2个背包空格。
+BREAK
+}
+
+[@后期奇遇_雪域老人见面]
+{
+#IF
+CHECK [501] 1
+CHECK [502] 0
+#ACT
+SET [502] 1
+#CALL [系统功能\老登辅助\后期奇遇.txt] @后期奇遇_刷新
+SENDMSG 5 提示：雪域老人说出了魂器真相，请在雪域继续证明自己。
+BREAK
+}
+
+[@后期奇遇_雪域魂器交付]
+{
+#IF
+CHECK [503] 1
+CHECK [504] 0
+CHECKITEM 冰核 3
+CHECKBAGSIZE 5
+#ACT
+TAKE 冰核 3
+SET [504] 1
+CREDITPOINT + 80
+CHANGEEXP + 1000000
+GIVE 雪域魂器残片 1
+GIVE 火龙凭证 1
+GIVESTATEITEM 避寒神丹 2
+#CALL [系统功能\老登辅助\后期奇遇.txt] @后期奇遇_刷新
+SENDMSG 5 提示：你取得了雪域魂器残片，请回银杏村穆家店报信。
+BREAK
+
+#IF
+CHECK [503] 1
+CHECK [504] 0
+CHECKITEM 冰核 3
+#ACT
+MESSAGEBOX 请准备5个背包空格。
+BREAK
+
+#IF
+CHECK [503] 1
+CHECK [504] 0
+#ACT
+MESSAGEBOX 还需要3个冰核，才能稳定魂器残片。
+BREAK
+}
+
+[@后期奇遇_火龙将军接军令]
+{
+#IF
+CHECK [510] 1
+CHECK [511] 0
+CHECK [422] 1
+#ACT
+SET [511] 1
+#CALL [系统功能\老登辅助\后期奇遇.txt] @后期奇遇_刷新
+SENDMSG 5 提示：火龙将军承认旧军令，请进入火龙迷宫清理残火。
+BREAK
+
+#IF
+CHECK [510] 1
+CHECK [511] 0
+#ACT
+MESSAGEBOX 先成为火龙勇士，火龙将军才会接下旧军令。
+BREAK
+}
+
+[@后期奇遇_王大娘遗骸]
+{
+#IF
+CHECK [512] 1
+CHECK [513] 0
+CHECKITEM 先驱者遗骸 1
+CHECKBAGSIZE 1
+#ACT
+TAKE 先驱者遗骸 1
+SET [513] 1
+CREDITPOINT + 50
+GIVE 焰魂龙纹 1
+#CALL [系统功能\老登辅助\后期奇遇.txt] @后期奇遇_刷新
+SENDMSG 5 提示：王大娘辨认了先驱遗骸，请回火龙勇士处寻找神殿入口。
+BREAK
+
+#IF
+CHECK [512] 1
+CHECK [513] 0
+CHECKITEM 先驱者遗骸 1
+#ACT
+MESSAGEBOX 请准备1个背包空格。
+BREAK
+
+#IF
+CHECK [512] 1
+CHECK [513] 0
+#ACT
+MESSAGEBOX 请先带回一个先驱者遗骸。
+BREAK
+}
+
+[@后期奇遇_云隐收束火龙]
+{
+#IF
+CHECK [514] 1
+CHECK [516] 0
+CHECKBAGSIZE 1
+#ACT
+SET [515] 1
+SET [516] 1
+SET [520] 1
+CREDITPOINT + 100
+GIVE 狐月引路符 1
+GIVEFENGHAO 火龙余烬 1
+#CALL [系统功能\老登辅助\后期奇遇.txt] @后期奇遇_刷新
+SENDMSG 5 提示：火龙余烬已归于体魄，请带着狐月引路符去白日门寻找阿狸。
+BREAK
+
+#IF
+CHECK [514] 1
+CHECK [516] 0
+#ACT
+MESSAGEBOX 请准备1个背包空格。
+BREAK
+}
+
+[@后期奇遇_狐月登船]
+{
+#IF
+CHECK [520] 1
+CHECK [521] 0
+#ACT
+SET [521] 1
+#CALL [系统功能\老登辅助\后期奇遇.txt] @后期奇遇_刷新
+SENDMSG 5 提示：你取得了海边老兵的信任，请前往狐月岛寻找阿狸。
+BREAK
+}
+
+[@后期奇遇_狐月秘密]
+{
+#IF
+CHECK [521] 1
+CHECK [522] 0
+CHECKITEM 狐火 30
+CHECKBAGSIZE 1
+#ACT
+TAKE 狐火 30
+SET [522] 1
+CHANGEEXP + 2000000
+CREDITPOINT + 100
+GIVE 皓月晶石 20
+#CALL [系统功能\老登辅助\后期奇遇.txt] @后期奇遇_刷新
+SENDMSG 5 提示：狐月山的秘密已被你读懂，请去找狐月长老。
+BREAK
+
+#IF
+CHECK [521] 1
+CHECK [522] 0
+CHECKITEM 狐火 30
+#ACT
+MESSAGEBOX 请准备1个背包空格。
+BREAK
+
+#IF
+CHECK [521] 1
+CHECK [522] 0
+#ACT
+MESSAGEBOX 阿狸需要30个狐火，才敢说出狐月阵眼的秘密。
+BREAK
+}
+
+[@后期奇遇_狐月祭坛]
+{
+#IF
+CHECK [522] 1
+CHECK [524] 0
+CHECKITEM 狐火 50
+CHECKITEM 皓月晶石 50
+CHECKBAGSIZE 1
+#ACT
+TAKE 狐火 50
+TAKE 皓月晶石 50
+SET [523] 1
+SET [524] 1
+CREDITPOINT + 150
+GIVE 顶级运气宝石 1
+#CALL [系统功能\老登辅助\后期奇遇.txt] @后期奇遇_刷新
+SENDMSG 5 提示：封印祭坛已经回应你，请前往狐月神殿击杀狐月天珠。
+BREAK
+
+#IF
+CHECK [522] 1
+CHECK [524] 0
+CHECKITEM 狐火 50
+CHECKITEM 皓月晶石 50
+#ACT
+MESSAGEBOX 请准备1个背包空格。
+BREAK
+
+#IF
+CHECK [522] 1
+CHECK [524] 0
+#ACT
+MESSAGEBOX 修补封印需要50个狐火和50个皓月晶石。
+BREAK
+}
+
+[@后期奇遇_狐月终章]
+{
+#IF
+CHECK [525] 1
+CHECK [526] 0
+CHECKBAGSIZE 3
+#ACT
+SET [526] 1
+CREDITPOINT + 300
+GIVESTATEITEM 装备转移宝盒 1 1 0 1 1 1 1 3
+GIVE 皓月晶石 100
+GIVE 狐火 50
+GIVEFENGHAO 狐月问道 1
+#CALL [系统功能\老登辅助\后期奇遇.txt] @后期奇遇_刷新
+SENDMSG 5 提示：后期个人奇遇主线已完成，狐月封印暂时稳定。
+BREAK
+
+#IF
+CHECK [525] 1
+CHECK [526] 0
+#ACT
+MESSAGEBOX 请准备3个背包空格。
+BREAK
+}

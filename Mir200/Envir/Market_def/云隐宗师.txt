@@ -22,6 +22,8 @@ OpenBigDialogBox <$STR(N$资源编号)> 16 1 4 0 0 1 384 23
 <NewLine:#L02~>
 <Text:#L02~:重置属性点|需要一个[焰魂龙纹]:0:20{FCOLOR=251}/@重置属性点>
 <NewLine:#L02~>
+<Text:#L02~:火龙余烬:0:20{FCOLOR=251}/@后期奇遇_火龙余烬>
+<NewLine:#L02~>
 <Text:#L02~:退出:0:20{FCOLOR=251}/@exit>
 
 
@@ -209,3 +211,36 @@ NOT H.CHECKLEVELEX > <$STR(N$削减等级)>
 ChangeHeroLevel = 1
 #ELSEACT
 ChangeHeroLevel - <$STR(N$削减等级)>
+
+[@后期奇遇_火龙余烬]
+#IF
+CHECK [514] 0
+#SAY
+你的火候还不够。\
+击败火龙教主之后，再来问老夫火龙余烬的去处。\
+<返回/@main> \
+#ACT
+BREAK
+
+#IF
+CHECK [516] 1
+#SAY
+火龙余烬已经融入你的气血。\
+去白日门找阿狸吧，狐月封印需要这样的体魄。\
+<返回/@main> \
+#ACT
+BREAK
+
+#IF
+#SAY
+火龙教主已死，可这不是结束。\
+火龙之焰本是古封印外泄的反噬，若不重塑体魄，\
+你连狐月山的灵压都承受不住。\
+<收束火龙余烬/@后期奇遇_确认火龙余烬>\
+<返回/@main> \
+
+[@后期奇遇_确认火龙余烬]
+#IF
+#ACT
+#CALL [系统功能\老登辅助\后期奇遇.txt] @后期奇遇_云隐收束火龙
+GOTO @后期奇遇_火龙余烬

@@ -90,6 +90,220 @@ SENDMSG 5 提示：你已经完成近在咫尺任务。
 RefreshMissPage 180任务
 
 #IF
+CheckKillMonName 雪域魔王[BOSS]
+EQUAL <$MAP> YXSD
+CHECK [502] 1
+CHECK [503] 0
+#ACT
+SET [503] 1
+SENDMSG 5 提示：你击碎了雪域魔王的魂器外壳，请带3个冰核去找雪域老人。
+RefreshMissPage 奇遇
+ADDBUTTON 0 1 82 83 84 153 150 7 <PlayImg:0:82:2:200:0:0:0> 251#任务\250#打开任务窗口
+
+#IF
+CheckKillMonName 金杖蜘蛛[狂暴]
+EQUAL <$MAP> hlmg
+CHECK [511] 1
+CHECK [512] 0
+#ACT
+INC U41 1
+SENDMSG 5 提示：你已清理火龙迷宫残火<$STR(U41)>/40。
+RefreshMissPage 奇遇
+
+#IF
+CheckKillMonName 金杖蜘蛛[狂暴]
+EQUAL <$MAP> hlyszm
+CHECK [511] 1
+CHECK [512] 0
+#ACT
+INC U41 1
+SENDMSG 5 提示：你已清理火龙迷宫残火<$STR(U41)>/40。
+RefreshMissPage 奇遇
+
+#IF
+CheckKillMonName 金杖蜘蛛[狂暴]
+EQUAL <$MAP> hl001
+CHECK [511] 1
+CHECK [512] 0
+#ACT
+INC U41 1
+SENDMSG 5 提示：你已清理火龙迷宫残火<$STR(U41)>/40。
+RefreshMissPage 奇遇
+
+#IF
+CheckKillMonName 金杖蜘蛛[狂暴]
+EQUAL <$MAP> hl002
+CHECK [511] 1
+CHECK [512] 0
+#ACT
+INC U41 1
+SENDMSG 5 提示：你已清理火龙迷宫残火<$STR(U41)>/40。
+RefreshMissPage 奇遇
+
+#IF
+CheckKillMonName 金杖蜘蛛[狂暴]
+EQUAL <$MAP> D2083
+CHECK [511] 1
+CHECK [512] 0
+#ACT
+INC U41 1
+SENDMSG 5 提示：你已清理火龙迷宫残火<$STR(U41)>/40。
+RefreshMissPage 奇遇
+
+#IF
+CheckKillMonName 金杖蜘蛛[狂暴]
+EQUAL <$MAP> <$USERNAME>火龙一
+CHECK [511] 1
+CHECK [512] 0
+#ACT
+INC U41 1
+SENDMSG 5 提示：你已清理火龙迷宫残火<$STR(U41)>/40。
+RefreshMissPage 奇遇
+
+#IF
+CheckKillMonName 金杖蜘蛛[狂暴]
+EQUAL <$MAP> <$USERNAME>火龙二
+CHECK [511] 1
+CHECK [512] 0
+#ACT
+INC U41 1
+SENDMSG 5 提示：你已清理火龙迷宫残火<$STR(U41)>/40。
+RefreshMissPage 奇遇
+
+#IF
+CheckKillMonName 金杖蜘蛛[精英]
+EQUAL <$MAP> hlmg
+CHECK [511] 1
+CHECK [512] 0
+#ACT
+INC U41 1
+SENDMSG 5 提示：你已清理火龙迷宫残火<$STR(U41)>/40。
+RefreshMissPage 奇遇
+
+#IF
+CheckKillMonName 金杖蜘蛛[精英]
+EQUAL <$MAP> hlyszm
+CHECK [511] 1
+CHECK [512] 0
+#ACT
+INC U41 1
+SENDMSG 5 提示：你已清理火龙迷宫残火<$STR(U41)>/40。
+RefreshMissPage 奇遇
+
+#IF
+CheckKillMonName 金杖蜘蛛[精英]
+EQUAL <$MAP> hl001
+CHECK [511] 1
+CHECK [512] 0
+#ACT
+INC U41 1
+SENDMSG 5 提示：你已清理火龙迷宫残火<$STR(U41)>/40。
+RefreshMissPage 奇遇
+
+#IF
+CheckKillMonName 金杖蜘蛛[精英]
+EQUAL <$MAP> hl002
+CHECK [511] 1
+CHECK [512] 0
+#ACT
+INC U41 1
+SENDMSG 5 提示：你已清理火龙迷宫残火<$STR(U41)>/40。
+RefreshMissPage 奇遇
+
+#IF
+CheckKillMonName 金杖蜘蛛[精英]
+EQUAL <$MAP> D2083
+CHECK [511] 1
+CHECK [512] 0
+#ACT
+INC U41 1
+SENDMSG 5 提示：你已清理火龙迷宫残火<$STR(U41)>/40。
+RefreshMissPage 奇遇
+
+#IF
+CheckKillMonName 金杖蜘蛛[精英]
+EQUAL <$MAP> <$USERNAME>火龙一
+CHECK [511] 1
+CHECK [512] 0
+#ACT
+INC U41 1
+SENDMSG 5 提示：你已清理火龙迷宫残火<$STR(U41)>/40。
+RefreshMissPage 奇遇
+
+#IF
+CheckKillMonName 金杖蜘蛛[精英]
+EQUAL <$MAP> <$USERNAME>火龙二
+CHECK [511] 1
+CHECK [512] 0
+#ACT
+INC U41 1
+SENDMSG 5 提示：你已清理火龙迷宫残火<$STR(U41)>/40。
+RefreshMissPage 奇遇
+
+#IF
+CheckKillMonName 火蟒
+EQUAL <$MAP> hlyszm
+CHECK [511] 1
+CHECK [512] 0
+#ACT
+INC U41 2
+SENDMSG 5 提示：你已清理火龙迷宫残火<$STR(U41)>/40。
+RefreshMissPage 奇遇
+
+#IF
+CheckKillMonName 火蟒
+EQUAL <$MAP> D2083
+CHECK [511] 1
+CHECK [512] 0
+#ACT
+INC U41 2
+SENDMSG 5 提示：你已清理火龙迷宫残火<$STR(U41)>/40。
+RefreshMissPage 奇遇
+
+#IF
+CheckKillMonName 火蟒
+EQUAL <$MAP> <$USERNAME>火龙二
+CHECK [511] 1
+CHECK [512] 0
+#ACT
+INC U41 2
+SENDMSG 5 提示：你已清理火龙迷宫残火<$STR(U41)>/40。
+RefreshMissPage 奇遇
+
+#IF
+LARGE U41 39
+CHECK [511] 1
+CHECK [512] 0
+#ACT
+SET [512] 1
+CHANGEEXP + 1500000
+CREDITPOINT + 80
+SENDMSG 5 提示：火龙迷宫残火已清理，请带先驱者遗骸去找毒蛇山谷王大娘。
+RefreshMissPage 奇遇
+ADDBUTTON 0 1 82 83 84 153 150 7 <PlayImg:0:82:2:200:0:0:0> 251#任务\250#打开任务窗口
+
+#IF
+CheckKillMonName 火龙教主
+EQUAL <$MAP> D2083
+CHECK [513] 1
+CHECK [514] 0
+#ACT
+SET [514] 1
+SENDMSG 5 提示：你击杀了火龙教主，请寻找云隐宗师收束火龙余烬。
+RefreshMissPage 奇遇
+ADDBUTTON 0 1 82 83 84 153 150 7 <PlayImg:0:82:2:200:0:0:0> 251#任务\250#打开任务窗口
+
+#IF
+CheckKillMonName 狐月天珠[BOSS]
+EQUAL <$MAP> FOX03
+CHECK [524] 1
+CHECK [525] 0
+#ACT
+SET [525] 1
+SENDMSG 5 提示：狐月天珠已经沉寂，请回狐月长老处完成后期奇遇。
+RefreshMissPage 奇遇
+ADDBUTTON 0 1 82 83 84 153 150 7 <PlayImg:0:82:2:200:0:0:0> 251#任务\250#打开任务窗口
+#IF
 #ACT
 #CALL [系统功能\地图开放.txt] @地图开放_杀怪触发
 }

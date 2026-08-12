@@ -153,6 +153,7 @@
 - `tools/mir200-encoding.ps1`：按项目规则列出文件应使用的编码；默认 `.txt` 走 GBK，`AGENTS.md`、`docs/`、`.vscode/*.json` 等走 UTF-8。
 - `tools/mir200-maplinks.ps1`：导出 `MapInfo.txt` 中的自然地图链接，支持按源地图或目标地图过滤。
 - `tools/mir200-stagecheck.ps1`：结合 `地图开放.txt` 阶段表检查 `MapInfo.txt` 是否仍有低阶段直达高阶段的静态链接。
+- `tools/mir200-stditems.ps1`：离线维护 `Mud2/DB/GEEM2.db` 的 `StdItems`；默认预览，`-Apply` 写入前自动备份，支持 `-SpecPath` 读取 UTF-8 CSV 规格。
 
 常用静态验证命令：
 
@@ -160,6 +161,7 @@
 .\tools\mir200-maplinks.ps1 -SourceMap 0
 .\tools\mir200-stagecheck.ps1
 .\tools\mir200-encoding.ps1 -Path AGENTS.md,docs,.vscode,Mir200\Envir\MapInfo.txt
+.\tools\mir200-stditems.ps1 -Check
 ```
 
 ## 地图阶段与防偷渡

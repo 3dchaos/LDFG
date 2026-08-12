@@ -7,7 +7,8 @@ function Get-Mir200Encoding {
     )
 
     $extension = [IO.Path]::GetExtension($Path).ToLowerInvariant()
-    if ($extension -eq '.md' -or $extension -eq '.json' -or $extension -eq '.ps1') {
+    $normalized = $Path.Replace('/', '\')
+    if ($extension -eq '.md' -or $extension -eq '.json' -or $extension -eq '.ps1' -or $extension -eq '.csv' -or $normalized -match '\\docs\\') {
         return [Text.UTF8Encoding]::new($false)
     }
 

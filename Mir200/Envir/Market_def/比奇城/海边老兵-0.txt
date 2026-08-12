@@ -47,6 +47,7 @@ BREAK
 <返回/@main>
 #ELSEACT
 GAMEGIRD - 1000
+#CALL [系统功能\老登辅助\后期奇遇.txt] @后期奇遇_狐月登船
 MAPMOVE  FOX02 50 76
 
 [@仆从]
@@ -84,6 +85,7 @@ take 金币 500
 KILLSLAVE 1 红狐狸[伪装]
 MAPMOVE  FOX02 50 76
 SET [255] 1
+#CALL [系统功能\老登辅助\后期奇遇.txt] @后期奇遇_狐月登船
 #ELSEACT
 MESSAGEBOX 船票都买不起，还想登船？
 
