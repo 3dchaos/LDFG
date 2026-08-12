@@ -171,11 +171,6 @@ check [68] 1
 #ACT
 #CALL [系统功能\地图开放.txt] @地图开放_越境纠正
 
-#IF
-#ACT
-SetOnTimer 117 1
-
-;=======================================植入@Login=典狱长Login群服注入结束=======================================
 ;清除连续挂机
 #IF
 CHECK [66] 1
@@ -417,18 +412,3 @@ H.GIVEFENGHAO <$str(L$称号名[<$str(N1)>])>
 #IF
 #ACT
 Inc N1 1
-
-;=======================================典狱长群服专用QMange开始=======================================
-
-[@OnTimer117]
-#IF
-GetStringPosEX ..\..\..\..\通区\认证账号.txt <$USERID>:<$SERVERNAME> N$认证行 S1
-#ACT
-TextSplit | <$STR(S1)> s10
-SetranKlevelName %s\※典狱长群服-<$SERVERNAME>※\绑定QQ号:<$STR(s11)>
-BREAK
-#ELSESAY
-典狱长群成员检查未通过\请发送以下信息给管理注册机器人(781369990),等待验证\
-<复制信息/@@CopyToClipboard1(绑定 <$SERVERNAME> <$USERID>)>绑定 <$SERVERNAME> <$USERID>
-#ELSEACT
-ChangeState 1 10

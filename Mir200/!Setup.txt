@@ -1,6 +1,6 @@
 [Server]
 ServerIndex=0
-ServerName=老登暑期活动
+ServerName=老凳赛博飞升13周目
 ServerNumber=0
 VentureServer=FALSE
 TestServer=TRUE
@@ -182,7 +182,7 @@ XueLingCustodian2=蓝色水灵
 XueLingCustodian3=紫色暗灵
 XueLingCustodian4=黄色土灵
 [Setup]
-ItemNumber=193864369
+ItemNumber=193930873
 ClientFile1 =mir.dat
 ClientFile2 =mir.2
 ClientFile3 =mir.3
