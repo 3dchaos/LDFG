@@ -1,0 +1,33 @@
+[@main]
+#IF
+#SAY
+传说中，只有真正的勇者才能获得英雄的传承。\
+你已经准备好迎接英雄的陪伴了吗？\
+支付2个金砖<尝试接受传承/@尝试接受>   <离开/@exit>
+
+[@尝试接受]
+#IF
+CHECKITEM 金砖 2
+#ELSESAY
+我看你身无分文，无法进行尝试呢\
+<我去准备/@exit>
+#ELSEACT
+BREAK
+#ACT
+TAKE 金砖 2
+
+#IF
+RANDOM 3
+#ACT
+MOV G3 1
+DelNpc 英雄引路人 <$MAP>
+SENDMSG 1 【英雄引路人】英雄引路人已现身，<$USERNAME> 获得英雄传承，全服英雄功能正式开放！
+#SAY
+愿你与英雄携手，共创传奇！\
+<离开/@exit>
+#ELSEACT
+DelNpc 英雄引路人 <$MAP>
+SENDMSG 5 传承的时机尚未到来，下次再来试试吧。
+#SAY
+传承的时机尚未到来，下次再来试试吧。\
+<离开/@exit>

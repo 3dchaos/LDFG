@@ -115,7 +115,6 @@ ISGUILDMASTER
 CheckGuildMemberCount < 200
 #ACT
 MOV A12 <$GUILDNAME>
-Gmexecute 开始提问 @假人入会
 #ELSEACT
 messagebox 你不是行会老大或你的行会成员已达到200个上限！！
 

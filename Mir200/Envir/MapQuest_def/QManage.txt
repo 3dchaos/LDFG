@@ -307,7 +307,7 @@ CHECK [30] 1
 SET [30] 0
 SET [31] 0
 mov N$刷怪次数 0
-Delnpc <$USERNAME>藏宝阁管理员
+Delnpc <$USERNAME>藏宝阁管理员 <$USERNAME>藏宝阁
 DelMirrorMap <$USERNAME>藏宝阁
 
 #IF
