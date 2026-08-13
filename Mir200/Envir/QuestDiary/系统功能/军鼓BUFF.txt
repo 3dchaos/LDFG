@@ -295,29 +295,27 @@ SetOnTimer 87 2
 
 [@军鼓BUFF_生成图标说明]
 {
-#IF
-#ACT
+
 #IF
 EQUAL <$STR(S$军鼓当前职业)> warrior
 #ACT
 MOV S$军鼓职业显示 战士
-BREAK
+
 
 #IF
 EQUAL <$STR(S$军鼓当前职业)> wizard
 #ACT
 MOV S$军鼓职业显示 法师
-BREAK
+
 
 #IF
 EQUAL <$STR(S$军鼓当前职业)> taoist
 #ACT
 MOV S$军鼓职业显示 道士
-BREAK
+
 
 #IF
 #ACT
-MOV S$军鼓职业显示 <$STR(S$军鼓当前职业)>
 MOV S$军鼓图标说明 {军鼓流派|243}\名称：<$STR(S$军鼓当前名称)>\职业：<$STR(S$军鼓职业显示)>　方向：<$STR(S$军鼓当前方向)>　品质：<$STR(N$军鼓当前品质)>\玩法：佩戴在军鼓位时持续生效。\触发：命中或受击时按当前方向结算；实际触发会在聊天框提示。
 
 #IF
