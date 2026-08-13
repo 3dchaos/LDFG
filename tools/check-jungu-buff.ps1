@@ -90,6 +90,50 @@ if (Test-Path -LiteralPath $scriptPath) {
 
 if (Test-Path -LiteralPath $configPath) {
     $configText = Get-Content -LiteralPath $configPath -Encoding ansi -Raw
+    $configLines = $configText -split "\r\n|\n|\r"
+    $getStringPosExLine = $null
+    $getStringPosExIndex = -1
+    $insideConfigRead = $false
+    $lastControl = ''
+    for ($i = 0; $i -lt $configLines.Count; $i++) {
+        $line = $configLines[$i].Trim()
+        if ($line -eq '[@军鼓配置_读取]') {
+            $insideConfigRead = $true
+            continue
+        }
+        if ($insideConfigRead -and $line -match '^\[@') {
+            break
+        }
+        if (-not $insideConfigRead -or $line -eq '') {
+            continue
+        }
+        if ($line -match '^(#IF|#ACT|#ELSEACT|#ELSESAY|#SAY)\b') {
+            $lastControl = $line
+        }
+        if ($line -match '^GetStringPosEX\b') {
+            $getStringPosExLine = $line
+            $getStringPosExIndex = $i + 1
+            if ($lastControl -ne '#IF') {
+                $fail += "GetStringPosEX must be in #IF condition block: $configPath line $getStringPosExIndex"
+            }
+        }
+    }
+    if ($null -eq $getStringPosExLine) {
+        $fail += "config missing GetStringPosEX lookup: $configPath"
+    }
+    if ($getStringPosExLine -and $getStringPosExLine -notmatch '\s0\s*$') {
+        $fail += "config GetStringPosEX must use relative-path flag 0: $configPath"
+    }
+    $extractStringLine = $configLines | Where-Object { $_ -match '^\s*ExtractStringEx\s+\|\s+<\$STR\(S\$军鼓配置文本\)>\s+S\$军鼓配置字段\s*$' }
+    if (-not $extractStringLine) {
+        $fail += "config must split the returned line with ExtractStringEx: $configPath"
+    }
+    foreach ($field in 1..7) {
+        $fieldName = 'S$军鼓配置字段' + $field
+        if ($configText -notmatch [regex]::Escape($fieldName)) {
+            $fail += "config missing extracted field ${field}: $configPath"
+        }
+    }
     foreach ($row in $specRows) {
         $count = ([regex]::Matches($configText, '(?m)^' + [regex]::Escape($row.Name) + '\|')).Count
         if ($count -ne 1) {

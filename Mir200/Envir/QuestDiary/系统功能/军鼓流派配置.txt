@@ -8,7 +8,10 @@
 MOV N$军鼓有效 0
 MOV N$军鼓配置行 0
 MOV S$军鼓配置文本
+
+#IF
 GetStringPosEX ..\QuestDiary\系统功能\军鼓流派配置.txt <$STR(S$军鼓名称)> N$军鼓配置行 S$军鼓配置文本 0
+#ACT
 
 #IF
 EQUAL N$军鼓配置行 0
@@ -17,7 +20,14 @@ BREAK
 
 #IF
 #ACT
-GetListString ..\QuestDiary\系统功能\军鼓流派配置.txt <$STR(N$军鼓配置行)> S$军鼓名称 S$军鼓职业 S$军鼓方向 N$军鼓品质 N$军鼓阶段 S$军鼓互斥组 S$军鼓模块 1
+ExtractStringEx | <$STR(S$军鼓配置文本)> S$军鼓配置字段
+MOV S$军鼓名称 <$STR(S$军鼓配置字段1)>
+MOV S$军鼓职业 <$STR(S$军鼓配置字段2)>
+MOV S$军鼓方向 <$STR(S$军鼓配置字段3)>
+MOV N$军鼓品质 <$STR(S$军鼓配置字段4)>
+MOV N$军鼓阶段 <$STR(S$军鼓配置字段5)>
+MOV S$军鼓互斥组 <$STR(S$军鼓配置字段6)>
+MOV S$军鼓模块 <$STR(S$军鼓配置字段7)>
 MOV N$军鼓有效 1
 }
 ;Name|Job|Direction|Quality|Stage|ConflictGroup|ModuleKey
