@@ -1,0 +1,279 @@
+;道士军鼓模块：养娃人 / 奶不死 / 毒嘴子。
+
+[@军鼓taoist_品质基础]
+{
+#IF
+EQUAL N$军鼓品质 1
+#ACT
+MOV N$军鼓点 1
+MOV N$军鼓大点 2
+MOV N$军鼓百分 2
+MOV N$军鼓元素 1
+MOV N$军鼓血蓝 50
+MOV N$军鼓顶级加码 0
+MOV N$军鼓压制 100
+BREAK
+
+#IF
+EQUAL N$军鼓品质 2
+#ACT
+MOV N$军鼓点 2
+MOV N$军鼓大点 3
+MOV N$军鼓百分 3
+MOV N$军鼓元素 2
+MOV N$军鼓血蓝 80
+MOV N$军鼓顶级加码 0
+MOV N$军鼓压制 100
+BREAK
+
+#IF
+EQUAL N$军鼓品质 3
+#ACT
+MOV N$军鼓点 3
+MOV N$军鼓大点 5
+MOV N$军鼓百分 4
+MOV N$军鼓元素 3
+MOV N$军鼓血蓝 120
+MOV N$军鼓顶级加码 0
+MOV N$军鼓压制 100
+BREAK
+
+#IF
+EQUAL N$军鼓品质 4
+#ACT
+MOV N$军鼓点 4
+MOV N$军鼓大点 7
+MOV N$军鼓百分 5
+MOV N$军鼓元素 4
+MOV N$军鼓血蓝 180
+MOV N$军鼓顶级加码 0
+MOV N$军鼓压制 100
+BREAK
+
+#IF
+EQUAL N$军鼓品质 5
+#ACT
+MOV N$军鼓点 5
+MOV N$军鼓大点 9
+MOV N$军鼓百分 6
+MOV N$军鼓元素 5
+MOV N$军鼓血蓝 250
+MOV N$军鼓顶级加码 2
+MOV N$军鼓压制 98
+BREAK
+
+#IF
+EQUAL N$军鼓品质 6
+#ACT
+MOV N$军鼓点 6
+MOV N$军鼓大点 12
+MOV N$军鼓百分 8
+MOV N$军鼓元素 6
+MOV N$军鼓血蓝 350
+MOV N$军鼓顶级加码 3
+MOV N$军鼓压制 96
+}
+
+[@军鼓taoist_开启_养娃人]
+{
+#IF
+#ACT
+GOTO @军鼓taoist_刷新_养娃人
+}
+
+[@军鼓taoist_刷新_养娃人]
+{
+#IF
+#ACT
+#CALL [系统功能\军鼓流派\道士军鼓.txt] @军鼓taoist_品质基础
+
+#IF
+LARGE N$军鼓品质 0
+#ACT
+LockUpdateAbil
+ChangeHumAbility 9 = <$STR(N$军鼓点)> 3
+ChangeHumAbility 10 = <$STR(N$军鼓大点)> 3
+AddHumNewValue 24 = <$STR(N$军鼓元素)> 3
+UpdateAbil
+
+#IF
+LARGE N$军鼓品质 3
+#ACT
+MOV N$军鼓宝宝成长 1
+
+#IF
+LARGE N$军鼓品质 5
+#ACT
+MOV N$军鼓宝宝联动 1
+}
+
+[@军鼓taoist_关闭_养娃人]
+{
+#IF
+#ACT
+MOV N$军鼓宝宝成长 0
+MOV N$军鼓宝宝联动 0
+}
+
+[@军鼓taoist_攻击_养娃人]
+{
+#IF
+CHECKSLAVECOUNT > 0
+#ACT
+ChangeDamageValue 1 + <$STR(N$军鼓百分)>
+
+#IF
+CHECKSLAVECOUNT > 0
+LARGE N$军鼓品质 4
+#ACT
+ChangeDamageValue 1 + <$STR(N$军鼓顶级加码)>
+}
+
+[@军鼓taoist_宝宝_养娃人]
+{
+#IF
+CHECKSLAVECOUNT > 0
+#ACT
+ChangeDamageValue 1 + <$STR(N$军鼓大点)>
+
+#IF
+CHECKSLAVECOUNT > 0
+LARGE N$军鼓品质 4
+#ACT
+ChangeDamageValue 1 + <$STR(N$军鼓顶级加码)>
+}
+
+[@军鼓taoist_开启_奶不死]
+{
+#IF
+#ACT
+GOTO @军鼓taoist_刷新_奶不死
+}
+
+[@军鼓taoist_刷新_奶不死]
+{
+#IF
+#ACT
+#CALL [系统功能\军鼓流派\道士军鼓.txt] @军鼓taoist_品质基础
+
+#IF
+LARGE N$军鼓品质 0
+#ACT
+LockUpdateAbil
+ChangeHumAbility 1 = <$STR(N$军鼓点)> 3
+ChangeHumAbility 2 = <$STR(N$军鼓大点)> 3
+ChangeHumAbility 3 = <$STR(N$军鼓点)> 3
+ChangeHumAbility 4 = <$STR(N$军鼓大点)> 3
+ChangeHumAbility 11 = <$STR(N$军鼓血蓝)> 3
+ChangeHumAbility 12 = <$STR(N$军鼓血蓝)> 3
+ChangeHumAbility 14 = <$STR(N$军鼓大点)> 3
+ChangeHumAbility 15 = <$STR(N$军鼓大点)> 3
+AddHumNewValue 24 = <$STR(N$军鼓元素)> 3
+UpdateAbil
+
+#IF
+LARGE N$军鼓品质 3
+#ACT
+MOV N$军鼓护主 1
+
+#IF
+LARGE N$军鼓品质 5
+#ACT
+MOV N$军鼓救急 1
+}
+
+[@军鼓taoist_关闭_奶不死]
+{
+#IF
+#ACT
+MOV N$军鼓护主 0
+MOV N$军鼓救急 0
+}
+
+[@军鼓taoist_受击_奶不死]
+{
+#IF
+LARGE N$军鼓品质 0
+#ACT
+ChangeDamageValue 1 - <$STR(N$军鼓元素)>
+
+#IF
+LARGE N$军鼓品质 4
+#ACT
+ChangeDamageValue 1 - <$STR(N$军鼓顶级加码)>
+
+#IF
+LARGE N$军鼓品质 5
+#ACT
+HumanHP + 5 100
+}
+
+[@军鼓taoist_开启_毒嘴子]
+{
+#IF
+#ACT
+GOTO @军鼓taoist_刷新_毒嘴子
+}
+
+[@军鼓taoist_刷新_毒嘴子]
+{
+#IF
+#ACT
+#CALL [系统功能\军鼓流派\道士军鼓.txt] @军鼓taoist_品质基础
+
+#IF
+LARGE N$军鼓品质 0
+#ACT
+LockUpdateAbil
+ChangeHumAbility 9 = <$STR(N$军鼓点)> 3
+ChangeHumAbility 10 = <$STR(N$军鼓大点)> 3
+ChangeHumAbility 16 = <$STR(N$军鼓大点)> 3
+ChangeHumAbility 17 = <$STR(N$军鼓大点)> 3
+ChangeHumAbility 18 = <$STR(N$军鼓点)> 3
+AddHumNewValue 0 = <$STR(N$军鼓元素)> 3
+UpdateAbil
+
+#IF
+LARGE N$军鼓品质 3
+#ACT
+MOV N$军鼓毒印 1
+
+#IF
+LARGE N$军鼓品质 5
+#ACT
+MOV N$军鼓毒爆 1
+}
+
+[@军鼓taoist_关闭_毒嘴子]
+{
+#IF
+#ACT
+MOV N$军鼓毒印 0
+MOV N$军鼓毒爆 0
+}
+
+[@军鼓taoist_攻击_毒嘴子]
+{
+#IF
+CHECKMAGICNAME 施毒术
+#ACT
+M.MOV S$军鼓毒印 开启
+M.SetArrBuff 3 5 20 308 10 0 0 0 {毒嘴子|243}\你被毒嘴子盯上了，毒意开始往外冒
+
+#IF
+CHECKMAGICNAME 灵魂火符
+#ACT
+M.MOV S$军鼓毒印 开启
+M.SetArrBuff 3 5 20 308 10 0 0 0 {毒嘴子|243}\火符带着毒嘴子，下一次更疼
+
+#IF
+CHECKMAGICNAME 诅咒术
+#ACT
+M.MOV S$军鼓毒印 开启
+M.SetArrBuff 3 5 20 308 10 0 0 0 {毒嘴子|243}\诅咒里混着毒嘴子，压一层是一层
+
+#IF
+LARGE N$军鼓品质 4
+#ACT
+ChangeDamageValue 1 + <$STR(N$军鼓顶级加码)>
+}

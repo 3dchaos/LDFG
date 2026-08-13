@@ -1,0 +1,77 @@
+;军鼓流派配置：54件StdMode65军鼓精确映射。
+;字段：Name|Job|Direction|Quality|Stage|ConflictGroup|ModuleKey
+
+[@军鼓配置_读取]
+{
+#IF
+#ACT
+MOV N$军鼓有效 0
+MOV N$军鼓配置行 0
+MOV S$军鼓配置文本
+GetStringPosEX ..\QuestDiary\系统功能\军鼓流派配置.txt <$STR(S$军鼓名称)> N$军鼓配置行 S$军鼓配置文本 0
+
+#IF
+EQUAL N$军鼓配置行 0
+#ACT
+BREAK
+
+#IF
+#ACT
+GetListString ..\QuestDiary\系统功能\军鼓流派配置.txt <$STR(N$军鼓配置行)> S$军鼓名称 S$军鼓职业 S$军鼓方向 N$军鼓品质 N$军鼓阶段 S$军鼓互斥组 S$军鼓模块 1
+MOV N$军鼓有效 1
+}
+;Name|Job|Direction|Quality|Stage|ConflictGroup|ModuleKey
+粗坯·拆门板|warrior|拆门板|1|1|WARRIOR_FORM|warrior
+精制·拆门板|warrior|拆门板|2|2|WARRIOR_FORM|warrior
+淬火·拆门板|warrior|拆门板|3|3|WARRIOR_FORM|warrior
+成名·拆门板|warrior|拆门板|4|4|WARRIOR_FORM|warrior
+压轴·拆门板|warrior|拆门板|5|5|WARRIOR_FORM|warrior
+封顶·拆门板|warrior|拆门板|6|6|WARRIOR_FORM|warrior
+粗坯·铁头娃|warrior|铁头娃|1|1|WARRIOR_FORM|warrior
+精制·铁头娃|warrior|铁头娃|2|2|WARRIOR_FORM|warrior
+淬火·铁头娃|warrior|铁头娃|3|3|WARRIOR_FORM|warrior
+成名·铁头娃|warrior|铁头娃|4|4|WARRIOR_FORM|warrior
+压轴·铁头娃|warrior|铁头娃|5|5|WARRIOR_FORM|warrior
+封顶·铁头娃|warrior|铁头娃|6|6|WARRIOR_FORM|warrior
+粗坯·剁馅机|warrior|剁馅机|1|1|WARRIOR_FORM|warrior
+精制·剁馅机|warrior|剁馅机|2|2|WARRIOR_FORM|warrior
+淬火·剁馅机|warrior|剁馅机|3|3|WARRIOR_FORM|warrior
+成名·剁馅机|warrior|剁馅机|4|4|WARRIOR_FORM|warrior
+压轴·剁馅机|warrior|剁馅机|5|5|WARRIOR_FORM|warrior
+封顶·剁馅机|warrior|剁馅机|6|6|WARRIOR_FORM|warrior
+粗坯·电耗子|wizard|电耗子|1|1|MAGE_ELEMENT|wizard
+精制·电耗子|wizard|电耗子|2|2|MAGE_ELEMENT|wizard
+淬火·电耗子|wizard|电耗子|3|3|MAGE_ELEMENT|wizard
+成名·电耗子|wizard|电耗子|4|4|MAGE_ELEMENT|wizard
+压轴·电耗子|wizard|电耗子|5|5|MAGE_ELEMENT|wizard
+封顶·电耗子|wizard|电耗子|6|6|MAGE_ELEMENT|wizard
+粗坯·火葫芦|wizard|火葫芦|1|1|MAGE_ELEMENT|wizard
+精制·火葫芦|wizard|火葫芦|2|2|MAGE_ELEMENT|wizard
+淬火·火葫芦|wizard|火葫芦|3|3|MAGE_ELEMENT|wizard
+成名·火葫芦|wizard|火葫芦|4|4|MAGE_ELEMENT|wizard
+压轴·火葫芦|wizard|火葫芦|5|5|MAGE_ELEMENT|wizard
+封顶·火葫芦|wizard|火葫芦|6|6|MAGE_ELEMENT|wizard
+粗坯·小冰箱|wizard|小冰箱|1|1|MAGE_ELEMENT|wizard
+精制·小冰箱|wizard|小冰箱|2|2|MAGE_ELEMENT|wizard
+淬火·小冰箱|wizard|小冰箱|3|3|MAGE_ELEMENT|wizard
+成名·小冰箱|wizard|小冰箱|4|4|MAGE_ELEMENT|wizard
+压轴·小冰箱|wizard|小冰箱|5|5|MAGE_ELEMENT|wizard
+封顶·小冰箱|wizard|小冰箱|6|6|MAGE_ELEMENT|wizard
+粗坯·养娃人|taoist|养娃人|1|1|TAOIST_ROLE|taoist
+精制·养娃人|taoist|养娃人|2|2|TAOIST_ROLE|taoist
+淬火·养娃人|taoist|养娃人|3|3|TAOIST_ROLE|taoist
+成名·养娃人|taoist|养娃人|4|4|TAOIST_ROLE|taoist
+压轴·养娃人|taoist|养娃人|5|5|TAOIST_ROLE|taoist
+封顶·养娃人|taoist|养娃人|6|6|TAOIST_ROLE|taoist
+粗坯·奶不死|taoist|奶不死|1|1|TAOIST_ROLE|taoist
+精制·奶不死|taoist|奶不死|2|2|TAOIST_ROLE|taoist
+淬火·奶不死|taoist|奶不死|3|3|TAOIST_ROLE|taoist
+成名·奶不死|taoist|奶不死|4|4|TAOIST_ROLE|taoist
+压轴·奶不死|taoist|奶不死|5|5|TAOIST_ROLE|taoist
+封顶·奶不死|taoist|奶不死|6|6|TAOIST_ROLE|taoist
+粗坯·毒嘴子|taoist|毒嘴子|1|1|TAOIST_ROLE|taoist
+精制·毒嘴子|taoist|毒嘴子|2|2|TAOIST_ROLE|taoist
+淬火·毒嘴子|taoist|毒嘴子|3|3|TAOIST_ROLE|taoist
+成名·毒嘴子|taoist|毒嘴子|4|4|TAOIST_ROLE|taoist
+压轴·毒嘴子|taoist|毒嘴子|5|5|TAOIST_ROLE|taoist
+封顶·毒嘴子|taoist|毒嘴子|6|6|TAOIST_ROLE|taoist

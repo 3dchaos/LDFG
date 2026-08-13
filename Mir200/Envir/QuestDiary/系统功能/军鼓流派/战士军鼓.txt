@@ -1,0 +1,270 @@
+;战士军鼓模块：拆门板 / 铁头娃 / 剁馅机。
+
+[@军鼓warrior_品质基础]
+{
+#IF
+EQUAL N$军鼓品质 1
+#ACT
+MOV N$军鼓点 1
+MOV N$军鼓大点 2
+MOV N$军鼓百分 2
+MOV N$军鼓元素 1
+MOV N$军鼓血蓝 50
+MOV N$军鼓顶级加码 0
+MOV N$军鼓压制 100
+BREAK
+
+#IF
+EQUAL N$军鼓品质 2
+#ACT
+MOV N$军鼓点 2
+MOV N$军鼓大点 3
+MOV N$军鼓百分 3
+MOV N$军鼓元素 2
+MOV N$军鼓血蓝 80
+MOV N$军鼓顶级加码 0
+MOV N$军鼓压制 100
+BREAK
+
+#IF
+EQUAL N$军鼓品质 3
+#ACT
+MOV N$军鼓点 3
+MOV N$军鼓大点 5
+MOV N$军鼓百分 4
+MOV N$军鼓元素 3
+MOV N$军鼓血蓝 120
+MOV N$军鼓顶级加码 0
+MOV N$军鼓压制 100
+BREAK
+
+#IF
+EQUAL N$军鼓品质 4
+#ACT
+MOV N$军鼓点 4
+MOV N$军鼓大点 7
+MOV N$军鼓百分 5
+MOV N$军鼓元素 4
+MOV N$军鼓血蓝 180
+MOV N$军鼓顶级加码 0
+MOV N$军鼓压制 100
+BREAK
+
+#IF
+EQUAL N$军鼓品质 5
+#ACT
+MOV N$军鼓点 5
+MOV N$军鼓大点 9
+MOV N$军鼓百分 6
+MOV N$军鼓元素 5
+MOV N$军鼓血蓝 250
+MOV N$军鼓顶级加码 2
+MOV N$军鼓压制 98
+BREAK
+
+#IF
+EQUAL N$军鼓品质 6
+#ACT
+MOV N$军鼓点 6
+MOV N$军鼓大点 12
+MOV N$军鼓百分 8
+MOV N$军鼓元素 6
+MOV N$军鼓血蓝 350
+MOV N$军鼓顶级加码 3
+MOV N$军鼓压制 96
+}
+
+[@军鼓warrior_开启_拆门板]
+{
+#IF
+#ACT
+GOTO @军鼓warrior_刷新_拆门板
+}
+
+[@军鼓warrior_刷新_拆门板]
+{
+#IF
+#ACT
+#CALL [系统功能\军鼓流派\战士军鼓.txt] @军鼓warrior_品质基础
+
+#IF
+LARGE N$军鼓品质 0
+#ACT
+LockUpdateAbil
+ChangeHumAbility 5 = <$STR(N$军鼓点)> 3
+ChangeHumAbility 6 = <$STR(N$军鼓大点)> 3
+AddHumNewValue 0 = <$STR(N$军鼓元素)> 3
+AddHumNewValue 4 = <$STR(N$军鼓元素)> 3
+UpdateAbil
+
+#IF
+LARGE N$军鼓品质 2
+#ACT
+MOV N$军鼓拆门板 1
+
+#IF
+LARGE N$军鼓品质 4
+#ACT
+MOV N$军鼓拆门板连锁 1
+}
+
+[@军鼓warrior_关闭_拆门板]
+{
+#IF
+#ACT
+MOV N$军鼓拆门板 0
+MOV N$军鼓拆门板连锁 0
+}
+
+[@军鼓warrior_攻击_拆门板]
+{
+#IF
+CHECKMAGICNAME 烈火剑法
+#ACT
+ChangeDamageValue 1 + <$STR(N$军鼓百分)>
+
+#IF
+CHECKMAGICNAME 开天斩
+#ACT
+ChangeDamageValue 1 + <$STR(N$军鼓大点)>
+
+#IF
+CHECKMAGICNAME 逐日剑法
+#ACT
+ChangeDamageValue 1 + <$STR(N$军鼓元素)>
+
+#IF
+LARGE N$军鼓品质 5
+#ACT
+ChangeDamageValue 1 + <$STR(N$军鼓顶级加码)>
+}
+
+[@军鼓warrior_开启_铁头娃]
+{
+#IF
+#ACT
+GOTO @军鼓warrior_刷新_铁头娃
+}
+
+[@军鼓warrior_刷新_铁头娃]
+{
+#IF
+#ACT
+#CALL [系统功能\军鼓流派\战士军鼓.txt] @军鼓warrior_品质基础
+
+#IF
+LARGE N$军鼓品质 0
+#ACT
+LockUpdateAbil
+ChangeHumAbility 1 = <$STR(N$军鼓点)> 3
+ChangeHumAbility 2 = <$STR(N$军鼓大点)> 3
+ChangeHumAbility 3 = <$STR(N$军鼓点)> 3
+ChangeHumAbility 4 = <$STR(N$军鼓大点)> 3
+ChangeHumAbility 11 = <$STR(N$军鼓血蓝)> 3
+AddHumNewValue 2 = <$STR(N$军鼓元素)> 3
+AddHumNewValue 3 = <$STR(N$军鼓元素)> 3
+AddHumNewValue 5 = <$STR(N$军鼓顶级加码)> 3
+UpdateAbil
+
+#IF
+LARGE N$军鼓品质 3
+#ACT
+MOV N$军鼓铁头压制 1
+
+#IF
+LARGE N$军鼓品质 5
+#ACT
+MOV N$军鼓铁头保命 1
+}
+
+[@军鼓warrior_关闭_铁头娃]
+{
+#IF
+#ACT
+MOV N$军鼓铁头压制 0
+MOV N$军鼓铁头保命 0
+}
+
+[@军鼓warrior_受击_铁头娃]
+{
+#IF
+LARGE N$军鼓品质 0
+#ACT
+ChangeDamageValue 1 - <$STR(N$军鼓百分)>
+
+#IF
+LARGE N$军鼓品质 4
+#ACT
+ChangeDamageValue 1 - <$STR(N$军鼓顶级加码)>
+
+#IF
+LARGE N$军鼓品质 5
+#ACT
+ChangeState 1 3 1
+}
+
+[@军鼓warrior_开启_剁馅机]
+{
+#IF
+#ACT
+GOTO @军鼓warrior_刷新_剁馅机
+}
+
+[@军鼓warrior_刷新_剁馅机]
+{
+#IF
+#ACT
+#CALL [系统功能\军鼓流派\战士军鼓.txt] @军鼓warrior_品质基础
+
+#IF
+LARGE N$军鼓品质 0
+#ACT
+LockUpdateAbil
+ChangeHumAbility 5 = <$STR(N$军鼓点)> 3
+ChangeHumAbility 6 = <$STR(N$军鼓点)> 3
+ChangeHumAbility 19 = <$STR(N$军鼓大点)> 3
+AddHumNewValue 0 = <$STR(N$军鼓元素)> 3
+AddHumNewValue 1 = <$STR(N$军鼓元素)> 3
+UpdateAbil
+
+#IF
+LARGE N$军鼓品质 3
+#ACT
+MOV N$军鼓剁馅机连击 1
+
+#IF
+LARGE N$军鼓品质 5
+#ACT
+MOV N$军鼓剁馅机收尾 1
+}
+
+[@军鼓warrior_关闭_剁馅机]
+{
+#IF
+#ACT
+MOV N$军鼓剁馅机连击 0
+MOV N$军鼓剁馅机收尾 0
+}
+
+[@军鼓warrior_攻击_剁馅机]
+{
+#IF
+CHECKMAGICNAME 刺杀剑术
+#ACT
+ChangeDamageValue 1 + <$STR(N$军鼓元素)>
+
+#IF
+CHECKMAGICNAME 半月弯刀
+#ACT
+ChangeDamageValue 1 + <$STR(N$军鼓点)>
+
+#IF
+CHECKMAGICNAME 攻杀剑术
+#ACT
+ChangeDamageValue 1 + <$STR(N$军鼓大点)>
+
+#IF
+LARGE N$军鼓品质 4
+#ACT
+ChangeDamageValue 1 + <$STR(N$军鼓顶级加码)>
+}

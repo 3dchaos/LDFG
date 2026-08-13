@@ -1,5 +1,6 @@
-;军鼓位玩法BUFF：14号装备位短时刷新，不写永久属性。
-;所有效果每2秒确认装备仍在，写入3秒在线临时效果，异常掉落/消失/回收后自然过期。
+;军鼓位BUFF：14号装备位持续流派系统。
+;只保留读取、分发、清理和定时复核，不再硬编码54件名称。
+
 [@军鼓BUFF_刷新]
 {
 #IF
@@ -13,718 +14,277 @@ BREAK
 GetItemFieldValue 14 name S$军鼓名称
 MOV N$军鼓有效 0
 MOV N$军鼓品质 0
+MOV N$军鼓阶段 0
+MOV S$军鼓职业
 MOV S$军鼓方向
+MOV S$军鼓互斥组
+MOV S$军鼓模块
+MOV N$军鼓配置行 0
 MOV N$军鼓战斗确认 0
+MOV S$军鼓确认名
 
 #IF
-EQUAL S$军鼓名称 粗坯·拆门板
 #ACT
-MOV N$军鼓有效 1
-MOV N$军鼓品质 1
-MOV S$军鼓方向 拆门板
-GOTO @军鼓BUFF_应用
-BREAK
+#CALL [系统功能\军鼓流派配置.txt] @军鼓配置_读取
 
 #IF
-EQUAL S$军鼓名称 精制·拆门板
-#ACT
-MOV N$军鼓有效 1
-MOV N$军鼓品质 2
-MOV S$军鼓方向 拆门板
-GOTO @军鼓BUFF_应用
-BREAK
-
-#IF
-EQUAL S$军鼓名称 淬火·拆门板
-#ACT
-MOV N$军鼓有效 1
-MOV N$军鼓品质 3
-MOV S$军鼓方向 拆门板
-GOTO @军鼓BUFF_应用
-BREAK
-
-#IF
-EQUAL S$军鼓名称 成名·拆门板
-#ACT
-MOV N$军鼓有效 1
-MOV N$军鼓品质 4
-MOV S$军鼓方向 拆门板
-GOTO @军鼓BUFF_应用
-BREAK
-
-#IF
-EQUAL S$军鼓名称 压轴·拆门板
-#ACT
-MOV N$军鼓有效 1
-MOV N$军鼓品质 5
-MOV S$军鼓方向 拆门板
-GOTO @军鼓BUFF_应用
-BREAK
-
-#IF
-EQUAL S$军鼓名称 封顶·拆门板
-#ACT
-MOV N$军鼓有效 1
-MOV N$军鼓品质 6
-MOV S$军鼓方向 拆门板
-GOTO @军鼓BUFF_应用
-BREAK
-
-#IF
-EQUAL S$军鼓名称 粗坯·铁头娃
-#ACT
-MOV N$军鼓有效 1
-MOV N$军鼓品质 1
-MOV S$军鼓方向 铁头娃
-GOTO @军鼓BUFF_应用
-BREAK
-
-#IF
-EQUAL S$军鼓名称 精制·铁头娃
-#ACT
-MOV N$军鼓有效 1
-MOV N$军鼓品质 2
-MOV S$军鼓方向 铁头娃
-GOTO @军鼓BUFF_应用
-BREAK
-
-#IF
-EQUAL S$军鼓名称 淬火·铁头娃
-#ACT
-MOV N$军鼓有效 1
-MOV N$军鼓品质 3
-MOV S$军鼓方向 铁头娃
-GOTO @军鼓BUFF_应用
-BREAK
-
-#IF
-EQUAL S$军鼓名称 成名·铁头娃
-#ACT
-MOV N$军鼓有效 1
-MOV N$军鼓品质 4
-MOV S$军鼓方向 铁头娃
-GOTO @军鼓BUFF_应用
-BREAK
-
-#IF
-EQUAL S$军鼓名称 压轴·铁头娃
-#ACT
-MOV N$军鼓有效 1
-MOV N$军鼓品质 5
-MOV S$军鼓方向 铁头娃
-GOTO @军鼓BUFF_应用
-BREAK
-
-#IF
-EQUAL S$军鼓名称 封顶·铁头娃
-#ACT
-MOV N$军鼓有效 1
-MOV N$军鼓品质 6
-MOV S$军鼓方向 铁头娃
-GOTO @军鼓BUFF_应用
-BREAK
-
-#IF
-EQUAL S$军鼓名称 粗坯·剁馅机
-#ACT
-MOV N$军鼓有效 1
-MOV N$军鼓品质 1
-MOV S$军鼓方向 剁馅机
-GOTO @军鼓BUFF_应用
-BREAK
-
-#IF
-EQUAL S$军鼓名称 精制·剁馅机
-#ACT
-MOV N$军鼓有效 1
-MOV N$军鼓品质 2
-MOV S$军鼓方向 剁馅机
-GOTO @军鼓BUFF_应用
-BREAK
-
-#IF
-EQUAL S$军鼓名称 淬火·剁馅机
-#ACT
-MOV N$军鼓有效 1
-MOV N$军鼓品质 3
-MOV S$军鼓方向 剁馅机
-GOTO @军鼓BUFF_应用
-BREAK
-
-#IF
-EQUAL S$军鼓名称 成名·剁馅机
-#ACT
-MOV N$军鼓有效 1
-MOV N$军鼓品质 4
-MOV S$军鼓方向 剁馅机
-GOTO @军鼓BUFF_应用
-BREAK
-
-#IF
-EQUAL S$军鼓名称 压轴·剁馅机
-#ACT
-MOV N$军鼓有效 1
-MOV N$军鼓品质 5
-MOV S$军鼓方向 剁馅机
-GOTO @军鼓BUFF_应用
-BREAK
-
-#IF
-EQUAL S$军鼓名称 封顶·剁馅机
-#ACT
-MOV N$军鼓有效 1
-MOV N$军鼓品质 6
-MOV S$军鼓方向 剁馅机
-GOTO @军鼓BUFF_应用
-BREAK
-
-#IF
-EQUAL S$军鼓名称 粗坯·电耗子
-#ACT
-MOV N$军鼓有效 1
-MOV N$军鼓品质 1
-MOV S$军鼓方向 电耗子
-GOTO @军鼓BUFF_应用
-BREAK
-
-#IF
-EQUAL S$军鼓名称 精制·电耗子
-#ACT
-MOV N$军鼓有效 1
-MOV N$军鼓品质 2
-MOV S$军鼓方向 电耗子
-GOTO @军鼓BUFF_应用
-BREAK
-
-#IF
-EQUAL S$军鼓名称 淬火·电耗子
-#ACT
-MOV N$军鼓有效 1
-MOV N$军鼓品质 3
-MOV S$军鼓方向 电耗子
-GOTO @军鼓BUFF_应用
-BREAK
-
-#IF
-EQUAL S$军鼓名称 成名·电耗子
-#ACT
-MOV N$军鼓有效 1
-MOV N$军鼓品质 4
-MOV S$军鼓方向 电耗子
-GOTO @军鼓BUFF_应用
-BREAK
-
-#IF
-EQUAL S$军鼓名称 压轴·电耗子
-#ACT
-MOV N$军鼓有效 1
-MOV N$军鼓品质 5
-MOV S$军鼓方向 电耗子
-GOTO @军鼓BUFF_应用
-BREAK
-
-#IF
-EQUAL S$军鼓名称 封顶·电耗子
-#ACT
-MOV N$军鼓有效 1
-MOV N$军鼓品质 6
-MOV S$军鼓方向 电耗子
-GOTO @军鼓BUFF_应用
-BREAK
-
-#IF
-EQUAL S$军鼓名称 粗坯·火葫芦
-#ACT
-MOV N$军鼓有效 1
-MOV N$军鼓品质 1
-MOV S$军鼓方向 火葫芦
-GOTO @军鼓BUFF_应用
-BREAK
-
-#IF
-EQUAL S$军鼓名称 精制·火葫芦
-#ACT
-MOV N$军鼓有效 1
-MOV N$军鼓品质 2
-MOV S$军鼓方向 火葫芦
-GOTO @军鼓BUFF_应用
-BREAK
-
-#IF
-EQUAL S$军鼓名称 淬火·火葫芦
-#ACT
-MOV N$军鼓有效 1
-MOV N$军鼓品质 3
-MOV S$军鼓方向 火葫芦
-GOTO @军鼓BUFF_应用
-BREAK
-
-#IF
-EQUAL S$军鼓名称 成名·火葫芦
-#ACT
-MOV N$军鼓有效 1
-MOV N$军鼓品质 4
-MOV S$军鼓方向 火葫芦
-GOTO @军鼓BUFF_应用
-BREAK
-
-#IF
-EQUAL S$军鼓名称 压轴·火葫芦
-#ACT
-MOV N$军鼓有效 1
-MOV N$军鼓品质 5
-MOV S$军鼓方向 火葫芦
-GOTO @军鼓BUFF_应用
-BREAK
-
-#IF
-EQUAL S$军鼓名称 封顶·火葫芦
-#ACT
-MOV N$军鼓有效 1
-MOV N$军鼓品质 6
-MOV S$军鼓方向 火葫芦
-GOTO @军鼓BUFF_应用
-BREAK
-
-#IF
-EQUAL S$军鼓名称 粗坯·小冰箱
-#ACT
-MOV N$军鼓有效 1
-MOV N$军鼓品质 1
-MOV S$军鼓方向 小冰箱
-GOTO @军鼓BUFF_应用
-BREAK
-
-#IF
-EQUAL S$军鼓名称 精制·小冰箱
-#ACT
-MOV N$军鼓有效 1
-MOV N$军鼓品质 2
-MOV S$军鼓方向 小冰箱
-GOTO @军鼓BUFF_应用
-BREAK
-
-#IF
-EQUAL S$军鼓名称 淬火·小冰箱
-#ACT
-MOV N$军鼓有效 1
-MOV N$军鼓品质 3
-MOV S$军鼓方向 小冰箱
-GOTO @军鼓BUFF_应用
-BREAK
-
-#IF
-EQUAL S$军鼓名称 成名·小冰箱
-#ACT
-MOV N$军鼓有效 1
-MOV N$军鼓品质 4
-MOV S$军鼓方向 小冰箱
-GOTO @军鼓BUFF_应用
-BREAK
-
-#IF
-EQUAL S$军鼓名称 压轴·小冰箱
-#ACT
-MOV N$军鼓有效 1
-MOV N$军鼓品质 5
-MOV S$军鼓方向 小冰箱
-GOTO @军鼓BUFF_应用
-BREAK
-
-#IF
-EQUAL S$军鼓名称 封顶·小冰箱
-#ACT
-MOV N$军鼓有效 1
-MOV N$军鼓品质 6
-MOV S$军鼓方向 小冰箱
-GOTO @军鼓BUFF_应用
-BREAK
-
-#IF
-EQUAL S$军鼓名称 粗坯·养娃人
-#ACT
-MOV N$军鼓有效 1
-MOV N$军鼓品质 1
-MOV S$军鼓方向 养娃人
-GOTO @军鼓BUFF_应用
-BREAK
-
-#IF
-EQUAL S$军鼓名称 精制·养娃人
-#ACT
-MOV N$军鼓有效 1
-MOV N$军鼓品质 2
-MOV S$军鼓方向 养娃人
-GOTO @军鼓BUFF_应用
-BREAK
-
-#IF
-EQUAL S$军鼓名称 淬火·养娃人
-#ACT
-MOV N$军鼓有效 1
-MOV N$军鼓品质 3
-MOV S$军鼓方向 养娃人
-GOTO @军鼓BUFF_应用
-BREAK
-
-#IF
-EQUAL S$军鼓名称 成名·养娃人
-#ACT
-MOV N$军鼓有效 1
-MOV N$军鼓品质 4
-MOV S$军鼓方向 养娃人
-GOTO @军鼓BUFF_应用
-BREAK
-
-#IF
-EQUAL S$军鼓名称 压轴·养娃人
-#ACT
-MOV N$军鼓有效 1
-MOV N$军鼓品质 5
-MOV S$军鼓方向 养娃人
-GOTO @军鼓BUFF_应用
-BREAK
-
-#IF
-EQUAL S$军鼓名称 封顶·养娃人
-#ACT
-MOV N$军鼓有效 1
-MOV N$军鼓品质 6
-MOV S$军鼓方向 养娃人
-GOTO @军鼓BUFF_应用
-BREAK
-
-#IF
-EQUAL S$军鼓名称 粗坯·奶不死
-#ACT
-MOV N$军鼓有效 1
-MOV N$军鼓品质 1
-MOV S$军鼓方向 奶不死
-GOTO @军鼓BUFF_应用
-BREAK
-
-#IF
-EQUAL S$军鼓名称 精制·奶不死
-#ACT
-MOV N$军鼓有效 1
-MOV N$军鼓品质 2
-MOV S$军鼓方向 奶不死
-GOTO @军鼓BUFF_应用
-BREAK
-
-#IF
-EQUAL S$军鼓名称 淬火·奶不死
-#ACT
-MOV N$军鼓有效 1
-MOV N$军鼓品质 3
-MOV S$军鼓方向 奶不死
-GOTO @军鼓BUFF_应用
-BREAK
-
-#IF
-EQUAL S$军鼓名称 成名·奶不死
-#ACT
-MOV N$军鼓有效 1
-MOV N$军鼓品质 4
-MOV S$军鼓方向 奶不死
-GOTO @军鼓BUFF_应用
-BREAK
-
-#IF
-EQUAL S$军鼓名称 压轴·奶不死
-#ACT
-MOV N$军鼓有效 1
-MOV N$军鼓品质 5
-MOV S$军鼓方向 奶不死
-GOTO @军鼓BUFF_应用
-BREAK
-
-#IF
-EQUAL S$军鼓名称 封顶·奶不死
-#ACT
-MOV N$军鼓有效 1
-MOV N$军鼓品质 6
-MOV S$军鼓方向 奶不死
-GOTO @军鼓BUFF_应用
-BREAK
-
-#IF
-EQUAL S$军鼓名称 粗坯·毒嘴子
-#ACT
-MOV N$军鼓有效 1
-MOV N$军鼓品质 1
-MOV S$军鼓方向 毒嘴子
-GOTO @军鼓BUFF_应用
-BREAK
-
-#IF
-EQUAL S$军鼓名称 精制·毒嘴子
-#ACT
-MOV N$军鼓有效 1
-MOV N$军鼓品质 2
-MOV S$军鼓方向 毒嘴子
-GOTO @军鼓BUFF_应用
-BREAK
-
-#IF
-EQUAL S$军鼓名称 淬火·毒嘴子
-#ACT
-MOV N$军鼓有效 1
-MOV N$军鼓品质 3
-MOV S$军鼓方向 毒嘴子
-GOTO @军鼓BUFF_应用
-BREAK
-
-#IF
-EQUAL S$军鼓名称 成名·毒嘴子
-#ACT
-MOV N$军鼓有效 1
-MOV N$军鼓品质 4
-MOV S$军鼓方向 毒嘴子
-GOTO @军鼓BUFF_应用
-BREAK
-
-#IF
-EQUAL S$军鼓名称 压轴·毒嘴子
-#ACT
-MOV N$军鼓有效 1
-MOV N$军鼓品质 5
-MOV S$军鼓方向 毒嘴子
-GOTO @军鼓BUFF_应用
-BREAK
-
-#IF
-EQUAL S$军鼓名称 封顶·毒嘴子
-#ACT
-MOV N$军鼓有效 1
-MOV N$军鼓品质 6
-MOV S$军鼓方向 毒嘴子
-GOTO @军鼓BUFF_应用
-BREAK
-
-#IF
+EQUAL N$军鼓有效 0
 #ACT
 GOTO @军鼓BUFF_清理
 BREAK
+
+#IF
+EQUAL <$STR(S$军鼓当前名称)> <$STR(S$军鼓名称)>
+EQUAL <$STR(S$军鼓当前方向)> <$STR(S$军鼓方向)>
+EQUAL <$STR(S$军鼓当前职业)> <$STR(S$军鼓职业)>
+EQUAL <$STR(N$军鼓当前品质)> <$STR(N$军鼓品质)>
+#ACT
+#CALL [系统功能\军鼓BUFF.txt] @军鼓BUFF_应用当前模块
+#CALL [系统功能\军鼓BUFF.txt] @军鼓BUFF_刷新图标
+BREAK
+
+#IF
+#ACT
+#CALL [系统功能\军鼓BUFF.txt] @军鼓BUFF_关闭当前模块
+MOV S$军鼓当前名称 <$STR(S$军鼓名称)>
+MOV S$军鼓当前方向 <$STR(S$军鼓方向)>
+MOV S$军鼓当前职业 <$STR(S$军鼓职业)>
+MOV N$军鼓当前品质 <$STR(N$军鼓品质)>
+#CALL [系统功能\军鼓BUFF.txt] @军鼓BUFF_模块开启
+#CALL [系统功能\军鼓BUFF.txt] @军鼓BUFF_刷新图标
 }
 
-[@军鼓BUFF_应用]
+[@军鼓BUFF_应用当前模块]
 {
 #IF
-EQUAL N$军鼓品质 1
+EQUAL <$STR(S$军鼓当前职业)> <$STR(S$军鼓职业)>
+EQUAL <$STR(S$军鼓当前方向)> <$STR(S$军鼓方向)>
+EQUAL <$STR(N$军鼓当前品质)> <$STR(N$军鼓品质)>
 #ACT
-MOV N$军鼓点 1
-MOV N$军鼓大点 2
-MOV N$军鼓百分 2
-MOV N$军鼓元素 1
-MOV N$军鼓血蓝 50
-MOV N$军鼓顶级加码 0
-MOV N$军鼓压制 100
-#IF
-EQUAL N$军鼓品质 2
-#ACT
-MOV N$军鼓点 2
-MOV N$军鼓大点 3
-MOV N$军鼓百分 3
-MOV N$军鼓元素 2
-MOV N$军鼓血蓝 80
-MOV N$军鼓顶级加码 0
-MOV N$军鼓压制 100
-#IF
-EQUAL N$军鼓品质 3
-#ACT
-MOV N$军鼓点 3
-MOV N$军鼓大点 5
-MOV N$军鼓百分 4
-MOV N$军鼓元素 3
-MOV N$军鼓血蓝 120
-MOV N$军鼓顶级加码 0
-MOV N$军鼓压制 100
-#IF
-EQUAL N$军鼓品质 4
-#ACT
-MOV N$军鼓点 4
-MOV N$军鼓大点 7
-MOV N$军鼓百分 5
-MOV N$军鼓元素 4
-MOV N$军鼓血蓝 180
-MOV N$军鼓顶级加码 0
-MOV N$军鼓压制 100
-#IF
-EQUAL N$军鼓品质 5
-#ACT
-MOV N$军鼓点 5
-MOV N$军鼓大点 9
-MOV N$军鼓百分 6
-MOV N$军鼓元素 5
-MOV N$军鼓血蓝 250
-MOV N$军鼓顶级加码 2
-MOV N$军鼓压制 98
-#IF
-EQUAL N$军鼓品质 6
-#ACT
-MOV N$军鼓点 6
-MOV N$军鼓大点 12
-MOV N$军鼓百分 8
-MOV N$军鼓元素 6
-MOV N$军鼓血蓝 350
-MOV N$军鼓顶级加码 3
-MOV N$军鼓压制 96
+#CALL [系统功能\军鼓BUFF.txt] @军鼓BUFF_模块刷新
+BREAK
 
 #IF
 #ACT
+#CALL [系统功能\军鼓BUFF.txt] @军鼓BUFF_模块开启
+}
+
+[@军鼓BUFF_关闭当前模块]
+{
+#IF
+EQUAL <$STR(S$军鼓当前职业)> warrior
+EQUAL <$STR(S$军鼓当前方向)> 拆门板
+#ACT
+#CALL [系统功能\军鼓流派\战士军鼓.txt] @军鼓warrior_关闭_拆门板
+BREAK
+
+#IF
+EQUAL <$STR(S$军鼓当前职业)> warrior
+EQUAL <$STR(S$军鼓当前方向)> 铁头娃
+#ACT
+#CALL [系统功能\军鼓流派\战士军鼓.txt] @军鼓warrior_关闭_铁头娃
+BREAK
+
+#IF
+EQUAL <$STR(S$军鼓当前职业)> warrior
+EQUAL <$STR(S$军鼓当前方向)> 剁馅机
+#ACT
+#CALL [系统功能\军鼓流派\战士军鼓.txt] @军鼓warrior_关闭_剁馅机
+BREAK
+
+#IF
+EQUAL <$STR(S$军鼓当前职业)> wizard
+EQUAL <$STR(S$军鼓当前方向)> 电耗子
+#ACT
+#CALL [系统功能\军鼓流派\法师军鼓.txt] @军鼓wizard_关闭_电耗子
+BREAK
+
+#IF
+EQUAL <$STR(S$军鼓当前职业)> wizard
+EQUAL <$STR(S$军鼓当前方向)> 火葫芦
+#ACT
+#CALL [系统功能\军鼓流派\法师军鼓.txt] @军鼓wizard_关闭_火葫芦
+BREAK
+
+#IF
+EQUAL <$STR(S$军鼓当前职业)> wizard
+EQUAL <$STR(S$军鼓当前方向)> 小冰箱
+#ACT
+#CALL [系统功能\军鼓流派\法师军鼓.txt] @军鼓wizard_关闭_小冰箱
+BREAK
+
+#IF
+EQUAL <$STR(S$军鼓当前职业)> taoist
+EQUAL <$STR(S$军鼓当前方向)> 养娃人
+#ACT
+#CALL [系统功能\军鼓流派\道士军鼓.txt] @军鼓taoist_关闭_养娃人
+BREAK
+
+#IF
+EQUAL <$STR(S$军鼓当前职业)> taoist
+EQUAL <$STR(S$军鼓当前方向)> 奶不死
+#ACT
+#CALL [系统功能\军鼓流派\道士军鼓.txt] @军鼓taoist_关闭_奶不死
+BREAK
+
+#IF
+EQUAL <$STR(S$军鼓当前职业)> taoist
+EQUAL <$STR(S$军鼓当前方向)> 毒嘴子
+#ACT
+#CALL [系统功能\军鼓流派\道士军鼓.txt] @军鼓taoist_关闭_毒嘴子
+BREAK
+
+#IF
+#ACT
+MOV N$军鼓战斗确认 0
+}
+
+[@军鼓BUFF_模块开启]
+{
+#IF
+EQUAL <$STR(S$军鼓当前职业)> warrior
+EQUAL <$STR(S$军鼓当前方向)> 拆门板
+#ACT
+#CALL [系统功能\军鼓流派\战士军鼓.txt] @军鼓warrior_开启_拆门板
+BREAK
+
+#IF
+EQUAL <$STR(S$军鼓当前职业)> warrior
+EQUAL <$STR(S$军鼓当前方向)> 铁头娃
+#ACT
+#CALL [系统功能\军鼓流派\战士军鼓.txt] @军鼓warrior_开启_铁头娃
+BREAK
+
+#IF
+EQUAL <$STR(S$军鼓当前职业)> warrior
+EQUAL <$STR(S$军鼓当前方向)> 剁馅机
+#ACT
+#CALL [系统功能\军鼓流派\战士军鼓.txt] @军鼓warrior_开启_剁馅机
+BREAK
+
+#IF
+EQUAL <$STR(S$军鼓当前职业)> wizard
+EQUAL <$STR(S$军鼓当前方向)> 电耗子
+#ACT
+#CALL [系统功能\军鼓流派\法师军鼓.txt] @军鼓wizard_开启_电耗子
+BREAK
+
+#IF
+EQUAL <$STR(S$军鼓当前职业)> wizard
+EQUAL <$STR(S$军鼓当前方向)> 火葫芦
+#ACT
+#CALL [系统功能\军鼓流派\法师军鼓.txt] @军鼓wizard_开启_火葫芦
+BREAK
+
+#IF
+EQUAL <$STR(S$军鼓当前职业)> wizard
+EQUAL <$STR(S$军鼓当前方向)> 小冰箱
+#ACT
+#CALL [系统功能\军鼓流派\法师军鼓.txt] @军鼓wizard_开启_小冰箱
+BREAK
+
+#IF
+EQUAL <$STR(S$军鼓当前职业)> taoist
+EQUAL <$STR(S$军鼓当前方向)> 养娃人
+#ACT
+#CALL [系统功能\军鼓流派\道士军鼓.txt] @军鼓taoist_开启_养娃人
+BREAK
+
+#IF
+EQUAL <$STR(S$军鼓当前职业)> taoist
+EQUAL <$STR(S$军鼓当前方向)> 奶不死
+#ACT
+#CALL [系统功能\军鼓流派\道士军鼓.txt] @军鼓taoist_开启_奶不死
+BREAK
+
+#IF
+EQUAL <$STR(S$军鼓当前职业)> taoist
+EQUAL <$STR(S$军鼓当前方向)> 毒嘴子
+#ACT
+#CALL [系统功能\军鼓流派\道士军鼓.txt] @军鼓taoist_开启_毒嘴子
+BREAK
+}
+
+[@军鼓BUFF_模块刷新]
+{
+#IF
+EQUAL <$STR(S$军鼓当前职业)> warrior
+EQUAL <$STR(S$军鼓当前方向)> 拆门板
+#ACT
+#CALL [系统功能\军鼓流派\战士军鼓.txt] @军鼓warrior_刷新_拆门板
+BREAK
+
+#IF
+EQUAL <$STR(S$军鼓当前职业)> warrior
+EQUAL <$STR(S$军鼓当前方向)> 铁头娃
+#ACT
+#CALL [系统功能\军鼓流派\战士军鼓.txt] @军鼓warrior_刷新_铁头娃
+BREAK
+
+#IF
+EQUAL <$STR(S$军鼓当前职业)> warrior
+EQUAL <$STR(S$军鼓当前方向)> 剁馅机
+#ACT
+#CALL [系统功能\军鼓流派\战士军鼓.txt] @军鼓warrior_刷新_剁馅机
+BREAK
+
+#IF
+EQUAL <$STR(S$军鼓当前职业)> wizard
+EQUAL <$STR(S$军鼓当前方向)> 电耗子
+#ACT
+#CALL [系统功能\军鼓流派\法师军鼓.txt] @军鼓wizard_刷新_电耗子
+BREAK
+
+#IF
+EQUAL <$STR(S$军鼓当前职业)> wizard
+EQUAL <$STR(S$军鼓当前方向)> 火葫芦
+#ACT
+#CALL [系统功能\军鼓流派\法师军鼓.txt] @军鼓wizard_刷新_火葫芦
+BREAK
+
+#IF
+EQUAL <$STR(S$军鼓当前职业)> wizard
+EQUAL <$STR(S$军鼓当前方向)> 小冰箱
+#ACT
+#CALL [系统功能\军鼓流派\法师军鼓.txt] @军鼓wizard_刷新_小冰箱
+BREAK
+
+#IF
+EQUAL <$STR(S$军鼓当前职业)> taoist
+EQUAL <$STR(S$军鼓当前方向)> 养娃人
+#ACT
+#CALL [系统功能\军鼓流派\道士军鼓.txt] @军鼓taoist_刷新_养娃人
+BREAK
+
+#IF
+EQUAL <$STR(S$军鼓当前职业)> taoist
+EQUAL <$STR(S$军鼓当前方向)> 奶不死
+#ACT
+#CALL [系统功能\军鼓流派\道士军鼓.txt] @军鼓taoist_刷新_奶不死
+BREAK
+
+#IF
+EQUAL <$STR(S$军鼓当前职业)> taoist
+EQUAL <$STR(S$军鼓当前方向)> 毒嘴子
+#ACT
+#CALL [系统功能\军鼓流派\道士军鼓.txt] @军鼓taoist_刷新_毒嘴子
+BREAK
+}
+
+[@军鼓BUFF_刷新图标]
+{
+#IF
+NOT EQUAL N$军鼓有效 1
+#ACT
+CloseArrBuff 1 87
+SETOFFTIMER 87
+BREAK
+
+#IF
+#ACT
+CloseArrBuff 1 87
+SetArrBuff 1 87 1 1681 3 1 1682 1 [军鼓]<$STR(S$军鼓当前职业)>·<$STR(S$军鼓当前方向)>·<$STR(N$军鼓当前品质)>
 SetOnTimer 87 2
-SetArrBuff 1 87 1 1681 3 1 1682 1 [玩法印记]<$STR(S$军鼓名称)>
-
-#IF
-CHECKJOB warrior
-EQUAL S$军鼓方向 拆门板
-#ACT
-LockUpdateAbil
-ChangeHumAbility 5 = <$STR(N$军鼓点)> 3
-ChangeHumAbility 6 = <$STR(N$军鼓大点)> 3
-AddHumNewValue 0 = <$STR(N$军鼓元素)> 3
-AddHumNewValue 4 = <$STR(N$军鼓元素)> 3
-UpdateAbil
-BREAK
-
-#IF
-CHECKJOB warrior
-EQUAL S$军鼓方向 铁头娃
-#ACT
-LockUpdateAbil
-ChangeHumAbility 1 = <$STR(N$军鼓点)> 3
-ChangeHumAbility 2 = <$STR(N$军鼓大点)> 3
-ChangeHumAbility 3 = <$STR(N$军鼓点)> 3
-ChangeHumAbility 4 = <$STR(N$军鼓大点)> 3
-ChangeHumAbility 11 = <$STR(N$军鼓血蓝)> 3
-AddHumNewValue 2 = <$STR(N$军鼓元素)> 3
-AddHumNewValue 3 = <$STR(N$军鼓元素)> 3
-AddHumNewValue 5 = <$STR(N$军鼓顶级加码)> 3
-UpdateAbil
-BREAK
-
-#IF
-CHECKJOB warrior
-EQUAL S$军鼓方向 剁馅机
-#ACT
-LockUpdateAbil
-ChangeHumAbility 5 = <$STR(N$军鼓点)> 3
-ChangeHumAbility 6 = <$STR(N$军鼓点)> 3
-ChangeHumAbility 19 = <$STR(N$军鼓大点)> 3
-AddHumNewValue 0 = <$STR(N$军鼓元素)> 3
-AddHumNewValue 1 = <$STR(N$军鼓元素)> 3
-UpdateAbil
-BREAK
-
-#IF
-CHECKJOB wizard
-EQUAL S$军鼓方向 电耗子
-#ACT
-LockUpdateAbil
-ChangeHumAbility 7 = <$STR(N$军鼓点)> 3
-ChangeHumAbility 8 = <$STR(N$军鼓大点)> 3
-ChangeHumAbility 18 = <$STR(N$军鼓大点)> 3
-AddHumNewValue 0 = <$STR(N$军鼓元素)> 3
-AddHumNewValue 1 = <$STR(N$军鼓元素)> 3
-UpdateAbil
-BREAK
-
-#IF
-CHECKJOB wizard
-EQUAL S$军鼓方向 火葫芦
-#ACT
-LockUpdateAbil
-ChangeHumAbility 7 = <$STR(N$军鼓点)> 3
-ChangeHumAbility 8 = <$STR(N$军鼓大点)> 3
-AddHumNewValue 1 = <$STR(N$军鼓元素)> 3
-AddHumNewValue 11 = <$STR(N$军鼓元素)> 3
-UpdateAbil
-BREAK
-
-#IF
-CHECKJOB wizard
-EQUAL S$军鼓方向 小冰箱
-#ACT
-LockUpdateAbil
-ChangeHumAbility 3 = <$STR(N$军鼓点)> 3
-ChangeHumAbility 4 = <$STR(N$军鼓大点)> 3
-ChangeHumAbility 11 = <$STR(N$军鼓血蓝)> 3
-ChangeHumAbility 12 = <$STR(N$军鼓血蓝)> 3
-AddHumNewValue 3 = <$STR(N$军鼓元素)> 3
-AddHumNewValue 19 = <$STR(N$军鼓元素)> 3
-UpdateAbil
-BREAK
-
-#IF
-CHECKJOB taoist
-EQUAL S$军鼓方向 养娃人
-#ACT
-LockUpdateAbil
-ChangeHumAbility 9 = <$STR(N$军鼓点)> 3
-ChangeHumAbility 10 = <$STR(N$军鼓大点)> 3
-AddHumNewValue 24 = <$STR(N$军鼓元素)> 3
-UpdateAbil
-BREAK
-
-#IF
-CHECKJOB taoist
-EQUAL S$军鼓方向 奶不死
-#ACT
-LockUpdateAbil
-ChangeHumAbility 1 = <$STR(N$军鼓点)> 3
-ChangeHumAbility 2 = <$STR(N$军鼓大点)> 3
-ChangeHumAbility 3 = <$STR(N$军鼓点)> 3
-ChangeHumAbility 4 = <$STR(N$军鼓大点)> 3
-ChangeHumAbility 11 = <$STR(N$军鼓血蓝)> 3
-ChangeHumAbility 12 = <$STR(N$军鼓血蓝)> 3
-ChangeHumAbility 14 = <$STR(N$军鼓大点)> 3
-ChangeHumAbility 15 = <$STR(N$军鼓大点)> 3
-AddHumNewValue 24 = <$STR(N$军鼓元素)> 3
-UpdateAbil
-BREAK
-
-#IF
-CHECKJOB taoist
-EQUAL S$军鼓方向 毒嘴子
-#ACT
-LockUpdateAbil
-ChangeHumAbility 9 = <$STR(N$军鼓点)> 3
-ChangeHumAbility 10 = <$STR(N$军鼓大点)> 3
-ChangeHumAbility 16 = <$STR(N$军鼓大点)> 3
-ChangeHumAbility 17 = <$STR(N$军鼓大点)> 3
-ChangeHumAbility 18 = <$STR(N$军鼓点)> 3
-AddHumNewValue 0 = <$STR(N$军鼓元素)> 3
-UpdateAbil
-BREAK
-}
-
-[@军鼓BUFF_战斗确认]
-{
-#IF
-EQUAL N$军鼓有效 1
-#ELSEACT
-MOV N$军鼓战斗确认 0
-BREAK
-
-#IF
-NOT CHECKUSEITEM 14
-#ACT
-GOTO @军鼓BUFF_清理
-BREAK
-
-#IF
-#ACT
-GetItemFieldValue 14 name S$军鼓确认名
-
-#IF
-EQUAL S$军鼓确认名 <$STR(S$军鼓名称)>
-#ACT
-MOV N$军鼓战斗确认 1
-#ELSEACT
-MOV N$军鼓战斗确认 0
-GOTO @军鼓BUFF_刷新
-BREAK
 }
 
 [@军鼓BUFF_攻击触发]
@@ -741,73 +301,50 @@ BREAK
 #CALL [系统功能\军鼓BUFF.txt] @军鼓BUFF_战斗确认
 
 #IF
-EQUAL N$军鼓战斗确认 1
-#ELSEACT
+EQUAL N$军鼓战斗确认 0
+#ACT
 BREAK
 
 #IF
-CHECKJOB warrior
-EQUAL S$军鼓方向 拆门板
+EQUAL <$STR(S$军鼓当前职业)> warrior
+EQUAL <$STR(S$军鼓当前方向)> 拆门板
 #ACT
-ChangeDamageValue 1 + <$STR(N$军鼓百分)>
-#IF
-CHECKJOB warrior
-EQUAL S$军鼓方向 拆门板
-LARGE N$军鼓品质 4
-#ACT
-ChangeDamageValue 1 + <$STR(N$军鼓顶级加码)>
+#CALL [系统功能\军鼓流派\战士军鼓.txt] @军鼓warrior_攻击_拆门板
+BREAK
 
 #IF
-CHECKJOB warrior
-EQUAL S$军鼓方向 剁馅机
+EQUAL <$STR(S$军鼓当前职业)> warrior
+EQUAL <$STR(S$军鼓当前方向)> 剁馅机
 #ACT
-ChangeDamageValue 1 + <$STR(N$军鼓元素)>
-#IF
-CHECKJOB warrior
-EQUAL S$军鼓方向 剁馅机
-LARGE N$军鼓品质 4
-#ACT
-ChangeDamageValue 1 + <$STR(N$军鼓顶级加码)>
+#CALL [系统功能\军鼓流派\战士军鼓.txt] @军鼓warrior_攻击_剁馅机
+BREAK
 
 #IF
-CHECKJOB wizard
-EQUAL S$军鼓方向 电耗子
+EQUAL <$STR(S$军鼓当前职业)> wizard
+EQUAL <$STR(S$军鼓当前方向)> 电耗子
 #ACT
-ChangeDamageValue 1 + <$STR(N$军鼓百分)>
-#IF
-CHECKJOB wizard
-EQUAL S$军鼓方向 电耗子
-LARGE N$军鼓品质 4
-#ACT
-M.ChangeHumAbilityPercentage 3 = <$STR(N$军鼓压制)> 3
-M.ChangeHumAbilityPercentage 4 = <$STR(N$军鼓压制)> 3
+#CALL [系统功能\军鼓流派\法师军鼓.txt] @军鼓wizard_攻击_电耗子
+BREAK
 
 #IF
-CHECKJOB wizard
-EQUAL S$军鼓方向 火葫芦
+EQUAL <$STR(S$军鼓当前职业)> wizard
+EQUAL <$STR(S$军鼓当前方向)> 火葫芦
 #ACT
-ChangeDamageValue 1 + <$STR(N$军鼓百分)>
-#IF
-CHECKJOB wizard
-EQUAL S$军鼓方向 火葫芦
-LARGE N$军鼓品质 4
-#ACT
-ChangeDamageValue 1 + <$STR(N$军鼓顶级加码)>
+#CALL [系统功能\军鼓流派\法师军鼓.txt] @军鼓wizard_攻击_火葫芦
+BREAK
 
 #IF
-CHECKJOB taoist
-EQUAL S$军鼓方向 毒嘴子
+EQUAL <$STR(S$军鼓当前职业)> taoist
+EQUAL <$STR(S$军鼓当前方向)> 养娃人
 #ACT
-ChangeDamageValue 1 + <$STR(N$军鼓元素)>
+#CALL [系统功能\军鼓流派\道士军鼓.txt] @军鼓taoist_攻击_养娃人
+BREAK
+
 #IF
-CHECKJOB taoist
-EQUAL S$军鼓方向 毒嘴子
-LARGE N$军鼓品质 4
+EQUAL <$STR(S$军鼓当前职业)> taoist
+EQUAL <$STR(S$军鼓当前方向)> 毒嘴子
 #ACT
-M.ChangeHumAbilityPercentage 1 = <$STR(N$军鼓压制)> 3
-M.ChangeHumAbilityPercentage 2 = <$STR(N$军鼓压制)> 3
-M.ChangeHumAbilityPercentage 3 = <$STR(N$军鼓压制)> 3
-M.ChangeHumAbilityPercentage 4 = <$STR(N$军鼓压制)> 3
+#CALL [系统功能\军鼓流派\道士军鼓.txt] @军鼓taoist_攻击_毒嘴子
 }
 
 [@军鼓BUFF_被打掉血前]
@@ -817,45 +354,29 @@ M.ChangeHumAbilityPercentage 4 = <$STR(N$军鼓压制)> 3
 #CALL [系统功能\军鼓BUFF.txt] @军鼓BUFF_战斗确认
 
 #IF
-EQUAL N$军鼓战斗确认 1
-#ELSEACT
+EQUAL N$军鼓战斗确认 0
+#ACT
 BREAK
 
 #IF
-CHECKJOB warrior
-EQUAL S$军鼓方向 铁头娃
+EQUAL <$STR(S$军鼓当前职业)> warrior
+EQUAL <$STR(S$军鼓当前方向)> 铁头娃
 #ACT
-ChangeDamageValue 1 - <$STR(N$军鼓百分)>
-#IF
-CHECKJOB warrior
-EQUAL S$军鼓方向 铁头娃
-LARGE N$军鼓品质 4
-#ACT
-ChangeDamageValue 1 - <$STR(N$军鼓顶级加码)>
+#CALL [系统功能\军鼓流派\战士军鼓.txt] @军鼓warrior_受击_铁头娃
+BREAK
 
 #IF
-CHECKJOB wizard
-EQUAL S$军鼓方向 小冰箱
+EQUAL <$STR(S$军鼓当前职业)> wizard
+EQUAL <$STR(S$军鼓当前方向)> 小冰箱
 #ACT
-ChangeDamageValue 1 - <$STR(N$军鼓元素)>
-#IF
-CHECKJOB wizard
-EQUAL S$军鼓方向 小冰箱
-LARGE N$军鼓品质 4
-#ACT
-ChangeDamageValue 1 - <$STR(N$军鼓顶级加码)>
+#CALL [系统功能\军鼓流派\法师军鼓.txt] @军鼓wizard_受击_小冰箱
+BREAK
 
 #IF
-CHECKJOB taoist
-EQUAL S$军鼓方向 奶不死
+EQUAL <$STR(S$军鼓当前职业)> taoist
+EQUAL <$STR(S$军鼓当前方向)> 奶不死
 #ACT
-ChangeDamageValue 1 - <$STR(N$军鼓元素)>
-#IF
-CHECKJOB taoist
-EQUAL S$军鼓方向 奶不死
-LARGE N$军鼓品质 4
-#ACT
-ChangeDamageValue 1 - <$STR(N$军鼓顶级加码)>
+#CALL [系统功能\军鼓流派\道士军鼓.txt] @军鼓taoist_受击_奶不死
 }
 
 [@军鼓BUFF_宝宝掉血前]
@@ -865,25 +386,43 @@ ChangeDamageValue 1 - <$STR(N$军鼓顶级加码)>
 #CALL [系统功能\军鼓BUFF.txt] @军鼓BUFF_战斗确认
 
 #IF
-EQUAL N$军鼓战斗确认 1
-CHECKJOB taoist
-EQUAL S$军鼓方向 养娃人
+EQUAL N$军鼓战斗确认 0
 #ACT
-ChangeDamageValue 1 + <$STR(N$军鼓百分)>
+BREAK
+
 #IF
-EQUAL N$军鼓战斗确认 1
-CHECKJOB taoist
-EQUAL S$军鼓方向 养娃人
-LARGE N$军鼓品质 4
+EQUAL <$STR(S$军鼓当前职业)> taoist
+EQUAL <$STR(S$军鼓当前方向)> 养娃人
 #ACT
-ChangeDamageValue 1 + <$STR(N$军鼓顶级加码)>
+#CALL [系统功能\军鼓流派\道士军鼓.txt] @军鼓taoist_宝宝_养娃人
+}
+
+[@军鼓BUFF_战斗确认]
+{
+#IF
+NOT CHECKUSEITEM 14
+#ACT
+MOV N$军鼓战斗确认 0
+GOTO @军鼓BUFF_清理
+BREAK
+
+#IF
+#ACT
+GetItemFieldValue 14 name S$军鼓确认名
+
+#IF
+EQUAL <$STR(S$军鼓确认名)> <$STR(S$军鼓当前名称)>
+#ACT
+MOV N$军鼓战斗确认 1
+#ELSEACT
+MOV N$军鼓战斗确认 0
+GOTO @军鼓BUFF_刷新
 }
 
 [@军鼓BUFF_死亡检查]
 {
 #IF
 #ACT
-MOV N$军鼓有效 0
 MOV N$军鼓战斗确认 0
 CloseArrBuff 1 87
 SetOnTimer 87 2
@@ -894,19 +433,22 @@ BREAK
 {
 #IF
 #ACT
+#CALL [系统功能\军鼓BUFF.txt] @军鼓BUFF_关闭当前模块
 MOV N$军鼓有效 0
 MOV N$军鼓品质 0
-MOV S$军鼓方向
-MOV S$军鼓名称
-MOV S$军鼓确认名
+MOV N$军鼓阶段 0
+MOV N$军鼓当前品质 0
 MOV N$军鼓战斗确认 0
-MOV N$军鼓点 0
-MOV N$军鼓大点 0
-MOV N$军鼓百分 0
-MOV N$军鼓元素 0
-MOV N$军鼓血蓝 0
-MOV N$军鼓顶级加码 0
-MOV N$军鼓压制 100
+MOV N$军鼓配置行 0
+MOV S$军鼓确认名
+MOV S$军鼓名称
+MOV S$军鼓方向
+MOV S$军鼓职业
+MOV S$军鼓互斥组
+MOV S$军鼓模块
+MOV S$军鼓当前名称
+MOV S$军鼓当前方向
+MOV S$军鼓当前职业
 SETOFFTIMER 87
 CloseArrBuff 1 87
 BREAK
