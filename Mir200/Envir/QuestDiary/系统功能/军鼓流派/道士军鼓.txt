@@ -121,12 +121,16 @@ MOV N$军鼓宝宝联动 0
 CHECKSLAVECOUNT > 0
 #ACT
 ChangeDamageValue 1 + <$STR(N$军鼓百分)>
+MOV N$军鼓触发成功 1
+MOV S$军鼓触发说明 攻击触发：养娃人人宠联动伤害已结算。
 
 #IF
 CHECKSLAVECOUNT > 0
 LARGE N$军鼓品质 4
 #ACT
 ChangeDamageValue 1 + <$STR(N$军鼓顶级加码)>
+MOV N$军鼓触发成功 1
+MOV S$军鼓触发说明 攻击触发：养娃人高阶护主加码已结算。
 }
 
 [@军鼓taoist_宝宝_养娃人]
@@ -135,12 +139,16 @@ ChangeDamageValue 1 + <$STR(N$军鼓顶级加码)>
 CHECKSLAVECOUNT > 0
 #ACT
 ChangeDamageValue 1 + <$STR(N$军鼓大点)>
+MOV N$军鼓触发成功 1
+MOV S$军鼓触发说明 宝宝触发：养娃人宝宝成长加码已结算。
 
 #IF
 CHECKSLAVECOUNT > 0
 LARGE N$军鼓品质 4
 #ACT
 ChangeDamageValue 1 + <$STR(N$军鼓顶级加码)>
+MOV N$军鼓触发成功 1
+MOV S$军鼓触发说明 宝宝触发：养娃人封顶联动已结算。
 }
 
 [@军鼓taoist_开启_奶不死]
@@ -196,16 +204,22 @@ MOV N$军鼓救急 0
 LARGE N$军鼓品质 0
 #ACT
 ChangeDamageValue 1 - <$STR(N$军鼓元素)>
+MOV N$军鼓触发成功 1
+MOV S$军鼓触发说明 受击触发：奶不死护主减伤已结算。
 
 #IF
 LARGE N$军鼓品质 4
 #ACT
 ChangeDamageValue 1 - <$STR(N$军鼓顶级加码)>
+MOV N$军鼓触发成功 1
+MOV S$军鼓触发说明 受击触发：奶不死高阶减伤已结算。
 
 #IF
 LARGE N$军鼓品质 5
 #ACT
 HumanHP + 5 100
+MOV N$军鼓触发成功 1
+MOV S$军鼓触发说明 受击触发：奶不死封顶救急回血已触发。
 }
 
 [@军鼓taoist_开启_毒嘴子]
@@ -259,21 +273,29 @@ CHECKMAGICNAME 施毒术
 #ACT
 M.MOV S$军鼓毒印 开启
 M.SetArrBuff 3 5 20 308 10 0 0 0 {毒嘴子|243}\你被毒嘴子盯上了，毒意开始往外冒
+MOV N$军鼓触发成功 1
+MOV S$军鼓触发说明 攻击触发：毒嘴子施毒术给目标挂毒印。
 
 #IF
 CHECKMAGICNAME 灵魂火符
 #ACT
 M.MOV S$军鼓毒印 开启
 M.SetArrBuff 3 5 20 308 10 0 0 0 {毒嘴子|243}\火符带着毒嘴子，下一次更疼
+MOV N$军鼓触发成功 1
+MOV S$军鼓触发说明 攻击触发：毒嘴子灵魂火符给目标挂毒印。
 
 #IF
 CHECKMAGICNAME 诅咒术
 #ACT
 M.MOV S$军鼓毒印 开启
 M.SetArrBuff 3 5 20 308 10 0 0 0 {毒嘴子|243}\诅咒里混着毒嘴子，压一层是一层
+MOV N$军鼓触发成功 1
+MOV S$军鼓触发说明 攻击触发：毒嘴子诅咒术给目标挂毒印。
 
 #IF
 LARGE N$军鼓品质 4
 #ACT
 ChangeDamageValue 1 + <$STR(N$军鼓顶级加码)>
+MOV N$军鼓触发成功 1
+MOV S$军鼓触发说明 攻击触发：毒嘴子高阶毒爆加码已结算。
 }

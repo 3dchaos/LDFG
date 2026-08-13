@@ -122,21 +122,29 @@ MOV N$军鼓拆门板连锁 0
 CHECKMAGICNAME 烈火剑法
 #ACT
 ChangeDamageValue 1 + <$STR(N$军鼓百分)>
+MOV N$军鼓触发成功 1
+MOV S$军鼓触发说明 攻击触发：拆门板强化烈火剑法，爆发破防已结算。
 
 #IF
 CHECKMAGICNAME 开天斩
 #ACT
 ChangeDamageValue 1 + <$STR(N$军鼓大点)>
+MOV N$军鼓触发成功 1
+MOV S$军鼓触发说明 攻击触发：拆门板强化开天斩，大点破防已结算。
 
 #IF
 CHECKMAGICNAME 逐日剑法
 #ACT
 ChangeDamageValue 1 + <$STR(N$军鼓元素)>
+MOV N$军鼓触发成功 1
+MOV S$军鼓触发说明 攻击触发：拆门板强化逐日剑法，元素加码已结算。
 
 #IF
 LARGE N$军鼓品质 5
 #ACT
 ChangeDamageValue 1 + <$STR(N$军鼓顶级加码)>
+MOV N$军鼓触发成功 1
+MOV S$军鼓触发说明 攻击触发：拆门板封顶加码已结算。
 }
 
 [@军鼓warrior_开启_铁头娃]
@@ -191,16 +199,22 @@ MOV N$军鼓铁头保命 0
 LARGE N$军鼓品质 0
 #ACT
 ChangeDamageValue 1 - <$STR(N$军鼓百分)>
+MOV N$军鼓触发成功 1
+MOV S$军鼓触发说明 受击触发：铁头娃减伤抗揍已结算。
 
 #IF
 LARGE N$军鼓品质 4
 #ACT
 ChangeDamageValue 1 - <$STR(N$军鼓顶级加码)>
+MOV N$军鼓触发成功 1
+MOV S$军鼓触发说明 受击触发：铁头娃高阶减伤已结算。
 
 #IF
 LARGE N$军鼓品质 5
 #ACT
 ChangeState 1 3 1
+MOV N$军鼓触发成功 1
+MOV S$军鼓触发说明 受击触发：铁头娃封顶保护已触发。
 }
 
 [@军鼓warrior_开启_剁馅机]
@@ -252,19 +266,27 @@ MOV N$军鼓剁馅机收尾 0
 CHECKMAGICNAME 刺杀剑术
 #ACT
 ChangeDamageValue 1 + <$STR(N$军鼓元素)>
+MOV N$军鼓触发成功 1
+MOV S$军鼓触发说明 攻击触发：剁馅机强化刺杀剑术，连击收尾已结算。
 
 #IF
 CHECKMAGICNAME 半月弯刀
 #ACT
 ChangeDamageValue 1 + <$STR(N$军鼓点)>
+MOV N$军鼓触发成功 1
+MOV S$军鼓触发说明 攻击触发：剁馅机强化半月弯刀，扫怪收尾已结算。
 
 #IF
 CHECKMAGICNAME 攻杀剑术
 #ACT
 ChangeDamageValue 1 + <$STR(N$军鼓大点)>
+MOV N$军鼓触发成功 1
+MOV S$军鼓触发说明 攻击触发：剁馅机强化攻杀剑术，重砍已结算。
 
 #IF
 LARGE N$军鼓品质 4
 #ACT
 ChangeDamageValue 1 + <$STR(N$军鼓顶级加码)>
+MOV N$军鼓触发成功 1
+MOV S$军鼓触发说明 攻击触发：剁馅机高阶收尾已结算。
 }

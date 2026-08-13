@@ -70,6 +70,31 @@ if (Test-Path -LiteralPath $scriptPath) {
             $fail += "buff script should not use high-frequency $forbidden"
         }
     }
+    foreach ($needle in @(
+            '[@军鼓BUFF_生成图标说明]',
+            '[@军鼓BUFF_触发反馈]',
+            'S$军鼓图标说明',
+            'S$军鼓触发说明',
+            'S$军鼓触发记录',
+            'N$军鼓触发成功',
+            'CHECK [61] 1',
+            'SENDMSG 7 【军鼓】'
+        )) {
+        if ($buffText -notmatch [regex]::Escape($needle)) {
+            $fail += "buff script missing icon/feedback support $needle"
+        }
+    }
+    if ($buffText -notmatch [regex]::Escape('SetArrBuff 1 87 1 1681 -1 0 0 0 <$STR(S$军鼓图标说明)>')) {
+        $fail += 'main buff icon must be persistent SetArrBuff button mode with detailed hover text'
+    }
+    if ($buffText -match 'SetArrBuff\s+1\s+87\s+1\s+1681\s+(?!-1\b)') {
+        $fail += 'main buff icon must not use countdown mode'
+    }
+    foreach ($needle in @('机制：14号位佩戴后持续生效', '安全：装备掉落、持久耗尽、脚本回收', '基础：属性只续3秒短时效果', '记录：<$STR(S$军鼓触发记录)>')) {
+        if ($buffText -notmatch [regex]::Escape($needle)) {
+            $fail += "buff hover text missing detail $needle"
+        }
+    }
     if ($buffText -match [regex]::Escape('GOTO @军鼓BUFF_战斗确认')) {
         $fail += "buff combat labels must #CALL battle confirmation instead of GOTO"
     }
@@ -218,6 +243,14 @@ if (Test-Path -LiteralPath $descPath) {
         $count = ([regex]::Matches($descText, '(?m)^' + [regex]::Escape($row.Name) + '=')).Count
         if ($count -ne 1) {
             $fail += "ItemDescList coverage error: $($row.Name) appears $count times"
+            continue
+        }
+        $lineMatch = [regex]::Match($descText, '(?m)^' + [regex]::Escape($row.Name) + '=.*$')
+        $line = $lineMatch.Value
+        foreach ($needle in @('14号位', '生效：', '复核：', '清理：', '基础：', '触发：', '效果：', '品质：')) {
+            if ($line -notmatch [regex]::Escape($needle)) {
+                $fail += "ItemDescList detail missing $needle for $($row.Name)"
+            }
         }
     }
 } else {

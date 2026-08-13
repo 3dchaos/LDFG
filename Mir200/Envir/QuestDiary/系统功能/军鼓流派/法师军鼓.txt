@@ -123,17 +123,23 @@ MOV N$军鼓雷网 0
 CHECKMAGICNAME 雷电术
 #ACT
 ChangeDamageValue 1 + <$STR(N$军鼓百分)>
+MOV N$军鼓触发成功 1
+MOV S$军鼓触发说明 攻击触发：电耗子强化雷电术，雷系专精已结算。
 
 #IF
 CHECKMAGICNAME 疾光电影
 #ACT
 ChangeDamageValue 1 + <$STR(N$军鼓大点)>
+MOV N$军鼓触发成功 1
+MOV S$军鼓触发说明 攻击触发：电耗子强化疾光电影，雷线加码已结算。
 
 #IF
 LARGE N$军鼓品质 4
 #ACT
 M.MOV S$军鼓雷痕 开启
 M.SetArrBuff 3 8 20 125 10 0 0 0 {电耗子|243}\雷痕落在了身上，下一次雷系更疼
+MOV N$军鼓触发成功 1
+MOV S$军鼓触发说明 攻击触发：电耗子给目标挂上雷痕。
 }
 
 [@军鼓wizard_开启_火葫芦]
@@ -184,22 +190,30 @@ MOV N$军鼓余烬 0
 CHECKMAGICNAME 火墙
 #ACT
 ChangeDamageValue 1 + <$STR(N$军鼓百分)>
+MOV N$军鼓触发成功 1
+MOV S$军鼓触发说明 攻击触发：火葫芦强化火墙，灼烧已结算。
 
 #IF
 CHECKMAGICNAME 流星火雨
 #ACT
 ChangeDamageValue 1 + <$STR(N$军鼓大点)>
+MOV N$军鼓触发成功 1
+MOV S$军鼓触发说明 攻击触发：火葫芦强化流星火雨，火雨加码已结算。
 
 #IF
 CHECKMAGICNAME 灭天火
 #ACT
 ChangeDamageValue 1 + <$STR(N$军鼓元素)>
+MOV N$军鼓触发成功 1
+MOV S$军鼓触发说明 攻击触发：火葫芦强化灭天火，元素灼烧已结算。
 
 #IF
 LARGE N$军鼓品质 4
 #ACT
 M.MOV S$军鼓火种 开启
 M.SetArrBuff 3 4 20 223 5 0 0 0 {火葫芦|243}\你被火葫芦烫了一下，余火还会烧
+MOV N$军鼓触发成功 1
+MOV S$军鼓触发说明 攻击触发：火葫芦给目标挂上火种。
 }
 
 [@军鼓wizard_开启_小冰箱]
@@ -252,14 +266,20 @@ MOV N$军鼓冰盾 0
 LARGE N$军鼓品质 0
 #ACT
 ChangeDamageValue 1 - <$STR(N$军鼓元素)>
+MOV N$军鼓触发成功 1
+MOV S$军鼓触发说明 受击触发：小冰箱冰甲减伤已结算。
 
 #IF
 LARGE N$军鼓品质 4
 #ACT
 ChangeDamageValue 1 - <$STR(N$军鼓顶级加码)>
+MOV N$军鼓触发成功 1
+MOV S$军鼓触发说明 受击触发：小冰箱高阶减伤已结算。
 
 #IF
 LARGE N$军鼓品质 5
 #ACT
 ChangeState 2 3 1
+MOV N$军鼓触发成功 1
+MOV S$军鼓触发说明 受击触发：小冰箱封顶冰盾已触发。
 }

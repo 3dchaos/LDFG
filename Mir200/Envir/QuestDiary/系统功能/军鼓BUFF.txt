@@ -21,7 +21,11 @@ MOV S$军鼓互斥组
 MOV S$军鼓模块
 MOV N$军鼓配置行 0
 MOV N$军鼓战斗确认 0
+MOV N$军鼓触发成功 0
 MOV S$军鼓确认名
+MOV S$军鼓图标说明
+MOV S$军鼓触发说明
+MOV S$军鼓触发记录
 
 #IF
 #ACT
@@ -137,6 +141,7 @@ BREAK
 #IF
 #ACT
 MOV N$军鼓战斗确认 0
+MOV N$军鼓触发成功 0
 }
 
 [@军鼓BUFF_模块开启]
@@ -283,10 +288,81 @@ BREAK
 #IF
 #ACT
 CloseArrBuff 1 87
-SetArrBuff 1 87 1 1681 3 1 1682 1 [军鼓]<$STR(S$军鼓当前职业)>·<$STR(S$军鼓当前方向)>·<$STR(N$军鼓当前品质)>
+#CALL [系统功能\军鼓BUFF.txt] @军鼓BUFF_生成图标说明
+SetArrBuff 1 87 1 1681 -1 0 0 0 <$STR(S$军鼓图标说明)>
 SetOnTimer 87 2
 }
 
+[@军鼓BUFF_生成图标说明]
+{
+#IF
+#ACT
+MOV S$军鼓图标说明 {军鼓流派|243}\名称：<$STR(S$军鼓当前名称)>\职业：<$STR(S$军鼓当前职业)>　方向：<$STR(S$军鼓当前方向)>　品质：<$STR(N$军鼓当前品质)>\机制：14号位佩戴后持续生效，登录、穿戴、卸下、死亡和2秒定时都会复核。\安全：装备掉落、持久耗尽、脚本回收或换下后会关闭模块并清理图标。\基础：属性只续3秒短时效果，靠2秒复核维持，不写永久属性。\反馈：实际触发后写聊天框；标识61开启时静默。\记录：<$STR(S$军鼓触发记录)>
+
+#IF
+EQUAL <$STR(S$军鼓当前方向)> 拆门板
+#ACT
+INC S$军鼓图标说明 \触发：人物攻击掉血前结算；烈火剑法、开天斩、逐日剑法会获得爆发破防加码，高阶品质再追加一次通用加码。
+BREAK
+
+#IF
+EQUAL <$STR(S$军鼓当前方向)> 铁头娃
+#ACT
+INC S$军鼓图标说明 \触发：人物被打掉血前结算；常规减伤，高阶继续降伤，封顶触发短暂保护状态。
+BREAK
+
+#IF
+EQUAL <$STR(S$军鼓当前方向)> 剁馅机
+#ACT
+INC S$军鼓图标说明 \触发：人物攻击掉血前结算；刺杀剑术、半月弯刀、攻杀剑术分别获得连击/扫怪/重砍加码，高阶追加收尾。
+BREAK
+
+#IF
+EQUAL <$STR(S$军鼓当前方向)> 电耗子
+#ACT
+INC S$军鼓图标说明 \触发：人物攻击掉血前结算；雷电术、疾光电影获得雷系加码，成名以上给目标挂雷痕图标。
+BREAK
+
+#IF
+EQUAL <$STR(S$军鼓当前方向)> 火葫芦
+#ACT
+INC S$军鼓图标说明 \触发：人物攻击掉血前结算；火墙、流星火雨、灭天火获得火系加码，成名以上给目标挂火种图标。
+BREAK
+
+#IF
+EQUAL <$STR(S$军鼓当前方向)> 小冰箱
+#ACT
+INC S$军鼓图标说明 \触发：人物被打掉血前结算；冰甲减伤，高阶继续降伤，封顶触发短暂冰盾状态。
+BREAK
+
+#IF
+EQUAL <$STR(S$军鼓当前方向)> 养娃人
+#ACT
+INC S$军鼓图标说明 \触发：人物攻击和宝宝掉血前结算；有宝宝时人物攻击和宝宝伤害都会加码，高阶追加护主联动。
+BREAK
+
+#IF
+EQUAL <$STR(S$军鼓当前方向)> 奶不死
+#ACT
+INC S$军鼓图标说明 \触发：人物被打掉血前结算；护主减伤，高阶继续降伤，封顶触发救急回血。
+BREAK
+
+#IF
+EQUAL <$STR(S$军鼓当前方向)> 毒嘴子
+#ACT
+INC S$军鼓图标说明 \触发：人物攻击掉血前结算；施毒术、灵魂火符、诅咒术给目标挂毒印，高阶追加毒爆加码。
+BREAK
+}
+[@军鼓BUFF_触发反馈]
+{
+#IF
+CHECK [61] 1
+#ELSEACT
+SENDMSG 7 【军鼓】<$STR(S$军鼓当前名称)>：<$STR(S$军鼓触发说明)>
+#IF
+#ACT
+MOV S$军鼓触发记录 <$STR(S$军鼓触发说明)>
+}
 [@军鼓BUFF_攻击触发]
 {
 #IF
@@ -299,6 +375,7 @@ SetOnTimer 87 2
 #IF
 #ACT
 #CALL [系统功能\军鼓BUFF.txt] @军鼓BUFF_战斗确认
+MOV N$军鼓触发成功 0
 
 #IF
 EQUAL N$军鼓战斗确认 0
@@ -310,6 +387,10 @@ EQUAL <$STR(S$军鼓当前职业)> warrior
 EQUAL <$STR(S$军鼓当前方向)> 拆门板
 #ACT
 #CALL [系统功能\军鼓流派\战士军鼓.txt] @军鼓warrior_攻击_拆门板
+#IF
+EQUAL N$军鼓触发成功 1
+#ACT
+#CALL [系统功能\军鼓BUFF.txt] @军鼓BUFF_触发反馈
 BREAK
 
 #IF
@@ -317,6 +398,10 @@ EQUAL <$STR(S$军鼓当前职业)> warrior
 EQUAL <$STR(S$军鼓当前方向)> 剁馅机
 #ACT
 #CALL [系统功能\军鼓流派\战士军鼓.txt] @军鼓warrior_攻击_剁馅机
+#IF
+EQUAL N$军鼓触发成功 1
+#ACT
+#CALL [系统功能\军鼓BUFF.txt] @军鼓BUFF_触发反馈
 BREAK
 
 #IF
@@ -324,6 +409,10 @@ EQUAL <$STR(S$军鼓当前职业)> wizard
 EQUAL <$STR(S$军鼓当前方向)> 电耗子
 #ACT
 #CALL [系统功能\军鼓流派\法师军鼓.txt] @军鼓wizard_攻击_电耗子
+#IF
+EQUAL N$军鼓触发成功 1
+#ACT
+#CALL [系统功能\军鼓BUFF.txt] @军鼓BUFF_触发反馈
 BREAK
 
 #IF
@@ -331,6 +420,10 @@ EQUAL <$STR(S$军鼓当前职业)> wizard
 EQUAL <$STR(S$军鼓当前方向)> 火葫芦
 #ACT
 #CALL [系统功能\军鼓流派\法师军鼓.txt] @军鼓wizard_攻击_火葫芦
+#IF
+EQUAL N$军鼓触发成功 1
+#ACT
+#CALL [系统功能\军鼓BUFF.txt] @军鼓BUFF_触发反馈
 BREAK
 
 #IF
@@ -338,6 +431,10 @@ EQUAL <$STR(S$军鼓当前职业)> taoist
 EQUAL <$STR(S$军鼓当前方向)> 养娃人
 #ACT
 #CALL [系统功能\军鼓流派\道士军鼓.txt] @军鼓taoist_攻击_养娃人
+#IF
+EQUAL N$军鼓触发成功 1
+#ACT
+#CALL [系统功能\军鼓BUFF.txt] @军鼓BUFF_触发反馈
 BREAK
 
 #IF
@@ -345,13 +442,17 @@ EQUAL <$STR(S$军鼓当前职业)> taoist
 EQUAL <$STR(S$军鼓当前方向)> 毒嘴子
 #ACT
 #CALL [系统功能\军鼓流派\道士军鼓.txt] @军鼓taoist_攻击_毒嘴子
+#IF
+EQUAL N$军鼓触发成功 1
+#ACT
+#CALL [系统功能\军鼓BUFF.txt] @军鼓BUFF_触发反馈
 }
-
 [@军鼓BUFF_被打掉血前]
 {
 #IF
 #ACT
 #CALL [系统功能\军鼓BUFF.txt] @军鼓BUFF_战斗确认
+MOV N$军鼓触发成功 0
 
 #IF
 EQUAL N$军鼓战斗确认 0
@@ -363,6 +464,10 @@ EQUAL <$STR(S$军鼓当前职业)> warrior
 EQUAL <$STR(S$军鼓当前方向)> 铁头娃
 #ACT
 #CALL [系统功能\军鼓流派\战士军鼓.txt] @军鼓warrior_受击_铁头娃
+#IF
+EQUAL N$军鼓触发成功 1
+#ACT
+#CALL [系统功能\军鼓BUFF.txt] @军鼓BUFF_触发反馈
 BREAK
 
 #IF
@@ -370,6 +475,10 @@ EQUAL <$STR(S$军鼓当前职业)> wizard
 EQUAL <$STR(S$军鼓当前方向)> 小冰箱
 #ACT
 #CALL [系统功能\军鼓流派\法师军鼓.txt] @军鼓wizard_受击_小冰箱
+#IF
+EQUAL N$军鼓触发成功 1
+#ACT
+#CALL [系统功能\军鼓BUFF.txt] @军鼓BUFF_触发反馈
 BREAK
 
 #IF
@@ -377,13 +486,17 @@ EQUAL <$STR(S$军鼓当前职业)> taoist
 EQUAL <$STR(S$军鼓当前方向)> 奶不死
 #ACT
 #CALL [系统功能\军鼓流派\道士军鼓.txt] @军鼓taoist_受击_奶不死
+#IF
+EQUAL N$军鼓触发成功 1
+#ACT
+#CALL [系统功能\军鼓BUFF.txt] @军鼓BUFF_触发反馈
 }
-
 [@军鼓BUFF_宝宝掉血前]
 {
 #IF
 #ACT
 #CALL [系统功能\军鼓BUFF.txt] @军鼓BUFF_战斗确认
+MOV N$军鼓触发成功 0
 
 #IF
 EQUAL N$军鼓战斗确认 0
@@ -395,14 +508,18 @@ EQUAL <$STR(S$军鼓当前职业)> taoist
 EQUAL <$STR(S$军鼓当前方向)> 养娃人
 #ACT
 #CALL [系统功能\军鼓流派\道士军鼓.txt] @军鼓taoist_宝宝_养娃人
+#IF
+EQUAL N$军鼓触发成功 1
+#ACT
+#CALL [系统功能\军鼓BUFF.txt] @军鼓BUFF_触发反馈
 }
-
 [@军鼓BUFF_战斗确认]
 {
 #IF
 NOT CHECKUSEITEM 14
 #ACT
 MOV N$军鼓战斗确认 0
+MOV N$军鼓触发成功 0
 GOTO @军鼓BUFF_清理
 BREAK
 
@@ -416,6 +533,7 @@ EQUAL <$STR(S$军鼓确认名)> <$STR(S$军鼓当前名称)>
 MOV N$军鼓战斗确认 1
 #ELSEACT
 MOV N$军鼓战斗确认 0
+MOV N$军鼓触发成功 0
 GOTO @军鼓BUFF_刷新
 }
 
@@ -424,6 +542,7 @@ GOTO @军鼓BUFF_刷新
 #IF
 #ACT
 MOV N$军鼓战斗确认 0
+MOV N$军鼓触发成功 0
 CloseArrBuff 1 87
 SetOnTimer 87 2
 BREAK
@@ -439,8 +558,12 @@ MOV N$军鼓品质 0
 MOV N$军鼓阶段 0
 MOV N$军鼓当前品质 0
 MOV N$军鼓战斗确认 0
+MOV N$军鼓触发成功 0
 MOV N$军鼓配置行 0
 MOV S$军鼓确认名
+MOV S$军鼓图标说明
+MOV S$军鼓触发说明
+MOV S$军鼓触发记录
 MOV S$军鼓名称
 MOV S$军鼓方向
 MOV S$军鼓职业
@@ -449,6 +572,9 @@ MOV S$军鼓模块
 MOV S$军鼓当前名称
 MOV S$军鼓当前方向
 MOV S$军鼓当前职业
+MOV S$军鼓图标说明
+MOV S$军鼓触发说明
+MOV S$军鼓触发记录
 SETOFFTIMER 87
 CloseArrBuff 1 87
 BREAK
