@@ -1,12 +1,12 @@
 ;军鼓位BUFF：14号装备位持续流派系统。
-;只保留读取、分发、清理和定时复核，不再硬编码54件名称。
+;只保留读取、分发、关闭和定时确认，不再硬编码54件名称。
 
 [@军鼓BUFF_刷新]
 {
 #IF
 NOT CHECKUSEITEM 14
 #ACT
-GOTO @军鼓BUFF_清理
+#CALL [系统功能\军鼓BUFF.txt] @军鼓BUFF_清理
 BREAK
 
 #IF
@@ -34,7 +34,7 @@ MOV S$军鼓触发记录
 #IF
 EQUAL N$军鼓有效 0
 #ACT
-GOTO @军鼓BUFF_清理
+#CALL [系统功能\军鼓BUFF.txt] @军鼓BUFF_清理
 BREAK
 
 #IF
@@ -297,7 +297,7 @@ SetOnTimer 87 2
 {
 #IF
 #ACT
-MOV S$军鼓图标说明 {军鼓流派|243}\名称：<$STR(S$军鼓当前名称)>\职业：<$STR(S$军鼓当前职业)>　方向：<$STR(S$军鼓当前方向)>　品质：<$STR(N$军鼓当前品质)>\机制：14号位佩戴后持续生效，登录、穿戴、卸下、死亡和2秒定时都会复核。\安全：装备掉落、持久耗尽、脚本回收或换下后会关闭模块并清理图标。\基础：属性只续3秒短时效果，靠2秒复核维持，不写永久属性。\反馈：实际触发后写聊天框；标识61开启时静默。\记录：<$STR(S$军鼓触发记录)>
+MOV S$军鼓图标说明 {军鼓流派|243}\名称：<$STR(S$军鼓当前名称)>\职业：<$STR(S$军鼓当前职业)>　方向：<$STR(S$军鼓当前方向)>　品质：<$STR(N$军鼓当前品质)>\玩法：佩戴在军鼓位时持续生效。\触发：命中或受击时按当前方向结算；实际触发会在聊天框提示。
 
 #IF
 EQUAL <$STR(S$军鼓当前方向)> 拆门板
@@ -356,7 +356,7 @@ BREAK
 [@军鼓BUFF_触发反馈]
 {
 #IF
-CHECK [61] 1
+CHECK [63] 1
 #ELSEACT
 SENDMSG 7 【军鼓】<$STR(S$军鼓当前名称)>：<$STR(S$军鼓触发说明)>
 #IF
@@ -520,7 +520,7 @@ NOT CHECKUSEITEM 14
 #ACT
 MOV N$军鼓战斗确认 0
 MOV N$军鼓触发成功 0
-GOTO @军鼓BUFF_清理
+#CALL [系统功能\军鼓BUFF.txt] @军鼓BUFF_清理
 BREAK
 
 #IF
@@ -534,7 +534,7 @@ MOV N$军鼓战斗确认 1
 #ELSEACT
 MOV N$军鼓战斗确认 0
 MOV N$军鼓触发成功 0
-GOTO @军鼓BUFF_刷新
+#CALL [系统功能\军鼓BUFF.txt] @军鼓BUFF_刷新
 }
 
 [@军鼓BUFF_死亡检查]
@@ -552,6 +552,8 @@ BREAK
 {
 #IF
 #ACT
+CloseArrBuff 1 87
+SETOFFTIMER 87
 #CALL [系统功能\军鼓BUFF.txt] @军鼓BUFF_关闭当前模块
 MOV N$军鼓有效 0
 MOV N$军鼓品质 0
@@ -576,6 +578,5 @@ MOV S$军鼓图标说明
 MOV S$军鼓触发说明
 MOV S$军鼓触发记录
 SETOFFTIMER 87
-CloseArrBuff 1 87
 BREAK
 }

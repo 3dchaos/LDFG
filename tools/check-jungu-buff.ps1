@@ -77,7 +77,7 @@ if (Test-Path -LiteralPath $scriptPath) {
             'S$军鼓触发说明',
             'S$军鼓触发记录',
             'N$军鼓触发成功',
-            'CHECK [61] 1',
+            'CHECK [63] 1',
             'SENDMSG 7 【军鼓】'
         )) {
         if ($buffText -notmatch [regex]::Escape($needle)) {
@@ -90,9 +90,17 @@ if (Test-Path -LiteralPath $scriptPath) {
     if ($buffText -match 'SetArrBuff\s+1\s+87\s+1\s+1681\s+(?!-1\b)') {
         $fail += 'main buff icon must not use countdown mode'
     }
-    foreach ($needle in @('机制：14号位佩戴后持续生效', '安全：装备掉落、持久耗尽、脚本回收', '基础：属性只续3秒短时效果', '记录：<$STR(S$军鼓触发记录)>')) {
+    if ($buffText -match '`n|`r') {
+        $fail += 'buff script contains literal PowerShell newline escape text'
+    }
+    foreach ($forbiddenDetail in @('机制：', '安全：', '复核：', '清理：', '基础：', '记录：<$STR(S$军鼓触发记录)>', '2秒定时', '3秒短时', '脚本回收', '复核')) {
+        if ($buffText -match [regex]::Escape($forbiddenDetail)) {
+            $fail += "buff hover text contains developer detail $forbiddenDetail"
+        }
+    }
+    foreach ($needle in @('名称：<$STR(S$军鼓当前名称)>', '玩法：', '触发：')) {
         if ($buffText -notmatch [regex]::Escape($needle)) {
-            $fail += "buff hover text missing detail $needle"
+            $fail += "buff hover text missing player detail $needle"
         }
     }
     if ($buffText -match [regex]::Escape('GOTO @军鼓BUFF_战斗确认')) {
@@ -247,9 +255,14 @@ if (Test-Path -LiteralPath $descPath) {
         }
         $lineMatch = [regex]::Match($descText, '(?m)^' + [regex]::Escape($row.Name) + '=.*$')
         $line = $lineMatch.Value
-        foreach ($needle in @('14号位', '生效：', '复核：', '清理：', '基础：', '触发：', '效果：', '品质：')) {
+        foreach ($needle in @('14号位', '生效：', '玩法：', '触发：', '效果：', '品质：')) {
             if ($line -notmatch [regex]::Escape($needle)) {
                 $fail += "ItemDescList detail missing $needle for $($row.Name)"
+            }
+        }
+        foreach ($forbiddenDetail in @('复核：', '清理：', '基础：', '机制：', '安全：', '记录：', '2秒定时', '3秒短时', '脚本回收', '确认14号位仍是当前物品')) {
+            if ($line -match [regex]::Escape($forbiddenDetail)) {
+                $fail += "ItemDescList contains developer detail $forbiddenDetail for $($row.Name)"
             }
         }
     }
