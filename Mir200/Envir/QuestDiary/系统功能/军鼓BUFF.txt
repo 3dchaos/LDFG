@@ -281,15 +281,16 @@ BREAK
 #IF
 NOT EQUAL N$军鼓有效 1
 #ACT
-CloseArrBuff 1 87
+CloseArrBuff 87
 SETOFFTIMER 87
 BREAK
 
 #IF
 #ACT
-CloseArrBuff 1 87
+CloseArrBuff 87
 #CALL [系统功能\军鼓BUFF.txt] @军鼓BUFF_生成图标说明
 SetArrBuff 1 87 1 1681 -1 0 0 0 <$STR(S$军鼓图标说明)>
+SENDMSG 6 军鼓BUFF已经生效！
 SetOnTimer 87 2
 }
 
@@ -543,7 +544,7 @@ MOV N$军鼓触发成功 0
 #ACT
 MOV N$军鼓战斗确认 0
 MOV N$军鼓触发成功 0
-CloseArrBuff 1 87
+CloseArrBuff 87
 SetOnTimer 87 2
 BREAK
 }
@@ -552,7 +553,8 @@ BREAK
 {
 #IF
 #ACT
-CloseArrBuff 1 87
+SENDMSG 6 取下军鼓，BUFF失效！
+CloseArrBuff 87
 SETOFFTIMER 87
 #CALL [系统功能\军鼓BUFF.txt] @军鼓BUFF_关闭当前模块
 MOV N$军鼓有效 0
