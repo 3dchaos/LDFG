@@ -26,7 +26,6 @@ MOV S$军鼓确认名
 MOV S$军鼓图标说明
 MOV S$军鼓触发说明
 MOV S$军鼓触发记录
-
 #IF
 #ACT
 #CALL [系统功能\军鼓流派配置.txt] @军鼓配置_读取
@@ -290,7 +289,7 @@ BREAK
 CloseArrBuff 87
 #CALL [系统功能\军鼓BUFF.txt] @军鼓BUFF_生成图标说明
 SetArrBuff 1 87 1 1681 -1 0 0 0 <$STR(S$军鼓图标说明)>
-SENDMSG 6 军鼓BUFF已经生效！
+
 SetOnTimer 87 2
 }
 
@@ -574,7 +573,6 @@ BREAK
 {
 #IF
 #ACT
-SENDMSG 6 取下军鼓，BUFF失效！
 CloseArrBuff 87
 SETOFFTIMER 87
 #CALL [系统功能\军鼓BUFF.txt] @军鼓BUFF_关闭当前模块
