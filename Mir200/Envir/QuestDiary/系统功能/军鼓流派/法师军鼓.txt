@@ -137,9 +137,20 @@ MOV S$军鼓触发说明 攻击触发：电耗子强化疾光电影，雷线加码已结算。
 LARGE N$军鼓品质 4
 #ACT
 M.MOV S$军鼓雷痕 开启
-M.SetArrBuff 3 8 20 125 10 0 0 0 {电耗子|243}\雷痕落在了身上，下一次雷系更疼
 MOV N$军鼓触发成功 1
 MOV S$军鼓触发说明 攻击触发：电耗子给目标挂上雷痕。
+
+#IF
+LARGE N$军鼓品质 4
+CHECKCURRTARGETRACE = 0
+#ACT
+M.SetArrBuff 3 8 20 125 10 0 0 0 {电耗子|243}\雷痕落在了身上，下一次雷系更疼
+
+#IF
+LARGE N$军鼓品质 4
+NOT CHECKCURRTARGETRACE = 0
+#ACT
+M.SETICON 0 0 200 44 -30 10 0 0 150 0
 }
 
 [@军鼓wizard_开启_火葫芦]
@@ -211,9 +222,20 @@ MOV S$军鼓触发说明 攻击触发：火葫芦强化灭天火，元素灼烧已结算。
 LARGE N$军鼓品质 4
 #ACT
 M.MOV S$军鼓火种 开启
-M.SetArrBuff 3 4 20 223 5 0 0 0 {火葫芦|243}\你被火葫芦烫了一下，余火还会烧
 MOV N$军鼓触发成功 1
 MOV S$军鼓触发说明 攻击触发：火葫芦给目标挂上火种。
+
+#IF
+LARGE N$军鼓品质 4
+CHECKCURRTARGETRACE = 0
+#ACT
+M.SetArrBuff 3 4 20 223 5 0 0 0 {火葫芦|243}\你被火葫芦烫了一下，余火还会烧
+
+#IF
+LARGE N$军鼓品质 4
+NOT CHECKCURRTARGETRACE = 0
+#ACT
+M.SETICON 0 0 200 44 -30 10 0 0 150 0
 }
 
 [@军鼓wizard_开启_小冰箱]
