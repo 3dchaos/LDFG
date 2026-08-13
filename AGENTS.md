@@ -144,6 +144,7 @@
 - 工具脚本必须默认保护 GBK / ANSI 文本：读取前识别编码，写回时保留原编码、BOM、换行风格和缩进习惯。
 - `Mir200/Envir/**/*.txt` 的批量编辑优先走这些项目工具；`AGENTS.md`、`docs/`、`.vscode/*.json` 等 UTF-8 文档和配置可用普通补丁方式修改。
 - 如果一次任务中总结出稳定规则，例如 `MapInfo.txt` 链接解析、动态地图门生成、防偷渡验证、Boss 完整名校验，应同步更新 `lf-mir200-knowledge` skill 或其参考文档。
+- 当用户要求“沉淀到 skill”“更新 skill”“写进知识库”这类持久化经验时，必须同时更新 skill 源仓库 `D:\wangsiProject\LF知识库搭建\codex-skills\lf-mir200-knowledge\`，再按需要同步本机安装版 `C:\Users\admin\.codex\skills\lf-mir200-knowledge\`，避免只改运行副本导致源仓库遗漏。
 - 更新 skill 时不要只记录本次操作流水账，要提炼成可复用规则：触发条件、读取顺序、命令语法依据、编辑边界、静态验证方法。
 - 本仓库的 `AGENTS.md` 和 `docs/*.md` 是项目知识源；Mir200 相关 skill 在处理本仓库前应优先读取这些 Markdown，再结合本地手册和样本脚本判断。
 

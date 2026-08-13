@@ -1,0 +1,265 @@
+;法师军鼓模块：电耗子 / 火葫芦 / 小冰箱。
+
+[@军鼓wizard_品质基础]
+{
+#IF
+EQUAL N$军鼓品质 1
+#ACT
+MOV N$军鼓点 1
+MOV N$军鼓大点 2
+MOV N$军鼓百分 2
+MOV N$军鼓元素 1
+MOV N$军鼓血蓝 50
+MOV N$军鼓顶级加码 0
+MOV N$军鼓压制 100
+BREAK
+
+#IF
+EQUAL N$军鼓品质 2
+#ACT
+MOV N$军鼓点 2
+MOV N$军鼓大点 3
+MOV N$军鼓百分 3
+MOV N$军鼓元素 2
+MOV N$军鼓血蓝 80
+MOV N$军鼓顶级加码 0
+MOV N$军鼓压制 100
+BREAK
+
+#IF
+EQUAL N$军鼓品质 3
+#ACT
+MOV N$军鼓点 3
+MOV N$军鼓大点 5
+MOV N$军鼓百分 4
+MOV N$军鼓元素 3
+MOV N$军鼓血蓝 120
+MOV N$军鼓顶级加码 0
+MOV N$军鼓压制 100
+BREAK
+
+#IF
+EQUAL N$军鼓品质 4
+#ACT
+MOV N$军鼓点 4
+MOV N$军鼓大点 7
+MOV N$军鼓百分 5
+MOV N$军鼓元素 4
+MOV N$军鼓血蓝 180
+MOV N$军鼓顶级加码 0
+MOV N$军鼓压制 100
+BREAK
+
+#IF
+EQUAL N$军鼓品质 5
+#ACT
+MOV N$军鼓点 5
+MOV N$军鼓大点 9
+MOV N$军鼓百分 6
+MOV N$军鼓元素 5
+MOV N$军鼓血蓝 250
+MOV N$军鼓顶级加码 2
+MOV N$军鼓压制 98
+BREAK
+
+#IF
+EQUAL N$军鼓品质 6
+#ACT
+MOV N$军鼓点 6
+MOV N$军鼓大点 12
+MOV N$军鼓百分 8
+MOV N$军鼓元素 6
+MOV N$军鼓血蓝 350
+MOV N$军鼓顶级加码 3
+MOV N$军鼓压制 96
+}
+
+[@军鼓wizard_开启_电耗子]
+{
+#IF
+#ACT
+GOTO @军鼓wizard_刷新_电耗子
+}
+
+[@军鼓wizard_刷新_电耗子]
+{
+#IF
+#ACT
+#CALL [系统功能\军鼓流派\法师军鼓.txt] @军鼓wizard_品质基础
+
+#IF
+LARGE N$军鼓品质 0
+#ACT
+LockUpdateAbil
+ChangeHumAbility 7 = <$STR(N$军鼓点)> 3
+ChangeHumAbility 8 = <$STR(N$军鼓大点)> 3
+ChangeHumAbility 18 = <$STR(N$军鼓大点)> 3
+AddHumNewValue 0 = <$STR(N$军鼓元素)> 3
+AddHumNewValue 1 = <$STR(N$军鼓元素)> 3
+UpdateAbil
+
+#IF
+LARGE N$军鼓品质 3
+#ACT
+MOV N$军鼓电痕 1
+
+#IF
+LARGE N$军鼓品质 5
+#ACT
+MOV N$军鼓雷网 1
+}
+
+[@军鼓wizard_关闭_电耗子]
+{
+#IF
+#ACT
+MOV N$军鼓电痕 0
+MOV N$军鼓雷网 0
+}
+
+[@军鼓wizard_攻击_电耗子]
+{
+#IF
+CHECKMAGICNAME 雷电术
+#ACT
+ChangeDamageValue 1 + <$STR(N$军鼓百分)>
+
+#IF
+CHECKMAGICNAME 疾光电影
+#ACT
+ChangeDamageValue 1 + <$STR(N$军鼓大点)>
+
+#IF
+LARGE N$军鼓品质 4
+#ACT
+M.MOV S$军鼓雷痕 开启
+M.SetArrBuff 3 8 20 125 10 0 0 0 {电耗子|243}\雷痕落在了身上，下一次雷系更疼
+}
+
+[@军鼓wizard_开启_火葫芦]
+{
+#IF
+#ACT
+GOTO @军鼓wizard_刷新_火葫芦
+}
+
+[@军鼓wizard_刷新_火葫芦]
+{
+#IF
+#ACT
+#CALL [系统功能\军鼓流派\法师军鼓.txt] @军鼓wizard_品质基础
+
+#IF
+LARGE N$军鼓品质 0
+#ACT
+LockUpdateAbil
+ChangeHumAbility 7 = <$STR(N$军鼓点)> 3
+ChangeHumAbility 8 = <$STR(N$军鼓大点)> 3
+AddHumNewValue 1 = <$STR(N$军鼓元素)> 3
+AddHumNewValue 11 = <$STR(N$军鼓元素)> 3
+UpdateAbil
+
+#IF
+LARGE N$军鼓品质 3
+#ACT
+MOV N$军鼓火种 1
+
+#IF
+LARGE N$军鼓品质 5
+#ACT
+MOV N$军鼓余烬 1
+}
+
+[@军鼓wizard_关闭_火葫芦]
+{
+#IF
+#ACT
+MOV N$军鼓火种 0
+MOV N$军鼓余烬 0
+}
+
+[@军鼓wizard_攻击_火葫芦]
+{
+#IF
+CHECKMAGICNAME 火墙
+#ACT
+ChangeDamageValue 1 + <$STR(N$军鼓百分)>
+
+#IF
+CHECKMAGICNAME 流星火雨
+#ACT
+ChangeDamageValue 1 + <$STR(N$军鼓大点)>
+
+#IF
+CHECKMAGICNAME 灭天火
+#ACT
+ChangeDamageValue 1 + <$STR(N$军鼓元素)>
+
+#IF
+LARGE N$军鼓品质 4
+#ACT
+M.MOV S$军鼓火种 开启
+M.SetArrBuff 3 4 20 223 5 0 0 0 {火葫芦|243}\你被火葫芦烫了一下，余火还会烧
+}
+
+[@军鼓wizard_开启_小冰箱]
+{
+#IF
+#ACT
+GOTO @军鼓wizard_刷新_小冰箱
+}
+
+[@军鼓wizard_刷新_小冰箱]
+{
+#IF
+#ACT
+#CALL [系统功能\军鼓流派\法师军鼓.txt] @军鼓wizard_品质基础
+
+#IF
+LARGE N$军鼓品质 0
+#ACT
+LockUpdateAbil
+ChangeHumAbility 3 = <$STR(N$军鼓点)> 3
+ChangeHumAbility 4 = <$STR(N$军鼓大点)> 3
+ChangeHumAbility 11 = <$STR(N$军鼓血蓝)> 3
+ChangeHumAbility 12 = <$STR(N$军鼓血蓝)> 3
+AddHumNewValue 3 = <$STR(N$军鼓元素)> 3
+AddHumNewValue 19 = <$STR(N$军鼓元素)> 3
+UpdateAbil
+
+#IF
+LARGE N$军鼓品质 3
+#ACT
+MOV N$军鼓冰甲 1
+
+#IF
+LARGE N$军鼓品质 5
+#ACT
+MOV N$军鼓冰盾 1
+}
+
+[@军鼓wizard_关闭_小冰箱]
+{
+#IF
+#ACT
+MOV N$军鼓冰甲 0
+MOV N$军鼓冰盾 0
+}
+
+[@军鼓wizard_受击_小冰箱]
+{
+#IF
+LARGE N$军鼓品质 0
+#ACT
+ChangeDamageValue 1 - <$STR(N$军鼓元素)>
+
+#IF
+LARGE N$军鼓品质 4
+#ACT
+ChangeDamageValue 1 - <$STR(N$军鼓顶级加码)>
+
+#IF
+LARGE N$军鼓品质 5
+#ACT
+ChangeState 2 3 1
+}

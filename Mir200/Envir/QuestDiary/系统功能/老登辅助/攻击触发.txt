@@ -1,6 +1,7 @@
 [@攻击触发]
 {
 #ACT
+	#CALL [系统功能\军鼓BUFF.txt] @军鼓BUFF_攻击触发
 	;重置卡死点数
 	MOV U30 0
 #IF

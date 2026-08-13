@@ -1,6 +1,10 @@
 [@死亡触发]
 {
 #IF
+#ACT
+#CALL [系统功能\军鼓BUFF.txt] @军鼓BUFF_死亡检查
+
+#IF
 checkitem 替死鬼符 1
 CHECK [59] 0
 #ACT

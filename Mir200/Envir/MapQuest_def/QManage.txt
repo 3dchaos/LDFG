@@ -128,6 +128,10 @@ SETOFFTIMER 4
 #CALL [系统功能\老登辅助\挂机跟踪.txt] @挂机跟踪
 ;刷新背包
 
+;军鼓位BUFF刷新
+[@OnTimer87]
+#ACT
+#CALL [系统功能\军鼓BUFF.txt] @军鼓BUFF_刷新
 [@OnTimer84]
 #IF
 #ACT
@@ -170,6 +174,7 @@ check [68] 1
 #IF
 #ACT
 #CALL [系统功能\地图开放.txt] @地图开放_越境纠正
+#CALL [系统功能\军鼓BUFF.txt] @军鼓BUFF_刷新
 
 ;清除连续挂机
 #IF
@@ -307,7 +312,7 @@ CHECK [30] 1
 SET [30] 0
 SET [31] 0
 mov N$刷怪次数 0
-Delnpc <$USERNAME>藏宝阁管理员
+Delnpc <$USERNAME>藏宝阁管理员 <$USERNAME>藏宝阁
 DelMirrorMap <$USERNAME>藏宝阁
 
 #IF
