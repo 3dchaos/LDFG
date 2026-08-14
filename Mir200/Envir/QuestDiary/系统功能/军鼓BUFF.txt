@@ -356,7 +356,7 @@ MOV N$军鼓头戴图标 284
 #IF
 EQUAL <$STR(S$军鼓当前方向)> 小冰箱
 #ACT
-MOV N$军鼓头戴图标 290
+MOV N$军鼓头戴图标 287
 
 #IF
 EQUAL <$STR(S$军鼓当前方向)> 奶不死
@@ -366,16 +366,15 @@ MOV N$军鼓头戴图标 285
 #IF
 #ACT
 #CALL [系统功能\军鼓BUFF.txt] @军鼓BUFF_生成图标说明
-SetArrBuff 1 87 1 <$STR(N$军鼓BUFF图标)> -1 0 0 0 <$STR(S$军鼓图标说明)>
+SetArrBuff 1 87 0 <$STR(N$军鼓BUFF图标)> -1 0 0 0 <$STR(S$军鼓图标说明)>
 
 #IF
 LARGE N$军鼓头戴图标 0
 #ACT
-SETICON 1 1 <$STR(N$军鼓头戴图标)> 44 -30 1 0 0 150 0
+SETICON 1 0 <$STR(N$军鼓头戴图标)> 44 -30 1 0 0 150 0
 
 #IF
 #ACT
-SENDMSG 6 军鼓BUFF已经生效！
 SetOnTimer 87 2
 }
 
@@ -387,23 +386,21 @@ SetOnTimer 87 2
 EQUAL <$STR(S$军鼓当前职业)> warrior
 #ACT
 MOV S$军鼓职业显示 战士
-BREAK
+
 
 #IF
 EQUAL <$STR(S$军鼓当前职业)> wizard
 #ACT
 MOV S$军鼓职业显示 法师
-BREAK
 
 #IF
 EQUAL <$STR(S$军鼓当前职业)> taoist
 #ACT
 MOV S$军鼓职业显示 道士
-BREAK
+
 
 #IF
 #ACT
-MOV S$军鼓职业显示 <$STR(S$军鼓当前职业)>
 MOV S$军鼓图标说明 {军鼓流派|243}\名称：<$STR(S$军鼓当前名称)>\职业：<$STR(S$军鼓职业显示)>　方向：<$STR(S$军鼓当前方向)>　品质：<$STR(N$军鼓当前品质)>\玩法：佩戴在军鼓位时持续生效。\触发：命中或受击时按当前方向结算；实际触发会在聊天框提示。
 
 #IF
@@ -660,7 +657,6 @@ BREAK
 {
 #IF
 #ACT
-SENDMSG 6 取下军鼓，BUFF失效！
 CloseArrBuff 87
 SETOFFTIMER 87
 #CALL [系统功能\军鼓BUFF.txt] @军鼓BUFF_关闭当前模块
