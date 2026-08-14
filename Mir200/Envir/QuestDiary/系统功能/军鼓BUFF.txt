@@ -282,14 +282,14 @@ BREAK
 NOT EQUAL N$军鼓有效 1
 #ACT
 CloseArrBuff 87
-SETICON 1 -1
+SETICON 0 -1
 SETOFFTIMER 87
 BREAK
 
 #IF
 #ACT
 CloseArrBuff 87
-SETICON 1 -1
+SETICON 0 -1
 MOV N$军鼓BUFF图标 275
 MOV N$军鼓头戴图标 -1
 
@@ -658,6 +658,7 @@ BREAK
 #IF
 #ACT
 CloseArrBuff 87
+SETICON 1 -1
 SETOFFTIMER 87
 #CALL [系统功能\军鼓BUFF.txt] @军鼓BUFF_关闭当前模块
 MOV N$军鼓有效 0
