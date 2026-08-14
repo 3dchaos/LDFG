@@ -26,7 +26,6 @@ MOV S$军鼓确认名
 MOV S$军鼓图标说明
 MOV S$军鼓触发说明
 MOV S$军鼓触发记录
-
 #IF
 #ACT
 #CALL [系统功能\军鼓流派配置.txt] @军鼓配置_读取
@@ -290,35 +289,33 @@ BREAK
 CloseArrBuff 87
 #CALL [系统功能\军鼓BUFF.txt] @军鼓BUFF_生成图标说明
 SetArrBuff 1 87 1 1681 -1 0 0 0 <$STR(S$军鼓图标说明)>
-SENDMSG 6 军鼓BUFF已经生效！
+
 SetOnTimer 87 2
 }
 
 [@军鼓BUFF_生成图标说明]
 {
-#IF
-#ACT
+
 #IF
 EQUAL <$STR(S$军鼓当前职业)> warrior
 #ACT
 MOV S$军鼓职业显示 战士
-BREAK
+
 
 #IF
 EQUAL <$STR(S$军鼓当前职业)> wizard
 #ACT
 MOV S$军鼓职业显示 法师
-BREAK
+
 
 #IF
 EQUAL <$STR(S$军鼓当前职业)> taoist
 #ACT
 MOV S$军鼓职业显示 道士
-BREAK
+
 
 #IF
 #ACT
-MOV S$军鼓职业显示 <$STR(S$军鼓当前职业)>
 MOV S$军鼓图标说明 {军鼓流派|243}\名称：<$STR(S$军鼓当前名称)>\职业：<$STR(S$军鼓职业显示)>　方向：<$STR(S$军鼓当前方向)>　品质：<$STR(N$军鼓当前品质)>\玩法：佩戴在军鼓位时持续生效。\触发：命中或受击时按当前方向结算；实际触发会在聊天框提示。
 
 #IF
@@ -574,7 +571,6 @@ BREAK
 {
 #IF
 #ACT
-SENDMSG 6 取下军鼓，BUFF失效！
 CloseArrBuff 87
 SETOFFTIMER 87
 #CALL [系统功能\军鼓BUFF.txt] @军鼓BUFF_关闭当前模块
