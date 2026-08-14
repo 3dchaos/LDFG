@@ -5,73 +5,79 @@
 #IF
 EQUAL N$军鼓品质 1
 #ACT
-MOV N$军鼓点 1
-MOV N$军鼓大点 2
-MOV N$军鼓百分 2
-MOV N$军鼓元素 1
-MOV N$军鼓血蓝 50
+MOV N$军鼓点 0
+MOV N$军鼓大点 1
+MOV N$军鼓百分 0
+MOV N$军鼓元素 0
+MOV N$军鼓血蓝 20
 MOV N$军鼓顶级加码 0
 MOV N$军鼓压制 100
+MOV N$军鼓触发几率 0
 BREAK
 
 #IF
 EQUAL N$军鼓品质 2
 #ACT
-MOV N$军鼓点 2
-MOV N$军鼓大点 3
-MOV N$军鼓百分 3
-MOV N$军鼓元素 2
-MOV N$军鼓血蓝 80
+MOV N$军鼓点 1
+MOV N$军鼓大点 1
+MOV N$军鼓百分 1
+MOV N$军鼓元素 0
+MOV N$军鼓血蓝 40
 MOV N$军鼓顶级加码 0
 MOV N$军鼓压制 100
+MOV N$军鼓触发几率 0
 BREAK
 
 #IF
 EQUAL N$军鼓品质 3
 #ACT
-MOV N$军鼓点 3
-MOV N$军鼓大点 5
-MOV N$军鼓百分 4
-MOV N$军鼓元素 3
-MOV N$军鼓血蓝 120
+MOV N$军鼓点 1
+MOV N$军鼓大点 2
+MOV N$军鼓百分 1
+MOV N$军鼓元素 1
+MOV N$军鼓血蓝 70
 MOV N$军鼓顶级加码 0
 MOV N$军鼓压制 100
+MOV N$军鼓触发几率 15
 BREAK
 
 #IF
 EQUAL N$军鼓品质 4
 #ACT
-MOV N$军鼓点 4
-MOV N$军鼓大点 7
-MOV N$军鼓百分 5
-MOV N$军鼓元素 4
-MOV N$军鼓血蓝 180
+MOV N$军鼓点 2
+MOV N$军鼓大点 3
+MOV N$军鼓百分 2
+MOV N$军鼓元素 2
+MOV N$军鼓血蓝 120
 MOV N$军鼓顶级加码 0
 MOV N$军鼓压制 100
+MOV N$军鼓触发几率 25
 BREAK
 
 #IF
 EQUAL N$军鼓品质 5
 #ACT
-MOV N$军鼓点 5
-MOV N$军鼓大点 9
-MOV N$军鼓百分 6
-MOV N$军鼓元素 5
-MOV N$军鼓血蓝 250
-MOV N$军鼓顶级加码 2
-MOV N$军鼓压制 98
+MOV N$军鼓点 3
+MOV N$军鼓大点 5
+MOV N$军鼓百分 3
+MOV N$军鼓元素 3
+MOV N$军鼓血蓝 180
+MOV N$军鼓顶级加码 1
+MOV N$军鼓压制 99
+MOV N$军鼓触发几率 35
 BREAK
 
 #IF
 EQUAL N$军鼓品质 6
 #ACT
-MOV N$军鼓点 6
-MOV N$军鼓大点 12
-MOV N$军鼓百分 8
-MOV N$军鼓元素 6
-MOV N$军鼓血蓝 350
-MOV N$军鼓顶级加码 3
-MOV N$军鼓压制 96
+MOV N$军鼓点 4
+MOV N$军鼓大点 7
+MOV N$军鼓百分 4
+MOV N$军鼓元素 4
+MOV N$军鼓血蓝 260
+MOV N$军鼓顶级加码 2
+MOV N$军鼓压制 98
+MOV N$军鼓触发几率 45
 }
 
 [@军鼓wizard_开启_电耗子]
@@ -121,36 +127,61 @@ MOV N$军鼓雷网 0
 {
 #IF
 CHECKMAGICNAME 雷电术
+RANDOMEX <$STR(N$军鼓触发几率)> 100
 #ACT
 ChangeDamageValue 1 + <$STR(N$军鼓百分)>
 MOV N$军鼓触发成功 1
-MOV S$军鼓触发说明 攻击触发：电耗子强化雷电术，雷系专精已结算。
+MOV S$军鼓触发说明 攻击触发：电耗子几率强化雷电术，雷系专精已结算。
 
 #IF
 CHECKMAGICNAME 疾光电影
+RANDOMEX <$STR(N$军鼓触发几率)> 100
 #ACT
 ChangeDamageValue 1 + <$STR(N$军鼓大点)>
 MOV N$军鼓触发成功 1
-MOV S$军鼓触发说明 攻击触发：电耗子强化疾光电影，雷线加码已结算。
+MOV S$军鼓触发说明 攻击触发：电耗子几率强化疾光电影，雷线加码已结算。
 
 #IF
-LARGE N$军鼓品质 4
-#ACT
-M.MOV S$军鼓雷痕 开启
-MOV N$军鼓触发成功 1
-MOV S$军鼓触发说明 攻击触发：电耗子给目标挂上雷痕。
-
-#IF
+CHECKMAGICNAME 雷电术
 LARGE N$军鼓品质 4
 CHECKCURRTARGETRACE = 0
+RANDOMEX <$STR(N$军鼓触发几率)> 100
 #ACT
-M.SetArrBuff 3 8 1 290 10 0 0 0 {电耗子|243}\雷痕落在了身上，下一次雷系更疼
+M.MOV S$军鼓雷痕 开启
+M.SetArrBuff 3 8 1 290 6 0 0 0 {电耗子|243}\雷痕短暂缠身，连续续上才会保持
+MOV N$军鼓触发成功 1
+MOV S$军鼓触发说明 攻击触发：电耗子短暂雷痕已挂上。
 
 #IF
+CHECKMAGICNAME 疾光电影
+LARGE N$军鼓品质 4
+CHECKCURRTARGETRACE = 0
+RANDOMEX <$STR(N$军鼓触发几率)> 100
+#ACT
+M.MOV S$军鼓雷痕 开启
+M.SetArrBuff 3 8 1 290 6 0 0 0 {电耗子|243}\雷痕短暂缠身，连续续上才会保持
+MOV N$军鼓触发成功 1
+MOV S$军鼓触发说明 攻击触发：电耗子短暂雷痕已挂上。
+
+#IF
+CHECKMAGICNAME 雷电术
 LARGE N$军鼓品质 4
 NOT CHECKCURRTARGETRACE = 0
+RANDOMEX <$STR(N$军鼓触发几率)> 100
 #ACT
 M.SETICON 0 0 290 44 -30 1 0 0 150 0
+MOV N$军鼓触发成功 1
+MOV S$军鼓触发说明 攻击触发：电耗子短暂雷痕已显形。
+
+#IF
+CHECKMAGICNAME 疾光电影
+LARGE N$军鼓品质 4
+NOT CHECKCURRTARGETRACE = 0
+RANDOMEX <$STR(N$军鼓触发几率)> 100
+#ACT
+M.SETICON 0 0 290 44 -30 1 0 0 150 0
+MOV N$军鼓触发成功 1
+MOV S$军鼓触发说明 攻击触发：电耗子短暂雷痕已显形。
 }
 
 [@军鼓wizard_开启_火葫芦]
@@ -199,43 +230,90 @@ MOV N$军鼓余烬 0
 {
 #IF
 CHECKMAGICNAME 火墙
+RANDOMEX <$STR(N$军鼓触发几率)> 100
 #ACT
 ChangeDamageValue 1 + <$STR(N$军鼓百分)>
 MOV N$军鼓触发成功 1
-MOV S$军鼓触发说明 攻击触发：火葫芦强化火墙，灼烧已结算。
+MOV S$军鼓触发说明 攻击触发：火葫芦几率强化火墙，灼烧已结算。
 
 #IF
 CHECKMAGICNAME 流星火雨
+RANDOMEX <$STR(N$军鼓触发几率)> 100
 #ACT
 ChangeDamageValue 1 + <$STR(N$军鼓大点)>
 MOV N$军鼓触发成功 1
-MOV S$军鼓触发说明 攻击触发：火葫芦强化流星火雨，火雨加码已结算。
+MOV S$军鼓触发说明 攻击触发：火葫芦几率强化流星火雨，火雨加码已结算。
 
 #IF
 CHECKMAGICNAME 灭天火
+RANDOMEX <$STR(N$军鼓触发几率)> 100
 #ACT
 ChangeDamageValue 1 + <$STR(N$军鼓元素)>
 MOV N$军鼓触发成功 1
-MOV S$军鼓触发说明 攻击触发：火葫芦强化灭天火，元素灼烧已结算。
+MOV S$军鼓触发说明 攻击触发：火葫芦几率强化灭天火，元素灼烧已结算。
 
 #IF
-LARGE N$军鼓品质 4
-#ACT
-M.MOV S$军鼓火种 开启
-MOV N$军鼓触发成功 1
-MOV S$军鼓触发说明 攻击触发：火葫芦给目标挂上火种。
-
-#IF
+CHECKMAGICNAME 火墙
 LARGE N$军鼓品质 4
 CHECKCURRTARGETRACE = 0
+RANDOMEX <$STR(N$军鼓触发几率)> 100
 #ACT
-M.SetArrBuff 3 4 1 289 5 0 0 0 {火葫芦|243}\你被火葫芦烫了一下，余火还会烧
+M.MOV S$军鼓火种 开启
+M.SetArrBuff 3 4 1 289 5 0 0 0 {火葫芦|243}\火种短暂燃着，断档就会熄灭
+MOV N$军鼓触发成功 1
+MOV S$军鼓触发说明 攻击触发：火葫芦短暂火种已挂上。
 
 #IF
+CHECKMAGICNAME 流星火雨
+LARGE N$军鼓品质 4
+CHECKCURRTARGETRACE = 0
+RANDOMEX <$STR(N$军鼓触发几率)> 100
+#ACT
+M.MOV S$军鼓火种 开启
+M.SetArrBuff 3 4 1 289 5 0 0 0 {火葫芦|243}\火种短暂燃着，断档就会熄灭
+MOV N$军鼓触发成功 1
+MOV S$军鼓触发说明 攻击触发：火葫芦短暂火种已挂上。
+
+#IF
+CHECKMAGICNAME 灭天火
+LARGE N$军鼓品质 4
+CHECKCURRTARGETRACE = 0
+RANDOMEX <$STR(N$军鼓触发几率)> 100
+#ACT
+M.MOV S$军鼓火种 开启
+M.SetArrBuff 3 4 1 289 5 0 0 0 {火葫芦|243}\火种短暂燃着，断档就会熄灭
+MOV N$军鼓触发成功 1
+MOV S$军鼓触发说明 攻击触发：火葫芦短暂火种已挂上。
+
+#IF
+CHECKMAGICNAME 火墙
 LARGE N$军鼓品质 4
 NOT CHECKCURRTARGETRACE = 0
+RANDOMEX <$STR(N$军鼓触发几率)> 100
 #ACT
 M.SETICON 0 0 289 44 -30 1 0 0 150 0
+MOV N$军鼓触发成功 1
+MOV S$军鼓触发说明 攻击触发：火葫芦短暂火种已显形。
+
+#IF
+CHECKMAGICNAME 流星火雨
+LARGE N$军鼓品质 4
+NOT CHECKCURRTARGETRACE = 0
+RANDOMEX <$STR(N$军鼓触发几率)> 100
+#ACT
+M.SETICON 0 0 289 44 -30 1 0 0 150 0
+MOV N$军鼓触发成功 1
+MOV S$军鼓触发说明 攻击触发：火葫芦短暂火种已显形。
+
+#IF
+CHECKMAGICNAME 灭天火
+LARGE N$军鼓品质 4
+NOT CHECKCURRTARGETRACE = 0
+RANDOMEX <$STR(N$军鼓触发几率)> 100
+#ACT
+M.SETICON 0 0 289 44 -30 1 0 0 150 0
+MOV N$军鼓触发成功 1
+MOV S$军鼓触发说明 攻击触发：火葫芦短暂火种已显形。
 }
 
 [@军鼓wizard_开启_小冰箱]
@@ -286,6 +364,7 @@ MOV N$军鼓冰盾 0
 {
 #IF
 LARGE N$军鼓品质 0
+RANDOMEX <$STR(N$军鼓触发几率)> 100
 #ACT
 ChangeDamageValue 1 - <$STR(N$军鼓元素)>
 MOV N$军鼓触发成功 1
@@ -293,6 +372,7 @@ MOV S$军鼓触发说明 受击触发：小冰箱冰甲减伤已结算。
 
 #IF
 LARGE N$军鼓品质 4
+RANDOMEX <$STR(N$军鼓触发几率)> 100
 #ACT
 ChangeDamageValue 1 - <$STR(N$军鼓顶级加码)>
 MOV N$军鼓触发成功 1
@@ -300,6 +380,7 @@ MOV S$军鼓触发说明 受击触发：小冰箱高阶减伤已结算。
 
 #IF
 LARGE N$军鼓品质 5
+RANDOMEX <$STR(N$军鼓触发几率)> 100
 #ACT
 ChangeState 2 3 1
 MOV N$军鼓触发成功 1

@@ -1,4 +1,16 @@
 (@@sendmsg @storage @PlayOffline @getback @buy @sell @repair @s_repair @@offlinemsg @storage @getback @getnextpage @getPreviouspage @@INPUTINTEGER @@InPutString )
+;军鼓目标短时BUFF到期清理
+[@CloseArrBuff8]
+#ACT
+MOV S$军鼓雷痕
+
+[@CloseArrBuff4]
+#ACT
+MOV S$军鼓火种
+
+[@CloseArrBuff5]
+#ACT
+MOV S$军鼓毒印
 ;军鼓位装备触发
 [@TakeOnEx]
 #IF

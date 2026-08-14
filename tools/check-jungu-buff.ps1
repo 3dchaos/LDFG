@@ -84,14 +84,15 @@ if (Test-Path -LiteralPath $scriptPath) {
             $fail += "buff script missing icon/feedback support $needle"
         }
     }
-    if ($buffText -notmatch [regex]::Escape('SetArrBuff 1 87 1 <$STR(N$军鼓BUFF图标)> -1 0 0 0 <$STR(S$军鼓图标说明)>')) {
+    if ($buffText -notmatch [regex]::Escape('SetArrBuff 1 87 0 <$STR(N$军鼓BUFF图标)> -1 0 0 0 <$STR(S$军鼓图标说明)>')) {
         $fail += 'main buff icon must use direction-specific persistent SetArrBuff button mode with detailed hover text'
     }
     foreach ($icon in 273..281) {
         if ($buffText -notmatch [regex]::Escape("MOV N`$军鼓BUFF图标 $icon")) {
             $fail += "main buff icon missing direction image $icon"
         }
-    }    foreach ($pair in @('剁馅机 282', '铁头娃 283', '拆门板 284', '小冰箱 290', '奶不死 285')) {
+    }
+    foreach ($pair in @('剁馅机 282', '铁头娃 283', '拆门板 284', '小冰箱 287', '奶不死 285')) {
         $parts = $pair -split ' '
         if ($buffText -notmatch [regex]::Escape("EQUAL <`$STR(S`$军鼓当前方向)> $($parts[0])")) {
             $fail += "main buff head icon missing direction $($parts[0])"
@@ -100,13 +101,13 @@ if (Test-Path -LiteralPath $scriptPath) {
             $fail += "main buff head icon missing image $($parts[1])"
         }
     }
-    if ($buffText -notmatch [regex]::Escape('SETICON 1 1 <$STR(N$军鼓头戴图标)> 44 -30 1 0 0 150 0')) {
+    if ($buffText -notmatch [regex]::Escape('SETICON 1 0 <$STR(N$军鼓头戴图标)> 44 -30 1 0 0 150 0')) {
         $fail += 'main buff missing self head icon SETICON on position 1'
     }
     if ($buffText -notmatch [regex]::Escape('SETICON 1 -1')) {
         $fail += 'main buff missing self head icon cleanup'
     }
-    if ($buffText -match 'SetArrBuff\s+1\s+87\s+1\s+<\$STR\(N\$军鼓BUFF图标\)>\s+(?!-1\b)') {
+    if ($buffText -match 'SetArrBuff\s+1\s+87\s+0\s+<\$STR\(N\$军鼓BUFF图标\)>\s+(?!-1\b)') {
         $fail += 'main buff icon must not use countdown mode'
     }
     if ($buffText -match '`n|`r') {
@@ -251,6 +252,41 @@ foreach ($module in @(
                 $fail += "$($module.Name) module should not use high-frequency $forbidden"
             }
         }
+        $qualityExpectations = @(
+            @{ Quality = 1; Point = 0; Big = 1; Percent = 0; Element = 0; HpMp = 20; Extra = 0; Proc = 0 },
+            @{ Quality = 2; Point = 1; Big = 1; Percent = 1; Element = 0; HpMp = 40; Extra = 0; Proc = 0 },
+            @{ Quality = 3; Point = 1; Big = 2; Percent = 1; Element = 1; HpMp = 70; Extra = 0; Proc = 15 },
+            @{ Quality = 4; Point = 2; Big = 3; Percent = 2; Element = 2; HpMp = 120; Extra = 0; Proc = 25 },
+            @{ Quality = 5; Point = 3; Big = 5; Percent = 3; Element = 3; HpMp = 180; Extra = 1; Proc = 35 },
+            @{ Quality = 6; Point = 4; Big = 7; Percent = 4; Element = 4; HpMp = 260; Extra = 2; Proc = 45 }
+        )
+        foreach ($expect in $qualityExpectations) {
+            $patternParts = @(
+                "EQUAL N`$军鼓品质 $($expect.Quality)",
+                "MOV N`$军鼓点 $($expect.Point)",
+                "MOV N`$军鼓大点 $($expect.Big)",
+                "MOV N`$军鼓百分 $($expect.Percent)",
+                "MOV N`$军鼓元素 $($expect.Element)",
+                "MOV N`$军鼓血蓝 $($expect.HpMp)",
+                "MOV N`$军鼓顶级加码 $($expect.Extra)",
+                "MOV N`$军鼓触发几率 $($expect.Proc)"
+            ) | ForEach-Object { [regex]::Escape($_) }
+            $pattern = $patternParts -join '[\s\S]*?'
+            if ($moduleText -notmatch $pattern) {
+                $fail += "$($module.Name) quality $($expect.Quality) does not match nerfed jungu curve"
+            }
+        }
+        foreach ($needle in @(
+                'RANDOMEX <$STR(N$军鼓触发几率)> 100',
+                'N$军鼓触发几率'
+            )) {
+            if ($moduleText -notmatch [regex]::Escape($needle)) {
+                $fail += "$($module.Name) module missing proc gate $needle"
+            }
+        }
+        if ($moduleText -match [regex]::Escape('RANDOM <$STR(N$军鼓触发几率)>')) {
+            $fail += "$($module.Name) module must not use inverse RANDOM with percent-style proc variable"
+        }
         foreach ($direction in $module.Directions) {
             foreach ($action in @('开启', '刷新', '关闭')) {
                 $label = "[@军鼓$($module.Name)_$($action)_$direction]"
@@ -284,6 +320,11 @@ if (Test-Path -LiteralPath $descPath) {
                 $fail += "ItemDescList contains developer detail $forbiddenDetail for $($row.Name)"
             }
         }
+        foreach ($oldWording in @('命中时结算', '实际受击时结算', '都会按流派结算', '成名以上会给目标挂雷痕', '成名以上会给目标挂火种')) {
+            if ($line -match [regex]::Escape($oldWording)) {
+                $fail += "ItemDescList still implies guaranteed old proc wording $oldWording for $($row.Name)"
+            }
+        }
     }
 } else {
     $fail += "missing ItemDescList: $descPath"
@@ -306,6 +347,18 @@ if (Test-Path -LiteralPath $qFunction) {
         )) {
         if ($qf -notmatch [regex]::Escape($needle)) {
             $fail += "QFunction-0 missing callback $needle"
+        }
+    }
+    foreach ($needle in @(
+            '[@CloseArrBuff8]',
+            'MOV S$军鼓雷痕',
+            '[@CloseArrBuff4]',
+            'MOV S$军鼓火种',
+            '[@CloseArrBuff5]',
+            'MOV S$军鼓毒印'
+        )) {
+        if ($qf -notmatch [regex]::Escape($needle)) {
+            $fail += "QFunction-0 missing target buff cleanup $needle"
         }
     }
 } else {
@@ -390,5 +443,3 @@ if ($fail.Count -gt 0) {
 }
 
 Write-Host 'jungu buff static check ok'
-
-

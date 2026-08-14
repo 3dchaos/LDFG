@@ -5,73 +5,79 @@
 #IF
 EQUAL N$军鼓品质 1
 #ACT
-MOV N$军鼓点 1
-MOV N$军鼓大点 2
-MOV N$军鼓百分 2
-MOV N$军鼓元素 1
-MOV N$军鼓血蓝 50
+MOV N$军鼓点 0
+MOV N$军鼓大点 1
+MOV N$军鼓百分 0
+MOV N$军鼓元素 0
+MOV N$军鼓血蓝 20
 MOV N$军鼓顶级加码 0
 MOV N$军鼓压制 100
+MOV N$军鼓触发几率 0
 BREAK
 
 #IF
 EQUAL N$军鼓品质 2
 #ACT
-MOV N$军鼓点 2
-MOV N$军鼓大点 3
-MOV N$军鼓百分 3
-MOV N$军鼓元素 2
-MOV N$军鼓血蓝 80
+MOV N$军鼓点 1
+MOV N$军鼓大点 1
+MOV N$军鼓百分 1
+MOV N$军鼓元素 0
+MOV N$军鼓血蓝 40
 MOV N$军鼓顶级加码 0
 MOV N$军鼓压制 100
+MOV N$军鼓触发几率 0
 BREAK
 
 #IF
 EQUAL N$军鼓品质 3
 #ACT
-MOV N$军鼓点 3
-MOV N$军鼓大点 5
-MOV N$军鼓百分 4
-MOV N$军鼓元素 3
-MOV N$军鼓血蓝 120
+MOV N$军鼓点 1
+MOV N$军鼓大点 2
+MOV N$军鼓百分 1
+MOV N$军鼓元素 1
+MOV N$军鼓血蓝 70
 MOV N$军鼓顶级加码 0
 MOV N$军鼓压制 100
+MOV N$军鼓触发几率 15
 BREAK
 
 #IF
 EQUAL N$军鼓品质 4
 #ACT
-MOV N$军鼓点 4
-MOV N$军鼓大点 7
-MOV N$军鼓百分 5
-MOV N$军鼓元素 4
-MOV N$军鼓血蓝 180
+MOV N$军鼓点 2
+MOV N$军鼓大点 3
+MOV N$军鼓百分 2
+MOV N$军鼓元素 2
+MOV N$军鼓血蓝 120
 MOV N$军鼓顶级加码 0
 MOV N$军鼓压制 100
+MOV N$军鼓触发几率 25
 BREAK
 
 #IF
 EQUAL N$军鼓品质 5
 #ACT
-MOV N$军鼓点 5
-MOV N$军鼓大点 9
-MOV N$军鼓百分 6
-MOV N$军鼓元素 5
-MOV N$军鼓血蓝 250
-MOV N$军鼓顶级加码 2
-MOV N$军鼓压制 98
+MOV N$军鼓点 3
+MOV N$军鼓大点 5
+MOV N$军鼓百分 3
+MOV N$军鼓元素 3
+MOV N$军鼓血蓝 180
+MOV N$军鼓顶级加码 1
+MOV N$军鼓压制 99
+MOV N$军鼓触发几率 35
 BREAK
 
 #IF
 EQUAL N$军鼓品质 6
 #ACT
-MOV N$军鼓点 6
-MOV N$军鼓大点 12
-MOV N$军鼓百分 8
-MOV N$军鼓元素 6
-MOV N$军鼓血蓝 350
-MOV N$军鼓顶级加码 3
-MOV N$军鼓压制 96
+MOV N$军鼓点 4
+MOV N$军鼓大点 7
+MOV N$军鼓百分 4
+MOV N$军鼓元素 4
+MOV N$军鼓血蓝 260
+MOV N$军鼓顶级加码 2
+MOV N$军鼓压制 98
+MOV N$军鼓触发几率 45
 }
 
 [@军鼓taoist_开启_养娃人]
@@ -119,6 +125,7 @@ MOV N$军鼓宝宝联动 0
 {
 #IF
 CHECKSLAVECOUNT > 0
+RANDOMEX <$STR(N$军鼓触发几率)> 100
 #ACT
 ChangeDamageValue 1 + <$STR(N$军鼓百分)>
 MOV N$军鼓触发成功 1
@@ -127,6 +134,7 @@ MOV S$军鼓触发说明 攻击触发：养娃人人宠联动伤害已结算。
 #IF
 CHECKSLAVECOUNT > 0
 LARGE N$军鼓品质 4
+RANDOMEX <$STR(N$军鼓触发几率)> 100
 #ACT
 ChangeDamageValue 1 + <$STR(N$军鼓顶级加码)>
 MOV N$军鼓触发成功 1
@@ -137,6 +145,7 @@ MOV S$军鼓触发说明 攻击触发：养娃人高阶护主加码已结算。
 {
 #IF
 CHECKSLAVECOUNT > 0
+RANDOMEX <$STR(N$军鼓触发几率)> 100
 #ACT
 ChangeDamageValue 1 + <$STR(N$军鼓大点)>
 MOV N$军鼓触发成功 1
@@ -145,6 +154,7 @@ MOV S$军鼓触发说明 宝宝触发：养娃人宝宝成长加码已结算。
 #IF
 CHECKSLAVECOUNT > 0
 LARGE N$军鼓品质 4
+RANDOMEX <$STR(N$军鼓触发几率)> 100
 #ACT
 ChangeDamageValue 1 + <$STR(N$军鼓顶级加码)>
 MOV N$军鼓触发成功 1
@@ -202,6 +212,7 @@ MOV N$军鼓救急 0
 {
 #IF
 LARGE N$军鼓品质 0
+RANDOMEX <$STR(N$军鼓触发几率)> 100
 #ACT
 ChangeDamageValue 1 - <$STR(N$军鼓元素)>
 MOV N$军鼓触发成功 1
@@ -209,6 +220,7 @@ MOV S$军鼓触发说明 受击触发：奶不死护主减伤已结算。
 
 #IF
 LARGE N$军鼓品质 4
+RANDOMEX <$STR(N$军鼓触发几率)> 100
 #ACT
 ChangeDamageValue 1 - <$STR(N$军鼓顶级加码)>
 MOV N$军鼓触发成功 1
@@ -216,6 +228,7 @@ MOV S$军鼓触发说明 受击触发：奶不死高阶减伤已结算。
 
 #IF
 LARGE N$军鼓品质 5
+RANDOMEX <$STR(N$军鼓触发几率)> 100
 #ACT
 HumanHP + 5 100
 MOV N$军鼓触发成功 1
@@ -270,65 +283,66 @@ MOV N$军鼓毒爆 0
 {
 #IF
 CHECKMAGICNAME 施毒术
+CHECKCURRTARGETRACE = 0
+RANDOMEX <$STR(N$军鼓触发几率)> 100
 #ACT
 M.MOV S$军鼓毒印 开启
+M.SetArrBuff 3 5 1 288 8 0 0 0 {毒嘴子|243}\毒印短暂压身，续不上就会散
 MOV N$军鼓触发成功 1
-MOV S$军鼓触发说明 攻击触发：毒嘴子施毒术给目标挂毒印。
-
-#IF
-CHECKMAGICNAME 施毒术
-CHECKCURRTARGETRACE = 0
-#ACT
-M.SetArrBuff 3 5 1 288 10 0 0 0 {毒嘴子|243}\你被毒嘴子盯上了，毒意开始往外冒
+MOV S$军鼓触发说明 攻击触发：毒嘴子施毒术短暂毒印已挂上。
 
 #IF
 CHECKMAGICNAME 施毒术
 NOT CHECKCURRTARGETRACE = 0
+RANDOMEX <$STR(N$军鼓触发几率)> 100
 #ACT
 M.SETICON 0 0 288 44 -30 1 0 0 150 0
-
-#IF
-CHECKMAGICNAME 灵魂火符
-#ACT
-M.MOV S$军鼓毒印 开启
 MOV N$军鼓触发成功 1
-MOV S$军鼓触发说明 攻击触发：毒嘴子灵魂火符给目标挂毒印。
+MOV S$军鼓触发说明 攻击触发：毒嘴子施毒术短暂毒印已显形。
 
 #IF
 CHECKMAGICNAME 灵魂火符
 CHECKCURRTARGETRACE = 0
+RANDOMEX <$STR(N$军鼓触发几率)> 100
 #ACT
-M.SetArrBuff 3 5 1 288 10 0 0 0 {毒嘴子|243}\火符带着毒嘴子，下一次更疼
+M.MOV S$军鼓毒印 开启
+M.SetArrBuff 3 5 1 288 8 0 0 0 {毒嘴子|243}\毒印短暂压身，续不上就会散
+MOV N$军鼓触发成功 1
+MOV S$军鼓触发说明 攻击触发：毒嘴子灵魂火符短暂毒印已挂上。
 
 #IF
 CHECKMAGICNAME 灵魂火符
 NOT CHECKCURRTARGETRACE = 0
+RANDOMEX <$STR(N$军鼓触发几率)> 100
 #ACT
 M.SETICON 0 0 288 44 -30 1 0 0 150 0
-
-#IF
-CHECKMAGICNAME 诅咒术
-#ACT
-M.MOV S$军鼓毒印 开启
 MOV N$军鼓触发成功 1
-MOV S$军鼓触发说明 攻击触发：毒嘴子诅咒术给目标挂毒印。
+MOV S$军鼓触发说明 攻击触发：毒嘴子灵魂火符短暂毒印已显形。
 
 #IF
 CHECKMAGICNAME 诅咒术
 CHECKCURRTARGETRACE = 0
+RANDOMEX <$STR(N$军鼓触发几率)> 100
 #ACT
-M.SetArrBuff 3 5 1 288 10 0 0 0 {毒嘴子|243}\诅咒里混着毒嘴子，压一层是一层
+M.MOV S$军鼓毒印 开启
+M.SetArrBuff 3 5 1 288 8 0 0 0 {毒嘴子|243}\毒印短暂压身，续不上就会散
+MOV N$军鼓触发成功 1
+MOV S$军鼓触发说明 攻击触发：毒嘴子诅咒术短暂毒印已挂上。
 
 #IF
 CHECKMAGICNAME 诅咒术
 NOT CHECKCURRTARGETRACE = 0
+RANDOMEX <$STR(N$军鼓触发几率)> 100
 #ACT
 M.SETICON 0 0 288 44 -30 1 0 0 150 0
+MOV N$军鼓触发成功 1
+MOV S$军鼓触发说明 攻击触发：毒嘴子诅咒术短暂毒印已显形。
 
 #IF
 LARGE N$军鼓品质 4
+RANDOMEX <$STR(N$军鼓触发几率)> 100
 #ACT
 ChangeDamageValue 1 + <$STR(N$军鼓顶级加码)>
 MOV N$军鼓触发成功 1
-MOV S$军鼓触发说明 攻击触发：毒嘴子高阶毒爆加码已结算。
+MOV S$军鼓触发说明 攻击触发：毒嘴子高阶毒爆几率加码已结算。
 }
