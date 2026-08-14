@@ -26,6 +26,7 @@ MOV S$军鼓确认名
 MOV S$军鼓图标说明
 MOV S$军鼓触发说明
 MOV S$军鼓触发记录
+
 #IF
 #ACT
 #CALL [系统功能\军鼓流派配置.txt] @军鼓配置_读取
@@ -281,41 +282,128 @@ BREAK
 NOT EQUAL N$军鼓有效 1
 #ACT
 CloseArrBuff 87
+SETICON 1 -1
 SETOFFTIMER 87
 BREAK
 
 #IF
 #ACT
 CloseArrBuff 87
-#CALL [系统功能\军鼓BUFF.txt] @军鼓BUFF_生成图标说明
-SetArrBuff 1 87 1 1681 -1 0 0 0 <$STR(S$军鼓图标说明)>
+SETICON 1 -1
+MOV N$军鼓BUFF图标 275
+MOV N$军鼓头戴图标 -1
 
+#IF
+EQUAL <$STR(S$军鼓当前方向)> 铁头娃
+#ACT
+MOV N$军鼓BUFF图标 273
+
+#IF
+EQUAL <$STR(S$军鼓当前方向)> 剁馅机
+#ACT
+MOV N$军鼓BUFF图标 274
+
+#IF
+EQUAL <$STR(S$军鼓当前方向)> 拆门板
+#ACT
+MOV N$军鼓BUFF图标 275
+
+#IF
+EQUAL <$STR(S$军鼓当前方向)> 电耗子
+#ACT
+MOV N$军鼓BUFF图标 276
+
+#IF
+EQUAL <$STR(S$军鼓当前方向)> 火葫芦
+#ACT
+MOV N$军鼓BUFF图标 277
+
+#IF
+EQUAL <$STR(S$军鼓当前方向)> 小冰箱
+#ACT
+MOV N$军鼓BUFF图标 278
+
+#IF
+EQUAL <$STR(S$军鼓当前方向)> 养娃人
+#ACT
+MOV N$军鼓BUFF图标 279
+
+#IF
+EQUAL <$STR(S$军鼓当前方向)> 奶不死
+#ACT
+MOV N$军鼓BUFF图标 280
+
+#IF
+EQUAL <$STR(S$军鼓当前方向)> 毒嘴子
+#ACT
+MOV N$军鼓BUFF图标 281
+
+#IF
+EQUAL <$STR(S$军鼓当前方向)> 剁馅机
+#ACT
+MOV N$军鼓头戴图标 282
+
+#IF
+EQUAL <$STR(S$军鼓当前方向)> 铁头娃
+#ACT
+MOV N$军鼓头戴图标 283
+
+#IF
+EQUAL <$STR(S$军鼓当前方向)> 拆门板
+#ACT
+MOV N$军鼓头戴图标 284
+
+#IF
+EQUAL <$STR(S$军鼓当前方向)> 小冰箱
+#ACT
+MOV N$军鼓头戴图标 290
+
+#IF
+EQUAL <$STR(S$军鼓当前方向)> 奶不死
+#ACT
+MOV N$军鼓头戴图标 285
+
+#IF
+#ACT
+#CALL [系统功能\军鼓BUFF.txt] @军鼓BUFF_生成图标说明
+SetArrBuff 1 87 1 <$STR(N$军鼓BUFF图标)> -1 0 0 0 <$STR(S$军鼓图标说明)>
+
+#IF
+LARGE N$军鼓头戴图标 0
+#ACT
+SETICON 1 1 <$STR(N$军鼓头戴图标)> 44 -30 1 0 0 150 0
+
+#IF
+#ACT
+SENDMSG 6 军鼓BUFF已经生效！
 SetOnTimer 87 2
 }
 
 [@军鼓BUFF_生成图标说明]
 {
-
+#IF
+#ACT
 #IF
 EQUAL <$STR(S$军鼓当前职业)> warrior
 #ACT
 MOV S$军鼓职业显示 战士
-
+BREAK
 
 #IF
 EQUAL <$STR(S$军鼓当前职业)> wizard
 #ACT
 MOV S$军鼓职业显示 法师
-
+BREAK
 
 #IF
 EQUAL <$STR(S$军鼓当前职业)> taoist
 #ACT
 MOV S$军鼓职业显示 道士
-
+BREAK
 
 #IF
 #ACT
+MOV S$军鼓职业显示 <$STR(S$军鼓当前职业)>
 MOV S$军鼓图标说明 {军鼓流派|243}\名称：<$STR(S$军鼓当前名称)>\职业：<$STR(S$军鼓职业显示)>　方向：<$STR(S$军鼓当前方向)>　品质：<$STR(N$军鼓当前品质)>\玩法：佩戴在军鼓位时持续生效。\触发：命中或受击时按当前方向结算；实际触发会在聊天框提示。
 
 #IF
@@ -563,6 +651,7 @@ MOV N$军鼓触发成功 0
 MOV N$军鼓战斗确认 0
 MOV N$军鼓触发成功 0
 CloseArrBuff 87
+SETICON 1 -1
 SetOnTimer 87 2
 BREAK
 }
@@ -571,6 +660,7 @@ BREAK
 {
 #IF
 #ACT
+SENDMSG 6 取下军鼓，BUFF失效！
 CloseArrBuff 87
 SETOFFTIMER 87
 #CALL [系统功能\军鼓BUFF.txt] @军鼓BUFF_关闭当前模块
@@ -580,6 +670,8 @@ MOV N$军鼓阶段 0
 MOV N$军鼓当前品质 0
 MOV N$军鼓战斗确认 0
 MOV N$军鼓触发成功 0
+MOV N$军鼓BUFF图标 0
+MOV N$军鼓头戴图标 0
 MOV N$军鼓配置行 0
 MOV S$军鼓确认名
 MOV S$军鼓图标说明

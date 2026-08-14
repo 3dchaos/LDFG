@@ -59,7 +59,7 @@ if (Test-Path -LiteralPath $scriptPath) {
             '#CALL [系统功能\军鼓流派配置.txt] @军鼓配置_读取',
             'SetOnTimer 87 2',
             'SETOFFTIMER 87',
-            'CloseArrBuff 1 87'
+            'CloseArrBuff 87'
         )) {
         if ($buffText -notmatch [regex]::Escape($needle)) {
             $fail += "buff script missing $needle"
@@ -84,10 +84,29 @@ if (Test-Path -LiteralPath $scriptPath) {
             $fail += "buff script missing icon/feedback support $needle"
         }
     }
-    if ($buffText -notmatch [regex]::Escape('SetArrBuff 1 87 1 1681 -1 0 0 0 <$STR(S$军鼓图标说明)>')) {
-        $fail += 'main buff icon must be persistent SetArrBuff button mode with detailed hover text'
+    if ($buffText -notmatch [regex]::Escape('SetArrBuff 1 87 1 <$STR(N$军鼓BUFF图标)> -1 0 0 0 <$STR(S$军鼓图标说明)>')) {
+        $fail += 'main buff icon must use direction-specific persistent SetArrBuff button mode with detailed hover text'
     }
-    if ($buffText -match 'SetArrBuff\s+1\s+87\s+1\s+1681\s+(?!-1\b)') {
+    foreach ($icon in 273..281) {
+        if ($buffText -notmatch [regex]::Escape("MOV N`$军鼓BUFF图标 $icon")) {
+            $fail += "main buff icon missing direction image $icon"
+        }
+    }    foreach ($pair in @('剁馅机 282', '铁头娃 283', '拆门板 284', '小冰箱 290', '奶不死 285')) {
+        $parts = $pair -split ' '
+        if ($buffText -notmatch [regex]::Escape("EQUAL <`$STR(S`$军鼓当前方向)> $($parts[0])")) {
+            $fail += "main buff head icon missing direction $($parts[0])"
+        }
+        if ($buffText -notmatch [regex]::Escape("MOV N`$军鼓头戴图标 $($parts[1])")) {
+            $fail += "main buff head icon missing image $($parts[1])"
+        }
+    }
+    if ($buffText -notmatch [regex]::Escape('SETICON 1 1 <$STR(N$军鼓头戴图标)> 44 -30 1 0 0 150 0')) {
+        $fail += 'main buff missing self head icon SETICON on position 1'
+    }
+    if ($buffText -notmatch [regex]::Escape('SETICON 1 -1')) {
+        $fail += 'main buff missing self head icon cleanup'
+    }
+    if ($buffText -match 'SetArrBuff\s+1\s+87\s+1\s+<\$STR\(N\$军鼓BUFF图标\)>\s+(?!-1\b)') {
         $fail += 'main buff icon must not use countdown mode'
     }
     if ($buffText -match '`n|`r') {
@@ -371,3 +390,5 @@ if ($fail.Count -gt 0) {
 }
 
 Write-Host 'jungu buff static check ok'
+
+

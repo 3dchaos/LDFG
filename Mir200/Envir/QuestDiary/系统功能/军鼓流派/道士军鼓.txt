@@ -279,13 +279,13 @@ MOV S$军鼓触发说明 攻击触发：毒嘴子施毒术给目标挂毒印。
 CHECKMAGICNAME 施毒术
 CHECKCURRTARGETRACE = 0
 #ACT
-M.SetArrBuff 3 5 20 308 10 0 0 0 {毒嘴子|243}\你被毒嘴子盯上了，毒意开始往外冒
+M.SetArrBuff 3 5 1 288 10 0 0 0 {毒嘴子|243}\你被毒嘴子盯上了，毒意开始往外冒
 
 #IF
 CHECKMAGICNAME 施毒术
 NOT CHECKCURRTARGETRACE = 0
 #ACT
-M.SETICON 0 0 200 44 -30 10 0 0 150 0
+M.SETICON 0 1 288 44 -30 1 0 0 150 0
 
 #IF
 CHECKMAGICNAME 灵魂火符
@@ -298,13 +298,13 @@ MOV S$军鼓触发说明 攻击触发：毒嘴子灵魂火符给目标挂毒印。
 CHECKMAGICNAME 灵魂火符
 CHECKCURRTARGETRACE = 0
 #ACT
-M.SetArrBuff 3 5 20 308 10 0 0 0 {毒嘴子|243}\火符带着毒嘴子，下一次更疼
+M.SetArrBuff 3 5 1 288 10 0 0 0 {毒嘴子|243}\火符带着毒嘴子，下一次更疼
 
 #IF
 CHECKMAGICNAME 灵魂火符
 NOT CHECKCURRTARGETRACE = 0
 #ACT
-M.SETICON 0 0 200 44 -30 10 0 0 150 0
+M.SETICON 0 1 288 44 -30 1 0 0 150 0
 
 #IF
 CHECKMAGICNAME 诅咒术
@@ -317,13 +317,13 @@ MOV S$军鼓触发说明 攻击触发：毒嘴子诅咒术给目标挂毒印。
 CHECKMAGICNAME 诅咒术
 CHECKCURRTARGETRACE = 0
 #ACT
-M.SetArrBuff 3 5 20 308 10 0 0 0 {毒嘴子|243}\诅咒里混着毒嘴子，压一层是一层
+M.SetArrBuff 3 5 1 288 10 0 0 0 {毒嘴子|243}\诅咒里混着毒嘴子，压一层是一层
 
 #IF
 CHECKMAGICNAME 诅咒术
 NOT CHECKCURRTARGETRACE = 0
 #ACT
-M.SETICON 0 0 200 44 -30 10 0 0 150 0
+M.SETICON 0 1 288 44 -30 1 0 0 150 0
 
 #IF
 LARGE N$军鼓品质 4
