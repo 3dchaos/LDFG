@@ -15,15 +15,11 @@ CHECKCURRTARGETRACE = 0
 BREAK
 
 #IF
-EQUAL G2 0
-#ACT
-BREAK
-
-#IF
 CHECKTEXTLIST ..\QuestDiary\数据文件\挂机名单.txt <$CURRRTARGETNAME>
+EQUAL <$C.STR(U10)> 1
 #ACT
 HumanHP - 333 0 1 0 1810 2
-MESSAGEBOX 不要攻击挂机玩家，请改为和平模式，攻击一次扣除1/3血量。
+MESSAGEBOX 不要攻击开启挂机保护的玩家，请改为和平模式，攻击一次扣除1/3血量。
 
 }
 

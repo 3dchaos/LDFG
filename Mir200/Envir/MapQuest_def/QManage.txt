@@ -122,6 +122,7 @@ SETOFFTIMER 4
 [@OnTimerEx7]
 #ACT
 #CALL [系统功能\老登辅助\挂机随机.txt] @挂机随机
+#CALL [系统功能\老登辅助\挂机.txt] @挂机保护扣费
 
 
 [@OnTimer8]

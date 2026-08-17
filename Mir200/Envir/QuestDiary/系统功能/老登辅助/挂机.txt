@@ -45,6 +45,7 @@ SENDMSG 6 已启动挂机跟随功能，<$STR(T5)>在附近时可以自动跟随，开启跟随将无法攻击
 SET [116] 1
 AddTextList ..\QuestDiary\数据文件\挂机名单.txt <$USERNAME>
 AddTextList ..\QuestDiary\数据文件\挂机名单.txt <$HERONAME>
+
 SETICON 0 0 200 44 -30 10 0 0 150 0
 H.SETICON 0 0 200 44 -30 10 0 0 150 0
 SETONTIMER 8 2
@@ -68,13 +69,31 @@ CHECK [62] 1
 SENDMSG 6 已启动挂机危险随机功能，无需随机道具即可随机
 
 #IF
-EQUAL G2 0
+EQUAL U10 0
 #ACT
 SENDMSG 6 开始挂机，使用点击【辅助】停止挂机，挂机过程小心被人杀了！
 SENDMSG 6 当前挂机记录地图：<$STR(T17)>
-#ELSEACT
-SENDMSG 6 开始挂机，使用点击【辅助】停止挂机，挂机过程被人物攻击将反击敌人1/3生命值
+GOTO @挂机启动执行
+BREAK
+
+#IF
+EQUAL U10 1
+CHECKGOLD 100
+#ACT
+SENDMSG 6 开始挂机，使用点击【辅助】停止挂机，挂机保护已开启。
 SENDMSG 6 当前挂机记录地图：<$STR(T17)>
+GOTO @挂机启动执行
+BREAK
+#ELSEACT
+MOV U10 0
+MOV N$挂机保护扣费次数 0
+SENDMSG 6 金币不足100，挂机保护已自动关闭。
+SENDMSG 6 开始挂机，使用点击【辅助】停止挂机，挂机过程小心被人杀了！
+SENDMSG 6 当前挂机记录地图：<$STR(T17)>
+GOTO @挂机启动执行
+BREAK
+
+[@挂机启动执行]
 #IF
 #ACT
 StartAutoPlayGame
@@ -82,9 +101,46 @@ AddTextList ..\QuestDiary\数据文件\挂机名单.txt <$USERNAME>
 AddTextList ..\QuestDiary\数据文件\挂机名单.txt <$HERONAME>
 SETICON 0 0 200 44 -30 10 0 0 150 0
 H.SETICON 0 0 200 44 -30 10 0 0 150 0
+MOV N$挂机保护扣费次数 0
 SETONTIMEREX 7 300
 ;SETONTIMER 7 2
 
+
+[@挂机保护扣费]
+#IF
+EQUAL U10 1
+#ELSEACT
+BREAK
+
+#IF
+CHECKTEXTLIST ..\QuestDiary\数据文件\挂机名单.txt <$USERNAME>
+#ELSEACT
+BREAK
+
+#IF
+CHECKGOLD 100
+#ELSEACT
+MOV U10 0
+MOV N$挂机保护扣费次数 0
+SENDMSG 6 金币不足100，挂机保护已自动关闭。
+BREAK
+
+#IF
+SMALL N$挂机保护扣费次数 2
+#ACT
+INC N$挂机保护扣费次数 1
+BREAK
+
+#IF
+CHECKGOLD 100
+#ACT
+MOV N$挂机保护扣费次数 0
+GOLDCOUNT - 1
+#ELSEACT
+MOV U10 0
+MOV N$挂机保护扣费次数 0
+SENDMSG 6 金币不足100，挂机保护已自动关闭。
+BREAK
 }
 
 
