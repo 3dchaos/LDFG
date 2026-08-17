@@ -26,6 +26,8 @@ MOV S$军鼓确认名
 MOV S$军鼓图标说明
 MOV S$军鼓触发说明
 MOV S$军鼓触发记录
+MOV N$军鼓职业确认 0
+MOV S$军鼓校验职业
 
 #IF
 #ACT
@@ -33,6 +35,17 @@ MOV S$军鼓触发记录
 
 #IF
 EQUAL N$军鼓有效 0
+#ACT
+#CALL [系统功能\军鼓BUFF.txt] @军鼓BUFF_清理
+BREAK
+
+#IF
+#ACT
+MOV S$军鼓校验职业 <$STR(S$军鼓职业)>
+#CALL [系统功能\军鼓BUFF.txt] @军鼓BUFF_职业确认
+
+#IF
+EQUAL N$军鼓职业确认 0
 #ACT
 #CALL [系统功能\军鼓BUFF.txt] @军鼓BUFF_清理
 BREAK
@@ -412,7 +425,7 @@ BREAK
 #IF
 EQUAL <$STR(S$军鼓当前方向)> 铁头娃
 #ACT
-INC S$军鼓图标说明 \触发：人物被打掉血前结算；常规减伤，高阶继续降伤，封顶触发短暂保护状态。
+INC S$军鼓图标说明 \触发：人物被打掉血前结算；常规减伤，高阶继续降伤，封顶触发额外减伤。
 BREAK
 
 #IF
@@ -436,7 +449,7 @@ BREAK
 #IF
 EQUAL <$STR(S$军鼓当前方向)> 小冰箱
 #ACT
-INC S$军鼓图标说明 \触发：人物被打掉血前结算；冰甲减伤，高阶继续降伤，封顶触发短暂冰盾状态。
+INC S$军鼓图标说明 \触发：人物被打掉血前结算；冰甲减伤，高阶继续降伤，封顶触发额外冰甲减伤。
 BREAK
 
 #IF
@@ -617,6 +630,34 @@ EQUAL N$军鼓触发成功 1
 #ACT
 #CALL [系统功能\军鼓BUFF.txt] @军鼓BUFF_触发反馈
 }
+[@军鼓BUFF_职业确认]
+{
+#IF
+EQUAL <$STR(S$军鼓校验职业)> warrior
+CHECKJOB warrior
+#ACT
+MOV N$军鼓职业确认 1
+BREAK
+
+#IF
+EQUAL <$STR(S$军鼓校验职业)> wizard
+CHECKJOB wizard
+#ACT
+MOV N$军鼓职业确认 1
+BREAK
+
+#IF
+EQUAL <$STR(S$军鼓校验职业)> taoist
+CHECKJOB taoist
+#ACT
+MOV N$军鼓职业确认 1
+BREAK
+
+#IF
+#ACT
+MOV N$军鼓职业确认 0
+}
+
 [@军鼓BUFF_战斗确认]
 {
 #IF
@@ -630,15 +671,30 @@ BREAK
 #IF
 #ACT
 GetItemFieldValue 14 name S$军鼓确认名
+MOV N$军鼓职业确认 0
+MOV S$军鼓校验职业 <$STR(S$军鼓当前职业)>
 
 #IF
 EQUAL <$STR(S$军鼓确认名)> <$STR(S$军鼓当前名称)>
 #ACT
-MOV N$军鼓战斗确认 1
+#CALL [系统功能\军鼓BUFF.txt] @军鼓BUFF_职业确认
 #ELSEACT
 MOV N$军鼓战斗确认 0
 MOV N$军鼓触发成功 0
 #CALL [系统功能\军鼓BUFF.txt] @军鼓BUFF_刷新
+BREAK
+
+#IF
+EQUAL N$军鼓职业确认 1
+#ACT
+MOV N$军鼓战斗确认 1
+BREAK
+
+#IF
+#ACT
+MOV N$军鼓战斗确认 0
+MOV N$军鼓触发成功 0
+#CALL [系统功能\军鼓BUFF.txt] @军鼓BUFF_清理
 }
 
 [@军鼓BUFF_死亡检查]
@@ -667,6 +723,7 @@ MOV N$军鼓阶段 0
 MOV N$军鼓当前品质 0
 MOV N$军鼓战斗确认 0
 MOV N$军鼓触发成功 0
+MOV N$军鼓职业确认 0
 MOV N$军鼓BUFF图标 0
 MOV N$军鼓头戴图标 0
 MOV N$军鼓配置行 0
@@ -679,6 +736,7 @@ MOV S$军鼓方向
 MOV S$军鼓职业
 MOV S$军鼓互斥组
 MOV S$军鼓模块
+MOV S$军鼓校验职业
 MOV S$军鼓当前名称
 MOV S$军鼓当前方向
 MOV S$军鼓当前职业

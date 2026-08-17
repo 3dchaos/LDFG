@@ -382,7 +382,7 @@ MOV S$军鼓触发说明 受击触发：小冰箱高阶减伤已结算。
 LARGE N$军鼓品质 5
 RANDOMEX <$STR(N$军鼓触发几率)> 100
 #ACT
-ChangeState 2 3 1
+ChangeDamageValue 1 - <$STR(N$军鼓大点)>
 MOV N$军鼓触发成功 1
-MOV S$军鼓触发说明 受击触发：小冰箱封顶冰盾已触发。
+MOV S$军鼓触发说明 受击触发：小冰箱封顶冰甲额外减伤已结算。
 }
