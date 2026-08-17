@@ -1,0 +1,378 @@
+{
+  "annotations": [
+    {
+      "note": "第一男战士",
+      "scopeKey": "workspace",
+      "token": "A0",
+      "updatedAt": "2026-08-13T02:10:42.534Z"
+    },
+    {
+      "note": "第一男法师",
+      "scopeKey": "workspace",
+      "token": "A1",
+      "updatedAt": "2026-08-13T02:10:48.451Z"
+    },
+    {
+      "note": "第一占用",
+      "scopeKey": "workspace",
+      "token": "A10",
+      "updatedAt": "2026-08-13T02:12:28.521Z"
+    },
+    {
+      "note": "第一占用",
+      "scopeKey": "workspace",
+      "token": "A11",
+      "updatedAt": "2026-08-13T02:12:28.070Z"
+    },
+    {
+      "note": "第一占用",
+      "scopeKey": "workspace",
+      "token": "A12",
+      "updatedAt": "2026-08-13T02:12:27.442Z"
+    },
+    {
+      "note": "第一占用",
+      "scopeKey": "workspace",
+      "token": "A13",
+      "updatedAt": "2026-08-13T02:12:27.058Z"
+    },
+    {
+      "note": "第一占用",
+      "scopeKey": "workspace",
+      "token": "A14",
+      "updatedAt": "2026-08-13T02:12:26.625Z"
+    },
+    {
+      "note": "第一占用",
+      "scopeKey": "workspace",
+      "token": "A15",
+      "updatedAt": "2026-08-13T02:12:26.188Z"
+    },
+    {
+      "note": "第一占用",
+      "scopeKey": "workspace",
+      "token": "A16",
+      "updatedAt": "2026-08-13T02:12:25.802Z"
+    },
+    {
+      "note": "第一占用",
+      "scopeKey": "workspace",
+      "token": "A17",
+      "updatedAt": "2026-08-13T02:12:24.532Z"
+    },
+    {
+      "note": "第一占用",
+      "scopeKey": "workspace",
+      "token": "A18",
+      "updatedAt": "2026-08-13T02:12:23.697Z"
+    },
+    {
+      "note": "第一占用",
+      "scopeKey": "workspace",
+      "token": "A19",
+      "updatedAt": "2026-08-13T02:12:23.310Z"
+    },
+    {
+      "note": "第一男道士",
+      "scopeKey": "workspace",
+      "token": "A2",
+      "updatedAt": "2026-08-13T02:10:53.859Z"
+    },
+    {
+      "note": "第一占用",
+      "scopeKey": "workspace",
+      "token": "A20",
+      "updatedAt": "2026-08-13T02:12:22.718Z"
+    },
+    {
+      "note": "第一占用",
+      "scopeKey": "workspace",
+      "token": "A21",
+      "updatedAt": "2026-08-13T02:12:22.106Z"
+    },
+    {
+      "note": "第一占用",
+      "scopeKey": "workspace",
+      "token": "A22",
+      "updatedAt": "2026-08-13T02:12:21.684Z"
+    },
+    {
+      "note": "第一占用",
+      "scopeKey": "workspace",
+      "token": "A23",
+      "updatedAt": "2026-08-13T02:12:21.140Z"
+    },
+    {
+      "note": "第一占用",
+      "scopeKey": "workspace",
+      "token": "A24",
+      "updatedAt": "2026-08-13T02:12:20.634Z"
+    },
+    {
+      "note": "第一占用",
+      "scopeKey": "workspace",
+      "token": "A25",
+      "updatedAt": "2026-08-13T02:12:20.170Z"
+    },
+    {
+      "note": "第一占用",
+      "scopeKey": "workspace",
+      "token": "A26",
+      "updatedAt": "2026-08-13T02:12:18.305Z"
+    },
+    {
+      "note": "第一占用",
+      "scopeKey": "workspace",
+      "token": "A27",
+      "updatedAt": "2026-08-13T02:12:17.916Z"
+    },
+    {
+      "note": "第一占用",
+      "scopeKey": "workspace",
+      "token": "A28",
+      "updatedAt": "2026-08-13T02:12:17.315Z"
+    },
+    {
+      "note": "第一占用",
+      "scopeKey": "workspace",
+      "token": "A29",
+      "updatedAt": "2026-08-13T02:12:50.034Z"
+    },
+    {
+      "note": "第一女战士",
+      "scopeKey": "workspace",
+      "token": "A3",
+      "updatedAt": "2026-08-13T02:10:46.540Z"
+    },
+    {
+      "note": "禁止存仓目录",
+      "scopeKey": "workspace",
+      "token": "A30",
+      "updatedAt": "2026-08-13T02:12:37.785Z"
+    },
+    {
+      "note": "禁止邮寄目录",
+      "scopeKey": "workspace",
+      "token": "A31",
+      "updatedAt": "2026-08-13T02:12:44.524Z"
+    },
+    {
+      "note": "第一占用",
+      "scopeKey": "workspace",
+      "token": "A35",
+      "updatedAt": "2026-08-13T02:12:51.531Z"
+    },
+    {
+      "note": "第一占用",
+      "scopeKey": "workspace",
+      "token": "A36",
+      "updatedAt": "2026-08-13T02:12:52.414Z"
+    },
+    {
+      "note": "第一占用",
+      "scopeKey": "workspace",
+      "token": "A37",
+      "updatedAt": "2026-08-13T02:12:53.058Z"
+    },
+    {
+      "note": "第一占用",
+      "scopeKey": "workspace",
+      "token": "A38",
+      "updatedAt": "2026-08-13T02:12:54.578Z"
+    },
+    {
+      "note": "第一占用",
+      "scopeKey": "workspace",
+      "token": "A39",
+      "updatedAt": "2026-08-13T02:12:55.604Z"
+    },
+    {
+      "note": "第一女法师",
+      "scopeKey": "workspace",
+      "token": "A4",
+      "updatedAt": "2026-08-13T02:10:52.348Z"
+    },
+    {
+      "note": "第一占用",
+      "scopeKey": "workspace",
+      "token": "A40",
+      "updatedAt": "2026-08-13T02:12:56.259Z"
+    },
+    {
+      "note": "发送 发送人",
+      "scopeKey": "workspace",
+      "token": "A41",
+      "updatedAt": "2026-08-13T02:13:18.489Z"
+    },
+    {
+      "note": "发送 发送人",
+      "scopeKey": "workspace",
+      "token": "A42",
+      "updatedAt": "2026-08-13T02:13:19.641Z"
+    },
+    {
+      "note": "第一女道士",
+      "scopeKey": "workspace",
+      "token": "A5",
+      "updatedAt": "2026-08-13T02:10:57.259Z"
+    },
+    {
+      "note": "新区",
+      "scopeKey": "workspace",
+      "token": "A52",
+      "updatedAt": "2026-08-13T02:13:25.811Z"
+    },
+    {
+      "note": "家人",
+      "scopeKey": "workspace",
+      "token": "A57",
+      "updatedAt": "2026-08-13T02:14:37.682Z"
+    },
+    {
+      "note": "第一占用",
+      "scopeKey": "workspace",
+      "token": "A6",
+      "updatedAt": "2026-08-13T02:12:30.956Z"
+    },
+    {
+      "note": "挂机跟随",
+      "scopeKey": "workspace",
+      "token": "A687",
+      "updatedAt": "2026-08-13T02:17:57.899Z"
+    },
+    {
+      "note": "挂机跟随",
+      "scopeKey": "workspace",
+      "token": "A688",
+      "updatedAt": "2026-08-13T02:20:37.348Z"
+    },
+    {
+      "note": "挂机跟随",
+      "scopeKey": "workspace",
+      "token": "A689",
+      "updatedAt": "2026-08-13T02:18:06.271Z"
+    },
+    {
+      "note": "第一占用",
+      "scopeKey": "workspace",
+      "token": "A7",
+      "updatedAt": "2026-08-13T03:05:03.622Z"
+    },
+    {
+      "note": "第一占用",
+      "scopeKey": "workspace",
+      "token": "A8",
+      "updatedAt": "2026-08-13T02:12:33.834Z"
+    },
+    {
+      "note": "第一占用",
+      "scopeKey": "workspace",
+      "token": "A9",
+      "updatedAt": "2026-08-13T02:12:30.323Z"
+    },
+    {
+      "note": "赌场",
+      "scopeKey": "workspace",
+      "token": "D0",
+      "updatedAt": "2026-08-13T02:18:18.151Z"
+    },
+    {
+      "note": "赌场",
+      "scopeKey": "workspace",
+      "token": "D1",
+      "updatedAt": "2026-08-13T02:18:18.726Z"
+    },
+    {
+      "note": "赌场",
+      "scopeKey": "workspace",
+      "token": "D2",
+      "updatedAt": "2026-08-13T02:18:19.432Z"
+    },
+    {
+      "note": "赌场",
+      "scopeKey": "workspace",
+      "token": "D3",
+      "updatedAt": "2026-08-13T02:18:22.621Z"
+    },
+    {
+      "note": "经验道具",
+      "scopeKey": "workspace",
+      "token": "D36",
+      "updatedAt": "2026-08-13T02:19:13.062Z"
+    },
+    {
+      "note": "赌场",
+      "scopeKey": "workspace",
+      "token": "D9",
+      "updatedAt": "2026-08-13T02:18:23.567Z"
+    },
+    {
+      "note": "开放进程",
+      "scopeKey": "workspace",
+      "token": "G0",
+      "updatedAt": "2026-08-13T02:20:51.605Z"
+    },
+    {
+      "note": "月卡模式",
+      "scopeKey": "workspace",
+      "token": "G1",
+      "updatedAt": "2026-08-13T02:21:00.637Z"
+    },
+    {
+      "note": "第一占用",
+      "scopeKey": "workspace",
+      "token": "G10",
+      "updatedAt": "2026-08-13T02:22:03.299Z"
+    },
+    {
+      "note": "挂机保护",
+      "scopeKey": "workspace",
+      "token": "G2",
+      "updatedAt": "2026-08-13T02:21:09.165Z"
+    },
+    {
+      "note": "国库大臣",
+      "scopeKey": "workspace",
+      "token": "G21",
+      "updatedAt": "2026-08-13T02:22:13.708Z"
+    },
+    {
+      "note": "英雄模式",
+      "scopeKey": "workspace",
+      "token": "G3",
+      "updatedAt": "2026-08-13T02:21:40.700Z"
+    },
+    {
+      "note": "第一占用",
+      "scopeKey": "workspace",
+      "token": "G5",
+      "updatedAt": "2026-08-13T02:21:57.804Z"
+    },
+    {
+      "note": "第一占用",
+      "scopeKey": "workspace",
+      "token": "G6",
+      "updatedAt": "2026-08-13T02:21:58.747Z"
+    },
+    {
+      "note": "第一占用",
+      "scopeKey": "workspace",
+      "token": "G7",
+      "updatedAt": "2026-08-13T02:21:59.227Z"
+    },
+    {
+      "note": "第一占用",
+      "scopeKey": "workspace",
+      "token": "G8",
+      "updatedAt": "2026-08-13T02:22:00.379Z"
+    },
+    {
+      "note": "第一占用",
+      "scopeKey": "workspace",
+      "token": "G9",
+      "updatedAt": "2026-08-13T02:22:02.308Z"
+    }
+  ],
+  "schemaVersion": 1,
+  "updatedAt": "2026-08-17T07:22:42.426Z"
+}
