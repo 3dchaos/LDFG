@@ -10,6 +10,7 @@
  <保管/@storage>东西\
  <找回/@getback>东西\
  <捆/@MBIND>各种卷书和药水\
+ <偷窃/@偷窃>\
  <退出/@exit> 
 
 [@OPENBIG]
@@ -281,3 +282,9 @@
  <退出/@exit>
 #ELSESAY
 你没有足够的金条 \ \
+
+[@偷窃]
+#IF
+#ACT
+#CALL [系统功能\偷窃.txt] @偷窃_白日门
+BREAK

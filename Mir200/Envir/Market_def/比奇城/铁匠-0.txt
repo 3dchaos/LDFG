@@ -9,6 +9,7 @@ checkpkpoint 2
 #SAY
 
 不想和你这样的可怜人作交易。。。\\
+ <偷窃/@偷窃>\
 <退出/@exit>
 #ELSEACT
 goto @main-1
@@ -38,6 +39,7 @@ OpenBigDialogBox <$STR(N$资源编号)> 16 1 4 0 0 1 384 23
 <NewLine:#L02~>
 <Text:#L02~:冶炼金矿:0:20{FCOLOR=70}/@冶炼金矿>
 
+ <偷窃/@偷窃>\
 [@冶炼金矿]
 #IF
 #ACT
@@ -69,6 +71,12 @@ CLOSEBIGDIALOGBOX
 你这家伙，你可太幸运了，我正好有材料做特殊修补.\
 但费用是普通的三倍！\
 
+
+[@偷窃]
+#IF
+#ACT
+#CALL [系统功能\偷窃.txt] @偷窃_比奇
+BREAK
 [goods]
 ;商品 数量  时间
 

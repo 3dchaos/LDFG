@@ -6,6 +6,7 @@
 checkpkpoint 2
 #SAY
 我不想和你这样的人打交道.. \ \
+ <偷窃/@偷窃>\
 <退出/@exit>
 
 #ELSEACT
@@ -23,6 +24,7 @@ goto @main-1
  <保管/@storage>东西\
  <找回/@getback>东西\
  <捆/@MBIND>各种卷书和药水\
+ <偷窃/@偷窃>\
  <退出/@exit> 
 #if
   random 2
@@ -36,6 +38,7 @@ goto @main-1
  <保管/@storage>东西\
  <找回/@getback>东西\
  <捆/@MBIND>各种卷书和药水\
+ <偷窃/@偷窃>\
  <退出/@exit> 
 #if
 #act
@@ -47,6 +50,7 @@ goto @main-1
  <保管/@storage>东西\
  <找回/@getback>东西\
  <捆/@MBIND>各种卷书和药水\
+ <偷窃/@偷窃>\
  <退出/@exit> 
 
 [@OPENBIG]
@@ -318,3 +322,9 @@ goto @main-1
  <退出/@exit>
 #ELSESAY
 你没有足够的金条 \ \
+
+[@偷窃]
+#IF
+#ACT
+#CALL [系统功能\偷窃.txt] @偷窃_盟重
+BREAK

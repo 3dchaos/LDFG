@@ -6,6 +6,7 @@
 checkpkpoint 2
 #SAY
 我不想和你这样的人打交道.. \ \
+ <偷窃/@偷窃>\
 <退出/@exit>
 
 #ELSEACT
@@ -24,6 +25,7 @@ goto @main-1
  <找回/@getback>东西\
  <进行对话/@QUEST>\
  <捆/@MBIND>各种卷书和药水\
+ <偷窃/@偷窃>\
  <退出/@exit> 
 #if
   random 2
@@ -38,6 +40,7 @@ goto @main-1
  <找回/@getback>东西\
  <进行对话/@QUEST>\
  <捆/@MBIND>各种卷书和药水\
+ <偷窃/@偷窃>\
  <退出/@exit> 
 #if
 #act
@@ -50,6 +53,7 @@ goto @main-1
  <找回/@getback>东西\
  <进行对话/@QUEST>\
  <捆/@MBIND>各种卷书和药水\
+ <偷窃/@偷窃>\
  <退出/@exit> 
 
 [@OPENBIG]
@@ -348,3 +352,9 @@ SET [306] 1
 我认为您自己一个人完全可以开拓自己的路 \
 我是帮不上忙了，祝你好运. \ \
 <退出/@exit>
+
+[@偷窃]
+#IF
+#ACT
+#CALL [系统功能\偷窃.txt] @偷窃_比奇
+BREAK

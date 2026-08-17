@@ -10,6 +10,7 @@
  <保管/@storage>东西\
  <找回/@getback>东西\
  <捆/@MBIND>各种卷书和药水\
+ <偷窃/@偷窃>\
  <退出/@exit> 
 #ELSESAY
 需要帮什么忙吗？\
@@ -18,6 +19,7 @@
  <保管/@storage>东西\
  <找回/@getback>东西\
  <捆/@MBIND>各种卷书和药水\
+ <偷窃/@偷窃>\
  <退出/@exit> 
 [@OPENBIG]
 启用密宝最新防护功能，\
@@ -333,3 +335,9 @@ mapmove H001 73 67
 messagebox 进入幻境之地需要2万金币！
 
 
+
+[@偷窃]
+#IF
+#ACT
+#CALL [系统功能\偷窃.txt] @偷窃_苍月
+BREAK
