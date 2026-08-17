@@ -2,6 +2,8 @@
 {
 #IF
 #ACT
+;停止挂机的计时器
+SETOFFTIMEREX 7
 #CALL [系统功能\军鼓BUFF.txt] @军鼓BUFF_死亡检查
 
 #IF
