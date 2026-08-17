@@ -1,54 +1,73 @@
 [@偷窃_比奇]
+{
 #IF
 #ACT
+
 MOV S$偷窃来源 沃玛教主
 MOV L$偷窃装备 [炼狱,魔杖,银蛇,幽灵项链,生命项链,天珠项链]
+;SENDMSG 6 进入偷窃2<$STR(S$偷窃来源)>，：<$str(L$偷窃装备)>
 GOTO @偷窃_入口
 
+
 [@偷窃_盟重]
+
 #IF
 #ACT
 MOV S$偷窃来源 祖玛教主
 MOV L$偷窃装备 [裁决之杖,骨玉权杖,龙纹剑,绿色项链,力量戒指,泰坦戒指]
+;SENDMSG 6 进入偷窃2<$STR(S$偷窃来源)>，：<$str(L$偷窃装备)>
 GOTO @偷窃_入口
 
+
+
 [@偷窃_白日门]
+
 #IF
 #ACT
 MOV S$偷窃来源 赤月恶魔
 MOV L$偷窃装备 [天尊头盔,天尊项链,天尊戒指,天尊手镯,屠龙,嗜魂法杖]
 GOTO @偷窃_入口
 
+
 [@偷窃_封魔]
+
 #IF
 #ACT
 MOV S$偷窃来源 虹魔教主
 MOV L$偷窃装备 [虹魔项链,虹魔手镯,虹魔戒指,裁决之杖,骨玉权杖,龙纹剑]
 GOTO @偷窃_入口
 
+
 [@偷窃_苍月]
+
 #IF
 #ACT
 MOV S$偷窃来源 牛魔王
 MOV L$偷窃装备 [怒斩,龙牙,逍遥扇,钢盔甲(男),圣龙魔袍(男),泰坦战衣(男)]
 GOTO @偷窃_入口
 
+
 [@偷窃_魔龙]
+
 #IF
 #ACT
 MOV S$偷窃来源 魔龙教主
 MOV L$偷窃装备 [战神项链,圣魔项链,真魂项链,开天,镇天,玄天]
 GOTO @偷窃_入口
 
+
 [@偷窃_入口]
+
 #IF
 #ACT
 INC U35 1
+SENDMSG 6 记录偷窃一次，总共<$STR(U35)>次！
+
 
 #IF
-CHECKPKPOINTEX > 80
+CHECKPKPOINTEX > 800
 #ACT
-CHANGEPKPOINT = 100
+CHANGEPKPOINT = 1000
 MESSAGEBOX 偷窃失败，你已经罪行累累，将被押送到红名村。
 GOTO @偷窃_犯罪检查
 BREAK
@@ -59,7 +78,9 @@ MOVR N$偷窃随机 1 100
 GOTO @偷窃_判定
 BREAK
 
+
 [@偷窃_判定]
+
 #IF
 SMALL N$偷窃随机 51
 #ACT
@@ -80,27 +101,31 @@ BREAK
 
 #IF
 #ACT
-CHANGEPKPOINT + 100
-MESSAGEBOX 你刚伸手就被当场抓住，PK值增加100点。
+CHANGEPKPOINT + 1000
+MESSAGEBOX 你刚伸手就被当场抓住，PK值增加1000点。
 GOTO @偷窃_犯罪检查
 BREAK
 
+
 [@偷窃_罚款]
+
 #IF
 CHECKGOLD 5000
 #ACT
 GOLDCOUNT - 5000
-CHANGEPKPOINT + 20
-MESSAGEBOX NPC怒斥：小贼！罚你5000金币，PK值增加20点。
+CHANGEPKPOINT + 200
+MESSAGEBOX NPC怒斥：小贼！罚你5000金币，PK值增加200点。
 GOTO @偷窃_犯罪检查
 BREAK
 #ELSEACT
-CHANGEPKPOINT + 80
-MESSAGEBOX 你身上连5000金币都不够赔，PK值增加80点。
+CHANGEPKPOINT + 800
+MESSAGEBOX 你身上连5000金币都不够赔，PK值增加800点。
 GOTO @偷窃_犯罪检查
 BREAK
 
+
 [@偷窃_金币奖励]
+
 #IF
 #ACT
 MOVR N$偷窃金币 100 5000
@@ -108,7 +133,9 @@ GOLDCOUNT + <$STR(N$偷窃金币)>
 SENDMSG 6 你顺手摸到<$STR(N$偷窃金币)>金币。
 BREAK
 
+
 [@偷窃_奖励]
+
 #IF
 CHECKBAGSIZE 1
 #ACT
@@ -120,9 +147,11 @@ BREAK
 MESSAGEBOX 背包至少留一个空格再偷装备。
 BREAK
 
+
 [@偷窃_犯罪检查]
+
 #IF
-CHECKPKPOINTEX > 99
+CHECKPKPOINTEX > 900
 #ACT
 MESSAGEBOX 你已经严重犯罪，将被押送到红名村。
 mapmove 3 830 650
@@ -131,3 +160,5 @@ BREAK
 #IF
 #ACT
 BREAK
+
+}
