@@ -78,32 +78,29 @@ MOVR N$偷窃随机 1 100
 GOTO @偷窃_判定
 BREAK
 
-
 [@偷窃_判定]
 
 #IF
-SMALL N$偷窃随机 51
+LARGE N$偷窃随机 39
 #ACT
 GOTO @偷窃_罚款
 BREAK
 
 #IF
-SMALL N$偷窃随机 81
+LARGE N$偷窃随机 19
 #ACT
 GOTO @偷窃_金币奖励
 BREAK
 
 #IF
-SMALL N$偷窃随机 91
+LARGE N$偷窃随机 2
 #ACT
-GOTO @偷窃_奖励
+GOTO @偷窃_逮捕
 BREAK
 
 #IF
 #ACT
-CHANGEPKPOINT + 1000
-MESSAGEBOX 你刚伸手就被当场抓住，PK值增加1000点。
-GOTO @偷窃_犯罪检查
+GOTO @偷窃_奖励
 BREAK
 
 
@@ -114,7 +111,7 @@ CHECKGOLD 5000
 #ACT
 GOLDCOUNT - 5000
 CHANGEPKPOINT + 200
-MESSAGEBOX NPC怒斥：小贼！罚你5000金币，PK值增加200点。
+MESSAGEBOX 小贼！罚你5000金币，PK值增加200点。
 GOTO @偷窃_犯罪检查
 BREAK
 #ELSEACT
@@ -133,6 +130,14 @@ GOLDCOUNT + <$STR(N$偷窃金币)>
 SENDMSG 6 你顺手摸到<$STR(N$偷窃金币)>金币。
 BREAK
 
+[@偷窃_逮捕]
+
+#IF
+#ACT
+CHANGEPKPOINT + 1000
+MESSAGEBOX 你刚伸手就被当场抓住，PK值增加1000点。
+GOTO @偷窃_犯罪检查
+BREAK
 
 [@偷窃_奖励]
 
