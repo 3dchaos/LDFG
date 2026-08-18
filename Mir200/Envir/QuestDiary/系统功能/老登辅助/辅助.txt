@@ -236,6 +236,13 @@ goto @辅助功能
 break
 
 #IF
+CHECKPKPOINTEX > 120
+#ACT
+SENDMSG 6 你身上有罪孽，无法开启挂机保护。
+goto @辅助功能
+break
+
+#IF
 EQUAL U10 0
 CHECKGOLD 100
 #ACT
