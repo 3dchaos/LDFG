@@ -160,6 +160,12 @@ CHECKBAGSIZE 1
 #ACT
 MOVR N$偷窃装备 0 5
 GIVE <$STR(L$偷窃装备[<$STR(N$偷窃装备)>])> 1
+LINKGIVEITEM
+;修改偷窃装备来源
+SetItemFrom -1 0 7
+updateitem -1
+;刷新到客户端
+clearLinkItem
 SENDMSG 6 你偷到了<$STR(S$偷窃来源)>的装备：<$STR(L$偷窃装备[<$STR(N$偷窃装备)>])>。
 BREAK
 #ELSEACT
