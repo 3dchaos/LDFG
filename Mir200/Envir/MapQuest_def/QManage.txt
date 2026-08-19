@@ -392,9 +392,9 @@ H.GIVEFENGHAO 手术刀
 #IF
 check [65] 1
 #ACT
-H.OpenAutoPickItem 1 0 15 1 0 0 500
-GuildNoticeMsg 255 249 [英雄自动拾取已开启，可以自动拾取周围15*15范围的物品 ] Self
-
+OpenAutoUsePickItem 1 0 5
+H.OpenAutoUsePickItem 1 0 5
+sendmsg 6 开启装备自动穿戴
 
 ;开启定时维修
 #IF

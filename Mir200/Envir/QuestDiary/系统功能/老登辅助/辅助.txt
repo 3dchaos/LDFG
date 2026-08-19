@@ -122,13 +122,13 @@ OPENMERCHANTBIGDLG 0 19 1 0 0 0 1 575 24
 <Img:#L04~:8<$flag(62)>:0:26:24|7#勾选后，挂机时低生命值自动随机/@开启危险随机>
 <text:#L04~:挂机危险随机|挂机生命值少于<$STR(U13)>%随机^250#遇到危险怪物自动随机^125#比内挂的残血随机更可靠:30:27{FCOLOR=22}/@设置危险血量点数>
 <Img:#L04~:8<$flag(63)>:0:78:24|7#勾选后，屏蔽提示信息/@屏蔽提示>
-<text:#L04~:屏蔽提示:82:27{FCOLOR=242}/@设置残血点数>
+<text:#L04~:屏蔽提示:82:27{FCOLOR=242}/@屏蔽提示>
 <NewLine:#L04~>
 <Img:#L04~:8<$flag(64)>:0:0:36|7#勾选将自动跟随目标移动/@开启挂机跟随>
 <text:#L04~:挂机跟随:6:39{FCOLOR=191}/@设置挂机跟随>
 ;<text:#L04~:<$STR(T5)> |点击设置跟随人物:6:63{FCOLOR=149}>
-<Img:#L04~:8<$flag(65)>:0:50:36|7#勾选将英雄会自动拾取/@开启英雄拾取>
-<text:#L04~: 英雄拾取:51:39{FCOLOR=151}>
+<Img:#L04~:8<$flag(65)>:0:50:36|7#勾选将当背包出现比佩戴属性更好的装备则静默自动替换/@开启自动穿戴>
+<text:#L04~: 自动穿戴:51:39{FCOLOR=151}>
 <Img:#L04~:8<$flag(66)>:0:122:36|7#勾选后出现挂机换图等将持续挂机/@持续挂机>
 <text:#L04~: 持续挂机|记录地图：<$STR(T17)>,<$STR(U0)>,<$STR(U1)>:124:39{FCOLOR=168}>
 <NewLine:#L04~>
@@ -325,28 +325,26 @@ break
 #IF
 #ACT
 MESSAGEBOX 警告：本功能将清除背包内所有道具！！\你确定要清除背包？ @确定清除
-[@开启英雄拾取]
-#if
-not equal G3 1
-#act
-messagebox 英雄功能已关闭
-break
+[@开启自动穿戴]
+
 
 #IF
 check [65] 0
 #ACT
 SET [65] 1
-H.OpenAutoPickItem 1 0 15 1 0 0 500
+OpenAutoUsePickItem 1 0 5
+H.OpenAutoUsePickItem 1 0 5
+sendmsg 6 开启装备自动穿戴
 goto @辅助功能
-GuildNoticeMsg 255 249 [英雄自动拾取已开启，可以自动拾取周围15*15范围的物品 ] Self
 break
 #IF
 check [65] 1
 #ACT
 SET [65] 0
-H.CloseAutoPickItem
+CloseAutoUsePickItem
+H.CloseAutoUsePickItem
+sendmsg 6 关闭装备自动穿戴
 goto @辅助功能
-GuildNoticeMsg 255 11 [英雄自动拾取已关闭 ] Self
 break
 
 
@@ -1042,19 +1040,25 @@ goto @辅助功能
 GuildNoticeMsg 255 11 [自动极品存仓已关闭 ] Self
 break
 [@开启自动捡取]
+
+
 #IF
 check [100] 0
 #ACT
 SET [100] 1
 OpenAutoPickItem 1 0 15 1 0 0 500
+H.OpenAutoPickItem 1 0 15 1 0 0 500
 goto @辅助功能
 GuildNoticeMsg 255 249 [自动拾取已开启，可以自动拾取周围15*15范围的物品 ] Self
 break
+
+
 #IF
 check [100] 1
 #ACT
 SET [100] 0
 CloseAutoPickItem
+H.CloseAutoPickItem
 goto @辅助功能
 GuildNoticeMsg 255 11 [自动拾取已关闭 ] Self
 break
