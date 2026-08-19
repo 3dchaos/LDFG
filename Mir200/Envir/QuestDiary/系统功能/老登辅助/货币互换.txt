@@ -2,125 +2,203 @@
 {
 #IF
 #ACT
+MOV N36 10
 OPENMERCHANTBIGDLG 0 16 1 0 0 0 1 383 25 
 #SAY
 \  \
 <Img:38:0:150:-4>\
-<Text:请注意背包里最多只能存放100000000000金币。溢出可能装不下！！:20:45{FCOLOR=7}>\
-<Text:灵符与金币的比例是 1：10000:20:47{FCOLOR=255}>\
-<Text:灵符换金币:20:49{FCOLOR=251}/@@InPutInteger1>   <Text:金币换灵符:20:49{FCOLOR=251}/@@InPutInteger2>\
-<Text:元宝与金币的比例是 1：1000:20:54{FCOLOR=255}>\
-<Text:元宝换金币:20:57{FCOLOR=251}/@@InPutInteger3>   <Text:金币换元宝:20:57{FCOLOR=251}/@@InPutInteger4>\
-<Text:声望与金币的比例是 1：10000:20:63{FCOLOR=255}>\
-<Text:声望换金币:20:66{FCOLOR=251}/@@InPutInteger5>   <Text:金币换声望:20:66{FCOLOR=251}/@@InPutInteger6>\
-<Text:返回:20:76{FCOLOR=251}/@辅助功能>\
+<Text:请注意背包里最多只能存放100000000000金币。溢出可能装不下！！:20:45{FCOLOR=7}>
+<Text:灵符与金币的比例是 1：10000:20:47{FCOLOR=255}>
+<Text:灵符换金币:20:49{FCOLOR=251}/@@InPutInteger1>   <Text:金币换灵符:20:49{FCOLOR=251}/@@InPutInteger2>
+<Text:元宝与金币的比例是 1：1000:20:54{FCOLOR=255}>
+<Text:元宝换金币:20:57{FCOLOR=251}/@@InPutInteger3>   <Text:金币换元宝:20:57{FCOLOR=251}/@@InPutInteger4>
+<Text:声望与金币的比例是 1：10000:20:63{FCOLOR=255}>
+<Text:声望换金币:20:66{FCOLOR=251}/@@InPutInteger5>   <Text:金币换声望:20:66{FCOLOR=251}/@@InPutInteger6>
+<Text:返回:20:76{FCOLOR=251}/@辅助功能>
 ;灵符换金币
 [@InPutInteger1]
 #IF
+LARGE <$STR(N1)> 0
+#ELSEACT
+MESSAGEBOX 请输入大于0的整数！
+BREAK
+#ACT
+#IF
 small <$GAMEGIRD> <$STR(N1)>
 #ACT
-#SAY
-你的灵符不够！！\
-<返回/@互换>
+MESSAGEBOX 你的灵符不够！！
+BREAK
 #ELSEACT
-MUL N30 N1 10000
-GAMEGIRD - N1
-give 金币 N30
-SENDMSG 7 兑换<$STR(N30)>金币！
-
-;金币换灵符
-
-[@InPutInteger2]
+MOV N37 <$STR(N1)>
+INC N37 9
+DIV N37 <$STR(N37)> <$STR(N36)>
+MOV N38 <$STR(N1)>
+DEC N38 <$STR(N37)>
 #IF
-LARGE <$STR(N2)> 9999
-#ELSESAY
-你的输入有误！！至少要10000金币\
-<返回/@互换>
+LARGE <$STR(N38)> 0
+#ACT
+MUL N30 <$STR(N38)> 10000
+GAMEGIRD - N1
+GIVE 金币 N30
+SENDMSG 7 兑换成功，扣除<$STR(N37)>手续费，到账<$STR(N30)>金币！
+BREAK
 #ELSEACT
+MESSAGEBOX 扣除10%手续费后不足1个灵符，不能兑换！
 BREAK
 
+;金币换灵符
+[@InPutInteger2]
 #IF
+LARGE <$STR(N2)> 0
+#ELSEACT
+MESSAGEBOX 请输入大于0的整数！
+BREAK
 #ACT
-DIV N31 <$STR(N2)> 10000
 #IF
 checkgold <$STR(N2)>
 #ACT
-	take 金币 <$STR(N2)>
-	GAMEGIRD + <$STR(N31)>
-	SENDMSG 7 兑换<$STR(N31)>灵符！
-	BREAK
+MOV N37 <$STR(N2)>
+INC N37 9
+DIV N37 <$STR(N37)> <$STR(N36)>
+MOV N38 <$STR(N2)>
+DEC N38 <$STR(N37)>
+DIV N30 <$STR(N38)> 10000
+#IF
+LARGE <$STR(N30)> 0
+#ACT
+TAKE 金币 <$STR(N2)>
+GAMEGIRD + <$STR(N30)>
+SENDMSG 7 兑换成功，扣除<$STR(N37)>手续费，到账<$STR(N30)>灵符！
+BREAK
 #ELSEACT
-SENDMSG 7 金币不够<$STR(N2)>
+MESSAGEBOX 扣除10%手续费后不足10000金币，不能兑换！
+BREAK
+#ELSEACT
+MESSAGEBOX 金币不够！！
+BREAK
+
 ;元宝换金币
 [@InPutInteger3]
 #IF
+LARGE <$STR(N3)> 0
+#ELSEACT
+MESSAGEBOX 请输入大于0的整数！
+BREAK
+#ACT
+#IF
 small <$GAMEGOLD> <$STR(N3)>
 #ACT
-#SAY
-你的元宝不够！！\
-<返回/@互换>
+MESSAGEBOX 你的元宝不够！！
+BREAK
 #ELSEACT
-MUL N32 N3 1000
+MOV N37 <$STR(N3)>
+INC N37 9
+DIV N37 <$STR(N37)> <$STR(N36)>
+MOV N38 <$STR(N3)>
+DEC N38 <$STR(N37)>
+#IF
+LARGE <$STR(N38)> 0
+#ACT
+MUL N30 <$STR(N38)> 1000
 GAMEGOLD - N3
-give 金币 N32
-SENDMSG 7 兑换<$STR(N32)>金币！
+GIVE 金币 N30
+SENDMSG 7 兑换成功，扣除<$STR(N37)>手续费，到账<$STR(N30)>金币！
+BREAK
+#ELSEACT
+MESSAGEBOX 扣除10%手续费后不足1个元宝，不能兑换！
+BREAK
 
-
+;金币换元宝
 [@InPutInteger4]
 #IF
-LARGE <$STR(N4)> 999
-#ELSESAY
-你的输入有误！！至少要1000金币\
-<返回/@互换>
+LARGE <$STR(N4)> 0
 #ELSEACT
+MESSAGEBOX 请输入大于0的整数！
 BREAK
-#IF
 #ACT
-DIV N33 <$STR(N4)> 1000
 #IF
 checkgold <$STR(N4)>
 #ACT
-	take 金币 <$STR(N4)>
-	GAMEGOLD + <$STR(N33)>
-	SENDMSG 7 兑换<$STR(N33)>元宝！
-	BREAK
+MOV N37 <$STR(N4)>
+INC N37 9
+DIV N37 <$STR(N37)> <$STR(N36)>
+MOV N38 <$STR(N4)>
+DEC N38 <$STR(N37)>
+DIV N30 <$STR(N38)> 1000
+#IF
+LARGE <$STR(N30)> 0
+#ACT
+TAKE 金币 <$STR(N4)>
+GAMEGOLD + <$STR(N30)>
+SENDMSG 7 兑换成功，扣除<$STR(N37)>手续费，到账<$STR(N30)>元宝！
+BREAK
 #ELSEACT
-SENDMSG 7 金币不够<$STR(N4)>
+MESSAGEBOX 扣除10%手续费后不足1000金币，不能兑换！
+BREAK
+#ELSEACT
+MESSAGEBOX 金币不够！！
+BREAK
 
 ;声望换金币
 [@InPutInteger5]
 #IF
+LARGE <$STR(N5)> 0
+#ELSEACT
+MESSAGEBOX 请输入大于0的整数！
+BREAK
+#ACT
+#IF
 CHECKCREDITPOINT < <$STR(N5)>
 #ACT
-#SAY
-你的声望不够！！\
-<返回/@互换>
+MESSAGEBOX 你的声望不够！！
+BREAK
 #ELSEACT
-MUL N34 N5 10000
-CREDITPOINT - N5
-give 金币 N34
-SENDMSG 7 兑换<$STR(N34)>金币！
-
-[@InPutInteger6]
+MOV N37 <$STR(N5)>
+INC N37 9
+DIV N37 <$STR(N37)> <$STR(N36)>
+MOV N38 <$STR(N5)>
+DEC N38 <$STR(N37)>
 #IF
-LARGE <$STR(N6)> 9999
-#ELSESAY
-你的输入有误！！至少要10000金币\
-<返回/@互换>
+LARGE <$STR(N38)> 0
+#ACT
+MUL N30 <$STR(N38)> 10000
+CREDITPOINT - N5
+GIVE 金币 N30
+SENDMSG 7 兑换成功，扣除<$STR(N37)>手续费，到账<$STR(N30)>金币！
+BREAK
 #ELSEACT
+MESSAGEBOX 扣除10%手续费后不足1点声望，不能兑换！
 BREAK
 
+;金币换声望
+[@InPutInteger6]
 #IF
+LARGE <$STR(N6)> 0
+#ELSEACT
+MESSAGEBOX 请输入大于0的整数！
+BREAK
 #ACT
-DIV N35 <$STR(N6)> 10000
 #IF
 checkgold <$STR(N6)>
 #ACT
-	take 金币 <$STR(N6)>
-	CREDITPOINT + <$STR(N35)>
-	SENDMSG 7 兑换<$STR(N35)>声望！
-	BREAK
+MOV N37 <$STR(N6)>
+INC N37 9
+DIV N37 <$STR(N37)> <$STR(N36)>
+MOV N38 <$STR(N6)>
+DEC N38 <$STR(N37)>
+DIV N30 <$STR(N38)> 10000
+#IF
+LARGE <$STR(N30)> 0
+#ACT
+TAKE 金币 <$STR(N6)>
+CREDITPOINT + <$STR(N30)>
+SENDMSG 7 兑换成功，扣除<$STR(N37)>手续费，到账<$STR(N30)>声望！
+BREAK
 #ELSEACT
-SENDMSG 7 金币不够<$STR(N6)>
+MESSAGEBOX 扣除10%手续费后不足10000金币，不能兑换！
+BREAK
+#ELSEACT
+MESSAGEBOX 金币不够！！
+BREAK
 
 }
