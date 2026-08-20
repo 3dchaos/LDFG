@@ -15,6 +15,6 @@
 #AutoRun NPC RUNONDAY 12:00 @火龙降临
 #AutoRun NPC RUNONDAY 16:00 @火龙降临
 #AutoRun NPC RUNONDAY 22:00 @火龙降临
-;#AutoRun NPC SEC 10 @关闭开区活动
+#AutoRun NPC SEC 1 @英雄令倒计时
 
 #AutoRun NPC HOUR 1 @英雄偶遇

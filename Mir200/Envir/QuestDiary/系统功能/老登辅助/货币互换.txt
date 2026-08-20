@@ -7,14 +7,14 @@ OPENMERCHANTBIGDLG 0 16 1 0 0 0 1 383 25
 #SAY
 \  \
 <Img:38:0:150:-4>\
-<Text:请注意背包里最多只能存放100000000000金币。溢出可能装不下！！:20:45{FCOLOR=7}>
-<Text:灵符与金币的比例是 1：10000:20:47{FCOLOR=255}>
-<Text:灵符换金币:20:49{FCOLOR=251}/@@InPutInteger1>   <Text:金币换灵符:20:49{FCOLOR=251}/@@InPutInteger2>
-<Text:元宝与金币的比例是 1：1000:20:54{FCOLOR=255}>
-<Text:元宝换金币:20:57{FCOLOR=251}/@@InPutInteger3>   <Text:金币换元宝:20:57{FCOLOR=251}/@@InPutInteger4>
-<Text:声望与金币的比例是 1：10000:20:63{FCOLOR=255}>
-<Text:声望换金币:20:66{FCOLOR=251}/@@InPutInteger5>   <Text:金币换声望:20:66{FCOLOR=251}/@@InPutInteger6>
-<Text:返回:20:76{FCOLOR=251}/@辅助功能>
+<Text:请注意背包里最多只能存放100000000000金币。溢出可能装不下！！:20:45{FCOLOR=7}>\
+<Text:灵符与金币的比例是 1：10000:20:47{FCOLOR=255}>\
+<Text:灵符换金币:20:49{FCOLOR=251}/@@InPutInteger1>   <Text:金币换灵符:20:49{FCOLOR=251}/@@InPutInteger2>\
+<Text:元宝与金币的比例是 1：1000:20:54{FCOLOR=255}>\
+<Text:元宝换金币:20:57{FCOLOR=251}/@@InPutInteger3>   <Text:金币换元宝:20:57{FCOLOR=251}/@@InPutInteger4>\
+<Text:声望与金币的比例是 1：10000:20:63{FCOLOR=255}>\
+<Text:声望换金币:20:66{FCOLOR=251}/@@InPutInteger5>   <Text:金币换声望:20:66{FCOLOR=251}/@@InPutInteger6>\
+<Text:返回:20:76{FCOLOR=251}/@辅助功能>\
 ;灵符换金币
 [@InPutInteger1]
 #IF

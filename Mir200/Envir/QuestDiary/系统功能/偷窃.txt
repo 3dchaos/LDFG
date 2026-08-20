@@ -75,6 +75,7 @@ INC U35 1
 Mov N$红名PK值 200
 Mov N$黄名PK值 160
 Mov N$一次PK值 40
+GetNpcName S1
 SENDMSG 6 记录偷窃一次，总共<$STR(U35)>次！
 
 
@@ -125,7 +126,7 @@ CHECKGOLD 5000
 #ACT
 GOLDCOUNT - 5000
 CHANGEPKPOINT + <$STR(N$一次PK值)>
-MESSAGEBOX 小贼！罚你5000金币，罪证已经录了。
+MESSAGEBOX 小贼！罚你5000金币，罪证已经记录了。
 GOTO @偷窃_犯罪检查
 BREAK
 #ELSEACT
@@ -163,10 +164,11 @@ GIVE <$STR(L$偷窃装备[<$STR(N$偷窃装备)>])> 1
 LINKGIVEITEM
 ;修改偷窃装备来源
 SetItemFrom -1 0 7
+SetItemFrom -1 3 <$STR(S1)>
 updateitem -1
 ;刷新到客户端
 clearLinkItem
-SENDMSG 6 你偷到了<$STR(S$偷窃来源)>的装备：<$STR(L$偷窃装备[<$STR(N$偷窃装备)>])>。
+SENDMSG 6 你偷到了<$STR(S1)>的装备：<$STR(L$偷窃装备[<$STR(N$偷窃装备)>])>。
 BREAK
 #ELSEACT
 MESSAGEBOX 偷窃失败！背包至少留一个空格再偷装备。
@@ -180,6 +182,7 @@ CHECKPKPOINTEX = <$STR(N$红名PK值)>
 CHECKPKPOINTEX > <$STR(N$红名PK值)>
 #ACT
 MESSAGEBOX 你已经严重犯罪，将被押送到红名村。
+SET [66] 0
 mapmove 3 830 650
 BREAK
 

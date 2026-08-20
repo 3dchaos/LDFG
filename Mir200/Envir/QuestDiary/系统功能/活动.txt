@@ -1,13 +1,37 @@
 [@活动]
 {
-#IF
-#ACT
-BREAK
 
 #IF
 LARGE G0 8
 #ACT
 GOTO @狐月活动
+BREAK
+
+#IF
+LARGE G0 3
+#ACT
+GOTO @祖玛活动
+BREAK
+
+[@祖玛活动]
+#IF
+CHECKLEVELEX < 35
+CHECKLEVELEX > 19
+#ACT
+SET [120] 1
+KILLMONEXPRATE 150 86400 0 0
+SetArrBuff 1 5 1 1681 86400 30 1682 1 [活动BUFF]新人追赶活动1.5倍经验
+SENDMSG 5 开启新人追赶活动，20-35级为1.5倍经验。
+BREAK
+
+#IF
+CHECKLEVELEX < 20
+#ACT
+SET [120] 1
+KILLMONEXPRATE 200 86400 0 0
+SetArrBuff 1 5 1 1681 86400 30 1682 1 [活动BUFF]新人追赶活动双倍经验
+SENDMSG 5 开启新人追赶活动，20以下为双倍经验。
+BREAK
 
 [@狐月活动]
 #IF
@@ -16,7 +40,7 @@ CHECKLEVELEX < 45
 SET [120] 1
 ;MESSAGEBOX 开区双倍经验活动双倍爆率1.5攻击开启
 SENDMSG 5 开启狐月活动：45级以下十倍经验，双倍伤害。80级以下五倍经验，1.5倍伤害。100级以下双倍经验，1.3倍伤害。
-SetArrBuff 1 2 1 1681 86400 30 1682 1 [狐月开放活动]十倍经验，双倍伤害。
+SetArrBuff 1 5 1 1681 86400 30 1682 1 [狐月开放活动]十倍经验，双倍伤害。
 KILLMONEXPRATE 1000 86400 0 0
 ;KILLMONBURSTRATE 200 86400 0 0
 POWERRATE 200 86400 0 0
@@ -29,7 +53,7 @@ CHECKLEVELEX < 80
 SET [120] 1
 ;MESSAGEBOX 开区双倍经验活动双倍爆率1.5攻击开启
 SENDMSG 5 开启狐月活动：45级以下十倍经验，双倍伤害。80级以下五倍经验，1.5倍伤害。100级以下双倍经验，1.3倍伤害。
-SetArrBuff 1 2 1 1681 86400 30 1682 1 [狐月开放活动]五倍经验，1.5倍伤害。
+SetArrBuff 1 5 1 1681 86400 30 1682 1 [狐月开放活动]五倍经验，1.5倍伤害。
 KILLMONEXPRATE 500 86400 0 0
 ;KILLMONBURSTRATE 200 86400 0 0
 POWERRATE 150 86400 0 0
@@ -41,7 +65,7 @@ CHECKLEVELEX < 100
 SET [120] 1
 ;MESSAGEBOX 开区双倍经验活动双倍爆率1.5攻击开启
 SENDMSG 5 开启狐月活动：45级以下十倍经验，双倍伤害。80级以下五倍经验，1.5倍伤害。100级以下双倍经验，1.3倍伤害。
-SetArrBuff 1 2 1 1681 86400 30 1682 1 [狐月开放活动]双倍经验，1.3倍伤害。
+SetArrBuff 1 5 1 1681 86400 30 1682 1 [狐月开放活动]双倍经验，1.3倍伤害。
 KILLMONEXPRATE 200 86400 0 0
 ;KILLMONBURSTRATE 200 86400 0 0
 POWERRATE 130 86400 0 0
@@ -56,7 +80,7 @@ CHECKLEVELEX > 35
 #ACT
 SET [120] 1
 KILLMONEXPRATE 200 86400 0 0
-SetArrBuff 1 2 1 1681 86400 30 1682 1 [活动BUFF]新人追赶活动双倍经验
+SetArrBuff 1 5 1 1681 86400 30 1682 1 [活动BUFF]新人追赶活动双倍经验
 SENDMSG 5 开启新人追赶活动，36-50为双倍经验。
 BREAK
 
@@ -66,7 +90,7 @@ CHECKLEVELEX > 19
 #ACT
 SET [120] 1
 KILLMONEXPRATE 300 86400 0 0
-SetArrBuff 1 2 1 1681 86400 30 1682 1 [活动BUFF]新人追赶活动三倍经验
+SetArrBuff 1 5 1 1681 86400 30 1682 1 [活动BUFF]新人追赶活动三倍经验
 SENDMSG 5 开启新人追赶活动，20-35级为三倍经验。
 BREAK
 
@@ -75,7 +99,7 @@ CHECKLEVELEX < 20
 #ACT
 SET [120] 1
 KILLMONEXPRATE 500 86400 0 0
-SetArrBuff 1 2 1 1681 86400 30 1682 1 [活动BUFF]新人追赶活动五倍经验
+SetArrBuff 1 5 1 1681 86400 30 1682 1 [活动BUFF]新人追赶活动五倍经验
 SENDMSG 5 开启新人追赶活动，20以下为五倍经验。
 BREAK
 }

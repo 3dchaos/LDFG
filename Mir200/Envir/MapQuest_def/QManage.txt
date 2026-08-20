@@ -46,6 +46,22 @@ MOV T5
 MOV A687
 MOV A688
 
+[@英雄令提问]
+#IF
+check [95] 1
+#SAY
+江湖急救<COUNTDOWN:30:3:251:0:0/@exit>，有人发布了英雄令，你愿意前往<$MapTitle>帮助他吗？\
+<前往支援/@前往支援>\
+ <无视/@exit>\
+
+[@前往支援]
+#IF
+LARGE G252 0
+#ACT
+MAPMOVE  <$STR(A250)> <$STR(G250)> <$STR(G251)>
+#ELSEACT
+MESSAGEBOX 英雄令已经过期
+
 ;传输坐标
 [@OnTimer5]
 #IF

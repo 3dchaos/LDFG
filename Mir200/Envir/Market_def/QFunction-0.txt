@@ -620,3 +620,26 @@ SENDMSG 7 你没满20级，攻击神水效果显著!
 SENDMSG 7 你获得了半小时1.5倍攻击力,期间死亡或下线不会失效,重复使用无效!
 BREAK
 
+;英雄令
+[@StdModeFunc27]
+#IF
+LARGE G252 0
+#ACT
+GIVE 英雄令 1
+MessageBox 上一份英雄令还没过期！请稍后再试！
+#ELSEACT
+GIVE 英雄令 1
+MessageBox 确定向全服玩家请求支援吗？\对象需要开启[接受英雄令]！ @确定英雄令
+
+[@确定英雄令]
+#IF
+#ACT
+TAKE 英雄令 1
+MOV A250 <$MAP>
+MOV A251 <$MapTitle>
+MOV G250 <$X>
+MOV G251 <$Y>
+;倒计时时间
+MOV G252 30
+SENDCENTERMSG 215 86 江湖救急，{<$USERNAME>|250:0}请求支援！ 1 30
+Gmexecute 开始提问 @英雄令提问

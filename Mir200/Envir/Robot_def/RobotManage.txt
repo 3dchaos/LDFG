@@ -23,7 +23,16 @@
 ;#ELSEACT
 ;SENDMSG 6 全区双倍经验活动已经结束,新人双倍开启，30级以下新人小退触发
 
-
+[@英雄令倒计时]
+#IF
+LARGE G252 0
+#ACT
+DEC G252 1
+#ELSEACT
+MOV A250
+MOV A251
+MOV G250
+MOV G251
 
 [@清理每日]
 #IF
