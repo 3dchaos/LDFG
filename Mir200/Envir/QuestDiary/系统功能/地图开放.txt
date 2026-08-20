@@ -6,7 +6,7 @@ EQUAL <$MAP> D003
 EQUAL G0 0
 #ACT
 MOV G0 1
-#CALL [系统功能\地图开放.txt] @地图开放_刷新链接
+goto @地图开放_刷新链接
 SENDMSG 1 【世界进度】<$USERNAME> 击杀骷髅精灵，沃玛森林区域已经开放！
 BREAK
 
@@ -16,7 +16,7 @@ EQUAL <$MAP> D024
 EQUAL G0 1
 #ACT
 MOV G0 2
-#CALL [系统功能\地图开放.txt] @地图开放_刷新链接
+goto @地图开放_刷新链接
 SENDMSG 1 【世界进度】<$USERNAME> 击杀沃玛教主，毒蛇山谷与矿区已经开放！
 BREAK
 
@@ -26,7 +26,7 @@ EQUAL <$MAP> Q004
 EQUAL G0 2
 #ACT
 MOV G0 3
-#CALL [系统功能\地图开放.txt] @地图开放_刷新链接
+goto @地图开放_刷新链接
 SENDMSG 1 【世界进度】<$USERNAME> 击杀尸王，盟重省已经开放！
 BREAK
 
@@ -36,7 +36,7 @@ EQUAL <$MAP> D515
 EQUAL G0 3
 #ACT
 MOV G0 4
-#CALL [系统功能\地图开放.txt] @地图开放_刷新链接
+goto @地图开放_刷新链接
 SENDMSG 1 【世界进度】<$USERNAME> 击杀祖玛教主，白日门与赤月峡谷已经开放！
 BREAK
 
@@ -46,7 +46,7 @@ EQUAL <$MAP> D10062
 EQUAL G0 4
 #ACT
 MOV G0 5
-#CALL [系统功能\地图开放.txt] @地图开放_刷新链接
+goto @地图开放_刷新链接
 SENDMSG 1 【世界进度】<$USERNAME> 击杀赤月恶魔，封魔谷区域已经开放！
 BREAK
 
@@ -56,7 +56,7 @@ EQUAL <$MAP> D2013
 EQUAL G0 5
 #ACT
 MOV G0 6
-#CALL [系统功能\地图开放.txt] @地图开放_刷新链接
+goto @地图开放_刷新链接
 SENDMSG 1 【世界进度】<$USERNAME> 击杀虹魔教主，苍月岛区域已经开放！
 BREAK
 
@@ -66,7 +66,7 @@ EQUAL <$MAP> D2079
 EQUAL G0 6
 #ACT
 MOV G0 7
-#CALL [系统功能\地图开放.txt] @地图开放_刷新链接
+goto @地图开放_刷新链接
 SENDMSG 1 【世界进度】<$USERNAME> 击杀牛魔王，幻境区域已经开放！
 BREAK
 
@@ -76,7 +76,7 @@ EQUAL <$MAP> H010
 EQUAL G0 7
 #ACT
 MOV G0 8
-#CALL [系统功能\地图开放.txt] @地图开放_刷新链接
+goto @地图开放_刷新链接
 SENDMSG 1 【世界进度】<$USERNAME> 击杀暗之牛魔王8，魔龙城区域已经开放！
 BREAK
 
@@ -86,13 +86,13 @@ EQUAL <$MAP> 66
 EQUAL G0 8
 #ACT
 MOV G0 9
-#CALL [系统功能\地图开放.txt] @地图开放_刷新链接
+goto @地图开放_刷新链接
 SENDMSG 1 【世界进度】<$USERNAME> 击杀魔龙教主，雪域、雷炎、火龙、狐月后期地图已经开放！
 BREAK
-}
+
 
 [@地图开放_越境纠正]
-{
+
 #IF
 ISADMIN
 #ACT
@@ -112,16 +112,16 @@ GOTO @地图开放_送回比奇
 
 #IF
 #ACT
-#CALL [系统功能\地图开放.txt] @地图开放_检查阶段1
+goto @地图开放_检查阶段1
 #CALL [系统功能\地图开放.txt] @地图开放_检查阶段2
-#CALL [系统功能\地图开放.txt] @地图开放_检查阶段3
+goto @地图开放_检查阶段3
 #CALL [系统功能\地图开放.txt] @地图开放_检查阶段4
-#CALL [系统功能\地图开放.txt] @地图开放_检查阶段5
+goto @地图开放_检查阶段5
 #CALL [系统功能\地图开放.txt] @地图开放_检查阶段6
-#CALL [系统功能\地图开放.txt] @地图开放_检查阶段7
+goto @地图开放_检查阶段7
 #CALL [系统功能\地图开放.txt] @地图开放_检查阶段8
-#CALL [系统功能\地图开放.txt] @地图开放_检查阶段9
-}
+goto @地图开放_检查阶段9
+
 
 [@地图开放_检查阶段1]
 #IF
@@ -1195,54 +1195,54 @@ EQUAL <$MAP> hero2
 GOTO @地图开放_送回比奇
 
 [@地图开放_刷新链接]
-{
+
 #IF
 #ACT
-#CALL [系统功能\地图开放.txt] @地图开放_清理动态链接
+goto @地图开放_清理动态链接
 
 #IF
 LARGE G0 0
 #ACT
-#CALL [系统功能\地图开放.txt] @地图开放_生成阶段1
+goto @地图开放_生成阶段1
 
 #IF
 LARGE G0 1
 #ACT
-#CALL [系统功能\地图开放.txt] @地图开放_生成阶段2
+goto @地图开放_生成阶段2
 
 #IF
 LARGE G0 2
 #ACT
-#CALL [系统功能\地图开放.txt] @地图开放_生成阶段3
+goto @地图开放_生成阶段3
 
 #IF
 LARGE G0 3
 #ACT
-#CALL [系统功能\地图开放.txt] @地图开放_生成阶段4
+goto @地图开放_生成阶段4
 
 #IF
 LARGE G0 4
 #ACT
-#CALL [系统功能\地图开放.txt] @地图开放_生成阶段5
+goto @地图开放_生成阶段5
 
 #IF
 LARGE G0 5
 #ACT
-#CALL [系统功能\地图开放.txt] @地图开放_生成阶段6
+goto @地图开放_生成阶段6
 
 #IF
 LARGE G0 6
 #ACT
-#CALL [系统功能\地图开放.txt] @地图开放_生成阶段7
+goto @地图开放_生成阶段7
 
 #IF
 LARGE G0 7
 #ACT
-#CALL [系统功能\地图开放.txt] @地图开放_生成阶段8
-}
+goto @地图开放_生成阶段8
+
 
 [@地图开放_清理动态链接]
-{
+
 #IF
 #ACT
 DELMAPGATE KF001 0170
@@ -1417,10 +1417,10 @@ DELMAPGATE KF169 B201
 DELMAPGATE KF170 B201
 DELMAPGATE KF171 B357
 DELMAPGATE KF172 B357
-}
+
 
 [@地图开放_生成阶段1]
-{
+
 #IF
 #ACT
 ADDMAPGATE KF003 0 324 34 0 1 559 553
@@ -1441,10 +1441,10 @@ ADDMAPGATE KF017 0 328 35 0 1 563 554
 ADDMAPGATE KF018 0 328 36 0 1 563 555
 ADDMAPGATE KF019 0 329 36 0 1 564 555
 ADDMAPGATE KF020 0 329 37 0 1 564 556
-}
+
 
 [@地图开放_生成阶段2]
-{
+
 #IF
 #ACT
 ADDMAPGATE KF027 0 671 82 0 2 414 563
@@ -1478,10 +1478,10 @@ ADDMAPGATE KF054 D415 84 16 0 D405 12 147
 ADDMAPGATE KF055 D415 8 86 0 D406 185 120
 ADDMAPGATE KF131 E404 69 56 0 D404 151 20
 ADDMAPGATE KF132 E601 134 20 0 D422 330 382
-}
+
 
 [@地图开放_生成阶段3]
-{
+
 #IF
 #ACT
 ADDMAPGATE KF001 0170 7 21 0 3 380 299
@@ -1562,29 +1562,22 @@ ADDMAPGATE KF128 D71612 13 37 0 D716 36 17
 ADDMAPGATE KF129 D71650 13 37 0 D716 36 17
 ADDMAPGATE KF130 E703 58 84 0 D712 206 224
 ADDMAPGATE KF133 E605 13 63 0 D601 10 198
-}
+
 
 [@地图开放_生成阶段4]
-{
+
 #IF
 #ACT
-ADDMAPGATE KF134 1 43 34 0 11 46 481
-ADDMAPGATE KF135 1 44 33 0 11 47 480
-ADDMAPGATE KF136 1 45 32 0 11 48 479
-ADDMAPGATE KF137 1 46 31 0 11 49 478
-ADDMAPGATE KF138 1 47 30 0 11 50 477
-ADDMAPGATE KF139 1005 12 16 0 11 146 325
-ADDMAPGATE KF140 1007 5 18 0 11 175 363
-ADDMAPGATE KF141 1006 8 16 0 11 179 296
-ADDMAPGATE KF142 1003 7 12 0 11 206 319
-ADDMAPGATE KF143 1004 12 16 0 11 209 273
-ADDMAPGATE KF144 1001 5 18 0 11 224 301
-ADDMAPGATE KF145 1002 9 18 0 11 227 269
-ADDMAPGATE KF146 0123A 12 18 0 11 204 385
-}
+AddMapGate 打开丛林迷宫 11 347 241 1 12 322 475
+AddMapGate 打开丛林迷宫 11 348 240 1 12 323 474
+AddMapGate 打开丛林迷宫 11 349 239 1 12 324 473
+AddMapGate 打开丛林迷宫 11 350 238 1 12 325 472
+AddMapGate 打开丛林迷宫 11 351 237 1 12 326 471
+AddMapGate 打开丛林迷宫 11 352 236 1 12 327 470
+
 
 [@地图开放_生成阶段5]
-{
+
 #IF
 #ACT
 ADDMAPGATE KF021 1 47 170 0 4 445 193
@@ -1602,10 +1595,10 @@ ADDMAPGATE KF152 1 51 165 0 4 449 189
 ADDMAPGATE KF153 D10053 41 91 0 D2008 38 26
 ADDMAPGATE KF154 D10054 79 20 0 D2003 288 284
 ADDMAPGATE KF155 M100 288 284 0 B341 11 29
-}
+
 
 [@地图开放_生成阶段6]
-{
+
 #IF
 #ACT
 ADDMAPGATE KF156 B351 11 13 0 5 127 301
@@ -1621,26 +1614,27 @@ ADDMAPGATE KF165 B355 9 17 0 5 152 294
 ADDMAPGATE KF166 B355 10 16 0 5 152 294
 ADDMAPGATE KF167 B356 10 19 0 5 167 314
 ADDMAPGATE KF168 D003 36 69 0 D2053 12 155
-}
+
 
 [@地图开放_生成阶段7]
-{
+
 #IF
 #ACT
 ADDMAPGATE KF169 B201 7 8 0 H010 371 375
 ADDMAPGATE KF170 B201 8 7 0 H010 370 376
-}
+
 
 [@地图开放_生成阶段8]
-{
+
 #IF
 #ACT
 ADDMAPGATE KF171 B357 11 14 0 6 115 148
 ADDMAPGATE KF172 B357 7 8 0 GA1 25 36
-}
+
 
 [@地图开放_送回比奇]
 #ACT
 SENDMSG 7 【世界进度】当前区域尚未开放，已送回比奇省。
 MAPMOVE 0 333 268
 BREAK
+}
