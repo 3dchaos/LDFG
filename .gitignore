@@ -22,7 +22,7 @@ Mir200/Envir/QuestDiary/数据文件/跟随目录
 *.DB-wal
 *.exe
 *.DB
-Mir200/!Setup.txt
+
 Mir200/GlobalVal.ini
 Mir200/Envir/AdminList.txt
 Mir200/Envir/QuestDiary/数据文件/
