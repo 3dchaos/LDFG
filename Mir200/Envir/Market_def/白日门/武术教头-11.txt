@@ -66,7 +66,8 @@ checklevel 30
 	SET [21] 0
 	CHANGEEXP + 200000
 	CREDITPOINT + 10
-	SENDMSG 5 提示：任务已完成，你获得了10点声望，当前声望：<$CREDITPOINT>点...
+	GIVE 英雄令 1
+	SENDMSG 5 提示：任务已完成，你获得了10点声望，一张英雄令，当前声望：<$CREDITPOINT>点...
 	RefreshMissPage 176任务
 	ADDBUTTON 0 1 82 83 84 153 150 7 <PlayImg:0:82:2:200:0:0:0> 251#任务\250#打开任务窗口
 	SET [22] 1

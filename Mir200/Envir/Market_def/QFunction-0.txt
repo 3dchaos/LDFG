@@ -145,6 +145,11 @@ CHECK [99] 1
 
 #IF
 #ACT
+DELAYGOTO 10000 @延时如包检查
+
+[@延时如包检查]
+#IF
+#ACT
 #CALL [系统功能\老登辅助\入包回收.txt] @入包回收
 ;小地图点击邮件
 [@MinMapCustomButtonClick2]
