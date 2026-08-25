@@ -182,7 +182,7 @@ XueLingCustodian2=蓝色水灵
 XueLingCustodian3=紫色暗灵
 XueLingCustodian4=黄色土灵
 [Setup]
-ItemNumber=194704415
+ItemNumber=194886275
 ClientFile1 =mir.dat
 ClientFile2 =mir.2
 ClientFile3 =mir.3
@@ -721,7 +721,7 @@ UnknowRingSCAddRate=50
 UnknowRingSCAddValueMaxLimit=6
 SubkMasterSendMsg=1
 WinLotteryCount=0
-NoWinLotteryCount=30850500
+NoWinLotteryCount=30851500
 WinLotteryLevel1=9
 WinLotteryLevel2=88
 WinLotteryLevel3=449

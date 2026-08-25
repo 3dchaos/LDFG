@@ -478,7 +478,7 @@ break
 check [95] 0
 #ACT
 SET [95] 1
-SetOnTimer 84 15
+
 SENDMSG 7 设置成功，当有人请求英雄支援时会收到提示
 goto @辅助功能
 break
@@ -486,7 +486,7 @@ break
 check [95] 1
 #ACT
 SET [95] 0
-SETOFFTIMER 84
+
 SENDMSG 7 拒绝接受英雄支援请求
 goto @辅助功能
 break

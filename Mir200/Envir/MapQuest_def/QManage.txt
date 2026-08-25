@@ -149,15 +149,7 @@ SETOFFTIMER 4
 [@OnTimer87]
 #ACT
 #CALL [系统功能\军鼓BUFF.txt] @军鼓BUFF_刷新
-[@OnTimer84]
-#IF
-#ACT
-RefreshBag
 
-#IF
-CHECK [63] 1
-#ELSEACT
-SENDMSG 7 成功刷新背包
 
 ;月卡检查
 [@OnTimer9]
@@ -297,11 +289,7 @@ check [100] 1
 OpenAutoPickItem 1 0 15 1 0 0 500
 GuildNoticeMsg 255 249 [自动拾取已开启，可以自动拾取周围15*15范围的物品 ] Self
 
-#IF
-check [95] 1
-#ACT
-SetOnTimer 84 15
-SENDMSG 7 已开启自动刷新背包
+
 
 #IF
 check [98] 1

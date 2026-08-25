@@ -82,7 +82,7 @@ SENDMSG 6 记录偷窃一次，总共<$STR(U35)>次！
 #IF
 CHECKPKPOINTEX > <$STR(N$黄名PK值)>
 #ACT
-CHANGEPKPOINT = <$STR(N$红名PK值)>
+CHANGEPKPOINT + <$STR(N$红名PK值)>
 MESSAGEBOX 偷窃失败，你已经罪行累累，将被押送到红名村。
 GOTO @偷窃_犯罪检查
 BREAK
