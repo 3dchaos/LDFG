@@ -271,9 +271,8 @@ LARGE G0 4
 AddDlg 3 0 95 0 0:0 95:7 2 <$RELEVEL>次
 ;战士攻速补偿
 #IF
-CHECKJOB warrior
 #ACT
-CHANGESPEED 2 3
+#CALL [系统功能\军鼓BUFF.txt] @军鼓BUFF_刷新战士攻速
 ;回收战士称号
 #if(2)
 CHECKJOB wizard
@@ -383,7 +382,7 @@ Loopgoto @复制称号 N$数量
 #IF
 CheckHeroJob WARRIOR
 #ACT
-H.CHANGESPEED 2 3
+#CALL [系统功能\军鼓BUFF.txt] @军鼓BUFF_刷新战士英雄攻速
 SENDMSG 6 战士英雄攻速，准确补偿开启
 
 

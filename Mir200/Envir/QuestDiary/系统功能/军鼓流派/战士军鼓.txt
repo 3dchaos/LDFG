@@ -8,6 +8,8 @@ EQUAL N$军鼓品质 1
 MOV N$军鼓点 1
 MOV N$军鼓大点 2
 MOV N$军鼓血蓝 20
+MOV N$军鼓吸血 1
+MOV N$军鼓攻速 0
 MOV N$军鼓破防 0
 MOV N$军鼓准确 0
 MOV N$军鼓物伤减 0
@@ -22,6 +24,8 @@ EQUAL N$军鼓品质 2
 MOV N$军鼓点 1
 MOV N$军鼓大点 3
 MOV N$军鼓血蓝 40
+MOV N$军鼓吸血 1
+MOV N$军鼓攻速 0
 MOV N$军鼓破防 0
 MOV N$军鼓准确 0
 MOV N$军鼓物伤减 0
@@ -36,6 +40,8 @@ EQUAL N$军鼓品质 3
 MOV N$军鼓点 2
 MOV N$军鼓大点 4
 MOV N$军鼓血蓝 70
+MOV N$军鼓吸血 2
+MOV N$军鼓攻速 2
 MOV N$军鼓破防 1
 MOV N$军鼓准确 0
 MOV N$军鼓物伤减 2
@@ -50,6 +56,8 @@ EQUAL N$军鼓品质 4
 MOV N$军鼓点 2
 MOV N$军鼓大点 5
 MOV N$军鼓血蓝 110
+MOV N$军鼓吸血 2
+MOV N$军鼓攻速 3
 MOV N$军鼓破防 2
 MOV N$军鼓准确 1
 MOV N$军鼓物伤减 3
@@ -64,6 +72,8 @@ EQUAL N$军鼓品质 5
 MOV N$军鼓点 3
 MOV N$军鼓大点 7
 MOV N$军鼓血蓝 150
+MOV N$军鼓吸血 3
+MOV N$军鼓攻速 4
 MOV N$军鼓破防 3
 MOV N$军鼓准确 1
 MOV N$军鼓物伤减 4
@@ -78,6 +88,8 @@ EQUAL N$军鼓品质 6
 MOV N$军鼓点 3
 MOV N$军鼓大点 8
 MOV N$军鼓血蓝 200
+MOV N$军鼓吸血 4
+MOV N$军鼓攻速 5
 MOV N$军鼓破防 4
 MOV N$军鼓准确 2
 MOV N$军鼓物伤减 5
@@ -109,6 +121,7 @@ AddHumNewValue 5 = 0
 AddHumNewValue 19 = 0
 AddHumNewValue 24 = 0
 UpdateAbil
+ChangeState 10 3 100 <$STR(N$军鼓吸血)>
 }
 
 [@军鼓warrior_关闭_基础]
@@ -174,8 +187,8 @@ GOTO @军鼓warrior_刷新_铁头娃
 LockUpdateAbil
 AddHumNewValue 2 = <$STR(N$军鼓物伤减)> 3
 AddHumNewValue 3 = <$STR(N$军鼓魔伤减)> 3
-AddHumNewValue 19 = <$STR(N$军鼓暴抗)> 3
-AddHumNewValue 24 = <$STR(N$军鼓防冰)> 3
+AddHumNewValue 19 = <$STR(N$军鼓防冰)> 3
+AddHumNewValue 24 = <$STR(N$军鼓暴抗)> 3
 UpdateAbil
 }
 
@@ -201,6 +214,7 @@ GOTO @军鼓warrior_刷新_剁馅机
 LockUpdateAbil
 ChangeHumAbility 19 = <$STR(N$军鼓准确)> 3
 UpdateAbil
+
 }
 
 [@军鼓warrior_关闭_剁馅机]
