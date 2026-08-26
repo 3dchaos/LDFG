@@ -1,6 +1,6 @@
 [@main]
 #IF
-	LARGE G0 8
+	LARGE G0 9
 	#ELSESAY
 	没有任何回应，这个奇怪的雪人在这很久了（1.85开放内容）
 	#ELSEACT
@@ -37,7 +37,7 @@ CHECK [250] 1
 <Text:你目前未拥有雪域镜像:180:38{FCOLOR=246}>\
 [@野图]
 #IF
-	SMALL G0 9
+	SMALL G0 10
 #ACT
 	MESSAGEBOX 暂未开放
 	BREAK
@@ -66,7 +66,7 @@ BREAK
 
 [@单人]
 #IF
-	LARGE G0 8
+	LARGE G0 9
 	#ELSEACT
 	MESSAGEBOX 暂未开放
 	BREAK
@@ -121,7 +121,7 @@ BREAK
 
 [@组队]
 #IF
-	LARGE G0 8
+	LARGE G0 9
 	#ELSEACT
 	MESSAGEBOX 暂未开放
 	BREAK

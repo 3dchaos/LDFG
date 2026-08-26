@@ -7,7 +7,7 @@
 <苍月岛在哪/@苍月岛在哪>\
 <去圣域/@j>勋章地图\
 #IF
-	LARGE G0 8
+	LARGE G0 11
 	#ELSESAY
 	前段时间我在捕鱼的时候发现一个奇怪的岛屿，\
 	迷雾中影影绰绰有一个倩影！（狐月开放内容）
@@ -33,7 +33,7 @@ check [255] 1
 
 [@直接买票]
 #IF
-SMALL G0 9
+SMALL G0 12
 #ACT
 MESSAGEBOX 当前区域尚未开放。
 BREAK
@@ -73,7 +73,7 @@ SENDMSG 5 幻化被识破，幻象已经湮灭。
 
 [@买票]
 #IF
-SMALL G0 9
+SMALL G0 12
 #ACT
 MESSAGEBOX 当前区域尚未开放。
 BREAK

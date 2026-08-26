@@ -73,29 +73,41 @@ MOV N$军鼓当前品质 <$STR(N$军鼓品质)>
 #CALL [系统功能\军鼓BUFF.txt] @军鼓BUFF_刷新战士攻速
 }
 
+[@军鼓BUFF_刷新战士基础攻速]
+{
+#IF
+NOT CHECKJOB warrior
+#ACT
+MOV N$战士基础攻速 0
+BREAK
+
+#IF
+#ACT
+MOV N$战士基础攻速 3
+}
+
 [@军鼓BUFF_刷新战士攻速]
 {
 #IF
+NOT CHECKJOB warrior
 #ACT
-MOV N$军鼓职业基础攻速 0
-MOV N$军鼓路线攻速 0
-MOV N$军鼓最终攻速 0
+BREAK
 
 #IF
-CHECKJOB warrior
 #ACT
-MOV N$军鼓职业基础攻速 3
+#CALL [系统功能\军鼓BUFF.txt] @军鼓BUFF_刷新战士基础攻速
+MOV N$战士路线攻速 0
+MOV N$战士最终攻速 0
 
 #IF
-CHECKJOB warrior
 EQUAL <$STR(S$军鼓当前方向)> 剁馅机
 #ACT
-MOV N$军鼓路线攻速 <$STR(N$军鼓攻速)>
+MOV N$战士路线攻速 <$STR(N$军鼓攻速)>
 
 #IF
 #ACT
-FORMULATION <$STR(N$军鼓职业基础攻速)>+<$STR(N$军鼓路线攻速)> N$军鼓最终攻速
-ChangeSpeed 2 <$STR(N$军鼓最终攻速)> 3
+FORMULATION <$STR(N$战士基础攻速)>+<$STR(N$战士路线攻速)> N$战士最终攻速
+ChangeSpeed 2 <$STR(N$战士最终攻速)> 3
 }
 
 [@军鼓BUFF_刷新战士英雄攻速]
@@ -103,10 +115,10 @@ ChangeSpeed 2 <$STR(N$军鼓最终攻速)> 3
 #IF
 CheckHeroJob WARRIOR
 #ACT
-MOV N$战士英雄最终攻速 3
+MOV N$战士英雄基础攻速 3
+MOV N$战士英雄最终攻速 <$STR(N$战士英雄基础攻速)>
 H.CHANGESPEED 2 <$STR(N$战士英雄最终攻速)> 3
 }
-
 [@军鼓BUFF_应用当前模块]
 {
 #IF

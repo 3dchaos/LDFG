@@ -38,7 +38,7 @@ CHECK [251] 1
 
 [@野图]
 #IF
-	LARGE G0 8
+	LARGE G0 11
 	#ELSEACT
 	MESSAGEBOX 这个区域还是太危险,等我们探索完毕...
 	BREAK
@@ -97,7 +97,7 @@ OPENMERCHANTBIGDLG 24 20 1 0 0 0 1 390 20 1
 [@单人]
 
 #IF
-	LARGE G0 8
+	LARGE G0 11
 	#ELSEACT
 	MESSAGEBOX 这个区域还是太危险,等我们探索完毕...
 	BREAK
@@ -148,7 +148,7 @@ BREAK
 
 [@组队]
 #IF
-	LARGE G0 8
+	LARGE G0 11
 	#ELSEACT
 	MESSAGEBOX 这个区域还是太危险,等我们探索完毕...
 	BREAK

@@ -269,7 +269,7 @@ ADDBUTTON 0 2 104 104 104 95 125 7 -1
 LARGE G0 4
 #ACT
 AddDlg 3 0 95 0 0:0 95:7 2 <$RELEVEL>次
-;战士攻速补偿
+;战士登录攻速平衡
 #IF
 #ACT
 #CALL [系统功能\军鼓BUFF.txt] @军鼓BUFF_刷新战士攻速

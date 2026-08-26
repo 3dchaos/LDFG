@@ -49,7 +49,7 @@ OpenBigDialogBox <$STR(N$资源编号)> 16 1 4 0 0 1 384 23
 
 [@返回火龙迷宫]
 #IF
-SMALL G0 9
+SMALL G0 11
 #ACT
 MESSAGEBOX 当前区域尚未开放。
 BREAK
@@ -131,7 +131,7 @@ CHECKRANGEMONCOUNTEX hl002 火蟒 36 183 400 > 0
 
 [@单人进入] 
 #IF
-SMALL G0 9
+SMALL G0 11
 #ACT
 MESSAGEBOX 当前区域尚未开放。
 BREAK
@@ -157,7 +157,7 @@ BREAK
 
 [@组队进去]
 #IF
-SMALL G0 9
+SMALL G0 11
 #ACT
 MESSAGEBOX 当前区域尚未开放。
 BREAK

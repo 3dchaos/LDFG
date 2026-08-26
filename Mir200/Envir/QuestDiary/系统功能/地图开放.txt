@@ -87,10 +87,59 @@ EQUAL G0 8
 #ACT
 MOV G0 9
 goto @地图开放_刷新链接
-SENDMSG 1 【世界进度】<$USERNAME> 击杀魔龙教主，雪域、雷炎、火龙、狐月后期地图已经开放！
+SENDMSG 1 【世界进度】<$USERNAME> 击杀魔龙教主，雷炎区域已经开放！
 BREAK
 
+#IF
+CheckKillMonName 雷炎蛛王[BOSS]
+EQUAL <$MAP> hl002
+EQUAL G0 9
+#ACT
+MOV G0 10
+goto @地图开放_刷新链接
+SENDMSG 1 【世界进度】<$USERNAME> 击杀雷炎蛛王[BOSS]，雪域区域已经开放！
+BREAK
 
+#IF
+CheckKillMonName 雷炎蛛王[BOSS]
+EQUAL <$MAP> H301
+EQUAL G0 9
+#ACT
+MOV G0 10
+goto @地图开放_刷新链接
+SENDMSG 1 【世界进度】<$USERNAME> 击杀雷炎蛛王[BOSS]，雪域区域已经开放！
+BREAK
+
+#IF
+CheckKillMonName 雪域魔王[BOSS]
+EQUAL <$MAP> hell206
+EQUAL G0 10
+#ACT
+MOV G0 11
+goto @地图开放_刷新链接
+SENDMSG 1 【世界进度】<$USERNAME> 击杀雪域魔王[BOSS]，火龙区域已经开放！
+BREAK
+
+#IF
+CheckKillMonName 雪域魔王[BOSS]
+EQUAL <$MAP> YXSD
+EQUAL G0 10
+#ACT
+MOV G0 11
+goto @地图开放_刷新链接
+SENDMSG 1 【世界进度】<$USERNAME> 击杀雪域魔王[BOSS]，火龙区域已经开放！
+BREAK
+
+#IF
+CheckKillMonName 火龙教主
+EQUAL <$MAP> D2083
+EQUAL G0 11
+#ACT
+MOV G0 12
+goto @地图开放_刷新链接
+SENDMSG 1 【世界进度】<$USERNAME> 击杀火龙教主，狐月区域已经开放！
+BREAK
+}
 [@地图开放_越境纠正]
 
 #IF
@@ -105,9 +154,9 @@ MOV G0 0
 GOTO @地图开放_送回比奇
 
 #IF
-LARGE G0 9
+LARGE G0 12
 #ACT
-MOV G0 9
+MOV G0 12
 GOTO @地图开放_送回比奇
 
 #IF
@@ -1092,35 +1141,6 @@ EQUAL <$MAP> EM300
 GOTO @地图开放_送回比奇
 
 [@地图开放_检查阶段9]
-#IF
-SMALL G0 9
-EQUAL <$MAP> hell201
-#ACT
-GOTO @地图开放_送回比奇
-
-#IF
-SMALL G0 9
-EQUAL <$MAP> hell202
-#ACT
-GOTO @地图开放_送回比奇
-
-#IF
-SMALL G0 9
-EQUAL <$MAP> hell203
-#ACT
-GOTO @地图开放_送回比奇
-
-#IF
-SMALL G0 9
-EQUAL <$MAP> hell206
-#ACT
-GOTO @地图开放_送回比奇
-
-#IF
-SMALL G0 9
-EQUAL <$MAP> YXSD
-#ACT
-GOTO @地图开放_送回比奇
 
 #IF
 SMALL G0 9
@@ -1142,42 +1162,6 @@ GOTO @地图开放_送回比奇
 
 #IF
 SMALL G0 9
-EQUAL <$MAP> hlmg
-#ACT
-GOTO @地图开放_送回比奇
-
-#IF
-SMALL G0 9
-EQUAL <$MAP> hlyszm
-#ACT
-GOTO @地图开放_送回比奇
-
-#IF
-SMALL G0 9
-EQUAL <$MAP> D2083
-#ACT
-GOTO @地图开放_送回比奇
-
-#IF
-SMALL G0 9
-EQUAL <$MAP> FOX01
-#ACT
-GOTO @地图开放_送回比奇
-
-#IF
-SMALL G0 9
-EQUAL <$MAP> FOX02
-#ACT
-GOTO @地图开放_送回比奇
-
-#IF
-SMALL G0 9
-EQUAL <$MAP> FOX03
-#ACT
-GOTO @地图开放_送回比奇
-
-#IF
-SMALL G0 9
 EQUAL <$MAP> yssd
 #ACT
 GOTO @地图开放_送回比奇
@@ -1194,7 +1178,89 @@ EQUAL <$MAP> hero2
 #ACT
 GOTO @地图开放_送回比奇
 
+#IF
+#ACT
+#CALL [系统功能\地图开放.txt] @地图开放_检查阶段10
 
+[@地图开放_检查阶段10]
+
+#IF
+SMALL G0 10
+EQUAL <$MAP> hell201
+#ACT
+GOTO @地图开放_送回比奇
+
+#IF
+SMALL G0 10
+EQUAL <$MAP> hell202
+#ACT
+GOTO @地图开放_送回比奇
+
+#IF
+SMALL G0 10
+EQUAL <$MAP> hell203
+#ACT
+GOTO @地图开放_送回比奇
+
+#IF
+SMALL G0 10
+EQUAL <$MAP> hell206
+#ACT
+GOTO @地图开放_送回比奇
+
+#IF
+SMALL G0 10
+EQUAL <$MAP> YXSD
+#ACT
+GOTO @地图开放_送回比奇
+
+#IF
+#ACT
+#CALL [系统功能\地图开放.txt] @地图开放_检查阶段11
+
+[@地图开放_检查阶段11]
+
+#IF
+SMALL G0 11
+EQUAL <$MAP> hlmg
+#ACT
+GOTO @地图开放_送回比奇
+
+#IF
+SMALL G0 11
+EQUAL <$MAP> hlyszm
+#ACT
+GOTO @地图开放_送回比奇
+
+#IF
+SMALL G0 11
+EQUAL <$MAP> D2083
+#ACT
+GOTO @地图开放_送回比奇
+
+#IF
+#ACT
+#CALL [系统功能\地图开放.txt] @地图开放_检查阶段12
+
+[@地图开放_检查阶段12]
+
+#IF
+SMALL G0 12
+EQUAL <$MAP> FOX01
+#ACT
+GOTO @地图开放_送回比奇
+
+#IF
+SMALL G0 12
+EQUAL <$MAP> FOX02
+#ACT
+GOTO @地图开放_送回比奇
+
+#IF
+SMALL G0 12
+EQUAL <$MAP> FOX03
+#ACT
+GOTO @地图开放_送回比奇
 [@地图开放_刷新链接]
 
 #IF

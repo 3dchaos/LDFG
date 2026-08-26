@@ -18,7 +18,7 @@
 <收束狐月天珠/@后期奇遇_收束狐月>后期奇遇\
 [@组队前往封印祭坛]
 #if
-SMALL G0 9
+SMALL G0 12
 #ACT
 MESSAGEBOX 当前区域尚未开放。
 BREAK
@@ -49,7 +49,7 @@ GROUPMAPMOVE  FOX01 274 126 @GROUPMAPMOVE 400
 SENDMSG 6 组队传送 
 [@前往封印祭坛]
 #IF
-SMALL G0 9
+SMALL G0 12
 #ACT
 MESSAGEBOX 当前区域尚未开放。
 BREAK
