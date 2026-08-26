@@ -5,14 +5,14 @@
 #IF
 EQUAL N$军鼓品质 1
 #ACT
-MOV N$军鼓点 1
-MOV N$军鼓大点 2
-MOV N$军鼓血蓝 20
-MOV N$军鼓吸血 1
-MOV N$军鼓攻速 0
-MOV N$军鼓破防 0
+MOV N$军鼓点 2
+MOV N$军鼓大点 4
+MOV N$军鼓血蓝 60
+MOV N$军鼓吸血 2
+MOV N$军鼓攻速 1
+MOV N$军鼓破防 1
 MOV N$军鼓准确 0
-MOV N$军鼓物伤减 0
+MOV N$军鼓物伤减 1
 MOV N$军鼓魔伤减 0
 MOV N$军鼓暴抗 0
 MOV N$军鼓防冰 0
@@ -21,42 +21,26 @@ BREAK
 #IF
 EQUAL N$军鼓品质 2
 #ACT
-MOV N$军鼓点 1
-MOV N$军鼓大点 3
-MOV N$军鼓血蓝 40
-MOV N$军鼓吸血 1
-MOV N$军鼓攻速 0
-MOV N$军鼓破防 0
-MOV N$军鼓准确 0
-MOV N$军鼓物伤减 0
-MOV N$军鼓魔伤减 0
-MOV N$军鼓暴抗 0
+MOV N$军鼓点 3
+MOV N$军鼓大点 5
+MOV N$军鼓血蓝 100
+MOV N$军鼓吸血 2
+MOV N$军鼓攻速 2
+MOV N$军鼓破防 1
+MOV N$军鼓准确 1
+MOV N$军鼓物伤减 1
+MOV N$军鼓魔伤减 1
+MOV N$军鼓暴抗 1
 MOV N$军鼓防冰 0
 BREAK
 
 #IF
 EQUAL N$军鼓品质 3
 #ACT
-MOV N$军鼓点 2
-MOV N$军鼓大点 4
-MOV N$军鼓血蓝 70
-MOV N$军鼓吸血 2
-MOV N$军鼓攻速 2
-MOV N$军鼓破防 1
-MOV N$军鼓准确 0
-MOV N$军鼓物伤减 2
-MOV N$军鼓魔伤减 1
-MOV N$军鼓暴抗 1
-MOV N$军鼓防冰 1
-BREAK
-
-#IF
-EQUAL N$军鼓品质 4
-#ACT
-MOV N$军鼓点 2
-MOV N$军鼓大点 5
-MOV N$军鼓血蓝 110
-MOV N$军鼓吸血 2
+MOV N$军鼓点 3
+MOV N$军鼓大点 6
+MOV N$军鼓血蓝 140
+MOV N$军鼓吸血 3
 MOV N$军鼓攻速 3
 MOV N$军鼓破防 2
 MOV N$军鼓准确 1
@@ -67,15 +51,15 @@ MOV N$军鼓防冰 1
 BREAK
 
 #IF
-EQUAL N$军鼓品质 5
+EQUAL N$军鼓品质 4
 #ACT
-MOV N$军鼓点 3
+MOV N$军鼓点 4
 MOV N$军鼓大点 7
-MOV N$军鼓血蓝 150
+MOV N$军鼓血蓝 180
 MOV N$军鼓吸血 3
 MOV N$军鼓攻速 4
 MOV N$军鼓破防 3
-MOV N$军鼓准确 1
+MOV N$军鼓准确 2
 MOV N$军鼓物伤减 4
 MOV N$军鼓魔伤减 3
 MOV N$军鼓暴抗 3
@@ -83,11 +67,11 @@ MOV N$军鼓防冰 2
 BREAK
 
 #IF
-EQUAL N$军鼓品质 6
+EQUAL N$军鼓品质 5
 #ACT
-MOV N$军鼓点 3
-MOV N$军鼓大点 8
-MOV N$军鼓血蓝 200
+MOV N$军鼓点 4
+MOV N$军鼓大点 9
+MOV N$军鼓血蓝 230
 MOV N$军鼓吸血 4
 MOV N$军鼓攻速 5
 MOV N$军鼓破防 4
@@ -95,6 +79,22 @@ MOV N$军鼓准确 2
 MOV N$军鼓物伤减 5
 MOV N$军鼓魔伤减 4
 MOV N$军鼓暴抗 4
+MOV N$军鼓防冰 2
+BREAK
+
+#IF
+EQUAL N$军鼓品质 6
+#ACT
+MOV N$军鼓点 5
+MOV N$军鼓大点 10
+MOV N$军鼓血蓝 300
+MOV N$军鼓吸血 5
+MOV N$军鼓攻速 5
+MOV N$军鼓破防 5
+MOV N$军鼓准确 3
+MOV N$军鼓物伤减 6
+MOV N$军鼓魔伤减 5
+MOV N$军鼓暴抗 5
 MOV N$军鼓防冰 3
 }
 
