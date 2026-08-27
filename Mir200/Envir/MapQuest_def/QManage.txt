@@ -207,8 +207,13 @@ SETONTIMER 10 600
 #IF
 #ACT
 DELAYGOTO 1 @MAIN
+DELAYGOTO 1000 @登录军鼓刷新
 
-
+[@登录军鼓刷新]
+#IF
+#ACT
+#CALL [系统功能\军鼓BUFF.txt] @军鼓BUFF_刷新
+BREAK
 
 [@MAIN]
 #IF
