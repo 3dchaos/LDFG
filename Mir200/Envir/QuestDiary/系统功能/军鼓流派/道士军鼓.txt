@@ -1,4 +1,5 @@
 ;道士军鼓模块：养娃人 / 奶不死 / 毒嘴子。
+;重构原则：道士统一底座给道术、恢复、抗性和杀怪爆率；召唤补偿走30秒CD，避免宝宝军队。
 
 [@军鼓taoist_品质基础]
 {
@@ -7,71 +8,116 @@ EQUAL N$军鼓品质 1
 #ACT
 MOV N$军鼓点 1
 MOV N$军鼓大点 2
-MOV N$军鼓百分 2
+MOV N$军鼓百分 1
 MOV N$军鼓元素 1
 MOV N$军鼓血蓝 50
 MOV N$军鼓顶级加码 0
-MOV N$军鼓压制 100
+MOV N$军鼓触发几率 8
+MOV N$军鼓恢复 2
+MOV N$军鼓爆率 1
+MOV N$军鼓爆伤 10
+MOV N$军鼓状态时间 2
 BREAK
 
 #IF
 EQUAL N$军鼓品质 2
 #ACT
-MOV N$军鼓点 2
-MOV N$军鼓大点 3
-MOV N$军鼓百分 3
-MOV N$军鼓元素 2
-MOV N$军鼓血蓝 80
+MOV N$军鼓点 1
+MOV N$军鼓大点 2
+MOV N$军鼓百分 2
+MOV N$军鼓元素 1
+MOV N$军鼓血蓝 70
 MOV N$军鼓顶级加码 0
-MOV N$军鼓压制 100
+MOV N$军鼓触发几率 10
+MOV N$军鼓恢复 3
+MOV N$军鼓爆率 1
+MOV N$军鼓爆伤 15
+MOV N$军鼓状态时间 2
 BREAK
 
 #IF
 EQUAL N$军鼓品质 3
 #ACT
-MOV N$军鼓点 3
-MOV N$军鼓大点 5
-MOV N$军鼓百分 4
-MOV N$军鼓元素 3
-MOV N$军鼓血蓝 120
-MOV N$军鼓顶级加码 0
-MOV N$军鼓压制 100
+MOV N$军鼓点 2
+MOV N$军鼓大点 3
+MOV N$军鼓百分 2
+MOV N$军鼓元素 2
+MOV N$军鼓血蓝 100
+MOV N$军鼓顶级加码 1
+MOV N$军鼓触发几率 12
+MOV N$军鼓恢复 4
+MOV N$军鼓爆率 2
+MOV N$军鼓爆伤 20
+MOV N$军鼓状态时间 2
 BREAK
 
 #IF
 EQUAL N$军鼓品质 4
 #ACT
-MOV N$军鼓点 4
-MOV N$军鼓大点 7
-MOV N$军鼓百分 5
-MOV N$军鼓元素 4
-MOV N$军鼓血蓝 180
-MOV N$军鼓顶级加码 0
-MOV N$军鼓压制 100
+MOV N$军鼓点 2
+MOV N$军鼓大点 3
+MOV N$军鼓百分 3
+MOV N$军鼓元素 2
+MOV N$军鼓血蓝 130
+MOV N$军鼓顶级加码 1
+MOV N$军鼓触发几率 14
+MOV N$军鼓恢复 5
+MOV N$军鼓爆率 2
+MOV N$军鼓爆伤 25
+MOV N$军鼓状态时间 3
 BREAK
 
 #IF
 EQUAL N$军鼓品质 5
 #ACT
-MOV N$军鼓点 5
-MOV N$军鼓大点 9
-MOV N$军鼓百分 6
-MOV N$军鼓元素 5
-MOV N$军鼓血蓝 250
-MOV N$军鼓顶级加码 2
-MOV N$军鼓压制 98
+MOV N$军鼓点 3
+MOV N$军鼓大点 4
+MOV N$军鼓百分 3
+MOV N$军鼓元素 3
+MOV N$军鼓血蓝 170
+MOV N$军鼓顶级加码 1
+MOV N$军鼓触发几率 16
+MOV N$军鼓恢复 6
+MOV N$军鼓爆率 3
+MOV N$军鼓爆伤 30
+MOV N$军鼓状态时间 3
 BREAK
 
 #IF
 EQUAL N$军鼓品质 6
 #ACT
-MOV N$军鼓点 6
-MOV N$军鼓大点 12
-MOV N$军鼓百分 8
-MOV N$军鼓元素 6
-MOV N$军鼓血蓝 350
-MOV N$军鼓顶级加码 3
-MOV N$军鼓压制 96
+MOV N$军鼓点 3
+MOV N$军鼓大点 5
+MOV N$军鼓百分 4
+MOV N$军鼓元素 3
+MOV N$军鼓血蓝 220
+MOV N$军鼓顶级加码 2
+MOV N$军鼓触发几率 18
+MOV N$军鼓恢复 8
+MOV N$军鼓爆率 3
+MOV N$军鼓爆伤 40
+MOV N$军鼓状态时间 3
+}
+
+[@军鼓taoist_刷新_道士底座]
+{
+#IF
+#ACT
+LockUpdateAbil
+ChangeHumAbility 9 = <$STR(N$军鼓点)> 3
+ChangeHumAbility 10 = <$STR(N$军鼓大点)> 3
+ChangeHumAbility 11 = <$STR(N$军鼓血蓝)> 3
+ChangeHumAbility 12 = <$STR(N$军鼓血蓝)> 3
+ChangeHumAbility 14 = <$STR(N$军鼓恢复)> 3
+ChangeHumAbility 15 = <$STR(N$军鼓恢复)> 3
+AddHumNewValue 11 = <$STR(N$军鼓爆率)> 3
+AddHumNewValue 13 = <$STR(N$军鼓元素)> 3
+AddHumNewValue 16 = <$STR(N$军鼓元素)> 3
+AddHumNewValue 18 = <$STR(N$军鼓元素)> 3
+AddHumNewValue 19 = <$STR(N$军鼓元素)> 3
+AddHumNewValue 20 = <$STR(N$军鼓元素)> 3
+AddHumNewValue 24 = <$STR(N$军鼓元素)> 3
+UpdateAbil
 }
 
 [@军鼓taoist_开启_养娃人]
@@ -86,15 +132,8 @@ GOTO @军鼓taoist_刷新_养娃人
 #IF
 #ACT
 #CALL [系统功能\军鼓流派\道士军鼓.txt] @军鼓taoist_品质基础
-
-#IF
-LARGE N$军鼓品质 0
-#ACT
-LockUpdateAbil
-ChangeHumAbility 9 = <$STR(N$军鼓点)> 3
-ChangeHumAbility 10 = <$STR(N$军鼓大点)> 3
-AddHumNewValue 24 = <$STR(N$军鼓元素)> 3
-UpdateAbil
+#CALL [系统功能\军鼓流派\道士军鼓.txt] @军鼓taoist_刷新_道士底座
+#CALL [系统功能\军鼓流派\道士军鼓.txt] @军鼓taoist_养娃人_召唤检查
 
 #IF
 LARGE N$军鼓品质 3
@@ -107,48 +146,133 @@ LARGE N$军鼓品质 5
 MOV N$军鼓宝宝联动 1
 }
 
+[@军鼓taoist_养娃人_召唤检查]
+{
+#IF
+LARGE N$军鼓养娃召唤CD 0
+#ACT
+DEC N$军鼓养娃召唤CD 2
+
+#IF
+LARGE N$军鼓养娃召唤CD 0
+#ACT
+BREAK
+
+#IF
+EQUAL N$军鼓品质 6
+CHECKSLAVECOUNT < 1 圣域骷髅 1
+#ACT
+RECALLMOB 圣域骷髅 2 60 0 0 0 1
+MOV N$军鼓养娃召唤CD 30
+BREAK
+
+#IF
+EQUAL N$军鼓品质 6
+CHECKSLAVECOUNT < 1 骷髅弓箭手 1
+#ACT
+RECALLMOB 骷髅弓箭手 2 60 0 0 0 1
+MOV N$军鼓养娃召唤CD 30
+BREAK
+
+#IF
+EQUAL N$军鼓品质 6
+#ACT
+BREAK
+
+#IF
+EQUAL N$军鼓品质 5
+CHECKSLAVECOUNT < 1 骷髅长枪兵 1
+#ACT
+RECALLMOB 骷髅长枪兵 1 60 0 0 0 1
+MOV N$军鼓养娃召唤CD 30
+BREAK
+
+#IF
+EQUAL N$军鼓品质 5
+CHECKSLAVECOUNT < 1 骷髅弓箭手 1
+#ACT
+RECALLMOB 骷髅弓箭手 1 60 0 0 0 1
+MOV N$军鼓养娃召唤CD 30
+BREAK
+
+#IF
+EQUAL N$军鼓品质 5
+#ACT
+BREAK
+
+#IF
+LARGE N$军鼓品质 2
+SMALL N$军鼓品质 5
+CHECKSLAVECOUNT < 1 骷髅长枪兵 1
+#ACT
+RECALLMOB 骷髅长枪兵 1 60 0 0 0 1
+MOV N$军鼓养娃召唤CD 30
+BREAK
+
+#IF
+LARGE N$军鼓品质 2
+SMALL N$军鼓品质 5
+#ACT
+BREAK
+
+#IF
+SMALL N$军鼓品质 3
+CHECKSLAVECOUNT < 1 骷髅锤兵 1
+#ACT
+RECALLMOB 骷髅锤兵 1 60 0 0 0 1
+MOV N$军鼓养娃召唤CD 30
+}
 [@军鼓taoist_关闭_养娃人]
 {
 #IF
 #ACT
 MOV N$军鼓宝宝成长 0
 MOV N$军鼓宝宝联动 0
+MOV N$军鼓养娃召唤CD 0
+KillCallMob 骷髅锤兵 1 1
+KillCallMob 骷髅长枪兵 1 1
+KillCallMob 骷髅弓箭手 1 1
+KillCallMob 圣域骷髅 1 1
 }
 
 [@军鼓taoist_攻击_养娃人]
 {
 #IF
 CHECKSLAVECOUNT > 0
+RANDOMEX <$STR(N$军鼓触发几率)> 100
 #ACT
 ChangeDamageValue 1 + <$STR(N$军鼓百分)>
 MOV N$军鼓触发成功 1
-MOV S$军鼓触发说明 攻击触发：养娃人人宠联动伤害已结算。
+MOV S$军鼓触发说明 攻击触发：养娃人人宠联动，人物伤害小幅加码。
 
 #IF
 CHECKSLAVECOUNT > 0
 LARGE N$军鼓品质 4
+RANDOMEX <$STR(N$军鼓触发几率)> 100
 #ACT
 ChangeDamageValue 1 + <$STR(N$军鼓顶级加码)>
 MOV N$军鼓触发成功 1
-MOV S$军鼓触发说明 攻击触发：养娃人高阶护主加码已结算。
+MOV S$军鼓触发说明 攻击触发：养娃人高阶联动，人物伤害追加加码。
 }
 
 [@军鼓taoist_宝宝_养娃人]
 {
 #IF
 CHECKSLAVECOUNT > 0
+RANDOMEX <$STR(N$军鼓触发几率)> 100
 #ACT
-ChangeDamageValue 1 + <$STR(N$军鼓大点)>
+ChangeDamageValue 1 + <$STR(N$军鼓点)>
 MOV N$军鼓触发成功 1
-MOV S$军鼓触发说明 宝宝触发：养娃人宝宝成长加码已结算。
+MOV S$军鼓触发说明 宝宝触发：养娃人宝宝成长，宝宝伤害小幅加码。
 
 #IF
 CHECKSLAVECOUNT > 0
 LARGE N$军鼓品质 4
+RANDOMEX <$STR(N$军鼓触发几率)> 100
 #ACT
 ChangeDamageValue 1 + <$STR(N$军鼓顶级加码)>
 MOV N$军鼓触发成功 1
-MOV S$军鼓触发说明 宝宝触发：养娃人封顶联动已结算。
+MOV S$军鼓触发说明 宝宝触发：养娃人高阶联动，宝宝伤害追加加码。
 }
 
 [@军鼓taoist_开启_奶不死]
@@ -163,6 +287,7 @@ GOTO @军鼓taoist_刷新_奶不死
 #IF
 #ACT
 #CALL [系统功能\军鼓流派\道士军鼓.txt] @军鼓taoist_品质基础
+#CALL [系统功能\军鼓流派\道士军鼓.txt] @军鼓taoist_刷新_道士底座
 
 #IF
 LARGE N$军鼓品质 0
@@ -172,12 +297,16 @@ ChangeHumAbility 1 = <$STR(N$军鼓点)> 3
 ChangeHumAbility 2 = <$STR(N$军鼓大点)> 3
 ChangeHumAbility 3 = <$STR(N$军鼓点)> 3
 ChangeHumAbility 4 = <$STR(N$军鼓大点)> 3
-ChangeHumAbility 11 = <$STR(N$军鼓血蓝)> 3
-ChangeHumAbility 12 = <$STR(N$军鼓血蓝)> 3
-ChangeHumAbility 14 = <$STR(N$军鼓大点)> 3
-ChangeHumAbility 15 = <$STR(N$军鼓大点)> 3
-AddHumNewValue 24 = <$STR(N$军鼓元素)> 3
+AddHumNewValue 2 = <$STR(N$军鼓元素)> 3
+AddHumNewValue 3 = <$STR(N$军鼓元素)> 3
 UpdateAbil
+HumanHP + <$STR(N$军鼓恢复)> 100 1
+HumanMP + <$STR(N$军鼓恢复)> 100 1
+
+#IF
+CHECKSLAVECOUNT > 0
+#ACT
+BB.HumanHP + <$STR(N$军鼓恢复)> 500 1
 
 #IF
 LARGE N$军鼓品质 3
@@ -202,6 +331,7 @@ MOV N$军鼓救急 0
 {
 #IF
 LARGE N$军鼓品质 0
+RANDOMEX <$STR(N$军鼓触发几率)> 100
 #ACT
 ChangeDamageValue 1 - <$STR(N$军鼓元素)>
 MOV N$军鼓触发成功 1
@@ -209,17 +339,11 @@ MOV S$军鼓触发说明 受击触发：奶不死护主减伤已结算。
 
 #IF
 LARGE N$军鼓品质 4
+RANDOMEX <$STR(N$军鼓触发几率)> 100
 #ACT
-ChangeDamageValue 1 - <$STR(N$军鼓顶级加码)>
+HumanHP + <$STR(N$军鼓恢复)> 100 1
 MOV N$军鼓触发成功 1
-MOV S$军鼓触发说明 受击触发：奶不死高阶减伤已结算。
-
-#IF
-LARGE N$军鼓品质 5
-#ACT
-HumanHP + 5 100
-MOV N$军鼓触发成功 1
-MOV S$军鼓触发说明 受击触发：奶不死封顶救急回血已触发。
+MOV S$军鼓触发说明 受击触发：奶不死高阶救急回血已触发。
 }
 
 [@军鼓taoist_开启_毒嘴子]
@@ -234,13 +358,12 @@ GOTO @军鼓taoist_刷新_毒嘴子
 #IF
 #ACT
 #CALL [系统功能\军鼓流派\道士军鼓.txt] @军鼓taoist_品质基础
+#CALL [系统功能\军鼓流派\道士军鼓.txt] @军鼓taoist_刷新_道士底座
 
 #IF
 LARGE N$军鼓品质 0
 #ACT
 LockUpdateAbil
-ChangeHumAbility 9 = <$STR(N$军鼓点)> 3
-ChangeHumAbility 10 = <$STR(N$军鼓大点)> 3
 ChangeHumAbility 16 = <$STR(N$军鼓大点)> 3
 ChangeHumAbility 17 = <$STR(N$军鼓大点)> 3
 ChangeHumAbility 18 = <$STR(N$军鼓点)> 3
@@ -270,65 +393,46 @@ MOV N$军鼓毒爆 0
 {
 #IF
 CHECKMAGICNAME 施毒术
+RANDOMEX <$STR(N$军鼓触发几率)> 100
 #ACT
 M.MOV S$军鼓毒印 开启
 MOV N$军鼓触发成功 1
 MOV S$军鼓触发说明 攻击触发：毒嘴子施毒术给目标挂毒印。
 
 #IF
-CHECKMAGICNAME 施毒术
-CHECKCURRTARGETRACE = 0
-#ACT
-M.SetArrBuff 3 5 1 288 10 0 0 0 {毒嘴子|243}\你被毒嘴子盯上了，毒意开始往外冒
-
-#IF
-CHECKMAGICNAME 施毒术
-NOT CHECKCURRTARGETRACE = 0
-#ACT
-M.SETICON 1 0 288 44 -30 1 0 0 150 0
-
-#IF
 CHECKMAGICNAME 灵魂火符
+RANDOMEX <$STR(N$军鼓触发几率)> 100
 #ACT
 M.MOV S$军鼓毒印 开启
 MOV N$军鼓触发成功 1
 MOV S$军鼓触发说明 攻击触发：毒嘴子灵魂火符给目标挂毒印。
 
 #IF
-CHECKMAGICNAME 灵魂火符
-CHECKCURRTARGETRACE = 0
-#ACT
-M.SetArrBuff 3 5 1 288 10 0 0 0 {毒嘴子|243}\火符带着毒嘴子，下一次更疼
-
-#IF
-CHECKMAGICNAME 灵魂火符
-NOT CHECKCURRTARGETRACE = 0
-#ACT
-M.SETICON 1 0 288 44 -30 1 0 0 150 0
-
-#IF
 CHECKMAGICNAME 诅咒术
+RANDOMEX <$STR(N$军鼓触发几率)> 100
 #ACT
 M.MOV S$军鼓毒印 开启
 MOV N$军鼓触发成功 1
 MOV S$军鼓触发说明 攻击触发：毒嘴子诅咒术给目标挂毒印。
 
 #IF
-CHECKMAGICNAME 诅咒术
+EQUAL N$军鼓触发成功 1
 CHECKCURRTARGETRACE = 0
 #ACT
-M.SetArrBuff 3 5 1 288 10 0 0 0 {毒嘴子|243}\诅咒里混着毒嘴子，压一层是一层
+M.SetArrBuff 3 5 1 288 10 0 0 0 {毒嘴子|243}\毒印压在身上，高阶毒符会追加毒爆
 
 #IF
-CHECKMAGICNAME 诅咒术
+EQUAL N$军鼓触发成功 1
 NOT CHECKCURRTARGETRACE = 0
 #ACT
 M.SETICON 1 0 288 44 -30 1 0 0 150 0
+M.ChangeState 5 <$STR(N$军鼓状态时间)> 1
 
 #IF
+EQUAL N$军鼓触发成功 1
 LARGE N$军鼓品质 4
+NOT CHECKCURRTARGETRACE = 0
 #ACT
-ChangeDamageValue 1 + <$STR(N$军鼓顶级加码)>
-MOV N$军鼓触发成功 1
-MOV S$军鼓触发说明 攻击触发：毒嘴子高阶毒爆加码已结算。
+M.HumanHP - <$STR(N$军鼓爆伤)> 100 1
+MOV S$军鼓触发说明 攻击触发：毒嘴子高阶毒爆，对怪物追加少量毒伤。
 }

@@ -59,6 +59,7 @@ EQUAL <$STR(N$军鼓当前品质)> <$STR(N$军鼓品质)>
 #CALL [系统功能\军鼓BUFF.txt] @军鼓BUFF_应用当前模块
 #CALL [系统功能\军鼓BUFF.txt] @军鼓BUFF_刷新图标
 #CALL [系统功能\军鼓BUFF.txt] @军鼓BUFF_刷新战士攻速
+#CALL [系统功能\军鼓BUFF.txt] @军鼓BUFF_刷新法师施法速度
 BREAK
 
 #IF
@@ -71,6 +72,7 @@ MOV N$军鼓当前品质 <$STR(N$军鼓品质)>
 #CALL [系统功能\军鼓BUFF.txt] @军鼓BUFF_模块开启
 #CALL [系统功能\军鼓BUFF.txt] @军鼓BUFF_刷新图标
 #CALL [系统功能\军鼓BUFF.txt] @军鼓BUFF_刷新战士攻速
+#CALL [系统功能\军鼓BUFF.txt] @军鼓BUFF_刷新法师施法速度
 }
 
 [@军鼓BUFF_刷新战士基础攻速]
@@ -110,6 +112,43 @@ FORMULATION <$STR(N$战士基础攻速)>+<$STR(N$战士路线攻速)> N$战士最终攻速
 ChangeSpeed 2 <$STR(N$战士最终攻速)> 3
 }
 
+
+[@军鼓BUFF_刷新法师基础施法速度]
+{
+#IF
+NOT CHECKJOB wizard
+#ACT
+MOV N$法师基础施法速度 0
+BREAK
+
+#IF
+#ACT
+MOV N$法师基础施法速度 0
+}
+
+[@军鼓BUFF_刷新法师施法速度]
+{
+#IF
+NOT CHECKJOB wizard
+#ACT
+BREAK
+
+#IF
+#ACT
+#CALL [系统功能\军鼓BUFF.txt] @军鼓BUFF_刷新法师基础施法速度
+MOV N$法师路线施法速度 0
+MOV N$法师最终施法速度 0
+
+#IF
+EQUAL <$STR(S$军鼓当前职业)> wizard
+#ACT
+MOV N$法师路线施法速度 <$STR(N$军鼓施法速度)>
+
+#IF
+#ACT
+FORMULATION <$STR(N$法师基础施法速度)>+<$STR(N$法师路线施法速度)> N$法师最终施法速度
+ChangeSpeed 3 <$STR(N$法师最终施法速度)> 3
+}
 [@军鼓BUFF_刷新战士英雄攻速]
 {
 #IF
@@ -486,37 +525,37 @@ BREAK
 #IF
 EQUAL <$STR(S$军鼓当前方向)> 电耗子
 #ACT
-INC S$军鼓图标说明 \触发：人物攻击掉血前结算；雷电术、疾光电影获得雷系加码，成名以上给目标挂雷痕图标。
+INC S$军鼓图标说明 \基础：魔法、MaxMP、吸蓝、施法速度。触发：雷电术、疾光电影、地狱雷光低几率雷系回响，高阶挂雷痕。
 BREAK
 
 #IF
 EQUAL <$STR(S$军鼓当前方向)> 火葫芦
 #ACT
-INC S$军鼓图标说明 \触发：人物攻击掉血前结算；火墙、流星火雨、灭天火获得火系加码，成名以上给目标挂火种图标。
+INC S$军鼓图标说明 \基础：魔法、MaxMP、吸蓝、施法速度。触发：火球、地狱火、爆裂火焰、火墙、灭天火、流星火雨叠火种，满层让周围怪物红毒灼烧。
 BREAK
 
 #IF
 EQUAL <$STR(S$军鼓当前方向)> 小冰箱
 #ACT
-INC S$军鼓图标说明 \触发：人物被打掉血前结算；冰甲减伤，高阶继续降伤，封顶触发额外冰甲减伤。
+INC S$军鼓图标说明 \基础：魔法、MaxMP、吸蓝、施法速度。触发：冰咆哮、寒冰掌、冰霜群雨和受击叠冰晶，满层让周围怪物冰冻。
 BREAK
 
 #IF
 EQUAL <$STR(S$军鼓当前方向)> 养娃人
 #ACT
-INC S$军鼓图标说明 \触发：人物攻击和宝宝掉血前结算；有宝宝时人物攻击和宝宝伤害都会加码，高阶追加护主联动。
+INC S$军鼓图标说明 \基础：道术、HPMP恢复、抗性和杀怪爆率。专精：30秒CD补骷髅系宝宝，有宝宝时人物和宝宝低几率小幅加码。
 BREAK
 
 #IF
 EQUAL <$STR(S$军鼓当前方向)> 奶不死
 #ACT
-INC S$军鼓图标说明 \触发：人物被打掉血前结算；护主减伤，高阶继续降伤，封顶触发救急回血。
+INC S$军鼓图标说明 \基础：道术、HPMP恢复、抗性和杀怪爆率。专精：持续微量回血回蓝并照看宝宝，受击低几率护主减伤。
 BREAK
 
 #IF
 EQUAL <$STR(S$军鼓当前方向)> 毒嘴子
 #ACT
-INC S$军鼓图标说明 \触发：人物攻击掉血前结算；施毒术、灵魂火符、诅咒术给目标挂毒印，高阶追加毒爆加码。
+INC S$军鼓图标说明 \基础：道术、HPMP恢复、抗性和杀怪爆率。触发：施毒术、灵魂火符、诅咒术低几率挂毒印，高阶对怪物追加少量毒爆。
 BREAK
 }
 [@军鼓BUFF_触发反馈]
@@ -565,6 +604,17 @@ EQUAL <$STR(S$军鼓当前职业)> wizard
 EQUAL <$STR(S$军鼓当前方向)> 火葫芦
 #ACT
 #CALL [系统功能\军鼓流派\法师军鼓.txt] @军鼓wizard_攻击_火葫芦
+#IF
+EQUAL N$军鼓触发成功 1
+#ACT
+#CALL [系统功能\军鼓BUFF.txt] @军鼓BUFF_触发反馈
+BREAK
+
+#IF
+EQUAL <$STR(S$军鼓当前职业)> wizard
+EQUAL <$STR(S$军鼓当前方向)> 小冰箱
+#ACT
+#CALL [系统功能\军鼓流派\法师军鼓.txt] @军鼓wizard_攻击_小冰箱
 #IF
 EQUAL N$军鼓触发成功 1
 #ACT
@@ -745,6 +795,10 @@ MOV N$军鼓职业确认 0
 MOV N$军鼓BUFF图标 0
 MOV N$军鼓头戴图标 0
 MOV N$军鼓配置行 0
+MOV N$军鼓施法速度 0
+MOV N$军鼓火种层 0
+MOV N$军鼓冰晶层 0
+MOV N$军鼓养娃召唤CD 0
 MOV S$军鼓确认名
 MOV S$军鼓图标说明
 MOV S$军鼓触发说明
@@ -762,6 +816,7 @@ MOV S$军鼓图标说明
 MOV S$军鼓触发说明
 MOV S$军鼓触发记录
 #CALL [系统功能\军鼓BUFF.txt] @军鼓BUFF_刷新战士攻速
+#CALL [系统功能\军鼓BUFF.txt] @军鼓BUFF_刷新法师施法速度
 SETOFFTIMER 87
 BREAK
 }

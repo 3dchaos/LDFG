@@ -763,6 +763,64 @@ SENDMSG 7 【军鼓】<$STR(S$军鼓当前名称)>：<$STR(S$军鼓触发说明)
 
 “统一底座 + 三路线专精”是基于当前军鼓脚本结构的设计建议；`ChangeHumAbility`、`AddHumNewValue 2/3/4/19/24`、`ChangeState 10`、`ChangeSpeed 2` 和 `ChangeDamageValue` 的含义来自当前项目已有分析、本地手册与 skill 参考。真正的目标切割仍未在本仓库军鼓链路中找到可直接复用的本服规则，因此继续标记为待确认实现项，而不是把样本功能当成本服已经具备。
 
+## 法师与道士军鼓重构方案（低幅底座 + 可见状态）
+
+### 设计结论
+
+法师和道士沿用战士重构后的思路：先建立职业底座，再让三条路线只强化自己的玩法。整体强度必须压制，避免军鼓变成后期唯一答案。
+
+本轮已经按第一期稳落地方案修改运行脚本：
+
+- 法师底座：魔法、MaxMP、吸蓝、施法速度。
+- 道士底座：道术、MaxHP/MaxMP、HPMP恢复、控制/毒/火墙/冰冻/蛛网抗性、杀怪爆率。
+- 法师满层效果不脚本释放火墙或其他持续技能，避免 `ReleaseMagic/ReleaseMagicEx` 在攻击/掉血触发中带来循环风险。
+- 火葫芦满层使用 `RangeHarm` 对周围怪物做小额爆燃并挂红毒；小冰箱满层使用 `RangeHarm` 对周围怪物做小额冰爆并挂冰冻。
+- 道士养娃人不复用常规神兽、圣兽、月灵作为补偿宝宝，而是从本工程 `Monster` 表中挑选骷髅系怪物，方便后期统一管理。
+- 养娃人召唤补偿走 30 秒 CD，每次只补一只缺口宝宝，卸下或切换路线时清理本路线补偿宝宝，避免宝宝军队。
+
+### 法师重构
+
+法师三条路线共用一套低幅品质表，品质越高只小幅提高魔法、吸蓝、施法速度、触发几率、满层范围和状态时间。
+
+`ChangeSpeed 3` 是施法速度的最终赋值命令，不能在路线脚本里分散直写。本工程新增 `@军鼓BUFF_刷新法师施法速度`，由路线脚本写入 `N$军鼓施法速度`，再统一计算 `N$法师最终施法速度` 并执行一次 `ChangeSpeed 3`。这延续了战士攻速重构沉淀的规则：赋值型速度命令必须通过贡献变量汇总，不能被登录、装备、Buff 互相覆盖。
+
+法师路线：
+
+| 方向 | 技能覆盖 | 触发效果 |
+| --- | --- | --- |
+| 电耗子 | 雷电术、疾光电影、地狱雷光 | 低几率雷系回响，小幅提高本次伤害；高阶挂雷痕图标。 |
+| 火葫芦 | 火球术、大火球、地狱火、爆裂火焰、火墙、灭天火、流星火雨 | 低几率叠火种；满层后 `RangeHarm` 只影响怪物，附加红毒。 |
+| 小冰箱 | 冰咆哮、寒冰掌、冰霜群雨，另包含受击冰甲 | 攻击或受击低几率叠冰晶；满层后 `RangeHarm` 只影响怪物，附加冰冻。 |
+
+技能名单来自 `Mud2/DB/GEEM2.db` 的 `Magic` 表，只把本工程存在的玩家法师技能纳入第一期描述。静态查询已确认玩家法师技能包含 `火球术`、`大火球`、`地狱火`、`雷电术`、`疾光电影`、`地狱雷光`、`爆裂火焰`、`火墙`、`冰咆哮`、`寒冰掌`、`灭天火`、`流星火雨`、`冰霜群雨`；`群雷术`只查到 `英雄群雷术`，所以不写入玩家军鼓承诺。
+
+### 道士重构
+
+道士三条路线共用道术、恢复、抗性和爆率底座，但路线收益压低：
+
+| 方向 | 第一效果 | 扩展效果 |
+| --- | --- | --- |
+| 养娃人 | 有宝宝时人物和宝宝攻击低几率小幅加码 | 30 秒 CD 补偿骷髅系宝宝；品质越高补偿宝宝越高级，封顶最多两只。 |
+| 奶不死 | 持续微量回血回蓝，照看宝宝 | 受击低几率护主减伤，高阶追加少量救急回血。 |
+| 毒嘴子 | 施毒术、灵魂火符、诅咒术低几率挂毒印 | 怪物目标附加绿毒；压轴以上追加少量毒爆。 |
+
+养娃人的宝宝候选来自本工程 `Monster` 表：`骷髅锤兵`、`骷髅长枪兵`、`骷髅弓箭手`、`圣域骷髅`。静态查询里 `月灵` 为 70 级、2500 HP、DC 100-170、SC 220，明显高于骷髅系补偿宠；`圣兽`也属于原生召唤体系且基础更高。因此本轮不选 `月灵`，也不直接复用 `神兽/圣兽`，避免和道士原生召唤混账。
+
+补偿召唤规则：
+
+- 品质 1-2：补 `骷髅锤兵` 或低阶骷髅补偿。
+- 品质 3-4：改用 `骷髅长枪兵`。
+- 品质 5：可补 `骷髅长枪兵` 和 `骷髅弓箭手`。
+- 品质 6：可补 `圣域骷髅` 和 `骷髅弓箭手`。
+- 每 30 秒只补一只缺口；同名宝宝通过 `CHECKSLAVECOUNT < 1 宝宝名 1` 守门。
+- 关闭养娃人时用 `KillCallMob` 清理本路线补偿宝宝。
+
+### 物品库边界
+
+本轮没有修改 `Mud2/DB/GEEM2.db` 的 `StdItems`。当前军鼓已经是 `StdMode=65` 的 14 号位装备，外观和颜色也已有品质区分；玩法强度集中在脚本层更容易统一刷新、清理和压强度。
+
+后续只有在需要“装备面板直接显示白字属性”时，才建议用 `tools/mir200-stditems.ps1` 配合 UTF-8 CSV 规格批量修改 `StdItems` 的 `Mc/Mc2/Sc/Sc2/HP/MP/element*` 等字段。若只是调整军鼓玩法、触发和说明，不应为了方便去改物品库，避免脚本属性和物品基础属性形成两套账。
+
 ## 静态核对命令
 
 本次只做静态读取，未编译、未启动服务端。用过的主要核对方式：
@@ -773,4 +831,6 @@ Select-String -LiteralPath 'Mir200\Envir\QuestDiary\系统功能\军鼓流派\�
 Select-String -LiteralPath 'Mir200\Envir\QuestDiary\系统功能\军鼓流派\战士军鼓.txt','Mir200\Envir\QuestDiary\系统功能\军鼓流派\法师军鼓.txt','Mir200\Envir\QuestDiary\系统功能\军鼓流派\道士军鼓.txt','Mir200\Envir\QuestDiary\系统功能\军鼓BUFF.txt','Mir200\Envir\Market_def\QFunction-0.txt','Mir200\Envir\MapQuest_def\QManage.txt' -Pattern 'S\$军鼓雷痕|S\$军鼓火种|S\$军鼓毒印' -Encoding ansi
 Select-String -LiteralPath 'Mir200\Envir\QuestDiary\系统功能\军鼓流派\战士军鼓.txt' -Pattern '军鼓吸血|军鼓攻速|ChangeState 10|ChangeSpeed 2|AddHumNewValue 19|AddHumNewValue 24' -Encoding ansi
 Select-String -LiteralPath 'Mir200\Envir\QuestDiary\系统功能\军鼓流派\战士军鼓.txt','Mir200\Envir\QuestDiary\系统功能\军鼓BUFF.txt' -Pattern '@军鼓warrior_攻击|@军鼓warrior_受击|ChangeDamageValue|RangeHarm|HumanHP -|M\.HumanHP' -Encoding ansi
+Select-String -LiteralPath 'Mir200\Envir\QuestDiary\系统功能\军鼓流派\法师军鼓.txt','Mir200\Envir\QuestDiary\系统功能\军鼓流派\道士军鼓.txt','Mir200\Envir\QuestDiary\系统功能\军鼓BUFF.txt' -Pattern 'RangeHarm|ChangeState 11|ChangeSpeed 3|RECALLMOB|CHECKSLAVECOUNT|KillCallMob|军鼓养娃召唤CD' -Encoding ansi
+.\tools\mir200-encoding.ps1 -Path 'Mir200\Envir\QuestDiary\系统功能\军鼓流派\法师军鼓.txt','Mir200\Envir\QuestDiary\系统功能\军鼓流派\道士军鼓.txt','Mir200\Envir\QuestDiary\系统功能\军鼓BUFF.txt','Mir200\Envir\ItemDescList.txt','docs\军鼓buff效果与实现分析.md'
 ```
