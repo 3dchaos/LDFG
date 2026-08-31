@@ -122,6 +122,69 @@ UpdateAbil
 BREAK
 }
 
+[@军鼓taoist_定时续期]
+{
+#IF
+#ACT
+LockUpdateAbil
+ChangeHumAbility 9 = <$STR(N$军鼓点)> 3
+ChangeHumAbility 10 = <$STR(N$军鼓大点)> 3
+ChangeHumAbility 11 = <$STR(N$军鼓血蓝)> 3
+ChangeHumAbility 12 = <$STR(N$军鼓血蓝)> 3
+ChangeHumAbility 14 = <$STR(N$军鼓恢复)> 3
+ChangeHumAbility 15 = <$STR(N$军鼓恢复)> 3
+AddHumNewValue 11 = <$STR(N$军鼓爆率)> 3
+AddHumNewValue 13 = <$STR(N$军鼓元素)> 3
+AddHumNewValue 16 = <$STR(N$军鼓元素)> 3
+AddHumNewValue 18 = <$STR(N$军鼓元素)> 3
+AddHumNewValue 19 = <$STR(N$军鼓元素)> 3
+AddHumNewValue 20 = <$STR(N$军鼓元素)> 3
+AddHumNewValue 24 = <$STR(N$军鼓元素)> 3
+
+#IF
+EQUAL <$STR(S$军鼓当前方向)> 奶不死
+#ACT
+ChangeHumAbility 1 = <$STR(N$军鼓点)> 3
+ChangeHumAbility 2 = <$STR(N$军鼓大点)> 3
+ChangeHumAbility 3 = <$STR(N$军鼓点)> 3
+ChangeHumAbility 4 = <$STR(N$军鼓大点)> 3
+AddHumNewValue 2 = <$STR(N$军鼓元素)> 3
+AddHumNewValue 3 = <$STR(N$军鼓元素)> 3
+
+#IF
+EQUAL <$STR(S$军鼓当前方向)> 毒嘴子
+#ACT
+ChangeHumAbility 16 = <$STR(N$军鼓大点)> 3
+ChangeHumAbility 17 = <$STR(N$军鼓大点)> 3
+ChangeHumAbility 18 = <$STR(N$军鼓点)> 3
+AddHumNewValue 0 = <$STR(N$军鼓元素)> 3
+
+#IF
+#ACT
+UpdateAbil
+
+#IF
+EQUAL <$STR(S$军鼓当前方向)> 养娃人
+#ACT
+#CALL [系统功能\军鼓流派\道士军鼓.txt] @军鼓taoist_养娃人_召唤检查
+
+#IF
+EQUAL <$STR(S$军鼓当前方向)> 奶不死
+#ACT
+HumanHP + <$STR(N$军鼓恢复)> 100 1
+HumanMP + <$STR(N$军鼓恢复)> 100 1
+
+#IF
+EQUAL <$STR(S$军鼓当前方向)> 奶不死
+CHECKSLAVECOUNT > 0
+#ACT
+BB.HumanHP + <$STR(N$军鼓恢复)> 500 1
+
+#IF
+#ACT
+BREAK
+}
+
 [@军鼓taoist_开启_养娃人]
 {
 #IF

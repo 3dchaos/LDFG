@@ -126,6 +126,37 @@ ChangeState 11 3 100 <$STR(N$军鼓吸蓝)>
 BREAK
 }
 
+[@军鼓wizard_定时续期]
+{
+#IF
+#ACT
+LockUpdateAbil
+ChangeHumAbility 7 = <$STR(N$军鼓点)> 3
+ChangeHumAbility 8 = <$STR(N$军鼓大点)> 3
+ChangeHumAbility 12 = <$STR(N$军鼓血蓝)> 3
+AddHumNewValue 1 = <$STR(N$军鼓元素)> 3
+
+#IF
+EQUAL <$STR(S$军鼓当前方向)> 电耗子
+#ACT
+ChangeHumAbility 18 = <$STR(N$军鼓点)> 3
+
+#IF
+EQUAL <$STR(S$军鼓当前方向)> 小冰箱
+#ACT
+ChangeHumAbility 3 = <$STR(N$军鼓点)> 3
+ChangeHumAbility 4 = <$STR(N$军鼓大点)> 3
+ChangeHumAbility 11 = <$STR(N$军鼓血蓝)> 3
+AddHumNewValue 3 = <$STR(N$军鼓元素)> 3
+AddHumNewValue 19 = <$STR(N$军鼓元素)> 3
+
+#IF
+#ACT
+UpdateAbil
+ChangeState 11 3 100 <$STR(N$军鼓吸蓝)>
+BREAK
+}
+
 [@军鼓wizard_开启_电耗子]
 {
 #IF

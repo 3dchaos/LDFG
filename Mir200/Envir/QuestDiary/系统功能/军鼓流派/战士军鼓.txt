@@ -156,6 +156,40 @@ ChangeState 10 3 100 <$STR(N$军鼓吸血)>
 BREAK
 }
 
+[@军鼓warrior_定时续期]
+{
+#IF
+#ACT
+LockUpdateAbil
+ChangeHumAbility 1 = <$STR(N$军鼓点)> 3
+ChangeHumAbility 2 = <$STR(N$军鼓大点)> 3
+ChangeHumAbility 11 = <$STR(N$军鼓血蓝)> 3
+
+#IF
+EQUAL <$STR(S$军鼓当前方向)> 拆门板
+#ACT
+AddHumNewValue 4 = <$STR(N$军鼓破防)> 3
+
+#IF
+EQUAL <$STR(S$军鼓当前方向)> 铁头娃
+#ACT
+AddHumNewValue 2 = <$STR(N$军鼓物伤减)> 3
+AddHumNewValue 3 = <$STR(N$军鼓魔伤减)> 3
+AddHumNewValue 19 = <$STR(N$军鼓防冰)> 3
+AddHumNewValue 24 = <$STR(N$军鼓暴抗)> 3
+
+#IF
+EQUAL <$STR(S$军鼓当前方向)> 剁馅机
+#ACT
+ChangeHumAbility 19 = <$STR(N$军鼓准确)> 3
+
+#IF
+#ACT
+UpdateAbil
+ChangeState 10 3 100 <$STR(N$军鼓吸血)>
+BREAK
+}
+
 [@军鼓warrior_关闭_基础]
 {
 #IF

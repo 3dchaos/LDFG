@@ -140,8 +140,13 @@ if (Test-Path -LiteralPath $buffPath) {
                 'GetItemFieldValue 14 name S$军鼓确认名',
                 'EQUAL <$STR(S$军鼓确认名)> <$STR(S$军鼓当前名称)>',
                 'EQUAL N$军鼓需要刷新 1',
+                'MOV N$军鼓职业确认 0',
+                'MOV S$军鼓校验职业 <$STR(S$军鼓当前职业)>',
+                '#CALL [系统功能\军鼓BUFF.txt] @军鼓BUFF_职业确认',
+                'EQUAL N$军鼓职业确认 0',
                 '#CALL [系统功能\军鼓BUFF.txt] @军鼓BUFF_刷新',
-                '#CALL [系统功能\军鼓BUFF.txt] @军鼓BUFF_清理'
+                '#CALL [系统功能\军鼓BUFF.txt] @军鼓BUFF_清理',
+                '#CALL [系统功能\军鼓BUFF.txt] @军鼓BUFF_定时续期'
             )) {
             if ($timerCheck.Groups[1].Value -notmatch [regex]::Escape($needle)) {
                 $fail += "timer check missing: $needle"
@@ -157,6 +162,101 @@ if (Test-Path -LiteralPath $buffPath) {
     $refresh = Get-LabelBlock -Text $buffText -Label '@军鼓BUFF_刷新'
     if (-not $refresh.Success -or $refresh.Groups[1].Value -notmatch [regex]::Escape('MOV N$军鼓需要刷新 0')) {
         $fail += 'full refresh must clear the pending refresh flag'
+    }
+
+    $renew = Get-LabelBlock -Text $buffText -Label '@军鼓BUFF_定时续期'
+    if (-not $renew.Success) {
+        $fail += 'buff script missing @军鼓BUFF_定时续期'
+    } else {
+        foreach ($needle in @(
+                '#CALL [系统功能\军鼓流派\战士军鼓.txt] @军鼓warrior_定时续期',
+                '#CALL [系统功能\军鼓BUFF.txt] @军鼓BUFF_刷新战士攻速',
+                '#CALL [系统功能\军鼓流派\法师军鼓.txt] @军鼓wizard_定时续期',
+                '#CALL [系统功能\军鼓BUFF.txt] @军鼓BUFF_刷新法师施法速度',
+                '#CALL [系统功能\军鼓流派\道士军鼓.txt] @军鼓taoist_定时续期'
+            )) {
+            if ($renew.Groups[1].Value -notmatch [regex]::Escape($needle)) {
+                $fail += "timer renew missing dispatch: $needle"
+            }
+        }
+    }
+}
+
+$renewExpectations = @(
+    @{
+        Path = $warriorPath
+        Label = '@军鼓warrior_定时续期'
+        Needles = @(
+            'ChangeHumAbility 1 = <$STR(N$军鼓点)> 3',
+            'ChangeHumAbility 2 = <$STR(N$军鼓大点)> 3',
+            'ChangeHumAbility 11 = <$STR(N$军鼓血蓝)> 3',
+            'AddHumNewValue 4 = <$STR(N$军鼓破防)> 3',
+            'AddHumNewValue 2 = <$STR(N$军鼓物伤减)> 3',
+            'AddHumNewValue 3 = <$STR(N$军鼓魔伤减)> 3',
+            'AddHumNewValue 19 = <$STR(N$军鼓防冰)> 3',
+            'AddHumNewValue 24 = <$STR(N$军鼓暴抗)> 3',
+            'ChangeHumAbility 19 = <$STR(N$军鼓准确)> 3',
+            'ChangeState 10 3 100 <$STR(N$军鼓吸血)>'
+        )
+    },
+    @{
+        Path = $wizardPath
+        Label = '@军鼓wizard_定时续期'
+        Needles = @(
+            'ChangeHumAbility 7 = <$STR(N$军鼓点)> 3',
+            'ChangeHumAbility 8 = <$STR(N$军鼓大点)> 3',
+            'ChangeHumAbility 12 = <$STR(N$军鼓血蓝)> 3',
+            'AddHumNewValue 1 = <$STR(N$军鼓元素)> 3',
+            'ChangeHumAbility 18 = <$STR(N$军鼓点)> 3',
+            'ChangeHumAbility 3 = <$STR(N$军鼓点)> 3',
+            'ChangeHumAbility 4 = <$STR(N$军鼓大点)> 3',
+            'ChangeHumAbility 11 = <$STR(N$军鼓血蓝)> 3',
+            'AddHumNewValue 3 = <$STR(N$军鼓元素)> 3',
+            'AddHumNewValue 19 = <$STR(N$军鼓元素)> 3',
+            'ChangeState 11 3 100 <$STR(N$军鼓吸蓝)>'
+        )
+    },
+    @{
+        Path = $taoistPath
+        Label = '@军鼓taoist_定时续期'
+        Needles = @(
+            'ChangeHumAbility 9 = <$STR(N$军鼓点)> 3',
+            'ChangeHumAbility 10 = <$STR(N$军鼓大点)> 3',
+            'ChangeHumAbility 11 = <$STR(N$军鼓血蓝)> 3',
+            'ChangeHumAbility 12 = <$STR(N$军鼓血蓝)> 3',
+            'ChangeHumAbility 14 = <$STR(N$军鼓恢复)> 3',
+            'ChangeHumAbility 15 = <$STR(N$军鼓恢复)> 3',
+            'AddHumNewValue 11 = <$STR(N$军鼓爆率)> 3',
+            'AddHumNewValue 13 = <$STR(N$军鼓元素)> 3',
+            'AddHumNewValue 16 = <$STR(N$军鼓元素)> 3',
+            'AddHumNewValue 18 = <$STR(N$军鼓元素)> 3',
+            'AddHumNewValue 19 = <$STR(N$军鼓元素)> 3',
+            'AddHumNewValue 20 = <$STR(N$军鼓元素)> 3',
+            'AddHumNewValue 24 = <$STR(N$军鼓元素)> 3',
+            '#CALL [系统功能\军鼓流派\道士军鼓.txt] @军鼓taoist_养娃人_召唤检查',
+            'HumanHP + <$STR(N$军鼓恢复)> 100 1',
+            'HumanMP + <$STR(N$军鼓恢复)> 100 1',
+            'BB.HumanHP + <$STR(N$军鼓恢复)> 500 1',
+            'ChangeHumAbility 16 = <$STR(N$军鼓大点)> 3',
+            'ChangeHumAbility 17 = <$STR(N$军鼓大点)> 3',
+            'ChangeHumAbility 18 = <$STR(N$军鼓点)> 3',
+            'AddHumNewValue 0 = <$STR(N$军鼓元素)> 3'
+        )
+    }
+)
+
+foreach ($expectation in $renewExpectations) {
+    if (-not (Test-Path -LiteralPath $expectation.Path)) { continue }
+    $moduleText = Read-GbkText -Path $expectation.Path
+    $renew = Get-LabelBlock -Text $moduleText -Label $expectation.Label
+    if (-not $renew.Success) {
+        $fail += "module missing $($expectation.Label): $($expectation.Path)"
+        continue
+    }
+    foreach ($needle in $expectation.Needles) {
+        if ($renew.Groups[1].Value -notmatch [regex]::Escape($needle)) {
+            $fail += "$($expectation.Label) missing: $needle"
+        }
     }
 }
 
