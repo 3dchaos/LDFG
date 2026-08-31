@@ -849,6 +849,18 @@ BREAK
 
 #IF
 #ACT
+MOV N$军鼓职业确认 0
+MOV S$军鼓校验职业 <$STR(S$军鼓当前职业)>
+#CALL [系统功能\军鼓BUFF.txt] @军鼓BUFF_职业确认
+
+#IF
+EQUAL N$军鼓职业确认 0
+#ACT
+#CALL [系统功能\军鼓BUFF.txt] @军鼓BUFF_清理
+BREAK
+
+#IF
+#ACT
 #CALL [系统功能\军鼓BUFF.txt] @军鼓BUFF_定时续期
 BREAK
 }

@@ -175,12 +175,6 @@ HumanHP + <$STR(N$军鼓恢复)> 100 1
 HumanMP + <$STR(N$军鼓恢复)> 100 1
 
 #IF
-EQUAL <$STR(S$军鼓当前方向)> 奶不死
-CHECKSLAVECOUNT > 0
-#ACT
-BB.HumanHP + <$STR(N$军鼓恢复)> 500 1
-
-#IF
 #ACT
 BREAK
 }

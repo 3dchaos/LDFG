@@ -236,7 +236,6 @@ $renewExpectations = @(
             '#CALL [系统功能\军鼓流派\道士军鼓.txt] @军鼓taoist_养娃人_召唤检查',
             'HumanHP + <$STR(N$军鼓恢复)> 100 1',
             'HumanMP + <$STR(N$军鼓恢复)> 100 1',
-            'BB.HumanHP + <$STR(N$军鼓恢复)> 500 1',
             'ChangeHumAbility 16 = <$STR(N$军鼓大点)> 3',
             'ChangeHumAbility 17 = <$STR(N$军鼓大点)> 3',
             'ChangeHumAbility 18 = <$STR(N$军鼓点)> 3',
@@ -257,6 +256,9 @@ foreach ($expectation in $renewExpectations) {
         if ($renew.Groups[1].Value -notmatch [regex]::Escape($needle)) {
             $fail += "$($expectation.Label) missing: $needle"
         }
+    }
+    if ($expectation.Label -eq '@军鼓taoist_定时续期' -and $renew.Groups[1].Value -match '(?m)^\s*BB\.') {
+        $fail += '@军鼓taoist_定时续期 must not execute recurring BB actions'
     }
 }
 
