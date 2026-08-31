@@ -182,7 +182,7 @@ XueLingCustodian2=蓝色水灵
 XueLingCustodian3=紫色暗灵
 XueLingCustodian4=黄色土灵
 [Setup]
-ItemNumber=194886275
+ItemNumber=196941690
 ClientFile1 =mir.dat
 ClientFile2 =mir.2
 ClientFile3 =mir.3
@@ -280,7 +280,7 @@ ShowGuildName=1
 MonSayMsg=1
 MonsterPowerRate=10
 ItemsPowerRate=10
-ItemNumberEx=1073745909
+ItemNumberEx=1073745911
 StartCastlewarTime=20
 StartPointSize=2
 PasswordLockSystem=0

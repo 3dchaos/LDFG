@@ -126,12 +126,12 @@ CHECKGOLD 5000
 #ACT
 GOLDCOUNT - 5000
 CHANGEPKPOINT + <$STR(N$一次PK值)>
-MESSAGEBOX 小贼！罚你5000金币，罪证已经记录了。
+MESSAGEBOX 小贼！罚你5000金币，罪证已经记录了。你的犯罪值：<$PKPOINT>
 GOTO @偷窃_犯罪检查
 BREAK
 #ELSEACT
 CHANGEPKPOINT + <$STR(N$黄名PK值)>
-MESSAGEBOX 你身上连5000金币都不够赔，罪证被加重！
+MESSAGEBOX 你身上连5000金币都不够赔，罪证被加重！你的犯罪值：<$PKPOINT>
 GOTO @偷窃_犯罪检查
 BREAK
 
@@ -142,7 +142,7 @@ BREAK
 #ACT
 MOVR N$偷窃金币 100 5000
 GOLDCOUNT + <$STR(N$偷窃金币)>
-SENDMSG 6 你顺手摸到<$STR(N$偷窃金币)>金币。
+SENDMSG 6 你顺手摸到<$STR(N$偷窃金币)>金币。你的犯罪值：<$PKPOINT>
 BREAK
 
 [@偷窃_逮捕]
@@ -150,7 +150,7 @@ BREAK
 #IF
 #ACT
 CHANGEPKPOINT + <$STR(N$红名PK值)>
-MESSAGEBOX 你刚伸手就被当场抓住，罪证已经无可饶恕。
+MESSAGEBOX 你刚伸手就被当场抓住，罪证已经无可饶恕。你的犯罪值：<$PKPOINT>
 GOTO @偷窃_犯罪检查
 BREAK
 
@@ -181,7 +181,7 @@ BREAK
 CHECKPKPOINTEX = <$STR(N$红名PK值)>
 CHECKPKPOINTEX > <$STR(N$红名PK值)>
 #ACT
-MESSAGEBOX 你已经严重犯罪，将被押送到红名村。
+MESSAGEBOX 你已经严重犯罪，将被押送到红名村。你的犯罪值：<$PKPOINT>
 SET [66] 0
 mapmove 3 830 650
 BREAK
