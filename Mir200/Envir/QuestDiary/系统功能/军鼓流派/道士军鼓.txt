@@ -160,17 +160,9 @@ BREAK
 
 #IF
 EQUAL N$军鼓品质 6
-CHECKSLAVECOUNT < 1 圣域骷髅 1
+CHECKSLAVECOUNT < 1 雪域战将 1
 #ACT
-RECALLMOB 圣域骷髅 2 60 0 0 0 1
-MOV N$军鼓养娃召唤CD 30
-BREAK
-
-#IF
-EQUAL N$军鼓品质 6
-CHECKSLAVECOUNT < 1 骷髅弓箭手 1
-#ACT
-RECALLMOB 骷髅弓箭手 2 60 0 0 0 1
+RECALLMOB 雪域战将 1 60 0 0 0 1
 MOV N$军鼓养娃召唤CD 30
 BREAK
 
@@ -181,17 +173,9 @@ BREAK
 
 #IF
 EQUAL N$军鼓品质 5
-CHECKSLAVECOUNT < 1 骷髅长枪兵 1
+CHECKSLAVECOUNT < 1 雪域冰狼 1
 #ACT
-RECALLMOB 骷髅长枪兵 1 60 0 0 0 1
-MOV N$军鼓养娃召唤CD 30
-BREAK
-
-#IF
-EQUAL N$军鼓品质 5
-CHECKSLAVECOUNT < 1 骷髅弓箭手 1
-#ACT
-RECALLMOB 骷髅弓箭手 1 60 0 0 0 1
+RECALLMOB 雪域冰狼 1 60 0 0 0 1
 MOV N$军鼓养娃召唤CD 30
 BREAK
 
@@ -201,25 +185,49 @@ EQUAL N$军鼓品质 5
 BREAK
 
 #IF
-LARGE N$军鼓品质 2
-SMALL N$军鼓品质 5
-CHECKSLAVECOUNT < 1 骷髅长枪兵 1
+EQUAL N$军鼓品质 4
+CHECKSLAVECOUNT < 1 魔龙战将 1
 #ACT
-RECALLMOB 骷髅长枪兵 1 60 0 0 0 1
+RECALLMOB 魔龙战将 1 60 0 0 0 1
 MOV N$军鼓养娃召唤CD 30
 BREAK
 
 #IF
-LARGE N$军鼓品质 2
-SMALL N$军鼓品质 5
+EQUAL N$军鼓品质 4
 #ACT
 BREAK
 
 #IF
-SMALL N$军鼓品质 3
-CHECKSLAVECOUNT < 1 骷髅锤兵 1
+EQUAL N$军鼓品质 3
+CHECKSLAVECOUNT < 1 魔龙破甲兵2 1
 #ACT
-RECALLMOB 骷髅锤兵 1 60 0 0 0 1
+RECALLMOB 魔龙破甲兵2 1 60 0 0 0 1
+MOV N$军鼓养娃召唤CD 30
+BREAK
+
+#IF
+EQUAL N$军鼓品质 3
+#ACT
+BREAK
+
+#IF
+EQUAL N$军鼓品质 2
+CHECKSLAVECOUNT < 1 圣域炎兽 1
+#ACT
+RECALLMOB 圣域炎兽 1 60 0 0 0 1
+MOV N$军鼓养娃召唤CD 30
+BREAK
+
+#IF
+EQUAL N$军鼓品质 2
+#ACT
+BREAK
+
+#IF
+EQUAL N$军鼓品质 1
+CHECKSLAVECOUNT < 1 圣域冥狼 1
+#ACT
+RECALLMOB 圣域冥狼 1 60 0 0 0 1
 MOV N$军鼓养娃召唤CD 30
 }
 [@军鼓taoist_关闭_养娃人]
@@ -233,6 +241,12 @@ KillCallMob 骷髅锤兵 1 1
 KillCallMob 骷髅长枪兵 1 1
 KillCallMob 骷髅弓箭手 1 1
 KillCallMob 圣域骷髅 1 1
+KillCallMob 圣域冥狼 1 1
+KillCallMob 圣域炎兽 1 1
+KillCallMob 魔龙破甲兵2 1 1
+KillCallMob 魔龙战将 1 1
+KillCallMob 雪域冰狼 1 1
+KillCallMob 雪域战将 1 1
 }
 
 [@军鼓taoist_攻击_养娃人]

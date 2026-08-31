@@ -1,0 +1,195 @@
+;倍率结算：收口 POWERRATE / KILLMONEXPRATE / KILLMONBURSTRATE 的最终写入。
+;规则：永久、活动、道具分别写自己的贡献变量，结算时取最高命令倍率；军鼓/装备隐藏属性继续走元素叠加层。
+
+[@倍率_刷新全部]
+{
+#IF
+#ACT
+#CALL [系统功能\倍率结算.txt] @经验倍率_结算
+#CALL [系统功能\倍率结算.txt] @攻击倍率_结算
+#CALL [系统功能\倍率结算.txt] @爆率倍率_结算
+#CALL [系统功能\倍率结算.txt] @倍率_计时器刷新
+
+[@倍率_倒计时]
+#IF
+LARGE N$倍率活动经验剩余 0
+#ACT
+DEC N$倍率活动经验剩余 5
+
+#IF
+SMALL N$倍率活动经验剩余 1
+#ACT
+MOV N$倍率活动经验倍率 0
+
+#IF
+LARGE U92 0
+#ACT
+DEC U92 5
+
+#IF
+SMALL U92 1
+#ACT
+MOV U91 0
+
+#IF
+LARGE N$倍率活动倍攻剩余 0
+#ACT
+DEC N$倍率活动倍攻剩余 5
+
+#IF
+SMALL N$倍率活动倍攻剩余 1
+#ACT
+MOV N$倍率活动倍攻倍率 0
+
+#IF
+LARGE U95 0
+#ACT
+DEC U95 5
+
+#IF
+SMALL U95 1
+#ACT
+MOV U94 0
+
+#IF
+LARGE N$倍率天下第一倍攻剩余 0
+#ACT
+DEC N$倍率天下第一倍攻剩余 5
+
+#IF
+SMALL N$倍率天下第一倍攻剩余 1
+#ACT
+MOV N$倍率天下第一倍攻倍率 0
+
+#IF
+LARGE N$倍率活动爆率剩余 0
+#ACT
+DEC N$倍率活动爆率剩余 5
+
+#IF
+SMALL N$倍率活动爆率剩余 1
+#ACT
+MOV N$倍率活动爆率倍率 0
+
+#IF
+#ACT
+#CALL [系统功能\倍率结算.txt] @倍率_刷新全部
+
+[@经验倍率_结算]
+#IF
+#ACT
+MOV N$最终经验倍率 100
+MOV N$最终经验时间 0
+MOV N$最终经验保存 1
+
+#IF
+LARGE U90 <$STR(N$最终经验倍率)>
+#ACT
+MOV N$最终经验倍率 <$STR(U90)>
+MOV N$最终经验时间 0
+MOV N$最终经验保存 1
+
+#IF
+LARGE N$倍率活动经验剩余 0
+LARGE N$倍率活动经验倍率 <$STR(N$最终经验倍率)>
+#ACT
+MOV N$最终经验倍率 <$STR(N$倍率活动经验倍率)>
+MOV N$最终经验时间 <$STR(N$倍率活动经验剩余)>
+MOV N$最终经验保存 0
+
+#IF
+LARGE U92 0
+LARGE U91 <$STR(N$最终经验倍率)>
+#ACT
+MOV N$最终经验倍率 <$STR(U91)>
+MOV N$最终经验时间 <$STR(U92)>
+MOV N$最终经验保存 1
+
+#IF
+#ACT
+KILLMONEXPRATE <$STR(N$最终经验倍率)> <$STR(N$最终经验时间)> <$STR(N$最终经验保存)> 1
+
+[@攻击倍率_结算]
+#IF
+#ACT
+MOV N$最终倍攻倍率 100
+MOV N$最终倍攻时间 0
+MOV N$最终倍攻保存 1
+
+#IF
+LARGE U93 <$STR(N$最终倍攻倍率)>
+#ACT
+MOV N$最终倍攻倍率 <$STR(U93)>
+MOV N$最终倍攻时间 0
+MOV N$最终倍攻保存 1
+
+#IF
+LARGE N$倍率活动倍攻剩余 0
+LARGE N$倍率活动倍攻倍率 <$STR(N$最终倍攻倍率)>
+#ACT
+MOV N$最终倍攻倍率 <$STR(N$倍率活动倍攻倍率)>
+MOV N$最终倍攻时间 <$STR(N$倍率活动倍攻剩余)>
+MOV N$最终倍攻保存 0
+
+#IF
+LARGE U95 0
+LARGE U94 <$STR(N$最终倍攻倍率)>
+#ACT
+MOV N$最终倍攻倍率 <$STR(U94)>
+MOV N$最终倍攻时间 <$STR(U95)>
+MOV N$最终倍攻保存 1
+
+#IF
+LARGE N$倍率天下第一倍攻剩余 0
+LARGE N$倍率天下第一倍攻倍率 <$STR(N$最终倍攻倍率)>
+#ACT
+MOV N$最终倍攻倍率 <$STR(N$倍率天下第一倍攻倍率)>
+MOV N$最终倍攻时间 <$STR(N$倍率天下第一倍攻剩余)>
+MOV N$最终倍攻保存 0
+
+#IF
+#ACT
+POWERRATE <$STR(N$最终倍攻倍率)> <$STR(N$最终倍攻时间)> <$STR(N$最终倍攻保存)> 1 0
+
+[@爆率倍率_结算]
+#IF
+#ACT
+MOV N$最终爆率倍率 100
+MOV N$最终爆率时间 0
+MOV N$最终爆率保存 1
+
+#IF
+LARGE U96 <$STR(N$最终爆率倍率)>
+#ACT
+MOV N$最终爆率倍率 <$STR(U96)>
+MOV N$最终爆率时间 0
+MOV N$最终爆率保存 1
+
+#IF
+LARGE N$倍率活动爆率剩余 0
+LARGE N$倍率活动爆率倍率 <$STR(N$最终爆率倍率)>
+#ACT
+MOV N$最终爆率倍率 <$STR(N$倍率活动爆率倍率)>
+MOV N$最终爆率时间 <$STR(N$倍率活动爆率剩余)>
+MOV N$最终爆率保存 0
+
+#IF
+#ACT
+KILLMONBURSTRATE <$STR(N$最终爆率倍率)> <$STR(N$最终爆率时间)> <$STR(N$最终爆率保存)> 1
+
+[@倍率_计时器刷新]
+#OR
+LARGE N$倍率活动经验剩余 0
+LARGE U92 0
+LARGE N$倍率活动倍攻剩余 0
+LARGE U95 0
+LARGE N$倍率天下第一倍攻剩余 0
+LARGE N$倍率活动爆率剩余 0
+#ACT
+SetOnTimer 88 5
+BREAK
+
+#IF
+#ACT
+SETOFFTIMER 88
+}

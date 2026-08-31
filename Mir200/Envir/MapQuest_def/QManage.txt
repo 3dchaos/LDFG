@@ -127,7 +127,9 @@ EQUAL A22 <$USERNAME>
 EQUAL A18 <$USERNAME>
 #ELSEACT
 SENDMSG 6 你的天下第一已经被夺走，攻击倍率已经被清除！
-POWERRATE 100 0 1 1
+MOV N$倍率天下第一倍攻倍率 0
+MOV N$倍率天下第一倍攻剩余 0
+#CALL [系统功能\倍率结算.txt] @倍率_刷新全部
 SETOFFTIMER 4
 [@OnTimer3]
 #ACT
@@ -149,6 +151,12 @@ SETOFFTIMER 4
 [@OnTimer87]
 #ACT
 #CALL [系统功能\军鼓BUFF.txt] @军鼓BUFF_刷新
+
+;倍率结算倒计时
+[@OnTimer88]
+#ACT
+#CALL [系统功能\倍率结算.txt] @倍率_倒计时
+
 
 
 ;月卡检查
@@ -184,6 +192,7 @@ check [68] 1
 #ACT
 #CALL [系统功能\地图开放.txt] @地图开放_越境纠正
 #CALL [系统功能\军鼓BUFF.txt] @军鼓BUFF_刷新
+#CALL [系统功能\倍率结算.txt] @倍率_刷新全部
 
 ;清除连续挂机
 #IF
@@ -229,7 +238,9 @@ EQUAL A22 <$USERNAME>
 EQUAL A18 <$USERNAME>
 #ACT
 SENDMSG 1 天下第一【<$USERNAME>】登录游戏，获得24小时1.2倍攻击力
-POWERRATE 120 86400 0 0
+MOV N$倍率天下第一倍攻倍率 120
+MOV N$倍率天下第一倍攻剩余 86400
+#CALL [系统功能\倍率结算.txt] @倍率_刷新全部
 SETONTIMER 4 30
 
 #IF

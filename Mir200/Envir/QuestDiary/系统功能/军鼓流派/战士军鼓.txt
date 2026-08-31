@@ -5,97 +5,127 @@
 #IF
 EQUAL N$军鼓品质 1
 #ACT
-MOV N$军鼓点 2
-MOV N$军鼓大点 4
-MOV N$军鼓血蓝 60
-MOV N$军鼓吸血 2
+MOV N$军鼓点 3
+MOV N$军鼓大点 6
+MOV N$军鼓血蓝 120
+MOV N$军鼓吸血 3
 MOV N$军鼓攻速 1
-MOV N$军鼓破防 1
+MOV N$军鼓破防 2
 MOV N$军鼓准确 0
-MOV N$军鼓物伤减 1
-MOV N$军鼓魔伤减 0
-MOV N$军鼓暴抗 0
+MOV N$军鼓物伤减 2
+MOV N$军鼓魔伤减 1
+MOV N$军鼓暴抗 1
 MOV N$军鼓防冰 0
+MOV N$军鼓触发几率 12
+MOV N$军鼓切割 20
+MOV N$军鼓追风切割 10
+MOV N$军鼓铁头减伤 4
+MOV N$军鼓铁头回血 1
 BREAK
 
 #IF
 EQUAL N$军鼓品质 2
 #ACT
-MOV N$军鼓点 3
-MOV N$军鼓大点 5
-MOV N$军鼓血蓝 100
-MOV N$军鼓吸血 2
+MOV N$军鼓点 4
+MOV N$军鼓大点 8
+MOV N$军鼓血蓝 200
+MOV N$军鼓吸血 4
 MOV N$军鼓攻速 2
-MOV N$军鼓破防 1
-MOV N$军鼓准确 1
-MOV N$军鼓物伤减 1
-MOV N$军鼓魔伤减 1
-MOV N$军鼓暴抗 1
-MOV N$军鼓防冰 0
-BREAK
-
-#IF
-EQUAL N$军鼓品质 3
-#ACT
-MOV N$军鼓点 3
-MOV N$军鼓大点 6
-MOV N$军鼓血蓝 140
-MOV N$军鼓吸血 3
-MOV N$军鼓攻速 3
 MOV N$军鼓破防 2
 MOV N$军鼓准确 1
 MOV N$军鼓物伤减 3
 MOV N$军鼓魔伤减 2
 MOV N$军鼓暴抗 2
 MOV N$军鼓防冰 1
+MOV N$军鼓触发几率 14
+MOV N$军鼓切割 30
+MOV N$军鼓追风切割 15
+MOV N$军鼓铁头减伤 5
+MOV N$军鼓铁头回血 1
+BREAK
+
+#IF
+EQUAL N$军鼓品质 3
+#ACT
+MOV N$军鼓点 5
+MOV N$军鼓大点 10
+MOV N$军鼓血蓝 320
+MOV N$军鼓吸血 5
+MOV N$军鼓攻速 3
+MOV N$军鼓破防 3
+MOV N$军鼓准确 2
+MOV N$军鼓物伤减 5
+MOV N$军鼓魔伤减 3
+MOV N$军鼓暴抗 3
+MOV N$军鼓防冰 2
+MOV N$军鼓触发几率 16
+MOV N$军鼓切割 45
+MOV N$军鼓追风切割 20
+MOV N$军鼓铁头减伤 6
+MOV N$军鼓铁头回血 2
 BREAK
 
 #IF
 EQUAL N$军鼓品质 4
 #ACT
-MOV N$军鼓点 4
-MOV N$军鼓大点 7
-MOV N$军鼓血蓝 180
-MOV N$军鼓吸血 3
+MOV N$军鼓点 6
+MOV N$军鼓大点 12
+MOV N$军鼓血蓝 460
+MOV N$军鼓吸血 6
 MOV N$军鼓攻速 4
-MOV N$军鼓破防 3
-MOV N$军鼓准确 2
-MOV N$军鼓物伤减 4
-MOV N$军鼓魔伤减 3
-MOV N$军鼓暴抗 3
-MOV N$军鼓防冰 2
+MOV N$军鼓破防 4
+MOV N$军鼓准确 3
+MOV N$军鼓物伤减 7
+MOV N$军鼓魔伤减 5
+MOV N$军鼓暴抗 4
+MOV N$军鼓防冰 3
+MOV N$军鼓触发几率 18
+MOV N$军鼓切割 60
+MOV N$军鼓追风切割 30
+MOV N$军鼓铁头减伤 8
+MOV N$军鼓铁头回血 2
 BREAK
 
 #IF
 EQUAL N$军鼓品质 5
 #ACT
-MOV N$军鼓点 4
-MOV N$军鼓大点 9
-MOV N$军鼓血蓝 230
-MOV N$军鼓吸血 4
+MOV N$军鼓点 8
+MOV N$军鼓大点 15
+MOV N$军鼓血蓝 620
+MOV N$军鼓吸血 8
 MOV N$军鼓攻速 5
-MOV N$军鼓破防 4
-MOV N$军鼓准确 2
-MOV N$军鼓物伤减 5
-MOV N$军鼓魔伤减 4
-MOV N$军鼓暴抗 4
-MOV N$军鼓防冰 2
+MOV N$军鼓破防 5
+MOV N$军鼓准确 4
+MOV N$军鼓物伤减 9
+MOV N$军鼓魔伤减 7
+MOV N$军鼓暴抗 6
+MOV N$军鼓防冰 4
+MOV N$军鼓触发几率 21
+MOV N$军鼓切割 80
+MOV N$军鼓追风切割 40
+MOV N$军鼓铁头减伤 10
+MOV N$军鼓铁头回血 3
 BREAK
 
 #IF
 EQUAL N$军鼓品质 6
 #ACT
-MOV N$军鼓点 5
-MOV N$军鼓大点 10
-MOV N$军鼓血蓝 300
-MOV N$军鼓吸血 5
-MOV N$军鼓攻速 5
-MOV N$军鼓破防 5
-MOV N$军鼓准确 3
-MOV N$军鼓物伤减 6
-MOV N$军鼓魔伤减 5
-MOV N$军鼓暴抗 5
-MOV N$军鼓防冰 3
+MOV N$军鼓点 10
+MOV N$军鼓大点 18
+MOV N$军鼓血蓝 850
+MOV N$军鼓吸血 10
+MOV N$军鼓攻速 6
+MOV N$军鼓破防 7
+MOV N$军鼓准确 5
+MOV N$军鼓物伤减 12
+MOV N$军鼓魔伤减 9
+MOV N$军鼓暴抗 8
+MOV N$军鼓防冰 5
+MOV N$军鼓触发几率 24
+MOV N$军鼓切割 100
+MOV N$军鼓追风切割 50
+MOV N$军鼓铁头减伤 12
+MOV N$军鼓铁头回血 4
 }
 
 [@军鼓warrior_刷新_基础]
@@ -222,4 +252,42 @@ UpdateAbil
 #IF
 #ACT
 #CALL [系统功能\军鼓流派\战士军鼓.txt] @军鼓warrior_关闭_基础
+}
+[@军鼓warrior_攻击_拆门板]
+{
+#IF
+NOT CHECKCURRTARGETRACE = 0
+RANDOMEX <$STR(N$军鼓触发几率)> 100
+#ACT
+M.HumanHP - <$STR(N$军鼓切割)> 0 1 0 0 3
+MOV N$军鼓触发成功 1
+MOV S$军鼓触发说明 攻击触发：拆门板断岳切割，对怪物造成少量最大生命伤害。
+}
+
+[@军鼓warrior_攻击_剁馅机]
+{
+#IF
+NOT CHECKCURRTARGETRACE = 0
+RANDOMEX <$STR(N$军鼓触发几率)> 100
+#ACT
+M.HumanHP - <$STR(N$军鼓追风切割)> 0 1 0 0 3
+MOV N$军鼓触发成功 1
+MOV S$军鼓触发说明 攻击触发：剁馅机追风切割，对怪物造成轻量最大生命伤害。
+}
+
+[@军鼓warrior_受击_铁头娃]
+{
+#IF
+RANDOMEX <$STR(N$军鼓触发几率)> 100
+#ACT
+ChangeDamageValue 1 - <$STR(N$军鼓铁头减伤)>
+MOV N$军鼓触发成功 1
+MOV S$军鼓触发说明 受击触发：铁头娃山岳护体，本次伤害已降低。
+
+#IF
+EQUAL N$军鼓触发成功 1
+LARGE N$军鼓品质 4
+#ACT
+HumanHP + <$STR(N$军鼓铁头回血)> 0 1 0 0 1
+MOV S$军鼓触发说明 受击触发：铁头娃山岳护体，本次伤害降低并小幅回血。
 }
