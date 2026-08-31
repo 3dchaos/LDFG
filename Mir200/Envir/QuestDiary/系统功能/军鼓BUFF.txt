@@ -588,6 +588,28 @@ EQUAL N$军鼓战斗确认 0
 BREAK
 
 
+
+#IF
+EQUAL <$STR(S$军鼓当前职业)> warrior
+EQUAL <$STR(S$军鼓当前方向)> 拆门板
+#ACT
+#CALL [系统功能\军鼓流派\战士军鼓.txt] @军鼓warrior_攻击_拆门板
+#IF
+EQUAL N$军鼓触发成功 1
+#ACT
+#CALL [系统功能\军鼓BUFF.txt] @军鼓BUFF_触发反馈
+BREAK
+
+#IF
+EQUAL <$STR(S$军鼓当前职业)> warrior
+EQUAL <$STR(S$军鼓当前方向)> 剁馅机
+#ACT
+#CALL [系统功能\军鼓流派\战士军鼓.txt] @军鼓warrior_攻击_剁馅机
+#IF
+EQUAL N$军鼓触发成功 1
+#ACT
+#CALL [系统功能\军鼓BUFF.txt] @军鼓BUFF_触发反馈
+BREAK
 #IF
 EQUAL <$STR(S$军鼓当前职业)> wizard
 EQUAL <$STR(S$军鼓当前方向)> 电耗子
@@ -655,6 +677,17 @@ EQUAL N$军鼓战斗确认 0
 BREAK
 
 
+
+#IF
+EQUAL <$STR(S$军鼓当前职业)> warrior
+EQUAL <$STR(S$军鼓当前方向)> 铁头娃
+#ACT
+#CALL [系统功能\军鼓流派\战士军鼓.txt] @军鼓warrior_受击_铁头娃
+#IF
+EQUAL N$军鼓触发成功 1
+#ACT
+#CALL [系统功能\军鼓BUFF.txt] @军鼓BUFF_触发反馈
+BREAK
 #IF
 EQUAL <$STR(S$军鼓当前职业)> wizard
 EQUAL <$STR(S$军鼓当前方向)> 小冰箱
