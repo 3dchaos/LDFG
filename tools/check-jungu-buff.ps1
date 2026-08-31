@@ -47,6 +47,7 @@ if (Test-Path -LiteralPath $scriptPath) {
             '[@军鼓BUFF_模块开启]',
             '[@军鼓BUFF_模块刷新]',
             '[@军鼓BUFF_刷新图标]',
+            '[@军鼓BUFF_定时检查]',
             '[@军鼓BUFF_战斗确认]',
             '[@军鼓BUFF_攻击触发]',
             '[@军鼓BUFF_攻击掉血前]',
@@ -56,6 +57,8 @@ if (Test-Path -LiteralPath $scriptPath) {
             '[@军鼓BUFF_清理]',
             'CHECKUSEITEM 14',
             'GetItemFieldValue 14 name S$军鼓名称',
+            'GetItemFieldValue 14 name S$军鼓确认名',
+            'N$军鼓需要刷新',
             '#CALL [系统功能\军鼓流派配置.txt] @军鼓配置_读取',
             'SetOnTimer 87 2',
             'SETOFFTIMER 87',
@@ -372,8 +375,12 @@ if (Test-Path -LiteralPath $qManage) {
             $fail += "QManage missing $needle"
         }
     }
-    if ($qm -notmatch '\[@OnTimer87\][\s\S]*?#CALL \[系统功能\\军鼓BUFF\.txt\] @军鼓BUFF_刷新') {
-        $fail += "QManage missing OnTimer87 buff refresh callback"
+    $timer87Match = [regex]::Match($qm, '(?ms)^\[@OnTimer87\]\s*(.*?)(?=^\[@|\z)')
+    if (-not $timer87Match.Success -or $timer87Match.Groups[1].Value -notmatch [regex]::Escape('#CALL [系统功能\军鼓BUFF.txt] @军鼓BUFF_定时检查')) {
+        $fail += "QManage OnTimer87 must call the lightweight buff timer check"
+    }
+    if ($timer87Match.Success -and $timer87Match.Groups[1].Value -match [regex]::Escape('@军鼓BUFF_刷新')) {
+        $fail += "QManage OnTimer87 must not run the full buff refresh every tick"
     }
     if ($qm -notmatch '\[@Login\][\s\S]*?#CALL \[系统功能\\军鼓BUFF\.txt\] @军鼓BUFF_刷新') {
         $fail += "QManage missing login buff refresh callback"

@@ -151,7 +151,7 @@ SETOFFTIMER 4
 [@OnTimer87]
 #ACT
 MOV N$军鼓定时刷新中 1
-#CALL [系统功能\军鼓BUFF.txt] @军鼓BUFF_刷新
+#CALL [系统功能\军鼓BUFF.txt] @军鼓BUFF_定时检查
 MOV N$军鼓定时刷新中 0
 
 ;倍率结算倒计时

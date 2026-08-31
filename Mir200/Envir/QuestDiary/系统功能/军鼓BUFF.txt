@@ -4,6 +4,10 @@
 [@军鼓BUFF_刷新]
 {
 #IF
+#ACT
+MOV N$军鼓需要刷新 0
+
+#IF
 NOT CHECKUSEITEM 14
 #ACT
 #CALL [系统功能\军鼓BUFF.txt] @军鼓BUFF_清理
@@ -819,12 +823,42 @@ MOV N$军鼓触发成功 0
 BREAK
 }
 
+[@军鼓BUFF_定时检查]
+{
+#IF
+NOT CHECKUSEITEM 14
+#ACT
+#CALL [系统功能\军鼓BUFF.txt] @军鼓BUFF_清理
+BREAK
+
+#IF
+#ACT
+GetItemFieldValue 14 name S$军鼓确认名
+
+#IF
+NOT EQUAL <$STR(S$军鼓确认名)> <$STR(S$军鼓当前名称)>
+#ACT
+#CALL [系统功能\军鼓BUFF.txt] @军鼓BUFF_刷新
+BREAK
+
+#IF
+EQUAL N$军鼓需要刷新 1
+#ACT
+#CALL [系统功能\军鼓BUFF.txt] @军鼓BUFF_刷新
+BREAK
+
+#IF
+#ACT
+BREAK
+}
+
 [@军鼓BUFF_死亡检查]
 {
 #IF
 #ACT
 MOV N$军鼓战斗确认 0
 MOV N$军鼓触发成功 0
+MOV N$军鼓需要刷新 1
 CloseArrBuff 87
 SETICON 1 -1
 SetOnTimer 87 2
@@ -845,6 +879,7 @@ MOV N$军鼓阶段 0
 MOV N$军鼓当前品质 0
 MOV N$军鼓战斗确认 0
 MOV N$军鼓触发成功 0
+MOV N$军鼓需要刷新 0
 MOV N$军鼓职业确认 0
 MOV N$军鼓BUFF图标 0
 MOV N$军鼓头戴图标 0
