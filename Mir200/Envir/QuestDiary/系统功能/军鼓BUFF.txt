@@ -73,6 +73,7 @@ MOV N$军鼓当前品质 <$STR(N$军鼓品质)>
 #CALL [系统功能\军鼓BUFF.txt] @军鼓BUFF_刷新图标
 #CALL [系统功能\军鼓BUFF.txt] @军鼓BUFF_刷新战士攻速
 #CALL [系统功能\军鼓BUFF.txt] @军鼓BUFF_刷新法师施法速度
+BREAK
 }
 
 [@军鼓BUFF_刷新战士基础攻速]
@@ -86,6 +87,7 @@ BREAK
 #IF
 #ACT
 MOV N$战士基础攻速 3
+BREAK
 }
 
 [@军鼓BUFF_刷新战士攻速]
@@ -110,6 +112,7 @@ MOV N$战士路线攻速 <$STR(N$军鼓攻速)>
 #ACT
 FORMULATION <$STR(N$战士基础攻速)>+<$STR(N$战士路线攻速)> N$战士最终攻速
 ChangeSpeed 2 <$STR(N$战士最终攻速)> 3
+BREAK
 }
 
 
@@ -124,6 +127,7 @@ BREAK
 #IF
 #ACT
 MOV N$法师基础施法速度 0
+BREAK
 }
 
 [@军鼓BUFF_刷新法师施法速度]
@@ -148,6 +152,7 @@ MOV N$法师路线施法速度 <$STR(N$军鼓施法速度)>
 #ACT
 FORMULATION <$STR(N$法师基础施法速度)>+<$STR(N$法师路线施法速度)> N$法师最终施法速度
 ChangeSpeed 3 <$STR(N$法师最终施法速度)> 3
+BREAK
 }
 [@军鼓BUFF_刷新战士英雄攻速]
 {
@@ -157,6 +162,7 @@ CheckHeroJob WARRIOR
 MOV N$战士英雄基础攻速 3
 MOV N$战士英雄最终攻速 <$STR(N$战士英雄基础攻速)>
 H.CHANGESPEED 2 <$STR(N$战士英雄最终攻速)> 3
+BREAK
 }
 
 [@军鼓BUFF_应用当前模块]
@@ -172,6 +178,7 @@ BREAK
 #IF
 #ACT
 #CALL [系统功能\军鼓BUFF.txt] @军鼓BUFF_模块开启
+BREAK
 }
 
 [@军鼓BUFF_关闭当前模块]
@@ -243,6 +250,7 @@ BREAK
 #ACT
 MOV N$军鼓战斗确认 0
 MOV N$军鼓触发成功 0
+BREAK
 }
 
 [@军鼓BUFF_模块开启]
@@ -477,6 +485,7 @@ SETICON 1 0 <$STR(N$军鼓头戴图标)> 44 -30 1 0 0 150 0
 #IF
 #ACT
 SetOnTimer 87 2
+BREAK
 }
 
 [@军鼓BUFF_生成图标说明]
@@ -567,12 +576,14 @@ SENDMSG 7 【军鼓】<$STR(S$军鼓当前名称)>：<$STR(S$军鼓触发说明)>
 #IF
 #ACT
 MOV S$军鼓触发记录 <$STR(S$军鼓触发说明)>
+BREAK
 }
 [@军鼓BUFF_攻击触发]
 {
 #IF
 #ACT
 #CALL [系统功能\军鼓BUFF.txt] @军鼓BUFF_战斗确认
+BREAK
 }
 
 [@军鼓BUFF_攻击掉血前]
@@ -663,6 +674,7 @@ EQUAL <$STR(S$军鼓当前方向)> 毒嘴子
 EQUAL N$军鼓触发成功 1
 #ACT
 #CALL [系统功能\军鼓BUFF.txt] @军鼓BUFF_触发反馈
+BREAK
 }
 [@军鼓BUFF_被打掉血前]
 {
@@ -708,6 +720,7 @@ EQUAL <$STR(S$军鼓当前方向)> 奶不死
 EQUAL N$军鼓触发成功 1
 #ACT
 #CALL [系统功能\军鼓BUFF.txt] @军鼓BUFF_触发反馈
+BREAK
 }
 [@军鼓BUFF_宝宝掉血前]
 {
@@ -730,6 +743,7 @@ EQUAL <$STR(S$军鼓当前方向)> 养娃人
 EQUAL N$军鼓触发成功 1
 #ACT
 #CALL [系统功能\军鼓BUFF.txt] @军鼓BUFF_触发反馈
+BREAK
 }
 [@军鼓BUFF_职业确认]
 {
@@ -757,6 +771,7 @@ BREAK
 #IF
 #ACT
 MOV N$军鼓职业确认 0
+BREAK
 }
 
 [@军鼓BUFF_战斗确认]
@@ -796,6 +811,7 @@ BREAK
 MOV N$军鼓战斗确认 0
 MOV N$军鼓触发成功 0
 #CALL [系统功能\军鼓BUFF.txt] @军鼓BUFF_清理
+BREAK
 }
 
 [@军鼓BUFF_死亡检查]

@@ -9,6 +9,7 @@
 #CALL [系统功能\倍率结算.txt] @攻击倍率_结算
 #CALL [系统功能\倍率结算.txt] @爆率倍率_结算
 #CALL [系统功能\倍率结算.txt] @倍率_计时器刷新
+BREAK
 
 [@倍率_倒计时]
 #IF
@@ -74,6 +75,7 @@ MOV N$倍率活动爆率倍率 0
 #IF
 #ACT
 #CALL [系统功能\倍率结算.txt] @倍率_刷新全部
+BREAK
 
 [@经验倍率_结算]
 #IF
@@ -108,6 +110,7 @@ MOV N$最终经验保存 1
 #IF
 #ACT
 KILLMONEXPRATE <$STR(N$最终经验倍率)> <$STR(N$最终经验时间)> <$STR(N$最终经验保存)> 1
+BREAK
 
 [@攻击倍率_结算]
 #IF
@@ -150,6 +153,7 @@ MOV N$最终倍攻保存 0
 #IF
 #ACT
 POWERRATE <$STR(N$最终倍攻倍率)> <$STR(N$最终倍攻时间)> <$STR(N$最终倍攻保存)> 1 0
+BREAK
 
 [@爆率倍率_结算]
 #IF
@@ -176,6 +180,7 @@ MOV N$最终爆率保存 0
 #IF
 #ACT
 KILLMONBURSTRATE <$STR(N$最终爆率倍率)> <$STR(N$最终爆率时间)> <$STR(N$最终爆率保存)> 1
+BREAK
 
 [@倍率_计时器刷新]
 #OR
@@ -192,4 +197,5 @@ BREAK
 #IF
 #ACT
 SETOFFTIMER 88
+BREAK
 }

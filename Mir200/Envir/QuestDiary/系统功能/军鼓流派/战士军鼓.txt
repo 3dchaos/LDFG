@@ -126,6 +126,7 @@ MOV N$军鼓切割 100
 MOV N$军鼓追风切割 50
 MOV N$军鼓铁头减伤 12
 MOV N$军鼓铁头回血 4
+BREAK
 }
 
 [@军鼓warrior_刷新_基础]
@@ -152,6 +153,7 @@ AddHumNewValue 19 = 0
 AddHumNewValue 24 = 0
 UpdateAbil
 ChangeState 10 3 100 <$STR(N$军鼓吸血)>
+BREAK
 }
 
 [@军鼓warrior_关闭_基础]
@@ -176,6 +178,7 @@ AddHumNewValue 5 = 0
 AddHumNewValue 19 = 0
 AddHumNewValue 24 = 0
 UpdateAbil
+BREAK
 }
 
 [@军鼓warrior_开启_拆门板]
@@ -183,6 +186,7 @@ UpdateAbil
 #IF
 #ACT
 GOTO @军鼓warrior_刷新_拆门板
+BREAK
 }
 
 [@军鼓warrior_刷新_拆门板]
@@ -193,6 +197,7 @@ GOTO @军鼓warrior_刷新_拆门板
 LockUpdateAbil
 AddHumNewValue 4 = <$STR(N$军鼓破防)> 3
 UpdateAbil
+BREAK
 }
 
 [@军鼓warrior_关闭_拆门板]
@@ -200,6 +205,7 @@ UpdateAbil
 #IF
 #ACT
 #CALL [系统功能\军鼓流派\战士军鼓.txt] @军鼓warrior_关闭_基础
+BREAK
 }
 
 [@军鼓warrior_开启_铁头娃]
@@ -207,6 +213,7 @@ UpdateAbil
 #IF
 #ACT
 GOTO @军鼓warrior_刷新_铁头娃
+BREAK
 }
 
 [@军鼓warrior_刷新_铁头娃]
@@ -220,6 +227,7 @@ AddHumNewValue 3 = <$STR(N$军鼓魔伤减)> 3
 AddHumNewValue 19 = <$STR(N$军鼓防冰)> 3
 AddHumNewValue 24 = <$STR(N$军鼓暴抗)> 3
 UpdateAbil
+BREAK
 }
 
 [@军鼓warrior_关闭_铁头娃]
@@ -227,6 +235,7 @@ UpdateAbil
 #IF
 #ACT
 #CALL [系统功能\军鼓流派\战士军鼓.txt] @军鼓warrior_关闭_基础
+BREAK
 }
 
 [@军鼓warrior_开启_剁馅机]
@@ -234,6 +243,7 @@ UpdateAbil
 #IF
 #ACT
 GOTO @军鼓warrior_刷新_剁馅机
+BREAK
 }
 
 [@军鼓warrior_刷新_剁馅机]
@@ -245,6 +255,7 @@ LockUpdateAbil
 ChangeHumAbility 19 = <$STR(N$军鼓准确)> 3
 UpdateAbil
 
+BREAK
 }
 
 [@军鼓warrior_关闭_剁馅机]
@@ -252,6 +263,7 @@ UpdateAbil
 #IF
 #ACT
 #CALL [系统功能\军鼓流派\战士军鼓.txt] @军鼓warrior_关闭_基础
+BREAK
 }
 [@军鼓warrior_攻击_拆门板]
 {
@@ -262,6 +274,7 @@ RANDOMEX <$STR(N$军鼓触发几率)> 100
 M.HumanHP - <$STR(N$军鼓切割)> 0 1 0 0 3
 MOV N$军鼓触发成功 1
 MOV S$军鼓触发说明 攻击触发：拆门板断岳切割，对怪物造成少量最大生命伤害。
+BREAK
 }
 
 [@军鼓warrior_攻击_剁馅机]
@@ -273,6 +286,7 @@ RANDOMEX <$STR(N$军鼓触发几率)> 100
 M.HumanHP - <$STR(N$军鼓追风切割)> 0 1 0 0 3
 MOV N$军鼓触发成功 1
 MOV S$军鼓触发说明 攻击触发：剁馅机追风切割，对怪物造成轻量最大生命伤害。
+BREAK
 }
 
 [@军鼓warrior_受击_铁头娃]
@@ -290,4 +304,5 @@ LARGE N$军鼓品质 4
 #ACT
 HumanHP + <$STR(N$军鼓铁头回血)> 0 1 0 0 1
 MOV S$军鼓触发说明 受击触发：铁头娃山岳护体，本次伤害降低并小幅回血。
+BREAK
 }

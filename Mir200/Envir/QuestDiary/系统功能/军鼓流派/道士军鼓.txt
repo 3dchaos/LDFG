@@ -97,6 +97,7 @@ MOV N$军鼓恢复 8
 MOV N$军鼓爆率 3
 MOV N$军鼓爆伤 40
 MOV N$军鼓状态时间 3
+BREAK
 }
 
 [@军鼓taoist_刷新_道士底座]
@@ -118,6 +119,7 @@ AddHumNewValue 19 = <$STR(N$军鼓元素)> 3
 AddHumNewValue 20 = <$STR(N$军鼓元素)> 3
 AddHumNewValue 24 = <$STR(N$军鼓元素)> 3
 UpdateAbil
+BREAK
 }
 
 [@军鼓taoist_开启_养娃人]
@@ -125,6 +127,7 @@ UpdateAbil
 #IF
 #ACT
 GOTO @军鼓taoist_刷新_养娃人
+BREAK
 }
 
 [@军鼓taoist_刷新_养娃人]
@@ -144,6 +147,7 @@ MOV N$军鼓宝宝成长 1
 LARGE N$军鼓品质 5
 #ACT
 MOV N$军鼓宝宝联动 1
+BREAK
 }
 
 [@军鼓taoist_养娃人_召唤检查]
@@ -229,6 +233,7 @@ CHECKSLAVECOUNT < 1 圣域冥狼 1
 #ACT
 RECALLMOB 圣域冥狼 1 60 0 0 0 1
 MOV N$军鼓养娃召唤CD 30
+BREAK
 }
 [@军鼓taoist_关闭_养娃人]
 {
@@ -247,6 +252,7 @@ KillCallMob 魔龙破甲兵2 1 1
 KillCallMob 魔龙战将 1 1
 KillCallMob 雪域冰狼 1 1
 KillCallMob 雪域战将 1 1
+BREAK
 }
 
 [@军鼓taoist_攻击_养娃人]
@@ -267,6 +273,7 @@ RANDOMEX <$STR(N$军鼓触发几率)> 100
 ChangeDamageValue 1 + <$STR(N$军鼓顶级加码)>
 MOV N$军鼓触发成功 1
 MOV S$军鼓触发说明 攻击触发：养娃人高阶联动，人物伤害追加加码。
+BREAK
 }
 
 [@军鼓taoist_宝宝_养娃人]
@@ -287,6 +294,7 @@ RANDOMEX <$STR(N$军鼓触发几率)> 100
 ChangeDamageValue 1 + <$STR(N$军鼓顶级加码)>
 MOV N$军鼓触发成功 1
 MOV S$军鼓触发说明 宝宝触发：养娃人高阶联动，宝宝伤害追加加码。
+BREAK
 }
 
 [@军鼓taoist_开启_奶不死]
@@ -294,6 +302,7 @@ MOV S$军鼓触发说明 宝宝触发：养娃人高阶联动，宝宝伤害追加加码。
 #IF
 #ACT
 GOTO @军鼓taoist_刷新_奶不死
+BREAK
 }
 
 [@军鼓taoist_刷新_奶不死]
@@ -331,6 +340,7 @@ MOV N$军鼓护主 1
 LARGE N$军鼓品质 5
 #ACT
 MOV N$军鼓救急 1
+BREAK
 }
 
 [@军鼓taoist_关闭_奶不死]
@@ -339,6 +349,7 @@ MOV N$军鼓救急 1
 #ACT
 MOV N$军鼓护主 0
 MOV N$军鼓救急 0
+BREAK
 }
 
 [@军鼓taoist_受击_奶不死]
@@ -358,6 +369,7 @@ RANDOMEX <$STR(N$军鼓触发几率)> 100
 HumanHP + <$STR(N$军鼓恢复)> 100 1
 MOV N$军鼓触发成功 1
 MOV S$军鼓触发说明 受击触发：奶不死高阶救急回血已触发。
+BREAK
 }
 
 [@军鼓taoist_开启_毒嘴子]
@@ -365,6 +377,7 @@ MOV S$军鼓触发说明 受击触发：奶不死高阶救急回血已触发。
 #IF
 #ACT
 GOTO @军鼓taoist_刷新_毒嘴子
+BREAK
 }
 
 [@军鼓taoist_刷新_毒嘴子]
@@ -393,6 +406,7 @@ MOV N$军鼓毒印 1
 LARGE N$军鼓品质 5
 #ACT
 MOV N$军鼓毒爆 1
+BREAK
 }
 
 [@军鼓taoist_关闭_毒嘴子]
@@ -401,6 +415,7 @@ MOV N$军鼓毒爆 1
 #ACT
 MOV N$军鼓毒印 0
 MOV N$军鼓毒爆 0
+BREAK
 }
 
 [@军鼓taoist_攻击_毒嘴子]
@@ -449,4 +464,5 @@ NOT CHECKCURRTARGETRACE = 0
 #ACT
 M.HumanHP - <$STR(N$军鼓爆伤)> 100 1
 MOV S$军鼓触发说明 攻击触发：毒嘴子高阶毒爆，对怪物追加少量毒伤。
+BREAK
 }
