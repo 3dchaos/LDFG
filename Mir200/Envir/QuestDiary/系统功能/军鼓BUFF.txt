@@ -483,6 +483,11 @@ LARGE N$军鼓头戴图标 0
 SETICON 1 0 <$STR(N$军鼓头戴图标)> 44 -30 1 0 0 150 0
 
 #IF
+EQUAL N$军鼓定时刷新中 1
+#ACT
+BREAK
+
+#IF
 #ACT
 SetOnTimer 87 2
 BREAK

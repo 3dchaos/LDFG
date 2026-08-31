@@ -183,6 +183,10 @@ KILLMONBURSTRATE <$STR(N$×îÖÕ±¬ÂÊ±¶ÂÊ)> <$STR(N$×îÖÕ±¬ÂÊÊ±¼ä)> <$STR(N$×îÖÕ±¬ÂÊ±
 BREAK
 
 [@±¶ÂÊ_¼ÆÊ±Æ÷Ë¢ÐÂ]
+#IF
+#ACT
+MOV N$±¶ÂÊÈÔÓÐµ¹¼ÆÊ± 0
+
 #OR
 LARGE N$±¶ÂÊ»î¶¯¾­ÑéÊ£Óà 0
 LARGE U92 0
@@ -191,11 +195,21 @@ LARGE U95 0
 LARGE N$±¶ÂÊÌìÏÂµÚÒ»±¶¹¥Ê£Óà 0
 LARGE N$±¶ÂÊ»î¶¯±¬ÂÊÊ£Óà 0
 #ACT
-SetOnTimer 88 5
+MOV N$±¶ÂÊÈÔÓÐµ¹¼ÆÊ± 1
+
+#IF
+EQUAL N$±¶ÂÊÈÔÓÐµ¹¼ÆÊ± 0
+#ACT
+SETOFFTIMER 88
+BREAK
+
+#IF
+EQUAL N$±¶ÂÊ¶¨Ê±Ë¢ÐÂÖÐ 1
+#ACT
 BREAK
 
 #IF
 #ACT
-SETOFFTIMER 88
+SetOnTimer 88 5
 BREAK
 }
