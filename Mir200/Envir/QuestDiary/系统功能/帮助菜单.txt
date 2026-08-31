@@ -146,9 +146,10 @@ GetListString ..\..\..\..\..\..\密码组.txt 0 P11 P12 1
 #IF
 EQUAL <$NPCINPUT(2)> <$STR(P11)>
 #ACT
-KILLMONBURSTRATE 200 0 1 
-KILLMONEXPRATE 500 0 1
-POWERRATE 150 0 1 
+MOV U96 200
+MOV U90 500
+MOV U93 150
+#CALL [系统功能\倍率结算.txt] @倍率_刷新全部
 MESSAGEBOX 激活永久双倍暴率，1.5倍攻击力，5倍经验值
 BREAK
 

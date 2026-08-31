@@ -19,8 +19,11 @@ CHECKLEVELEX < 45
 CHECKLEVELEX > 29
 #ACT
 SET [120] 1
-KILLMONEXPRATE 150 86400 0 0
-KILLMONBURSTRATE 150 86400 0 0
+MOV N$倍率活动经验倍率 150
+MOV N$倍率活动经验剩余 86400
+MOV N$倍率活动爆率倍率 150
+MOV N$倍率活动爆率剩余 86400
+#CALL [系统功能\倍率结算.txt] @倍率_刷新全部
 SetArrBuff 1 5 1 1681 86400 30 1682 1 [活动BUFF]新人追赶活动1.5倍经验和暴率
 SENDMSG 5 开启新人追赶活动，20-35级为1.5倍经验和暴率。
 BREAK
@@ -29,8 +32,11 @@ BREAK
 CHECKLEVELEX < 30
 #ACT
 SET [120] 1
-KILLMONEXPRATE 200 86400 0 0
-KILLMONBURSTRATE 200 86400 0 0
+MOV N$倍率活动经验倍率 200
+MOV N$倍率活动经验剩余 86400
+MOV N$倍率活动爆率倍率 200
+MOV N$倍率活动爆率剩余 86400
+#CALL [系统功能\倍率结算.txt] @倍率_刷新全部
 SetArrBuff 1 5 1 1681 86400 30 1682 1 [活动BUFF]新人追赶活动双倍经验和暴率
 SENDMSG 5 开启新人追赶活动，20以下为双倍经验和暴率。
 BREAK
@@ -43,9 +49,12 @@ SET [120] 1
 ;MESSAGEBOX 开区双倍经验活动双倍爆率1.5攻击开启
 SENDMSG 5 开启狐月活动：45级以下十倍经验，双倍伤害。80级以下五倍经验，1.5倍伤害。100级以下双倍经验，1.3倍伤害。
 SetArrBuff 1 5 1 1681 86400 30 1682 1 [狐月开放活动]十倍经验，双倍伤害。
-KILLMONEXPRATE 1000 86400 0 0
+MOV N$倍率活动经验倍率 1000
+MOV N$倍率活动经验剩余 86400
 ;KILLMONBURSTRATE 200 86400 0 0
-POWERRATE 200 86400 0 0
+MOV N$倍率活动倍攻倍率 200
+MOV N$倍率活动倍攻剩余 86400
+#CALL [系统功能\倍率结算.txt] @倍率_刷新全部
 BREAK
 
 
@@ -56,9 +65,12 @@ SET [120] 1
 ;MESSAGEBOX 开区双倍经验活动双倍爆率1.5攻击开启
 SENDMSG 5 开启狐月活动：45级以下十倍经验，双倍伤害。80级以下五倍经验，1.5倍伤害。100级以下双倍经验，1.3倍伤害。
 SetArrBuff 1 5 1 1681 86400 30 1682 1 [狐月开放活动]五倍经验，1.5倍伤害。
-KILLMONEXPRATE 500 86400 0 0
+MOV N$倍率活动经验倍率 500
+MOV N$倍率活动经验剩余 86400
 ;KILLMONBURSTRATE 200 86400 0 0
-POWERRATE 150 86400 0 0
+MOV N$倍率活动倍攻倍率 150
+MOV N$倍率活动倍攻剩余 86400
+#CALL [系统功能\倍率结算.txt] @倍率_刷新全部
 BREAK
 
 #IF
@@ -68,9 +80,12 @@ SET [120] 1
 ;MESSAGEBOX 开区双倍经验活动双倍爆率1.5攻击开启
 SENDMSG 5 开启狐月活动：45级以下十倍经验，双倍伤害。80级以下五倍经验，1.5倍伤害。100级以下双倍经验，1.3倍伤害。
 SetArrBuff 1 5 1 1681 86400 30 1682 1 [狐月开放活动]双倍经验，1.3倍伤害。
-KILLMONEXPRATE 200 86400 0 0
+MOV N$倍率活动经验倍率 200
+MOV N$倍率活动经验剩余 86400
 ;KILLMONBURSTRATE 200 86400 0 0
-POWERRATE 130 86400 0 0
+MOV N$倍率活动倍攻倍率 130
+MOV N$倍率活动倍攻剩余 86400
+#CALL [系统功能\倍率结算.txt] @倍率_刷新全部
 BREAK
 
 
@@ -81,7 +96,9 @@ CHECKLEVELEX < 50
 CHECKLEVELEX > 35
 #ACT
 SET [120] 1
-KILLMONEXPRATE 200 86400 0 0
+MOV N$倍率活动经验倍率 200
+MOV N$倍率活动经验剩余 86400
+#CALL [系统功能\倍率结算.txt] @倍率_刷新全部
 SetArrBuff 1 5 1 1681 86400 30 1682 1 [活动BUFF]新人追赶活动双倍经验
 SENDMSG 5 开启新人追赶活动，36-50为双倍经验。
 BREAK
@@ -91,7 +108,9 @@ CHECKLEVELEX < 35
 CHECKLEVELEX > 19
 #ACT
 SET [120] 1
-KILLMONEXPRATE 300 86400 0 0
+MOV N$倍率活动经验倍率 300
+MOV N$倍率活动经验剩余 86400
+#CALL [系统功能\倍率结算.txt] @倍率_刷新全部
 SetArrBuff 1 5 1 1681 86400 30 1682 1 [活动BUFF]新人追赶活动三倍经验
 SENDMSG 5 开启新人追赶活动，20-35级为三倍经验。
 BREAK
@@ -100,7 +119,9 @@ BREAK
 CHECKLEVELEX < 20
 #ACT
 SET [120] 1
-KILLMONEXPRATE 500 86400 0 0
+MOV N$倍率活动经验倍率 500
+MOV N$倍率活动经验剩余 86400
+#CALL [系统功能\倍率结算.txt] @倍率_刷新全部
 SetArrBuff 1 5 1 1681 86400 30 1682 1 [活动BUFF]新人追赶活动五倍经验
 SENDMSG 5 开启新人追赶活动，20以下为五倍经验。
 BREAK

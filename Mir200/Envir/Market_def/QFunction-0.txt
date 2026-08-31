@@ -534,7 +534,9 @@ SENDMSG 7 无效！
 #IF
 #ACT
 Gmexecute showeffect 76
-KILLMONEXPRATE 1000 3600 1
+MOV U91 1000
+MOV U92 3600
+#CALL [系统功能\倍率结算.txt] @倍率_刷新全部
 SENDMSG 7 你获得了1个小时十倍经验,期间死亡或下线不会失效,重复使用无效!
 
 
@@ -542,21 +544,27 @@ SENDMSG 7 你获得了1个小时十倍经验,期间死亡或下线不会失效,重复使用无效!
 #IF
 #ACT
 Gmexecute showeffect 76
-KILLMONEXPRATE 500 3600 1
+MOV U91 500
+MOV U92 3600
+#CALL [系统功能\倍率结算.txt] @倍率_刷新全部
 SENDMSG 7 你获得了1个小时五倍经验,期间死亡或下线不会失效,重复使用无效!
 
 [@StdModeFunc31]
 #IF
 #ACT
 Gmexecute showeffect 76
-KILLMONEXPRATE 300 3600 1
+MOV U91 300
+MOV U92 3600
+#CALL [系统功能\倍率结算.txt] @倍率_刷新全部
 SENDMSG 7 你获得了1个小时三倍经验,期间死亡或下线不会失效,重复使用无效!
 
 [@StdModeFunc28]
 #IF
 #ACT
 Gmexecute showeffect 76
-KILLMONEXPRATE 200 3600 1
+MOV U91 200
+MOV U92 3600
+#CALL [系统功能\倍率结算.txt] @倍率_刷新全部
 SENDMSG 7 你获得了1个小时两倍经验,期间死亡或下线不会失效,重复使用无效!
 
 
@@ -564,7 +572,9 @@ SENDMSG 7 你获得了1个小时两倍经验,期间死亡或下线不会失效,重复使用无效!
 #IF
 CHECKLEVEL 40
 #ACT
-KILLMONEXPRATE 110 3600 1
+MOV U91 110
+MOV U92 3600
+#CALL [系统功能\倍率结算.txt] @倍率_刷新全部
 SENDMSG 7 你已经40级了，双倍卷轴效果不佳!
 SENDMSG 7 你获得了1小时1.1倍经验,期间死亡或下线不会失效,重复使用无效!
 BREAK
@@ -572,7 +582,9 @@ BREAK
 #IF
 CHECKLEVEL 30
 #ACT
-KILLMONEXPRATE 120 3600 1
+MOV U91 120
+MOV U92 3600
+#CALL [系统功能\倍率结算.txt] @倍率_刷新全部
 SENDMSG 7 你已经30级了，双倍卷轴效果一般!
 SENDMSG 7 你获得了1小时1.2倍经验,期间死亡或下线不会失效,重复使用无效!
 BREAK
@@ -580,14 +592,18 @@ BREAK
 #IF
 CHECKLEVEL 20
 #ACT
-KILLMONEXPRATE 150 3600 1
+MOV U91 150
+MOV U92 3600
+#CALL [系统功能\倍率结算.txt] @倍率_刷新全部
 SENDMSG 7 你已经20级了，双倍卷轴效果良好!
 SENDMSG 7 你获得了1小时1.5倍经验,期间死亡或下线不会失效,重复使用无效!
 BREAK
 
 #IF
 #ACT
-KILLMONEXPRATE 200 3600 1
+MOV U91 200
+MOV U92 3600
+#CALL [系统功能\倍率结算.txt] @倍率_刷新全部
 SENDMSG 7 你未满20级了，双倍卷轴效果显著!
 SENDMSG 7 你获得了1小时2倍经验,期间死亡或下线不会失效,重复使用无效!
 BREAK
@@ -597,7 +613,9 @@ BREAK
 #IF
 CHECKLEVEL 40
 #ACT
-POWERRATE 110 1800 1
+MOV U94 110
+MOV U95 1800
+#CALL [系统功能\倍率结算.txt] @倍率_刷新全部
 SENDMSG 7 你已经40级了，攻击神水效果不佳!
 SENDMSG 7 你获得了半小时1.1倍攻击力,期间死亡或下线不会失效,重复使用无效!
 BREAK
@@ -605,7 +623,9 @@ BREAK
 #IF
 CHECKLEVEL 30
 #ACT
-POWERRATE 120 1800 1
+MOV U94 120
+MOV U95 1800
+#CALL [系统功能\倍率结算.txt] @倍率_刷新全部
 SENDMSG 7 你已经30级了，攻击神水效果一般!
 SENDMSG 7 你获得了半小时1.2倍攻击力,期间死亡或下线不会失效,重复使用无效!
 BREAK
@@ -613,14 +633,18 @@ BREAK
 #IF
 CHECKLEVEL 20
 #ACT
-POWERRATE 130 1800 1
+MOV U94 130
+MOV U95 1800
+#CALL [系统功能\倍率结算.txt] @倍率_刷新全部
 SENDMSG 7 你已经20级了，攻击神水效果良好!
 SENDMSG 7 你获得了半小时1.3倍攻击力,期间死亡或下线不会失效,重复使用无效!
 BREAK
 
 #IF
 #ACT
-POWERRATE 150 1800 1
+MOV U94 150
+MOV U95 1800
+#CALL [系统功能\倍率结算.txt] @倍率_刷新全部
 SENDMSG 7 你没满20级，攻击神水效果显著!
 SENDMSG 7 你获得了半小时1.5倍攻击力,期间死亡或下线不会失效,重复使用无效!
 BREAK
