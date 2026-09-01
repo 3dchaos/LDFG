@@ -1,6 +1,6 @@
 [@main]
 #IF
-	LARGE G0 5
+	LARGE G0 11
 #ACT
 mov N$资源编号 0 
 OpenBigDialogBox <$STR(N$资源编号)> 16 1 4 0 0 1 384 23
