@@ -153,6 +153,8 @@ SETOFFTIMER 4
 MOV N$军鼓定时刷新中 1
 #CALL [系统功能\军鼓BUFF.txt] @军鼓BUFF_定时检查
 MOV N$军鼓定时刷新中 0
+;英雄军鼓在线续期(英雄不在场时由 @英雄军鼓_定时检查 内部 CheckHeroOnline 守卫跳过)
+#CALL [系统功能\军鼓BUFF.txt] @英雄军鼓_定时检查
 
 ;倍率结算倒计时
 [@OnTimer88]
@@ -394,10 +396,9 @@ Loopgoto @复制称号 N$数量
 #CALL [系统功能\老登辅助\特效.txt] @英雄登场
 
 #IF
-CheckHeroJob WARRIOR
 #ACT
-#CALL [系统功能\军鼓BUFF.txt] @军鼓BUFF_刷新战士英雄攻速
-SENDMSG 6 战士英雄攻速，准确补偿开启
+;英雄登录：按英雄当前14号位军鼓结算常驻(含攻速/施法速度统一收敛到新链路)
+#CALL [系统功能\军鼓BUFF.txt] @英雄军鼓_刷新
 
 
 #IF

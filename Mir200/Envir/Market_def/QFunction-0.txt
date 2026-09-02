@@ -672,3 +672,25 @@ MOV G251 <$Y>
 MOV G252 30
 SENDCENTERMSG 215 86 江湖救急，{<$USERNAME>|250:0}请求支援！ 1 30
 Gmexecute 开始提问 @英雄令提问
+
+;========== 英雄军鼓位触发（14号位） ==========
+;英雄穿装备 -> 刷新英雄军鼓
+[@HeroTakeOnEx]
+#IF
+EQUAL <$H.CurItemPos> 14
+#ACT
+#CALL [系统功能\军鼓BUFF.txt] @英雄军鼓_刷新
+BREAK
+
+;英雄卸装备 -> 清理英雄军鼓
+[@HeroTakeOffEx]
+#IF
+EQUAL <$H.CurItemPos> 14
+#ACT
+#CALL [系统功能\军鼓BUFF.txt] @英雄军鼓_清理
+BREAK
+
+;英雄死亡 -> 英雄军鼓死亡检查(复位战斗态/标记刷新)
+[@HeroDie]
+#ACT
+#CALL [系统功能\军鼓BUFF.txt] @英雄军鼓_死亡检查
