@@ -1097,10 +1097,14 @@ BREAK
 #IF
 #ACT
 ;英雄独立解析配置(不复用玩家侧读取，避免污染玩家 S$军鼓*/N$军鼓* 变量)
+MOV N$英雄军鼓有效 0
 MOV N$英雄军鼓配置行 0
 MOV S$英雄军鼓配置文本
-MOV N$英雄军鼓有效 0
+
+;GetStringPosEX 是条件命令，须放在 #IF 区(与玩家侧 @军鼓配置_读取 同构)
+#IF
 GetStringPosEX ..\QuestDiary\系统功能\军鼓流派配置.txt <$STR(S$英雄军鼓名称)> N$英雄军鼓配置行 S$英雄军鼓配置文本 0
+#ACT
 
 #IF
 EQUAL N$英雄军鼓配置行 0
@@ -1183,79 +1187,412 @@ BREAK
 }
 
 ;读取英雄军鼓品质数值桶(与玩家同品质同值，写英雄军鼓变量域)
+;读取英雄军鼓品质数值：按英雄军鼓职业分发玩家同款品质(满足 复用玩家方向数值 取向，落 N$英雄军鼓* 变量域)
 [@英雄军鼓_读取品质数值]
 {
 #IF
 #ACT
-MOV N$英雄军鼓点 0
+;按英雄军鼓职业分发对应职业品质基础
+
+#IF
+EQUAL <$STR(S$英雄军鼓职业)> warrior
+#ACT
+#CALL [系统功能\军鼓BUFF.txt] @英雄军鼓_读取品质数值_warrior
+BREAK
+
+#IF
+EQUAL <$STR(S$英雄军鼓职业)> wizard
+#ACT
+#CALL [系统功能\军鼓BUFF.txt] @英雄军鼓_读取品质数值_wizard
+BREAK
+
+#IF
+EQUAL <$STR(S$英雄军鼓职业)> taoist
+#ACT
+#CALL [系统功能\军鼓BUFF.txt] @英雄军鼓_读取品质数值_taoist
+BREAK
+}
+
+[@英雄军鼓_读取品质数值_warrior]
+{
+#IF
+#ACT
+;清空本职业品质数值桶
+MOV N$英雄军鼓准确 0
+MOV N$英雄军鼓切割 0
+MOV N$英雄军鼓吸血 0
 MOV N$英雄军鼓大点 0
-MOV N$英雄军鼓血蓝 0
 MOV N$英雄军鼓攻速 0
-MOV N$英雄军鼓施法速度 0
+MOV N$英雄军鼓暴抗 0
+MOV N$英雄军鼓点 0
+MOV N$英雄军鼓物伤减 0
+MOV N$英雄军鼓破防 0
+MOV N$英雄军鼓血蓝 0
+MOV N$英雄军鼓触发几率 0
+MOV N$英雄军鼓追风切割 0
+MOV N$英雄军鼓铁头减伤 0
+MOV N$英雄军鼓铁头回血 0
+MOV N$英雄军鼓防冰 0
+MOV N$英雄军鼓魔伤减 0
 
 #IF
 EQUAL N$英雄军鼓品质 1
+CheckHeroJob WARRIOR
 #ACT
-MOV N$英雄军鼓点 3
+MOV N$英雄军鼓准确 0
+MOV N$英雄军鼓切割 20
+MOV N$英雄军鼓吸血 3
 MOV N$英雄军鼓大点 6
-MOV N$英雄军鼓血蓝 120
 MOV N$英雄军鼓攻速 1
-MOV N$英雄军鼓施法速度 1
+MOV N$英雄军鼓暴抗 1
+MOV N$英雄军鼓点 3
+MOV N$英雄军鼓物伤减 2
+MOV N$英雄军鼓破防 2
+MOV N$英雄军鼓血蓝 120
+MOV N$英雄军鼓触发几率 12
+MOV N$英雄军鼓追风切割 10
+MOV N$英雄军鼓铁头减伤 4
+MOV N$英雄军鼓铁头回血 1
+MOV N$英雄军鼓防冰 0
+MOV N$英雄军鼓魔伤减 1
 BREAK
 
 #IF
 EQUAL N$英雄军鼓品质 2
+CheckHeroJob WARRIOR
 #ACT
-MOV N$英雄军鼓点 4
+MOV N$英雄军鼓准确 1
+MOV N$英雄军鼓切割 30
+MOV N$英雄军鼓吸血 4
 MOV N$英雄军鼓大点 8
-MOV N$英雄军鼓血蓝 200
 MOV N$英雄军鼓攻速 2
-MOV N$英雄军鼓施法速度 1
+MOV N$英雄军鼓暴抗 2
+MOV N$英雄军鼓点 4
+MOV N$英雄军鼓物伤减 3
+MOV N$英雄军鼓破防 2
+MOV N$英雄军鼓血蓝 200
+MOV N$英雄军鼓触发几率 14
+MOV N$英雄军鼓追风切割 15
+MOV N$英雄军鼓铁头减伤 5
+MOV N$英雄军鼓铁头回血 1
+MOV N$英雄军鼓防冰 1
+MOV N$英雄军鼓魔伤减 2
 BREAK
 
 #IF
 EQUAL N$英雄军鼓品质 3
+CheckHeroJob WARRIOR
 #ACT
-MOV N$英雄军鼓点 5
+MOV N$英雄军鼓准确 2
+MOV N$英雄军鼓切割 45
+MOV N$英雄军鼓吸血 5
 MOV N$英雄军鼓大点 10
-MOV N$英雄军鼓血蓝 320
 MOV N$英雄军鼓攻速 3
-MOV N$英雄军鼓施法速度 1
+MOV N$英雄军鼓暴抗 3
+MOV N$英雄军鼓点 5
+MOV N$英雄军鼓物伤减 5
+MOV N$英雄军鼓破防 3
+MOV N$英雄军鼓血蓝 320
+MOV N$英雄军鼓触发几率 16
+MOV N$英雄军鼓追风切割 20
+MOV N$英雄军鼓铁头减伤 6
+MOV N$英雄军鼓铁头回血 2
+MOV N$英雄军鼓防冰 2
+MOV N$英雄军鼓魔伤减 3
 BREAK
 
 #IF
 EQUAL N$英雄军鼓品质 4
+CheckHeroJob WARRIOR
 #ACT
-MOV N$英雄军鼓点 6
+MOV N$英雄军鼓准确 3
+MOV N$英雄军鼓切割 60
+MOV N$英雄军鼓吸血 6
 MOV N$英雄军鼓大点 12
-MOV N$英雄军鼓血蓝 460
 MOV N$英雄军鼓攻速 4
-MOV N$英雄军鼓施法速度 2
+MOV N$英雄军鼓暴抗 4
+MOV N$英雄军鼓点 6
+MOV N$英雄军鼓物伤减 7
+MOV N$英雄军鼓破防 4
+MOV N$英雄军鼓血蓝 460
+MOV N$英雄军鼓触发几率 18
+MOV N$英雄军鼓追风切割 30
+MOV N$英雄军鼓铁头减伤 8
+MOV N$英雄军鼓铁头回血 2
+MOV N$英雄军鼓防冰 3
+MOV N$英雄军鼓魔伤减 5
 BREAK
 
 #IF
 EQUAL N$英雄军鼓品质 5
+CheckHeroJob WARRIOR
 #ACT
-MOV N$英雄军鼓点 8
+MOV N$英雄军鼓准确 4
+MOV N$英雄军鼓切割 80
+MOV N$英雄军鼓吸血 8
 MOV N$英雄军鼓大点 15
-MOV N$英雄军鼓血蓝 620
 MOV N$英雄军鼓攻速 5
-MOV N$英雄军鼓施法速度 2
+MOV N$英雄军鼓暴抗 6
+MOV N$英雄军鼓点 8
+MOV N$英雄军鼓物伤减 9
+MOV N$英雄军鼓破防 5
+MOV N$英雄军鼓血蓝 620
+MOV N$英雄军鼓触发几率 21
+MOV N$英雄军鼓追风切割 40
+MOV N$英雄军鼓铁头减伤 10
+MOV N$英雄军鼓铁头回血 3
+MOV N$英雄军鼓防冰 4
+MOV N$英雄军鼓魔伤减 7
 BREAK
 
 #IF
 EQUAL N$英雄军鼓品质 6
+CheckHeroJob WARRIOR
 #ACT
-MOV N$英雄军鼓点 10
+MOV N$英雄军鼓准确 5
+MOV N$英雄军鼓切割 100
+MOV N$英雄军鼓吸血 10
 MOV N$英雄军鼓大点 18
-MOV N$英雄军鼓血蓝 850
 MOV N$英雄军鼓攻速 6
-MOV N$英雄军鼓施法速度 3
+MOV N$英雄军鼓暴抗 8
+MOV N$英雄军鼓点 10
+MOV N$英雄军鼓物伤减 12
+MOV N$英雄军鼓破防 7
+MOV N$英雄军鼓血蓝 850
+MOV N$英雄军鼓触发几率 24
+MOV N$英雄军鼓追风切割 50
+MOV N$英雄军鼓铁头减伤 12
+MOV N$英雄军鼓铁头回血 4
+MOV N$英雄军鼓防冰 5
+MOV N$英雄军鼓魔伤减 9
 BREAK
 }
 
-;应用英雄军鼓常驻：按英雄职业下发职业核心属性(3秒短窗口，由玩家87定时器续期)
-[@英雄军鼓_应用常驻]
+[@英雄军鼓_读取品质数值_wizard]
+{
+#IF
+#ACT
+;清空本职业品质数值桶
+MOV N$英雄军鼓元素 0
+MOV N$英雄军鼓吸蓝 0
+MOV N$英雄军鼓大点 0
+MOV N$英雄军鼓层数触发线 0
+MOV N$英雄军鼓施法速度 0
+MOV N$英雄军鼓点 0
+MOV N$英雄军鼓爆伤 0
+MOV N$英雄军鼓状态时间 0
+MOV N$英雄军鼓范围 0
+MOV N$英雄军鼓血蓝 0
+MOV N$英雄军鼓触发几率 0
+
+#IF
+EQUAL N$英雄军鼓品质 1
+CheckHeroJob WIZARD
+#ACT
+MOV N$英雄军鼓元素 1
+MOV N$英雄军鼓吸蓝 1
+MOV N$英雄军鼓大点 2
+MOV N$英雄军鼓层数触发线 4
+MOV N$英雄军鼓施法速度 1
+MOV N$英雄军鼓点 1
+MOV N$英雄军鼓爆伤 20
+MOV N$英雄军鼓状态时间 2
+MOV N$英雄军鼓范围 2
+MOV N$英雄军鼓血蓝 40
+MOV N$英雄军鼓触发几率 8
+BREAK
+
+#IF
+EQUAL N$英雄军鼓品质 2
+CheckHeroJob WIZARD
+#ACT
+MOV N$英雄军鼓元素 1
+MOV N$英雄军鼓吸蓝 1
+MOV N$英雄军鼓大点 3
+MOV N$英雄军鼓层数触发线 4
+MOV N$英雄军鼓施法速度 1
+MOV N$英雄军鼓点 1
+MOV N$英雄军鼓爆伤 30
+MOV N$英雄军鼓状态时间 2
+MOV N$英雄军鼓范围 2
+MOV N$英雄军鼓血蓝 60
+MOV N$英雄军鼓触发几率 10
+BREAK
+
+#IF
+EQUAL N$英雄军鼓品质 3
+CheckHeroJob WIZARD
+#ACT
+MOV N$英雄军鼓元素 2
+MOV N$英雄军鼓吸蓝 2
+MOV N$英雄军鼓大点 4
+MOV N$英雄军鼓层数触发线 3
+MOV N$英雄军鼓施法速度 1
+MOV N$英雄军鼓点 2
+MOV N$英雄军鼓爆伤 40
+MOV N$英雄军鼓状态时间 2
+MOV N$英雄军鼓范围 2
+MOV N$英雄军鼓血蓝 90
+MOV N$英雄军鼓触发几率 12
+BREAK
+
+#IF
+EQUAL N$英雄军鼓品质 4
+CheckHeroJob WIZARD
+#ACT
+MOV N$英雄军鼓元素 2
+MOV N$英雄军鼓吸蓝 2
+MOV N$英雄军鼓大点 5
+MOV N$英雄军鼓层数触发线 3
+MOV N$英雄军鼓施法速度 2
+MOV N$英雄军鼓点 2
+MOV N$英雄军鼓爆伤 50
+MOV N$英雄军鼓状态时间 3
+MOV N$英雄军鼓范围 3
+MOV N$英雄军鼓血蓝 120
+MOV N$英雄军鼓触发几率 14
+BREAK
+
+#IF
+EQUAL N$英雄军鼓品质 5
+CheckHeroJob WIZARD
+#ACT
+MOV N$英雄军鼓元素 3
+MOV N$英雄军鼓吸蓝 3
+MOV N$英雄军鼓大点 6
+MOV N$英雄军鼓层数触发线 2
+MOV N$英雄军鼓施法速度 2
+MOV N$英雄军鼓点 3
+MOV N$英雄军鼓爆伤 60
+MOV N$英雄军鼓状态时间 3
+MOV N$英雄军鼓范围 3
+MOV N$英雄军鼓血蓝 160
+MOV N$英雄军鼓触发几率 16
+BREAK
+
+#IF
+EQUAL N$英雄军鼓品质 6
+CheckHeroJob WIZARD
+#ACT
+MOV N$英雄军鼓元素 3
+MOV N$英雄军鼓吸蓝 3
+MOV N$英雄军鼓大点 7
+MOV N$英雄军鼓层数触发线 2
+MOV N$英雄军鼓施法速度 3
+MOV N$英雄军鼓点 3
+MOV N$英雄军鼓爆伤 80
+MOV N$英雄军鼓状态时间 3
+MOV N$英雄军鼓范围 3
+MOV N$英雄军鼓血蓝 220
+MOV N$英雄军鼓触发几率 18
+BREAK
+}
+
+[@英雄军鼓_读取品质数值_taoist]
+{
+#IF
+#ACT
+;清空本职业品质数值桶
+MOV N$英雄军鼓元素 0
+MOV N$英雄军鼓大点 0
+MOV N$英雄军鼓恢复 0
+MOV N$英雄军鼓点 0
+MOV N$英雄军鼓爆伤 0
+MOV N$英雄军鼓爆率 0
+MOV N$英雄军鼓状态时间 0
+MOV N$英雄军鼓血蓝 0
+MOV N$英雄军鼓触发几率 0
+
+#IF
+EQUAL N$英雄军鼓品质 1
+CheckHeroJob TAOIST
+#ACT
+MOV N$英雄军鼓元素 1
+MOV N$英雄军鼓大点 2
+MOV N$英雄军鼓恢复 2
+MOV N$英雄军鼓点 1
+MOV N$英雄军鼓爆伤 10
+MOV N$英雄军鼓爆率 1
+MOV N$英雄军鼓状态时间 2
+MOV N$英雄军鼓血蓝 50
+MOV N$英雄军鼓触发几率 8
+BREAK
+
+#IF
+EQUAL N$英雄军鼓品质 2
+CheckHeroJob TAOIST
+#ACT
+MOV N$英雄军鼓元素 1
+MOV N$英雄军鼓大点 2
+MOV N$英雄军鼓恢复 3
+MOV N$英雄军鼓点 1
+MOV N$英雄军鼓爆伤 15
+MOV N$英雄军鼓爆率 1
+MOV N$英雄军鼓状态时间 2
+MOV N$英雄军鼓血蓝 70
+MOV N$英雄军鼓触发几率 10
+BREAK
+
+#IF
+EQUAL N$英雄军鼓品质 3
+CheckHeroJob TAOIST
+#ACT
+MOV N$英雄军鼓元素 2
+MOV N$英雄军鼓大点 3
+MOV N$英雄军鼓恢复 4
+MOV N$英雄军鼓点 2
+MOV N$英雄军鼓爆伤 20
+MOV N$英雄军鼓爆率 2
+MOV N$英雄军鼓状态时间 2
+MOV N$英雄军鼓血蓝 100
+MOV N$英雄军鼓触发几率 12
+BREAK
+
+#IF
+EQUAL N$英雄军鼓品质 4
+CheckHeroJob TAOIST
+#ACT
+MOV N$英雄军鼓元素 2
+MOV N$英雄军鼓大点 3
+MOV N$英雄军鼓恢复 5
+MOV N$英雄军鼓点 2
+MOV N$英雄军鼓爆伤 25
+MOV N$英雄军鼓爆率 2
+MOV N$英雄军鼓状态时间 3
+MOV N$英雄军鼓血蓝 130
+MOV N$英雄军鼓触发几率 14
+BREAK
+
+#IF
+EQUAL N$英雄军鼓品质 5
+CheckHeroJob TAOIST
+#ACT
+MOV N$英雄军鼓元素 3
+MOV N$英雄军鼓大点 4
+MOV N$英雄军鼓恢复 6
+MOV N$英雄军鼓点 3
+MOV N$英雄军鼓爆伤 30
+MOV N$英雄军鼓爆率 3
+MOV N$英雄军鼓状态时间 3
+MOV N$英雄军鼓血蓝 170
+MOV N$英雄军鼓触发几率 16
+BREAK
+
+#IF
+EQUAL N$英雄军鼓品质 6
+CheckHeroJob TAOIST
+#ACT
+MOV N$英雄军鼓元素 3
+MOV N$英雄军鼓大点 5
+MOV N$英雄军鼓恢复 8
+MOV N$英雄军鼓点 3
+MOV N$英雄军鼓爆伤 40
+MOV N$英雄军鼓爆率 3
+MOV N$英雄军鼓状态时间 3
+MOV N$英雄军鼓血蓝 220
+MOV N$英雄军鼓触发几率 18
+BREAK
+}[@英雄军鼓_应用常驻]
 {
 #IF
 NOT CheckHeroOnline
@@ -1415,5 +1752,114 @@ BREAK
 #ACT
 MOV N$英雄军鼓需要刷新 1
 MOV N$英雄军鼓触发成功 0
+BREAK
+}
+
+
+;============ 阶段2：英雄军鼓 受击减伤 战斗闭环 ============
+;英雄军鼓战斗确认：英雄在线+在位+有效+名称一致。被 @HeroStruckDamage 调用。
+[@英雄军鼓_战斗确认]
+{
+#IF
+NOT CheckHeroOnline
+#ACT
+MOV N$英雄军鼓战斗确认 0
+BREAK
+
+#IF
+NOT H.CHECKUSEITEM 14
+#ACT
+MOV N$英雄军鼓战斗确认 0
+MOV N$英雄军鼓触发成功 0
+#CALL [系统功能\军鼓BUFF.txt] @英雄军鼓_清理
+BREAK
+
+#IF
+NOT EQUAL N$英雄军鼓有效 1
+#ACT
+MOV N$英雄军鼓战斗确认 0
+#CALL [系统功能\军鼓BUFF.txt] @英雄军鼓_刷新
+BREAK
+
+#IF
+#ACT
+H.GetItemFieldValue 14 name S$英雄军鼓确认名
+
+#IF
+NOT EQUAL <$STR(S$英雄军鼓确认名)> <$STR(S$英雄军鼓当前名称)>
+#ACT
+MOV N$英雄军鼓战斗确认 0
+#CALL [系统功能\军鼓BUFF.txt] @英雄军鼓_刷新
+BREAK
+
+#IF
+#ACT
+MOV N$英雄军鼓战斗确认 1
+BREAK
+}
+
+;英雄被攻击掉血前：按当前方向分发 受击减伤(H.ChangeDamageValue 1 - 值)。
+;命令依据：@HeroStruckDamage + H.ChangeDamageValue 见手册796。
+[@英雄军鼓_被打掉血前]
+{
+#IF
+#ACT
+#CALL [系统功能\军鼓BUFF.txt] @英雄军鼓_战斗确认
+MOV N$英雄军鼓触发成功 0
+
+#IF
+NOT EQUAL N$英雄军鼓战斗确认 1
+#ACT
+BREAK
+
+;---- 战士·铁头娃：被击按几率减伤，高品质追加回血 ----
+#IF
+EQUAL <$STR(S$英雄军鼓当前职业)> warrior
+EQUAL <$STR(S$英雄军鼓当前方向)> 铁头娃
+LARGE N$英雄军鼓品质 0
+RANDOMEX <$STR(N$英雄军鼓触发几率)> 100
+#ACT
+H.ChangeDamageValue 1 - <$STR(N$英雄军鼓铁头减伤)>
+MOV N$英雄军鼓触发成功 1
+
+#IF
+EQUAL <$STR(S$英雄军鼓当前职业)> warrior
+EQUAL <$STR(S$英雄军鼓当前方向)> 铁头娃
+EQUAL N$英雄军鼓触发成功 1
+LARGE N$英雄军鼓品质 4
+#ACT
+H.HumanHP + <$STR(N$英雄军鼓铁头回血)> 0 1 0 0 1
+BREAK
+
+;---- 法师·小冰箱：被击按几率冰甲减伤(满层冰冻 RangeHarm 阶段3补) ----
+#IF
+EQUAL <$STR(S$英雄军鼓当前职业)> wizard
+EQUAL <$STR(S$英雄军鼓当前方向)> 小冰箱
+LARGE N$英雄军鼓品质 0
+RANDOMEX <$STR(N$英雄军鼓触发几率)> 100
+#ACT
+H.ChangeDamageValue 1 - <$STR(N$英雄军鼓元素)>
+MOV N$英雄军鼓触发成功 1
+BREAK
+
+;---- 道士·奶不死：被击按几率减伤，高品质追加救急回血 ----
+#IF
+EQUAL <$STR(S$英雄军鼓当前职业)> taoist
+EQUAL <$STR(S$英雄军鼓当前方向)> 奶不死
+LARGE N$英雄军鼓品质 0
+RANDOMEX <$STR(N$英雄军鼓触发几率)> 100
+#ACT
+H.ChangeDamageValue 1 - <$STR(N$英雄军鼓元素)>
+MOV N$英雄军鼓触发成功 1
+
+#IF
+EQUAL <$STR(S$英雄军鼓当前职业)> taoist
+EQUAL <$STR(S$英雄军鼓当前方向)> 奶不死
+EQUAL N$英雄军鼓触发成功 1
+LARGE N$英雄军鼓品质 4
+RANDOMEX <$STR(N$英雄军鼓触发几率)> 100
+#ACT
+H.HumanHP + <$STR(N$英雄军鼓恢复)> 100 1
+MOV N$英雄军鼓触发成功 1
 BREAK
 }

@@ -694,3 +694,9 @@ BREAK
 [@HeroDie]
 #ACT
 #CALL [系统功能\军鼓BUFF.txt] @英雄军鼓_死亡检查
+
+
+;========== 英雄军鼓 受击掉血前触发 ==========
+[@HeroStruckDamage]
+#ACT
+#CALL [系统功能\军鼓BUFF.txt] @英雄军鼓_被打掉血前

@@ -41,7 +41,10 @@ lb = labelset(BUFF)
 hero_labs = ['英雄军鼓_刷新','英雄军鼓_职业确认','英雄军鼓_读取品质数值','英雄军鼓_应用常驻',
              '英雄军鼓_定时检查','英雄军鼓_清理','英雄军鼓_死亡检查','英雄军鼓_关闭当前表现',
              '英雄军鼓_刷新战士基础攻速','英雄军鼓_刷新战士攻速',
-             '英雄军鼓_刷新法师基础施法速度','英雄军鼓_刷新法师施法速度']
+             '英雄军鼓_刷新法师基础施法速度','英雄军鼓_刷新法师施法速度',
+             # 阶段2：受击减伤战斗闭环
+             '英雄军鼓_读取品质数值_warrior','英雄军鼓_读取品质数值_wizard','英雄军鼓_读取品质数值_taoist',
+             '英雄军鼓_战斗确认','英雄军鼓_被打掉血前']
 for l in hero_labs:
     check(l in lb and label_count(BUFF, l) == 1, '军鼓BUFF 标签 @%s 唯一存在' % l)
 
@@ -80,7 +83,7 @@ for m in re.finditer(r'#CALL\s+\[([^\]]+)\]\s+@([^\s]+)', tqf):
     f, lab = m.group(1), m.group(2)
     if '军鼓BUFF' in f:
         check(lab in lb, 'QF#CALL 军鼓BUFF@%s 存在' % lab)
-for l in ['HeroTakeOnEx','HeroTakeOffEx','HeroDie']:
+for l in ['HeroTakeOnEx','HeroTakeOffEx','HeroDie','HeroStruckDamage']:
     check(label_count(QF, l) == 1, 'QF 标签 @%s 唯一' % l)
 # 玩家侧军鼓原标签不被破坏
 for l in ['TakeOnEx','TakeOffEx','HumDropItem','AttackDamage','StruckDamage','SlaveAttackDamage','PlayDie']:
