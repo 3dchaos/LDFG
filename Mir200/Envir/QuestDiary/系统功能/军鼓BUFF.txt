@@ -1592,7 +1592,8 @@ MOV N$英雄军鼓状态时间 3
 MOV N$英雄军鼓血蓝 220
 MOV N$英雄军鼓触发几率 18
 BREAK
-}[@英雄军鼓_应用常驻]
+}
+[@英雄军鼓_应用常驻]
 {
 #IF
 NOT CheckHeroOnline
@@ -1602,32 +1603,32 @@ BREAK
 #IF
 EQUAL <$STR(S$英雄军鼓当前职业)> warrior
 #ACT
-H.LockUpdateAbil
+LockUpdateAbil
 H.ChangeHumAbility 1 = <$STR(N$英雄军鼓点)> 3
 H.ChangeHumAbility 2 = <$STR(N$英雄军鼓大点)> 3
 H.ChangeHumAbility 11 = <$STR(N$英雄军鼓血蓝)> 3
-H.UpdateAbil
+UpdateAbil
 BREAK
 
 #IF
 EQUAL <$STR(S$英雄军鼓当前职业)> wizard
 #ACT
-H.LockUpdateAbil
+LockUpdateAbil
 H.ChangeHumAbility 7 = <$STR(N$英雄军鼓点)> 3
 H.ChangeHumAbility 8 = <$STR(N$英雄军鼓大点)> 3
 H.ChangeHumAbility 12 = <$STR(N$英雄军鼓血蓝)> 3
-H.UpdateAbil
+UpdateAbil
 BREAK
 
 #IF
 EQUAL <$STR(S$英雄军鼓当前职业)> taoist
 #ACT
-H.LockUpdateAbil
+LockUpdateAbil
 H.ChangeHumAbility 9 = <$STR(N$英雄军鼓点)> 3
 H.ChangeHumAbility 10 = <$STR(N$英雄军鼓大点)> 3
 H.ChangeHumAbility 11 = <$STR(N$英雄军鼓血蓝)> 3
 H.ChangeHumAbility 12 = <$STR(N$英雄军鼓血蓝)> 3
-H.UpdateAbil
+UpdateAbil
 BREAK
 }
 
@@ -1642,32 +1643,32 @@ BREAK
 #IF
 EQUAL <$STR(S$英雄军鼓当前职业)> warrior
 #ACT
-H.LockUpdateAbil
+LockUpdateAbil
 H.ChangeHumAbility 1 = 0
 H.ChangeHumAbility 2 = 0
 H.ChangeHumAbility 11 = 0
-H.UpdateAbil
+UpdateAbil
 BREAK
 
 #IF
 EQUAL <$STR(S$英雄军鼓当前职业)> wizard
 #ACT
-H.LockUpdateAbil
+LockUpdateAbil
 H.ChangeHumAbility 7 = 0
 H.ChangeHumAbility 8 = 0
 H.ChangeHumAbility 12 = 0
-H.UpdateAbil
+UpdateAbil
 BREAK
 
 #IF
 EQUAL <$STR(S$英雄军鼓当前职业)> taoist
 #ACT
-H.LockUpdateAbil
+LockUpdateAbil
 H.ChangeHumAbility 9 = 0
 H.ChangeHumAbility 10 = 0
 H.ChangeHumAbility 11 = 0
 H.ChangeHumAbility 12 = 0
-H.UpdateAbil
+UpdateAbil
 BREAK
 }
 
