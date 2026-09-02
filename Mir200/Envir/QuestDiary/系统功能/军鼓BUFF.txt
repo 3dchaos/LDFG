@@ -1386,6 +1386,7 @@ MOV N$英雄军鼓状态时间 0
 MOV N$英雄军鼓范围 0
 MOV N$英雄军鼓血蓝 0
 MOV N$英雄军鼓触发几率 0
+MOV N$英雄军鼓百分 0
 
 #IF
 EQUAL N$英雄军鼓品质 1
@@ -1402,6 +1403,7 @@ MOV N$英雄军鼓状态时间 2
 MOV N$英雄军鼓范围 2
 MOV N$英雄军鼓血蓝 40
 MOV N$英雄军鼓触发几率 8
+MOV N$英雄军鼓百分 2
 BREAK
 
 #IF
@@ -1419,6 +1421,7 @@ MOV N$英雄军鼓状态时间 2
 MOV N$英雄军鼓范围 2
 MOV N$英雄军鼓血蓝 60
 MOV N$英雄军鼓触发几率 10
+MOV N$英雄军鼓百分 2
 BREAK
 
 #IF
@@ -1436,6 +1439,7 @@ MOV N$英雄军鼓状态时间 2
 MOV N$英雄军鼓范围 2
 MOV N$英雄军鼓血蓝 90
 MOV N$英雄军鼓触发几率 12
+MOV N$英雄军鼓百分 3
 BREAK
 
 #IF
@@ -1453,6 +1457,7 @@ MOV N$英雄军鼓状态时间 3
 MOV N$英雄军鼓范围 3
 MOV N$英雄军鼓血蓝 120
 MOV N$英雄军鼓触发几率 14
+MOV N$英雄军鼓百分 3
 BREAK
 
 #IF
@@ -1470,6 +1475,7 @@ MOV N$英雄军鼓状态时间 3
 MOV N$英雄军鼓范围 3
 MOV N$英雄军鼓血蓝 160
 MOV N$英雄军鼓触发几率 16
+MOV N$英雄军鼓百分 4
 BREAK
 
 #IF
@@ -1487,6 +1493,7 @@ MOV N$英雄军鼓状态时间 3
 MOV N$英雄军鼓范围 3
 MOV N$英雄军鼓血蓝 220
 MOV N$英雄军鼓触发几率 18
+MOV N$英雄军鼓百分 5
 BREAK
 }
 
@@ -1504,6 +1511,7 @@ MOV N$英雄军鼓爆率 0
 MOV N$英雄军鼓状态时间 0
 MOV N$英雄军鼓血蓝 0
 MOV N$英雄军鼓触发几率 0
+MOV N$英雄军鼓百分 0
 
 #IF
 EQUAL N$英雄军鼓品质 1
@@ -1518,6 +1526,7 @@ MOV N$英雄军鼓爆率 1
 MOV N$英雄军鼓状态时间 2
 MOV N$英雄军鼓血蓝 50
 MOV N$英雄军鼓触发几率 8
+MOV N$英雄军鼓百分 1
 BREAK
 
 #IF
@@ -1533,6 +1542,7 @@ MOV N$英雄军鼓爆率 1
 MOV N$英雄军鼓状态时间 2
 MOV N$英雄军鼓血蓝 70
 MOV N$英雄军鼓触发几率 10
+MOV N$英雄军鼓百分 2
 BREAK
 
 #IF
@@ -1548,6 +1558,7 @@ MOV N$英雄军鼓爆率 2
 MOV N$英雄军鼓状态时间 2
 MOV N$英雄军鼓血蓝 100
 MOV N$英雄军鼓触发几率 12
+MOV N$英雄军鼓百分 2
 BREAK
 
 #IF
@@ -1563,6 +1574,7 @@ MOV N$英雄军鼓爆率 2
 MOV N$英雄军鼓状态时间 3
 MOV N$英雄军鼓血蓝 130
 MOV N$英雄军鼓触发几率 14
+MOV N$英雄军鼓百分 3
 BREAK
 
 #IF
@@ -1578,6 +1590,7 @@ MOV N$英雄军鼓爆率 3
 MOV N$英雄军鼓状态时间 3
 MOV N$英雄军鼓血蓝 170
 MOV N$英雄军鼓触发几率 16
+MOV N$英雄军鼓百分 3
 BREAK
 
 #IF
@@ -1593,6 +1606,7 @@ MOV N$英雄军鼓爆率 3
 MOV N$英雄军鼓状态时间 3
 MOV N$英雄军鼓血蓝 220
 MOV N$英雄军鼓触发几率 18
+MOV N$英雄军鼓百分 4
 BREAK
 }
 [@英雄军鼓_应用常驻]
@@ -1852,6 +1866,105 @@ LARGE N$英雄军鼓品质 4
 RANDOMEX <$STR(N$英雄军鼓触发几率)> 100
 #ACT
 H.HumanHP + <$STR(N$英雄军鼓恢复)> 100 1
+MOV N$英雄军鼓触发成功 1
+BREAK
+}
+
+;============ 阶段2攻击向：英雄军鼓 攻击加伤/切割 战斗闭环 ============
+;英雄攻击目标掉血前(@HeroAttackDamage)。命令依据：
+; @HeroAttackDamage + H.ChangeDamageValue 见手册796;
+; H.CHECKCURRTARGETRACE 见手册103; H.M.HumanHP(英雄操作当前目标)见手册164多级运用。
+; 战士拆门板/剁馅机：对非玩家目标直扣最大生命比例(切割/追风切割)。
+; 法师/道士各攻击方向：攻击按几率给英雄本次伤害加百分比(H.ChangeDamageValue 1 + 百分)。
+; 注：法师/道士攻击向采用 技能名无关的通用触发(未细分英雄技能), 数值复用玩家同品质百分。
+[@英雄军鼓_攻击掉血前]
+{
+#IF
+#ACT
+#CALL [系统功能\军鼓BUFF.txt] @英雄军鼓_战斗确认
+MOV N$英雄军鼓触发成功 0
+
+#IF
+NOT EQUAL N$英雄军鼓战斗确认 1
+#ACT
+BREAK
+
+;---- 战士·拆门板：攻击切割(对怪) ----
+#IF
+EQUAL <$STR(S$英雄军鼓当前职业)> warrior
+EQUAL <$STR(S$英雄军鼓当前方向)> 拆门板
+NOT H.CHECKCURRTARGETRACE = 0
+LARGE N$英雄军鼓品质 0
+RANDOMEX <$STR(N$英雄军鼓触发几率)> 100
+#ACT
+H.M.HumanHP - <$STR(N$英雄军鼓切割)> 0 1 0 0 3
+MOV N$英雄军鼓触发成功 1
+BREAK
+
+;---- 战士·剁馅机：攻击追风切割(对怪) ----
+#IF
+EQUAL <$STR(S$英雄军鼓当前职业)> warrior
+EQUAL <$STR(S$英雄军鼓当前方向)> 剁馅机
+NOT H.CHECKCURRTARGETRACE = 0
+LARGE N$英雄军鼓品质 0
+RANDOMEX <$STR(N$英雄军鼓触发几率)> 100
+#ACT
+H.M.HumanHP - <$STR(N$英雄军鼓追风切割)> 0 1 0 0 3
+MOV N$英雄军鼓触发成功 1
+BREAK
+
+;---- 法师·小冰箱：攻击加伤(通用触发) ----
+#IF
+EQUAL <$STR(S$英雄军鼓当前职业)> wizard
+EQUAL <$STR(S$英雄军鼓当前方向)> 小冰箱
+LARGE N$英雄军鼓品质 0
+RANDOMEX <$STR(N$英雄军鼓触发几率)> 100
+#ACT
+H.ChangeDamageValue 1 + <$STR(N$英雄军鼓百分)>
+MOV N$英雄军鼓触发成功 1
+BREAK
+
+;---- 法师·电耗子：攻击加伤(通用触发) ----
+#IF
+EQUAL <$STR(S$英雄军鼓当前职业)> wizard
+EQUAL <$STR(S$英雄军鼓当前方向)> 电耗子
+LARGE N$英雄军鼓品质 0
+RANDOMEX <$STR(N$英雄军鼓触发几率)> 100
+#ACT
+H.ChangeDamageValue 1 + <$STR(N$英雄军鼓百分)>
+MOV N$英雄军鼓触发成功 1
+BREAK
+
+;---- 法师·火葫芦：攻击加伤(通用触发) ----
+#IF
+EQUAL <$STR(S$英雄军鼓当前职业)> wizard
+EQUAL <$STR(S$英雄军鼓当前方向)> 火葫芦
+LARGE N$英雄军鼓品质 0
+RANDOMEX <$STR(N$英雄军鼓触发几率)> 100
+#ACT
+H.ChangeDamageValue 1 + <$STR(N$英雄军鼓百分)>
+MOV N$英雄军鼓触发成功 1
+BREAK
+
+;---- 道士·毒嘴子：攻击加伤(通用触发) ----
+#IF
+EQUAL <$STR(S$英雄军鼓当前职业)> taoist
+EQUAL <$STR(S$英雄军鼓当前方向)> 毒嘴子
+LARGE N$英雄军鼓品质 0
+RANDOMEX <$STR(N$英雄军鼓触发几率)> 100
+#ACT
+H.ChangeDamageValue 1 + <$STR(N$英雄军鼓百分)>
+MOV N$英雄军鼓触发成功 1
+BREAK
+
+;---- 道士·养娃人：攻击加伤(通用触发) ----
+#IF
+EQUAL <$STR(S$英雄军鼓当前职业)> taoist
+EQUAL <$STR(S$英雄军鼓当前方向)> 养娃人
+LARGE N$英雄军鼓品质 0
+RANDOMEX <$STR(N$英雄军鼓触发几率)> 100
+#ACT
+H.ChangeDamageValue 1 + <$STR(N$英雄军鼓百分)>
 MOV N$英雄军鼓触发成功 1
 BREAK
 }

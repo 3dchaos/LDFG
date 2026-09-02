@@ -700,3 +700,9 @@ BREAK
 [@HeroStruckDamage]
 #ACT
 #CALL [系统功能\军鼓BUFF.txt] @英雄军鼓_被打掉血前
+
+;========== 英雄军鼓 攻击掉血前触发 ==========
+;英雄攻击目标掉血前 -> 战士切割 / 法师道士攻击加伤
+[@HeroAttackDamage]
+#ACT
+#CALL [系统功能\军鼓BUFF.txt] @英雄军鼓_攻击掉血前
