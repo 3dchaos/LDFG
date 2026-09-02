@@ -1153,6 +1153,8 @@ MOV S$英雄军鼓当前职业 <$STR(S$英雄军鼓职业)>
 ;刷新英雄攻速/施法速度(统一汇总)
 #CALL [系统功能\军鼓BUFF.txt] @英雄军鼓_刷新战士攻速
 #CALL [系统功能\军鼓BUFF.txt] @英雄军鼓_刷新法师施法速度
+;英雄军鼓专属续期定时器：独立于玩家军鼓/87(玩家可不带军鼓)。ChangeHumAbility 3秒限时,需周期重施。
+SetOnTimer 89 2
 BREAK
 }
 
@@ -1675,36 +1677,23 @@ BREAK
 ;英雄军鼓定时续期：玩家87定时器在英雄在线时调用，重发3秒窗口
 [@英雄军鼓_定时检查]
 {
+;英雄军鼓专属续期(QManage @OnTimer89)与玩家87共同入口。装备在位由穿戴/卸下事件维护,
+;这里不用 H.CHECKUSEITEM/H.GetItemFieldValue 在玩家作用域探测英雄装备(引擎无H.版,不可靠)。
 #IF
 NOT CheckHeroOnline
 #ACT
 BREAK
 
 #IF
-NOT H.CHECKUSEITEM 14
-#ACT
-MOV N$英雄军鼓有效 0
-#CALL [系统功能\军鼓BUFF.txt] @英雄军鼓_清理
-BREAK
-
-#IF
 NOT EQUAL N$英雄军鼓有效 1
 #ACT
-#CALL [系统功能\军鼓BUFF.txt] @英雄军鼓_刷新
+;有效状态丢失：停止续期定时器,等待穿戴/登录事件重开
+SetOffTimer 89
 BREAK
 
 #IF
 #ACT
-H.GetItemFieldValue 14 name S$英雄军鼓确认名
-
-#IF
-NOT EQUAL <$STR(S$英雄军鼓确认名)> <$STR(S$英雄军鼓当前名称)>
-#ACT
-#CALL [系统功能\军鼓BUFF.txt] @英雄军鼓_刷新
-BREAK
-
-#IF
-#ACT
+;有效=1：周期重施3秒限时常驻,顶住引擎英雄属性重算
 #CALL [系统功能\军鼓BUFF.txt] @英雄军鼓_应用常驻
 #CALL [系统功能\军鼓BUFF.txt] @英雄军鼓_刷新战士攻速
 #CALL [系统功能\军鼓BUFF.txt] @英雄军鼓_刷新法师施法速度
@@ -1743,6 +1732,8 @@ MOV S$英雄军鼓当前职业
 #CALL [系统功能\军鼓BUFF.txt] @英雄军鼓_关闭当前表现
 #CALL [系统功能\军鼓BUFF.txt] @英雄军鼓_刷新战士攻速
 #CALL [系统功能\军鼓BUFF.txt] @英雄军鼓_刷新法师施法速度
+;停掉英雄军鼓专属续期定时器
+SetOffTimer 89
 BREAK
 }
 
