@@ -430,6 +430,10 @@ SETONTIMER 10 600
 #IF
 CHECK [800] 1
 #ACT
+;登录前要清空标识符
+SET [801] 0
+SET [802] 0
+SET [803] 0
 SetOnTimer 7 3
 
 [@HeroLogout]
