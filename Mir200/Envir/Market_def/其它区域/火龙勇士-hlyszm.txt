@@ -17,6 +17,8 @@ OpenBigDialogBox <$STR(N$资源编号)> 16 1 4 0 0 1 384 23
 <NewLine:#L02~>
 <Text:#L02~:护送:0:5{FCOLOR=255}><Text:#L02~:返回火龙迷宫:0:5{FCOLOR=251}/@返回火龙迷宫><Text:#L02~:500灵符:0:5{FCOLOR=255}>
 <NewLine:#L02~>
+<Text:#L02~:偷窃:0:20{FCOLOR=251}/@偷窃>
+<NewLine:#L02~>
 <Text:#L02~:退出:0:20{FCOLOR=251}/@exit>
 [@就你一个人吗]
 #IF
@@ -190,3 +192,9 @@ SENDMSG 0 火龙宫殿居然有人打扰？是<$USERNAME>带领队员闯进去了
 SCENESHAKE 4 1 3 D2083
 #ELSEACT
 	MESSAGEBOX 勇士，你的道具准备的还不够。
+
+[@偷窃]
+#IF
+#ACT
+#CALL [系统功能\偷窃.txt] @偷窃_火龙
+BREAK

@@ -90,6 +90,7 @@ small <$GAMEGIRD> 8000
 #ELSEACT
 GAMEGIRD - 8000
 MAPMOVE  hlmg 385 346
+CHANGEPKPOINT + 100
 SENDMSG 0  狡猾的『<$USERNAME>』贿赂神秘老人溜进了火龙洞穴。
 
 [@回到盟重]

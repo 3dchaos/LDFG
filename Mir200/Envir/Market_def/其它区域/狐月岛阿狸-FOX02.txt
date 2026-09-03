@@ -20,6 +20,8 @@ OpenBigDialogBox <$STR(N$资源编号)> 16 1 4 0 0 1 384 23
 <NewLine:#L02~>
 <Text:#L02~:狐月归途:0:20{FCOLOR=251}/@后期奇遇_狐月归途><Text:#L02~:狐火补充魔血石:30:20{FCOLOR=251}/@补充魔血石>
 <NewLine:#L02~>
+<Text:#L02~:偷窃:0:20{FCOLOR=251}/@偷窃>
+<NewLine:#L02~>
 <Text:#L02~:退出:0:20{FCOLOR=251}/@exit>
 
 [@帮我修复]
@@ -304,3 +306,9 @@ CHECK [525] 0
 #ACT
 #CALL [系统功能\老登辅助\后期奇遇.txt] @后期奇遇_狐月秘密
 GOTO @后期奇遇_狐月归途
+
+[@偷窃]
+#IF
+#ACT
+#CALL [系统功能\偷窃.txt] @偷窃_狐月
+BREAK
