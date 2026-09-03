@@ -1,0 +1,31 @@
+{
+  "files": [
+    {
+      "kind": "file",
+      "label": "QManage.txt",
+      "path": "Mir200\\Envir\\MapQuest_def\\QManage.txt"
+    },
+    {
+      "kind": "file",
+      "label": "QFunction-0.txt",
+      "path": "Mir200\\Envir\\Market_Def\\QFunction-0.txt"
+    },
+    {
+      "kind": "file",
+      "label": "MerChant.txt",
+      "path": "Mir200\\Envir\\MerChant.txt"
+    },
+    {
+      "kind": "folder",
+      "label": "Market_Def",
+      "path": "Mir200\\Envir\\Market_Def"
+    },
+    {
+      "kind": "folder",
+      "label": "QuestDiary",
+      "path": "Mir200\\Envir\\QuestDiary"
+    }
+  ],
+  "schemaVersion": 4,
+  "updatedAt": "2026-09-03T02:27:52.353Z"
+}

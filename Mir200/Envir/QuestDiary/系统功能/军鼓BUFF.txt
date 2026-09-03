@@ -1062,6 +1062,7 @@ MOV N$英雄军鼓大点 0
 MOV N$英雄军鼓血蓝 0
 MOV N$英雄军鼓攻速 0
 MOV N$英雄军鼓施法速度 0
+MOV N$英雄军鼓头戴图标 -1
 MOV S$英雄军鼓当前名称
 MOV S$英雄军鼓当前方向
 MOV S$英雄军鼓当前职业
@@ -1149,6 +1150,7 @@ MOV S$英雄军鼓当前职业 <$STR(S$英雄军鼓职业)>
 
 ;应用英雄军鼓常驻(按职业底座)
 #CALL [系统功能\军鼓BUFF.txt] @英雄军鼓_应用常驻
+#CALL [系统功能\军鼓BUFF.txt] @英雄军鼓_刷新图标
 
 ;刷新英雄攻速/施法速度(统一汇总)
 #CALL [系统功能\军鼓BUFF.txt] @英雄军鼓_刷新战士攻速
@@ -1648,6 +1650,58 @@ UpdateAbil
 BREAK
 }
 
+
+[@英雄军鼓_刷新图标]
+{
+#IF
+NOT CheckHeroOnline
+#ACT
+BREAK
+
+#IF
+NOT EQUAL N$英雄军鼓有效 1
+#ACT
+H.SETICON 1 -1
+MOV N$英雄军鼓头戴图标 -1
+BREAK
+
+#IF
+#ACT
+H.SETICON 1 -1
+MOV N$英雄军鼓头戴图标 -1
+
+#IF
+EQUAL <$STR(S$英雄军鼓当前方向)> 剁馅机
+#ACT
+MOV N$英雄军鼓头戴图标 282
+
+#IF
+EQUAL <$STR(S$英雄军鼓当前方向)> 铁头娃
+#ACT
+MOV N$英雄军鼓头戴图标 283
+
+#IF
+EQUAL <$STR(S$英雄军鼓当前方向)> 拆门板
+#ACT
+MOV N$英雄军鼓头戴图标 284
+
+#IF
+EQUAL <$STR(S$英雄军鼓当前方向)> 小冰箱
+#ACT
+MOV N$英雄军鼓头戴图标 287
+
+#IF
+EQUAL <$STR(S$英雄军鼓当前方向)> 奶不死
+#ACT
+MOV N$英雄军鼓头戴图标 285
+
+#IF
+LARGE N$英雄军鼓头戴图标 0
+#ACT
+H.SETICON 1 0 <$STR(N$英雄军鼓头戴图标)> 44 -30 1 0 0 150 0
+BREAK
+}
+
 ;关闭当前英雄军鼓常驻表现(属性清零)
 [@英雄军鼓_关闭当前表现]
 {
@@ -1709,10 +1763,12 @@ BREAK
 #ACT
 ;有效=1：周期重施3秒限时常驻,顶住引擎英雄属性重算
 #CALL [系统功能\军鼓BUFF.txt] @英雄军鼓_应用常驻
+#CALL [系统功能\军鼓BUFF.txt] @英雄军鼓_刷新图标
 #CALL [系统功能\军鼓BUFF.txt] @英雄军鼓_刷新战士攻速
 #CALL [系统功能\军鼓BUFF.txt] @英雄军鼓_刷新法师施法速度
 BREAK
 }
+
 
 ;英雄军鼓清理：卸下/掉落/失效 统一入口
 [@英雄军鼓_清理]
@@ -1730,6 +1786,11 @@ MOV N$英雄军鼓大点 0
 MOV N$英雄军鼓血蓝 0
 MOV N$英雄军鼓攻速 0
 MOV N$英雄军鼓施法速度 0
+#CALL [系统功能\军鼓BUFF.txt] @英雄军鼓_刷新图标
+#CALL [系统功能\军鼓BUFF.txt] @英雄军鼓_关闭当前表现
+#CALL [系统功能\军鼓BUFF.txt] @英雄军鼓_刷新战士攻速
+#CALL [系统功能\军鼓BUFF.txt] @英雄军鼓_刷新法师施法速度
+MOV N$英雄军鼓头戴图标 -1
 MOV S$英雄军鼓名称
 MOV S$英雄军鼓方向
 MOV S$英雄军鼓职业
@@ -1742,81 +1803,20 @@ MOV S$英雄军鼓确认名
 MOV S$英雄军鼓当前名称
 MOV S$英雄军鼓当前方向
 MOV S$英雄军鼓当前职业
-;清英雄军鼓常驻表现(属性归零)并收敛攻速/施法速度(未穿追风流/法师军鼓时为0)
-#CALL [系统功能\军鼓BUFF.txt] @英雄军鼓_关闭当前表现
-#CALL [系统功能\军鼓BUFF.txt] @英雄军鼓_刷新战士攻速
-#CALL [系统功能\军鼓BUFF.txt] @英雄军鼓_刷新法师施法速度
 ;停掉英雄军鼓专属续期定时器
 SetOffTimer 89
 BREAK
 }
 
-;英雄军鼓死亡检查(@HeroDie)：停战斗态与定时刷新标记
+;英雄军鼓死亡检查(@HeroDie)：死亡直接清理图标/常驻并复位战斗态
 [@英雄军鼓_死亡检查]
 {
 #IF
 #ACT
-MOV N$英雄军鼓需要刷新 1
-MOV N$英雄军鼓触发成功 0
-BREAK
-}
-
-
-;============ 阶段2：英雄军鼓 受击减伤 战斗闭环 ============
-;英雄军鼓战斗确认：英雄在线+在位+有效+名称一致。被 @HeroStruckDamage 调用。
-[@英雄军鼓_战斗确认]
-{
-#IF
-NOT CheckHeroOnline
-#ACT
-MOV N$英雄军鼓战斗确认 0
-BREAK
-
-#IF
-NOT H.CHECKUSEITEM 14
-#ACT
-MOV N$英雄军鼓战斗确认 0
 MOV N$英雄军鼓触发成功 0
 #CALL [系统功能\军鼓BUFF.txt] @英雄军鼓_清理
 BREAK
-
-#IF
-NOT EQUAL N$英雄军鼓有效 1
-#ACT
-MOV N$英雄军鼓战斗确认 0
-#CALL [系统功能\军鼓BUFF.txt] @英雄军鼓_刷新
-BREAK
-
-#IF
-#ACT
-H.GetItemFieldValue 14 name S$英雄军鼓确认名
-
-#IF
-NOT EQUAL <$STR(S$英雄军鼓确认名)> <$STR(S$英雄军鼓当前名称)>
-#ACT
-MOV N$英雄军鼓战斗确认 0
-#CALL [系统功能\军鼓BUFF.txt] @英雄军鼓_刷新
-BREAK
-
-#IF
-#ACT
-MOV N$英雄军鼓战斗确认 1
-BREAK
 }
-
-;英雄被攻击掉血前：按当前方向分发 受击减伤(H.ChangeDamageValue 1 - 值)。
-;命令依据：@HeroStruckDamage + H.ChangeDamageValue 见手册796。
-[@英雄军鼓_被打掉血前]
-{
-#IF
-#ACT
-#CALL [系统功能\军鼓BUFF.txt] @英雄军鼓_战斗确认
-MOV N$英雄军鼓触发成功 0
-
-#IF
-NOT EQUAL N$英雄军鼓战斗确认 1
-#ACT
-BREAK
 
 ;---- 战士·铁头娃：被击按几率减伤，高品质追加回血 ----
 #IF
