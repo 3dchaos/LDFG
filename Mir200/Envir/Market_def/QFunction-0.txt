@@ -706,3 +706,9 @@ BREAK
 [@HeroAttackDamage]
 #ACT
 #CALL [系统功能\军鼓BUFF.txt] @英雄军鼓_攻击掉血前
+;========== 英雄自动召唤圣兽 ==========
+;英雄使用召唤圣兽技能(魔法ID 76)自身触发
+[@HeroMagSelfFunc76]
+#ACT
+#CALL [系统功能\老登辅助\英雄召唤圣兽.txt] @英雄召唤圣兽
+BREAK

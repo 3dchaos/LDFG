@@ -1,0 +1,99 @@
+;英雄自动召唤圣兽
+;引擎不支持英雄自动召唤圣兽，此脚本由主人侧脚本触发，替英雄召唤圣兽宝宝
+;触发入口：QFunction-0.txt 的 [@HeroMagSelfFunc76]
+;魔法ID：76 = 英雄召唤圣兽
+;圣兽怪物名：圣兽
+;规则：
+;  1、英雄未学习召唤圣兽 -> 不召唤
+;  2、技能等级决定圣兽数量上限：1级1个 / 2级2个 / 3级3个
+;  3、英雄等级决定圣兽等级：40级=1级，每5级+1，封顶7级
+
+[@英雄召唤圣兽]
+{
+
+;========== 第一步：英雄在线判断 ==========
+#IF
+CheckHeroOnline
+#ELSEACT
+BREAK
+
+;========== 第二步：英雄是否学习召唤圣兽 ==========
+#IF
+H.CHECKSKILL 英雄召唤圣兽 = 1
+#ELSEACT
+BREAK
+
+;========== 第三步：按技能等级计算数量上限并检测 ==========
+#IF
+H.CHECKSKILL 英雄召唤圣兽 = 3
+#ACT
+MOV N$圣兽数量上限 3
+GOTO @英雄召唤圣兽_数量检测
+#IF
+H.CHECKSKILL 英雄召唤圣兽 = 2
+#ACT
+MOV N$圣兽数量上限 2
+GOTO @英雄召唤圣兽_数量检测
+
+#IF
+H.CHECKSKILL 英雄召唤圣兽 = 1
+#ACT
+MOV N$圣兽数量上限 1
+
+;========== 数量检测 ==========
+[@英雄召唤圣兽_数量检测]
+#IF
+H.CHECKSLAVECOUNT < <$STR(N$圣兽数量上限)> 圣兽 0
+#ELSEACT
+SENDMSG 6 你的英雄召唤圣兽已达数量上限！
+BREAK
+
+;========== 第四步：按英雄等级计算圣兽等级 ==========
+#IF
+CheckHerolevel > 69
+#ACT
+MOV N$圣兽等级 7
+GOTO @英雄召唤圣兽_召唤
+#IF
+CheckHerolevel > 64
+#ACT
+MOV N$圣兽等级 6
+GOTO @英雄召唤圣兽_召唤
+#IF
+CheckHerolevel > 59
+#ACT
+MOV N$圣兽等级 5
+GOTO @英雄召唤圣兽_召唤
+#IF
+CheckHerolevel > 54
+#ACT
+MOV N$圣兽等级 4
+GOTO @英雄召唤圣兽_召唤
+#IF
+CheckHerolevel > 49
+#ACT
+MOV N$圣兽等级 3
+GOTO @英雄召唤圣兽_召唤
+#IF
+CheckHerolevel > 44
+#ACT
+MOV N$圣兽等级 2
+GOTO @英雄召唤圣兽_召唤
+#IF
+CheckHerolevel > 39
+#ACT
+MOV N$圣兽等级 1
+GOTO @英雄召唤圣兽_召唤
+
+;英雄不足40级，不召唤
+SENDMSG 6 你的英雄等级不足40级，无法召唤圣兽！
+BREAK
+
+;========== 第五步：召唤圣兽 ==========
+[@英雄召唤圣兽_召唤]
+#ACT
+H.RECALLMOB 圣兽 <$STR(N$圣兽等级)> 9999 0 0 3 1
+SENDMSG 6 你的英雄召唤了<$STR(N$圣兽等级)>级圣兽！
+BREAK
+
+}
