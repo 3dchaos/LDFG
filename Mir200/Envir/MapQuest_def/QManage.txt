@@ -434,7 +434,8 @@ CHECK [800] 1
 SET [801] 0
 SET [802] 0
 SET [803] 0
-SetOnTimer 7 3
+;CD：每 60 秒触发一次，每次只补 1 个空槽位
+SetOnTimer 7 60
 
 [@HeroLogout]
 #IF

@@ -168,6 +168,12 @@ TakeOffItem 34
 TakeOffItem 35
 H.CHANGEEXP = 1
 H.CLEARSKILL
+;英雄召唤圣兽：转生清空英雄技能后，归零[800]标志位并清空圣兽槽位，让英雄重新学习召唤圣兽后走完整初始化
+SET [800] 0
+SET [801] 0
+SET [802] 0
+SET [803] 0
+SETOFFTIMER 7
 H.TakeOffItem 0
 H.TakeOffItem 1
 H.TakeOffItem 2

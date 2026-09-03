@@ -1,11 +1,12 @@
 [@英雄偶遇]
-{
 #IF
 LARGE G0 3
 EQUAL G3 0
 RANDOM 50
 #ACT
 #CALL [系统功能\随机英雄NPC.txt] @生成英雄引路人
+#ELSEACT
+BREAK
 
 [@生成英雄引路人]
 #IF
@@ -25,4 +26,4 @@ MOV A91 <$STR(L$英雄引路人野外地图[<$STR(N$英雄引路人地图下标)>])>
 MOV A92 <$STR(L$英雄引路人野外地图名称[<$STR(N$英雄引路人地图下标)>])>
 CreateNPC 英雄引路人 <$STR(A91)> -1 -1 8 英雄引路人 1
 SENDMSG 1 【英雄引路人】传说中的英雄引路人出现在<$STR(A92)>，等待有缘人的到来。
-}
+BREAK
