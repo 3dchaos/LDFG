@@ -228,6 +228,11 @@ SETONTIMER 10 600
 #ACT
 DELAYGOTO 1 @MAIN
 SetOnTimer 87 1
+;英雄自动召唤圣兽：英雄已学召唤圣兽则启动定时器轮询补召
+#IF
+H.CHECKSKILL 英雄召唤圣兽 = 1
+#ACT
+SetOnTimer 7 3
 
 [@MAIN]
 #IF
@@ -441,3 +446,7 @@ H.GIVEFENGHAO <$str(L$称号名[<$str(N1)>])>
 #IF
 #ACT
 Inc N1 1
+;英雄自动召唤圣兽定时回调
+[@OnTimer7]
+#ACT
+#CALL [系统功能\老登辅助\英雄召唤圣兽.txt] @英雄召唤圣兽_定时检测
