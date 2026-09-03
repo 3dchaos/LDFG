@@ -431,7 +431,8 @@ SETONTIMER 10 600
 H.CHECKSKILL 英雄召唤圣兽 = 1
 #ACT
 SetOnTimer 7 3
-
+#ELSEACT
+SENDMSG 5 没有成功检测英雄召唤圣兽技能
 [@HeroLogout]
 #IF
 #ACT
@@ -450,4 +451,5 @@ Inc N1 1
 ;英雄自动召唤圣兽定时回调
 [@OnTimer7]
 #ACT
+SENDMSG 6 圣兽召唤触发
 #CALL [系统功能\老登辅助\英雄召唤圣兽.txt] @英雄召唤圣兽_定时检测
