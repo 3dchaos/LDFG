@@ -706,3 +706,13 @@ BREAK
 [@HeroAttackDamage]
 #ACT
 #CALL [系统功能\军鼓BUFF.txt] @英雄军鼓_攻击掉血前
+
+;========== 英雄自动召唤圣兽：学习技能打标志位 ==========
+;英雄学习召唤圣兽技能(魔法ID 76)时，给本体置标志位 [800]=1，用于替代无法检测的英雄技能等级
+[@HeroLearnMagic]
+#IF
+EQUAL <$H.LearnMagicID> 76
+#ACT
+SET [800] 1
+SENDMSG 6 你的英雄学会了召唤圣兽，圣兽将自动跟随召唤。
+BREAK
