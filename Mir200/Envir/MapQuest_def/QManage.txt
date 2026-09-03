@@ -228,11 +228,7 @@ SETONTIMER 10 600
 #ACT
 DELAYGOTO 1 @MAIN
 SetOnTimer 87 1
-;英雄自动召唤圣兽：英雄已学召唤圣兽则启动定时器轮询补召
-#IF
-H.CHECKSKILL 英雄召唤圣兽 = 1
-#ACT
-SetOnTimer 7 3
+
 
 [@MAIN]
 #IF
@@ -430,6 +426,11 @@ check [67] 1
 #ACT
 SETONTIMER 10 600
 
+;英雄自动召唤圣兽：英雄已学召唤圣兽则启动定时器轮询补召
+#IF
+H.CHECKSKILL 英雄召唤圣兽 = 1
+#ACT
+SetOnTimer 7 3
 
 [@HeroLogout]
 #IF
